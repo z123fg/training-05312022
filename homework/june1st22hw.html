@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <script type="text/javascript" src="index.js"></script>
+    <title>Signup</title>
+</head>
+<body>
+    <header>
+
+    </header>
+    <div class="sign-up-section">
+        <h1>Sign Up</h1>
+        <form class="register-form">
+            <!-- Name -->
+            <div class="two-in-one">
+                <input 
+                class="input-field first-half-input" 
+                type="text" 
+                id="firstName" 
+                name="firstName" 
+                placeholder="First Name" 
+                aria-placeholder="First Name" required/>
+                <input 
+                class="input-field second-half-input" 
+                type="text" 
+                id="lastName" 
+                name="lastName" 
+                placeholder="Last Name" 
+                aria-placeholder="Last Name" 
+                required/>
+            </div>
+            <!-- Mobile -->
+            <div class="one-line">
+                <input 
+                class="input-field one-line-input" 
+                type="number" 
+                id="phoneNumber" 
+                name="phoneNumber" 
+                placeholder="Mobile No." 
+                aria-placeholder="Mobile Number" 
+                required/>
+            </div>
+            <!-- Email -->
+            <div class="one-line">
+                <input 
+                class="input-field one-line-input" 
+                type="email" 
+                id="emailAddress" 
+                name="emailAddress" 
+                placeholder="Email Address"
+                aria-placeholder="Email Address"
+                required/>
+            </div>
+            <!-- Password -->
+            <div class="two-in-one">
+                <input 
+                class="input-field first-half-input"
+                type="password"
+                id="userPassword"
+                name="userPassword"
+                placeholder="Password"
+                aria-placeholder="Password"
+                required/>
+    
+                <input 
+                class="input-field second-half-input"
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                aria-placeholder="Confirm Password"
+                required/>
+            </div>
+            <!-- terms and conditions -->
+            <div class="two-in-one reverse">
+                <div class="left-side">
+                    <input type="checkbox" id="terms_conditions" name="terms_conditions" value="true" required/>
+                    <label for="terms_conditions">I Agree</label>
+                </div>
+                <div class="right-side">
+                    <p class="terms-agreement">
+                        By clicking 
+                        <span class="register-highlight">Register</span>, you agree to the 
+                        <a class="terms-conditions" href="#" target="_blank">Terms and Conditions</a> set out by this site, including our Cookie Use.
+                    </p>
+                </div>
+            </div>
+            <!-- Buttons -->
+            <div class="two-in-one">
+                <button class="register-button first-half-input">
+                    Register
+                </button>
+                <button class="sign-in-button second-half-input">
+                    Sign In
+                </button>
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>
