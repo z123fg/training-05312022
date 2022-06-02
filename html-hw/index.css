@@ -1,0 +1,20 @@
+#form {
+    margin: auto;
+    width: 50%;
+}
+h1{
+    text-align: center;
+}
+#mobile, #email {
+    width: 100%;
+}
+#fname, #lname, #password, #cpass, #register, #sign {
+    width: 45%;
+}
+#lname, #cpass, #agreement, #sign {
+    float: right;
+}
+#agreement {
+    width: 60%;
+    font-size: .7em;
+}
