@@ -100,15 +100,14 @@ a{
     color: rgb(14, 189, 232);
     border-radius: px;
 }
-p{
-   
-    margin-left: 120px;
-}
-label{
-    
-   font-weight: bold;
-}
 
 .agree{
-    display: inline;
+    display: inline-block;
+    padding-right: 2rem;
+    font-weight: bold;
+}
+
+p{
+    display: inline-block;
+    width: 75%;
 }
