@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #fname {}
+
+    body {
+      text-align: center;
+    }
+
+    form {
+      display: inline-block;
+    }
+
+    input[type=text],
+    select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type=submit] {
+      width: 100%;
+      /* background-color: #4CAF50; */
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type=submit].register {
+      background-color: #4CAF50;
+
+    }
+
+    input[type=submit].login {
+      background-color: #4c9daf;
+    }
+
+    .grid-container {
+      display: grid;
+      height: 100%;
+      grid-template-columns: auto auto;
+      justify-content: center;
+      /* padding: 10px; */
+    }
+
+    .grid-item {
+      width: 315px;
+    }
+
+    div {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+  </style>
+  <title>HW1</title>
+</head>
+
+<body>
+  <h1>Sing up</h1>
+  <form class="grid-container">
+
+    <div class="grid-item">
+      <input type="text" id="fname" name="firstname" placeholder="First name">
+    </div>
+
+    <div class="grid-item">
+      <input type="text" id="lname" name="lastname" placeholder="Last name">
+    </div>
+
+    <div class="grid-item">
+      <input type="text" id="phone" name="phone" placeholder="Mobile No.">
+    </div>
+
+    <div class="grid-item">
+      <input type="text" id="eamil" name="email" placeholder="Email Address">
+    </div>
+
+    <div class="grid-item">
+      <input type="text" id="password1" name="password" placeholder="password">
+    </div>
+
+    <div class="grid-item">
+      <input type="text" id="password2" name="password" placeholder="confirm password">
+    </div>
+
+    <div class="grid-item">
+      <input type="checkbox" id="aggrement" name="aggrement">
+      <label for="aggrement">I agree</label>
+    </div>
+
+    <div class="grid-item"> By clicking <span style="background-color: blue; color: white;">register</span>, you aggree
+      to the <a href="http://">Terms and Conditions</a> set out by this site, including our Cookie Use.</div>
+
+    <div class="grid-item">
+      <input type="submit" value="Register" class="register" aria-label="Register" />
+    </div>
+
+    <div class="grid-item">
+      <input type="submit" value="Login" class="login" aria-label="login" />
+    </div>
+
+  </form>
+
+</body>
+
+</html>
