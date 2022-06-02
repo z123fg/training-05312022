@@ -1,0 +1,60 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  max-width: 550px;
+}
+
+
+a {
+  text-decoration: none;
+  color:rgb(60, 122, 188);
+}
+
+input {
+  padding: 8px;
+  border-radius: 8px;
+  margin: 7px;
+  font-size: 22px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+input:focus {
+  box-shadow: 0 0 5px rgb(55, 177, 211);
+  border: 1px solid rgb(55, 177, 211);
+}
+
+.click_button {
+  width: 250px;
+  color: white;
+}
+
+#sign_button {
+  background-color: rgb(69, 189, 69);
+}
+
+#register_button {
+  background-color: rgb(117, 117, 229);
+  color: white;
+  border: 15px;
+}
+
+
+header {
+  text-align: center;
+}
+
+
+
+p {
+  font-size: 2px;
+}
+
+
+.input-block {
+  display: block;
+  width: 90%;
+}
