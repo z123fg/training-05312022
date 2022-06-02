@@ -1,0 +1,50 @@
+form{
+    text-align: center;
+}
+
+div{
+    margin: 15px;
+}
+
+h1{
+    text-align: center;
+}
+
+input {
+    margin: 0 10px 0 10px;
+    padding: 5px 15px 5px 15px;
+    border-radius: 5px;
+}
+
+label{
+    font-weight: bold;
+}
+
+button{
+    margin: 10px;
+    width: 20%;
+    height: 5%;
+    border-radius: 5px;
+}
+
+#registerSpan {
+    border-radius: 5px;
+    border: black;
+    padding: 5px 25px 5px 25px;
+    background-color: #2587be;
+    color: white;
+}
+
+#register {
+    background-color: #2587be;
+    color: white;
+}
+
+#login {
+    background-color: #49be25;
+    color: white;
+}
+
+input:hover{
+    box-shadow: 0 0 5px 1px lightskyblue;
+}
