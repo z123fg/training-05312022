@@ -1,0 +1,26 @@
+header{
+    text-align: center;
+}
+
+.formContainer{
+    width: 800px;
+    text-align: center;
+}
+
+
+input{
+    width: 200px;
+}
+
+.b1{
+    background-color: rgb(29, 113, 231);
+    color: white;
+    border-radius: 4px;
+    border: none;
+}
+.b2{
+    background-color: rgb(69, 188, 83);
+    color: white;
+    border-radius: 4px;
+    border: none;
+}

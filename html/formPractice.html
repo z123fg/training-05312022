@@ -7,6 +7,7 @@
         <meta name="author" content="Leon">
         <meta name="description" content="A review of how to generate a registration using html and css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="form.css">
     </head>
 
         
@@ -14,14 +15,20 @@
         <header>
             <h1>Sign Up</h1>
         </header>
-        <form>
-            <input type="text" id="fName" placeholder="First Name">
-            <input type="text" id="lName" placeholder="Last Name"><br>
-            <input type="tel" id="cellPhone#" placeholder="Mobile No.">
-            <input type="email" id="email" placeholder="Email Address">
-            <input type="checkbox" id="terms_box" name="terms_box">
-            <label for="terms_box">By clicking Register, you agree to the Terms and Conditions set out by this site, including our Cookie Use.</label>
-            <button><button>
-        </form>
+
+        <div class="formContainer">
+            <form>
+                <input type="text" id="fName" placeholder="First Name">
+                <input type="text" id="lName" placeholder="Last Name"><br>
+                <input type="tel" id="cellPhone#" placeholder="Mobile No."><br>
+                <input type="email" id="email" placeholder="Email Address"><br>
+                <input type="password" id="password" placeholder="Password">
+                <input type="password" id="passwordConfirmation" placeholder="Confirm Password"><br>
+                <input type="checkbox" id="terms_box" name="terms_box">
+                <label for="terms_box">I Agree </label>
+                <span>By clicking Register, you agree to the Terms and Conditions set out by this site, including our Cookie Use.</span> <br>
+                <button class="b1">Register</button> <button class="b2">Sign In</button>
+            </form>
+        </div>
     </body>
 </html>
