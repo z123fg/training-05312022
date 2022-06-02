@@ -45,7 +45,6 @@ p {
 }
 
 input[type='checkbox'] {
-    padding: 0;
     width: fit-content;
 }
 
