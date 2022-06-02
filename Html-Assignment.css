@@ -1,5 +1,6 @@
 * {
   font-family: 'Register', sans-serif;
+  font-family: 'Sign In', sans-serif;
  }
 .hidden {
   display: none;
@@ -7,3 +8,10 @@
   padding: 10px;
   width: 250px;
 } 
+
+.hidden {
+    display: none;
+    border: 1px solid green;
+    padding: 10px;
+    width: 250px;
+  } 
