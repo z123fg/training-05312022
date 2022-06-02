@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- FOR SEO -->
+    <meta name="keyword" content="" />
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Site Title</title>
+  </head>
+
+  <body>
+    <header class="global-header">
+      <div class="global-container">
+        <nav class="global-nav">
+          <a href="#" class="logo-header">
+            <p>Logo<span>.io</span></p>
+          </a>
+
+          <ul>
+            <li><a href="#">Register</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+
+          <button class="menu-button">
+            <div class="slice"></div>
+            <div class="slice"></div>
+            <div class="slice"></div>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="register-section">
+        <div class="global-container register-content">
+          <header>
+            <h1 class="register-header">Sign Up</h1>
+          </header>
+          <form class="register-form">
+            <label htmlFor="userFirstName" hidden>First Name</label>
+            <input
+              type="text"
+              id="userFirstName"
+              placeholder="First Name"
+              autocomplete="off"
+              required
+            />
+            <label htmlFor="userLastName" hidden>Last Name</label>
+            <input
+              type="text"
+              id="userLastName"
+              placeholder="Last Name"
+              autocomplete="off"
+              required
+            />
+            <label htmlFor="userMobilePhone" hidden>Mobile Number</label>
+            <input
+              type="tel"
+              id="userMobilePhone"
+              placeholder="Mobile No."
+              autocomplete="off"
+              required
+            />
+            <label htmlFor="userEmailAddress" hidden>Email Address</label>
+            <input
+              type="email"
+              id="userEmailAddress"
+              placeholder="Email Address"
+              autocomplete="off"
+              required
+            />
+            <label htmlFor="userPassword" hidden>Password</label>
+            <input
+              type="password"
+              id="userPassword"
+              placeholder="Password"
+              autocomplete="off"
+              required
+            />
+            <label htmlFor="userConfirmPassword" hidden>Confirm Password</label>
+            <input
+              type="password"
+              id="userConfirmPassword"
+              placeholder="Confirm Password"
+              autocomplete="off"
+              required
+            />
+
+            <div class="agreement">
+              <input type="checkbox" name="" id="" />
+              <label htmlFor=""><strong>I Agree</strong></label>
+
+              <p class="agreement-description">
+                By clicking <span>Register</span>, you agree to the
+                <a href="">Term and Conditions</a> set out by this site,
+                including our Cookie Use.
+              </p>
+            </div>
+
+            <div class="register-buttons">
+              <button type="submit">Register</button>
+              <button type="submit">Sign In</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
