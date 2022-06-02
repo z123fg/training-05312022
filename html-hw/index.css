@@ -7,9 +7,20 @@ h1{
 }
 #mobile, #email {
     width: 100%;
+    border-radius: 5px;
+    border-color: lightgray;
+    border-width: 1px;
+    margin-bottom: 2%;
+    padding: 2%;
 }
 #fname, #lname, #password, #cpass, #register, #sign {
     width: 45%;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: lightgray;
+    margin-bottom: 2%;
+    padding: 2%;
+    
 }
 #lname, #cpass, #agreement, #sign {
     float: right;
@@ -18,3 +29,21 @@ h1{
     width: 60%;
     font-size: .7em;
 }
+
+#register, #sign, #reg {
+    color: white;
+}
+
+#register, #reg {
+    background-color: dodgerblue;
+}
+ #sign {
+     background-color: green;
+ }
+ #reg {
+     padding: 1%;
+     border-radius: 5px;
+ }
+ input[type=text]:focus {
+    border: dodgerblue;
+  }
