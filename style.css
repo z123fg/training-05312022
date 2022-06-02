@@ -1,0 +1,137 @@
+body {
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+#title {
+    display: flex;
+    justify-content: center;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+#form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+#form input {
+    border-radius: 4px;
+    padding: 10px;
+    border: 1px solid rgb(168, 167, 167);
+}
+
+#form input:focus {
+    outline: 1px solid rgb(140, 192, 234);
+    border: none;
+    box-shadow: 0 0 10px rgb(140, 192, 234);
+}
+
+.phone {
+  grid-column: 1 / 3;
+}
+
+.email {
+    grid-column: 1 / 3;
+}
+
+#termsAndConditions {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    font-size: 12px;
+}
+
+#check {
+    cursor: pointer;
+}
+
+.label {
+    margin-right: 20px;
+}
+
+.register {
+    color: #FFF;
+    background-color: rgb(53, 128, 202);
+    border-radius: 4px;
+    padding:2px;
+}
+
+#terms {
+    color: rgb(97, 148, 190);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#submitContainer {
+    display: flex;
+    justify-content: center;
+}
+
+#submit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+#submit input {
+    padding: 10px;
+    width: 185px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+#register {
+    color: #FFF;
+    background-color: rgb(53, 128, 202);
+}
+
+#register:active {
+    background-color: rgb(42, 103, 164);
+}
+
+#sign-in {
+    color: #FFF;
+    background-color: rgb(32, 163, 89);
+}
+
+#sign-in:active {
+    background-color:rgb(43, 120, 76)
+}
+
+@media screen and (max-width: 600px) {
+    .first {
+        grid-column: 1 / 3;
+    }
+    
+    .last {
+        grid-column: 1 / 3;
+    }
+
+    .pass {
+        grid-column: 1 / 3;
+    }
+    
+    .confirmPass {
+        grid-column: 1 / 3;
+    }
+    
+    #submitContainer {
+        align-items: center;
+    }
+
+    #submit {
+        grid-template-columns: 1fr;
+    }
+
+    #termsAndConditions {
+        display: block;
+        text-align: center;
+    }
+}
+
