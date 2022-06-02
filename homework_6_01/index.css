@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    font-family: "lato", sans-serif;
+}
+
+h2 {
+    text-align: center;
+    margin: 8px;
+    font-weight: normal;
+}
+
+input[type=text], input[type=submit] {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none !important;
+    padding: 5px 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid gray;
+    margin-bottom: 10px;
+}
+
+input[type=submit] {
+    border: 0;
+    color: white;
+    font-size: 12px;
+}
+
+label {
+    font-size: 10px;
+    min-width: 20%;
+    display: flex;
+    align-items: center;
+}
+
+input:focus {
+    outline: none !important;
+    border-radius: 3px;
+    border: 1px solid rgb(128, 194, 244);
+    box-shadow: 0 0 5px rgba(128, 194, 244, 0.8);
+}
+
+::placeholder {
+    opacity: 0.8;
+}
+
+form {
+    height: 100vh;
+    display: flex;
+    margin: auto;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+a:link {
+    text-decoration: none;
+    color: #4C91CB;
+}
+
+.container {
+    display: flex;
+    width: 40%;
+    justify-content: left;
+    flex-direction: column;
+    position: relative;
+    min-width: 250px;
+}
+
+.row {
+    height: auto;
+    width: 100%;
+    display: flex;
+    gap: 5%;
+    justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+    .row {
+      flex-direction: column;
+    }
+  }
+
+.info {
+    font-size: 10px;
+    margin-bottom: 2px;
+    padding-bottom: 0;
+    align-items: center;
+}
+
+.RegisterBtn {
+    background-color: #428BCA;
+}
+
+.SignInBtn {
+    background-color: #5CB85C;
+}
+
+.RegisterBtnInline{
+    background-color: #428BCA;
+    color: white;
+    font-size: 8px;
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
+#agree {
+    margin-left: -12px;
+}

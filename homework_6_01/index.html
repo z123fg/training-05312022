@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="keyword" content="" />
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <title>antra Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js" defer></script>
+</head>
+
+<body>
+    <form >
+        <div class="container">
+            <h2>Sign Up</h2>
+            <div class="row">
+                <input type="text" id="firstName" placeholder="First Name" required/>
+                <input type="text"  id="lastName" placeholder="Last Name" required/>
+            </div>
+
+            <input type="text" class="row" id="phoneNumber" placeholder="Mobile No." required/>
+            <input type="text" class="row" id="email" placeholder="Email Address" required/>
+            <div class="row">
+                <input type="text"  id="password" placeholder="Password" required/>
+                <input type="text"  id="confirmPW" placeholder="Confirm Password" required/>
+            </div>
+            <div class="row info">
+                <label for="agree"><input id="agree" type="checkbox" /> I Agree</label>
+                <div>By clicking <span class="RegisterBtnInline">Register</span>,
+                    you agree to the <a href="/#">Terms and Conditions</a>
+                    set out by this site, including our Cookie Use.
+                </div>
+            </div>
+
+            <div class="row">
+                <input type="submit" class="RegisterBtn" value="Register" />
+                <input type="submit" class="SignInBtn" value="Sign In" />
+            </div>
+
+        </div>
+    </form>
+</body>
+
+</html>
