@@ -88,6 +88,9 @@ form {
     width: 100%;
     margin: 20px;
 }
+.btn:hover {
+    cursor: pointer;
+}
 
 .btn-blue {
     border: 1px solid #428bca;
