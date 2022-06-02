@@ -5,41 +5,88 @@ body,html{
     margin: 0;
     padding: 0;
 }
-body {
-    display:flex;
-  }
 
-header{
-    margin: auto;
+h1{
+    text-align: center;
 }
 
-form{
+#form{
     margin: auto;
+    text-align: center;    
 }
-#fName{
-    text-align: left;
+
+
+.input1{
     width: 250px;
     padding: 10px 20px;
     margin: 10px 0;
     box-sizing: border-box;
     border-radius: 4px;
+    border:2px solid gainsboro;
 }
-#lName{
-    text-align: left;
+.input1:focus{
+    outline: none;
+    border-color: rgb(127, 163, 214);
+    box-shadow: 0 0 10px rgb(127, 163, 214);
+}
+
+/* #fName{
     width: 250px;
     padding: 10px 20px;
     margin: 10px 0;
     box-sizing: border-box;
     border-radius: 4px;
-    
+    border:2px solid gainsboro;
 }
 
-#cellPhone{
+#fName:focus{
+    outline: none;
+    border-color: rgb(127, 163, 214);
+    box-shadow: 0 0 10px rgb(127, 163, 214);
+} */
+
+/* #lName{
+    width: 250px;
+    padding: 10px 20px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border:2px solid gainsboro;
+}
+#lName:focus{
+    outline: none;
+    border-color: rgb(127, 163, 214);
+    box-shadow: 0 0 10px rgb(127, 163, 214);
+} */
+
+
+.input2{
     width: 500px;
     padding: 10px 20px;
     margin: 10px 0;
     box-sizing: border-box;
-    border-radius: 4px;   
+    border-radius: 4px;
+    border:2px solid gainsboro;
+}
+.input2:focus{
+    outline: none;
+    border-color: rgb(127, 163, 214);
+    box-shadow: 0 0 10px rgb(127, 163, 214);
+}
+
+
+/* #cellPhone{
+    width: 500px;
+    padding: 10px 20px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border:2px solid gainsboro;
+}
+#cellPhone:focus{
+    outline: none;
+    border-color: rgb(127, 163, 214);
+    box-shadow: 0 0 10px rgb(127, 163, 214);
 }
 
 #email{
@@ -48,32 +95,65 @@ form{
     margin: 10px 0;
     box-sizing: border-box;
     border-radius: 4px;
+    border:2px solid gainsboro;
 }
-
-#password{
+#email:focus{
+    outline: none;
+    border-color: rgb(127, 163, 214);
+    box-shadow: 0 0 10px rgb(127, 163, 214);
+} */
+/* #password{
     width: 250px;
     padding: 10px 20px;
     margin: 10px 0;
     box-sizing: border-box;
     border-radius: 4px;
+    border:2px solid gainsboro;
 }
-
+#password:focus{
+    outline: none;
+    border-color: rgb(127, 163, 214);
+    box-shadow: 0 0 10px rgb(127, 163, 214);
+}
 #passwordConfirmation{
     width: 250px;
     padding: 10px 20px;
     margin: 10px 0;
     box-sizing: border-box;
-    border-radius: 4px;   
+    border-radius: 4px;  
+    border:2px solid gainsboro;
+}
+#passwordConfirmation:focus{
+    outline: none;
+    border-color: rgb(127, 163, 214);
+    box-shadow: 0 0 10px rgb(127, 163, 214);
+} */
+#terms_box{
+    
 }
 
-.b1{
+.button{
+    width: 250px;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    text-align: center;
+}
+#b1{
+    background-color: rgb(97, 154, 234);
+}
+#b2{
+    background-color: rgb(69, 188, 83);
+}
+
+/* .b1{
     width: 250px;
     padding: 10px 20px;
     background-color: rgb(97, 154, 234);
     color: white;
     border-radius: 4px;
     border: none;
-    text-align: center;
 }
 
 .b2{
@@ -83,9 +163,7 @@ form{
     color: white;
     border-radius: 4px;
     border: none;
-    display: inline-block;
-    
-}
+} */
 
 a:link{
     color: rgb(92, 152, 216);
@@ -99,4 +177,13 @@ a:hover{
 a:visited {
     color: rgb(92, 152, 216);
     background-color: transparent;
+  }
+
+  #text{
+      text-indent: 400px;
+  }
+  #color{
+    background-color: rgb(56, 118, 165);
+    color: white;
+    border-radius: 4px;
   }

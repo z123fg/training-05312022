@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" />
         <title>Form pratice</title>
-        <meta name="homework_1" content="Trainining homework #1">
-        <meta name="author" content="Leon">
-        <meta name="description" content="A review of how to generate a registration using html and css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="form.css">
+        <meta name="homework_1" content="Trainining homework #1" />
+        <meta name="author" content="Leon" />
+        <meta name="description" content="A review of how to generate a registration using html and css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="form.css"/>
     </head>
 
         
     <body>
-        <header>
-            <h1>Sign Up</h1>
-        </header>
-
-        <form>
-            <input type="text" id="fName" placeholder="First Name">
-            <input type="text" id="lName" placeholder="Last Name"><br>
-            <input type="tel" id="cellPhone" placeholder="Mobile No."><br>
-            <input type="email" id="email" placeholder="Email Address"><br>
-            <input type="password" id="password" placeholder="Password">
-            <input type="password" id="passwordConfirmation" placeholder="Confirm Password"><br>
+        <h1>Sign Up</h1>
+      
+        <form id="form">
+            <input type="text" id="fName" placeholder="First Name" class="input1">
+            <input type="text" id="lName" placeholder="Last Name"class="input1"><br>
+            <input type="tel" id="cellPhone" placeholder="Mobile No." class="input2"><br>
+            <input type="email" id="email" placeholder="Email Address" class="input2"><br>
+            <input type="password" id="password" placeholder="Password"class="input1">
+            <input type="password" id="passwordConfirmation" placeholder="Confirm Password"class="input1"><br>
             <input type="checkbox" id="terms_box" name="terms_box">
             <label for="terms_box">I Agree </label>
-            <span>By clicking Register, you agree to the <a href="">Terms and Conditions</a> set out by this site, including our Cookie Use.</span> <br>
-            <button class="b1">Register</button> <button class="b2">Sign In</button>
+            <span id="text">By clicking <span id="color"> Register </span>, you agree to the <a href="">Terms and Conditions</a> set out by this site, including our Cookie Use.</span> <br>
+            <button class="button" id="b1">Register</button> <button class="button" id ="b2">Sign In</button>
         </form>
     </body>
 </html>
