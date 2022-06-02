@@ -1,0 +1,56 @@
+.header{
+    margin-top:20px;
+    margin-bottom: 20px;
+    text-align:center;
+}
+
+#fname,#lname,#pw,#confirmPW{
+    width:300px;
+}
+
+#mobile,#email{
+    width:630px;
+}
+
+.form-input{
+    border-radius: 5px;
+    height:50px;
+    margin:10px;
+    box-shadow: 0px 0px 1px 1px lightgrey;
+    border: 1px solid lightgray;
+}
+
+.form-input:focus{
+    caret-color: blue;
+    box-shadow: 0px 0px 3px 3px lightgrey;
+}
+
+.label-agree{
+    margin-left:5px;
+    font-weight:bold;
+}
+
+.agreement{
+    margin:10px;
+}
+
+a:link { 
+    text-decoration: none; 
+}
+
+.btn-register,.btn-signin{
+    width: 300px;
+    height:50px;
+    border-radius: 5px;
+    border: none;
+    color:white;
+    margin:10px;
+}
+
+.btn-register{
+    background-color: rgb(12,110,253);
+}
+
+.btn-signin{
+    background-color:rgb(92,184,92);
+}
