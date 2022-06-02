@@ -11,9 +11,17 @@ h1{
 }
 
 input {
-    margin: 0 10px 0 10px;
+    margin: auto;
     padding: 5px 15px 5px 15px;
     border-radius: 5px;
+}
+
+#name *, #password *{
+    width: 25%;
+}
+
+#email *, #number *{
+    width: 50%;
 }
 
 label{
