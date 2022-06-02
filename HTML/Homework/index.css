@@ -1,0 +1,73 @@
+
+.header{
+    text-align: center;
+}
+
+form{
+    text-align: center;
+}
+
+.names{
+    text-align: left;
+    width: 250px;
+    padding: 10px 20px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border-radius: 12px;
+    
+}
+.names:focus, .single-items:focus, .passwords:focus{
+    outline: none;
+    box-shadow: 1px 1px 1px 1px rgb(106, 117, 249);
+}
+
+.single-items{
+    width: 500px;
+    padding: 10px 20px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border-radius: 12px;   
+}
+
+.passwords{
+    width: 250px;
+    margin: 10px 0;
+    padding: 10px 20px;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+ .span-register{
+     font-weight: bold;
+     color: white;
+     font-size: 10px;
+     padding: 5px;
+     background-color: rgb(17, 129, 249);
+     border-radius: 4px;
+ }
+
+
+.button-div{
+    padding-top: 15px;
+}
+
+.terms-link{
+    text-decoration: none;
+    color: blue;
+}
+
+.buttons1, .buttons2{
+    background-color: blue;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    width: 250px;
+}
+
+.buttons2 {
+    background-color: green;
+}
+
+
