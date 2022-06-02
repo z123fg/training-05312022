@@ -1,0 +1,103 @@
+body{
+    margin: auto;
+  
+}
+
+
+header{
+    margin: auto;
+    width: fit-content;
+    font-size: 3em;
+}
+
+form{
+    margin: 2em;
+    padding: 1em;
+    margin-bottom: 0;
+}
+
+input:focus{
+    outline: none;
+   box-shadow: 0px 0px 5px 5px rgb(29, 29, 231);
+}
+
+input{
+    border-radius: 5px;
+    size: 2em;
+    padding: 1em;
+    margin-bottom: 2em;
+    border: solid rgb(112, 112, 112) 2px;
+}
+
+
+
+#name{
+    display: flex;
+    justify-content: space-between;
+}
+
+#name input{
+    width: 40%;
+}
+
+#contact-info{
+    display: flex;
+    flex-direction: column;
+}
+
+
+#password{
+    display: flex;
+    justify-content: space-between;
+}
+
+#password input{
+    width: 40%;
+}
+
+.fine-print{
+    display: flex;
+    justify-content: space-between;
+}
+
+.agree-check{
+   
+    display: flex;
+    width: 150px;
+    padding: 1em;
+    margin: 1em;
+}
+
+a{
+    text-decoration: none;
+}
+
+span{
+    background-color: rgb(29, 29, 231);
+    color: white;
+    padding: 0em .5em;
+    border-radius: 5px;
+}
+
+button{
+    font-size: 2em;
+    padding: .5em  3em;
+    border-radius: 5px;
+    border: none;
+    color: white;
+}
+
+.register{
+    background-color:rgb(29, 29, 231);
+    
+}
+
+.signup{
+    background-color:green;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-around;
+
+}
