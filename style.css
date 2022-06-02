@@ -1,0 +1,183 @@
+*, html, body{
+    box-sizing: content-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.signup{
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
+}
+.form{
+    align-self: center;
+    margin: 10px;
+    position: relative;
+    left: 40px;
+}
+.form .fullname{
+    display: flex;
+    position: relative;
+    right: 40px;
+    padding: 10px;
+}
+.form .fullname .fname{
+    width: 100%;
+    border-radius: 5px;
+    height: 40px;
+    border: 1px solid lightgray;
+    text-indent: 10px;
+}
+.form .fullname .fname:hover{
+    border: 1px solid lightskyblue;
+    box-shadow: 0px 0px 1px 1px lightblue;
+}
+.form .fullname .lname{
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    position: relative;
+    left: 20px;
+    text-indent: 10px;
+}
+.form .fullname .lname:hover{
+    border: 1px solid lightskyblue;
+    box-shadow: 0px 0px 1px 1px lightblue;
+}
+.form .mobile-number{
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    height: 40px;
+    border: 1px solid lightgray;
+    text-indent: 10px;
+    position: relative;
+    right: 30px;
+}
+.form .mobile-number:hover{
+    border: 1px solid lightskyblue;
+    box-shadow: 0px 0px 1px 1px lightblue;
+}
+.form .email{
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    height: 40px;
+    border: 1px solid lightgray;
+    text-indent: 10px;
+    position: relative;
+    right: 30px;
+}
+.form .email:hover{
+    border: 1px solid lightskyblue;
+    box-shadow: 0px 0px 1px 1px lightblue;
+}
+.form .passwords{
+    display: flex;
+    position: relative;
+    right: 40px;
+    padding: 10px;
+}
+.form .password{
+    width: 100%;
+    border-radius: 5px;
+    height: 40px;
+    border: 1px solid lightgray;
+    text-indent: 10px;
+}
+.form .password:hover{
+    border: 1px solid lightskyblue;
+    box-shadow: 0px 0px 1px 1px lightblue;
+}
+.form .confirm.password{
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    position: relative;
+    left: 20px;
+    text-indent: 10px;
+}
+.form .confirm .password:hover{
+    border: 1px solid lightskyblue;
+    box-shadow: 0px 0px 1px 1px lightblue;
+}
+.form .checkbox .clickbox{
+    height: 20px;
+    position: relative;
+    right: 45px;
+}
+.form .checkbox span{
+    font-size: 13px;
+    font-weight: 600;
+    position: relative;
+    bottom: 5px;
+    right: 45px;
+}
+.form .terms-and-conditions{
+    font-size: 10px;
+    position: relative;
+    bottom: 25px;
+    left: 80px;
+}
+.form .terms-and-conditions span{
+   color: white;
+   background-color: rgb(0, 153, 255);
+   padding: 1px;
+   font-size: 10px;
+}
+.form .terms-and-conditions a{
+    color: skyblue;
+    text-decoration: none;
+    font-weight: 300;
+ }
+ .form .terms-and-conditions a:hover{
+    color: lightcoral;
+    text-decoration: underline;
+    font-weight: 300;
+ }
+ .form .buttons{
+    display: flex;
+    position: relative;
+    right: 40px;
+    bottom:20px;
+ }
+ .form .buttons .register{
+    width: 50%;
+    border-radius: 5px;
+    height: 40px;
+    color: white;
+    border: 1px solid  rgb(0, 153, 255);
+    background-color: rgb(0, 153, 255);
+ }
+ .form .buttons .register:hover{
+    border: 1px solid lightskyblue;
+    box-shadow: 0px 0px 1px 1px lightblue;
+ }
+ .form .buttons .sign-in{
+    width: 50%;
+    height: 40px;
+    border-radius: 5px;
+    color: white;
+    border: 1px solid  rgb(6, 184, 74);
+    background-color: rgb(6, 184, 74);
+    position: relative;
+    left: 20px;
+ }
+ .form .buttons .sign-in:hover{
+    border: 1px solid lightgreen;
+    box-shadow: 0px 0px 1px 1px lightgreen;
+}
+
+
+
+
+
