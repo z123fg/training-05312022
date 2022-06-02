@@ -1,0 +1,94 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+
+a{
+    color:rgb(2, 181, 240);
+    text-decoration: none;
+}
+
+header{
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.name{
+    margin: 10px 10px 0px;
+    height: 25px;
+    width: 200px;
+    border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid grey;
+}
+
+.name:focus{
+    box-shadow: 0px 0px 5px 0px rgb(12, 134, 255);
+}
+
+.info{
+    width: 433px;
+    margin: 10px 10px 0px;
+    height: 25px;
+    border-radius: 3px;
+    border: 1px solid grey;
+}
+
+.info:focus{
+    box-shadow: 0px 0px 5px 0px rgb(12, 134, 255);
+}
+
+.password{
+    margin: 10px 10px;
+    height: 25px;
+    width: 200px;
+    border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid grey;  
+}
+
+.password:focus{
+    box-shadow: 0px 0px 5px 0px rgb(12, 134, 255);
+}
+
+.checkbox{
+    font-weight: bold;   
+    margin-right: 60px;
+}
+
+.register-btn{
+    border: none;
+    border-radius: 4px;
+    color: white;
+    background-color:cornflowerblue;
+    height: 30px;
+    width: 210px;
+    margin: 10px 10px;
+    cursor:pointer;
+    
+}
+
+.signin-btn{
+    border: none;
+    border-radius: 4px;
+    color: white;
+    background-color:green;
+    height: 30px;
+    width: 210px;
+    margin: 10px 10px;
+    cursor:pointer;
+}
+
+.description{
+    width: 320px;
+    font-size: 12px;
+    display: inline-block;   
+}
+
+.description .register{
+    color: white;
+    background-color: cornflowerblue;
+    padding: 1px 5px;
+    border-radius: 2px;
+}
