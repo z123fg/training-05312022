@@ -1,0 +1,9 @@
+* {
+  font-family: 'Register', sans-serif;
+ }
+.hidden {
+  display: none;
+  border: 1px solid blue;
+  padding: 10px;
+  width: 250px;
+} 
