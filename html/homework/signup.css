@@ -17,8 +17,8 @@ form {
 .input {
     border: 1px solid #cfcfcf;
     border-radius: 3px;
-    padding: 5px;
-    margin: 5px;
+    padding: 10px;
+    margin: 10px 20px;
 }
 
 .input:focus {
@@ -35,6 +35,7 @@ form {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 10px;
 }
 
 .wrapper-agree {
@@ -42,8 +43,13 @@ form {
     margin-right: 10px;
 }
 
+.wrapper-agree label {
+    font-weight: bold;
+}
+
 .wrapper-terms >span {
     flex: 3;
+    line-height: 1.2em;
 }
 
 .register {
@@ -58,7 +64,6 @@ form {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 10px;
 }
 
 .btn {
@@ -67,6 +72,8 @@ form {
     font-size: 1rem;
     line-height: 1.5rem;
     border-radius: 3px;
+    width: 100%;
+    margin: 20px;
 }
 
 .btn-blue {
@@ -79,4 +86,23 @@ form {
     border: 1px solid #5cb85c;
     background-color: #5cb85c;
     color: white;
+}
+
+@media only screen and (min-width: 768px) {
+    .wrapper-input {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .wrapper-input .input {
+        width: 100%;
+    }
+
+    .wrapper-agree {
+        flex: 1;
+    }
+    
+    .wrapper-terms >span {
+        flex: 5;
+    }
 }
