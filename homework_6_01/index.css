@@ -29,6 +29,12 @@ input[type=submit] {
     font-size: 12px;
 }
 
+input[type=submit]:hover {
+    opacity: 0.8;
+    box-shadow: 5px 5px 5px gray;
+    cursor: pointer;
+}
+
 label {
     font-size: 10px;
     min-width: 20%;
@@ -41,6 +47,10 @@ input:focus {
     border-radius: 3px;
     border: 1px solid rgb(128, 194, 244);
     box-shadow: 0 0 5px rgba(128, 194, 244, 0.8);
+}
+
+input[type=checkbox]:focus {
+    cursor: pointer;
 }
 
 ::placeholder {
