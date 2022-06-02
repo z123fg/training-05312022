@@ -54,3 +54,31 @@ a:link {
 .btn-signin{
     background-color:rgb(92,184,92);
 }
+
+@media only screen and (max-width: 768px) {
+    .header{
+        margin-left:150px;
+    }
+
+    #fname,#lname,#pw,#confirmPW{
+        width:500px;
+    }
+    
+    #mobile,#email{
+        width:500px;
+    }
+
+    .btn-register,.btn-signin{
+        width: 500px;
+    }
+
+    .agreement{
+        margin-left: 100px;
+    }
+
+    .agreement-input{
+        margin-left:50px;
+    }
+    
+}
+
