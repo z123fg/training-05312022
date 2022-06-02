@@ -1,0 +1,180 @@
+div {
+    text-align: center;
+}
+form {
+    width:584px;
+    display: inline-block;
+}
+h1 {
+    font-family: "Arial";
+    margin-left: 32px;
+}
+p {
+    float: right;
+    font-family: "Arial";
+    font-size: smaller;
+    width: 400px;
+    text-align: left;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    color: rgb(6, 69, 173);
+}
+.text-input {
+    width: 544px;
+    margin-left: 40px;
+}
+.text {
+    display: inline-block;
+    width: 540px;
+    height: 40px;
+    outline: 1px rgb(200, 200, 200) solid;
+    border: none;
+    border-radius: 5px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.text:focus {
+    outline: 1px rgb(160, 180, 220) solid;
+    box-shadow: 0px 0px 10px lightgrey;
+}
+.text-left {
+    float: left;
+    width: 250px;
+    height: 40px;
+    outline: 1px rgb(200, 200, 200) solid;
+    border: none;
+    border-radius: 5px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.text-left:focus {
+    outline: 1px rgb(160, 180, 220) solid;
+    box-shadow: 0px 0px 10px lightgrey;
+}
+.text-right {
+    float: right;
+    width: 250px;
+    height: 40px;
+    outline: 1px rgb(200, 200, 200) solid;
+    border: none;
+    border-radius: 5px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.text-right:focus {
+    outline: 1px rgb(160, 180, 220) solid;
+    box-shadow: 0px 0px 10px lightgrey;
+}
+.checkbox-input {
+    width: 584px;
+}
+.checkbox {
+    float: left;
+}
+.label {
+    margin-left: 5px;
+    font-family: "Arial";
+    font-size: medium;
+    float: left;
+}
+.register-span {
+    background-color: rgb(69, 130, 205);
+    color: white;
+    font-size: smaller;
+    padding: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 3px;
+}
+.submit {
+    width: 544px;
+    margin-left: 40px;
+    margin-top: 3px;
+}
+.button {
+    width: 250px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: medium;
+    font-family: "Arial";
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+.register-btn {
+    float: left;
+    background-color: rgb(69, 130, 205);
+    outline: 1px solid rgb(69, 130, 205);
+}
+.register-btn:hover {
+    background-color: rgba(69, 130, 205, 0.9);
+}
+.register-btn:active {
+    background-color: rgba(69, 130, 205, 1);
+}
+.signin-btn {
+    float: right;
+    background-color: rgb(90, 181, 89);
+    outline: 1px solid rgb(90, 181, 89);
+}
+.signin-btn:hover {
+    background-color: rgba(90, 181, 89, 0.9);
+}
+.signin-btn:active {
+    background-color: rgba(90, 181, 89, 1);
+}
+
+@media only screen and (max-width: 650px) {
+    form {
+        width: 80vw;
+    }
+    h1 {
+        margin-left: 0;
+    }
+    p {
+        float: unset;
+        width: unset;
+    }
+    .text-input {
+        width: unset;
+        height: unset;
+        margin: 0;
+    }
+    .text {
+        width: 80vw;
+    }
+    .text-left {
+        width: 80vw;
+        float: unset;
+    }
+    .text-right {
+        width: 80vw;
+        float: unset;
+    }
+    .checkbox-input {
+        width: 80vw;
+    }
+    .checkbox {
+        float: unset;
+    }
+    .label {
+        float: unset;
+    }
+    .submit {
+        width: 80vw;
+        margin-left: unset;
+    }
+    .button {
+        width: 80vw;
+        height: 40px;
+    }
+    .signin-btn {
+        margin-top: 10px;
+    }
+}
