@@ -13,7 +13,7 @@ header > div {
     margin: 0 170px;
     height: 100%;
 }
-header button {
+header a {
     cursor: pointer;
     transition: background-color 0.5s;
     height: 100%;
@@ -23,10 +23,10 @@ header button {
     line-height: 50px;
     margin-left: 30px;
 }
-header button:hover {
+header a:hover {
     text-decoration: underline;
 }
-header button:active {
+header a:active {
     color: black;
 }
 
@@ -65,7 +65,7 @@ footer > div {
     justify-content: space-between;
     margin: 0px 130px;
 }
-footer button {
+footer a {
     cursor: pointer;
     height: 100%;
     border: none;
@@ -74,10 +74,10 @@ footer button {
     line-height: 50px;
     margin-left: 30px;
 }
-footer button:hover {
+footer a:hover {
     text-decoration: underline;
 }
-footer button:active {
+footer a:active {
     color: black;
 }
 @media only screen and (min-width: 2000px) {
@@ -129,7 +129,7 @@ footer button:active {
         margin: 0px 42px;
         justify-content:space-evenly;
     }
-    header button {
+    header a {
         margin-left: unset;
     }
 
@@ -143,12 +143,12 @@ footer button:active {
         margin: 0px 0px;
     }
 
-    footer button {
+    footer a {
         margin-left: 0px;
     }
 }
 @media only screen and (max-width: 350px) {
-    footer button {
+    footer a {
         width: 40px;
         font-size: x-small;
     }
