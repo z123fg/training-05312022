@@ -29,8 +29,15 @@ li a:hover{
     background-color: cornflowerblue;
 }
 
-div{
+.header{
     background-color: #c6bfbf;
+}
+.p_container{
+    display: flex;
+}
+
+.p_container > p{
+    flex: 1;
 }
 
 .nav2{
