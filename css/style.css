@@ -1,0 +1,45 @@
+.menu{
+  display: flex;
+  flex-direction: row;
+  position: sticky;
+  margin-bottom: 0%;
+}
+.color--gray{
+  background-color: #c6bfbf;
+}
+.color--black{
+  background-color: #000;
+}
+.color--green{
+  background-color: #0b4d14;
+}
+.content{
+  display: flex;
+  justify-content: space-around;
+  align-content: stretch;
+  padding: 0.5% 20% 0 20%;
+}
+@media screen and (max-width: 768px) {
+  .menu{
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .content{
+    display: flex;
+    justify-content: space-around;
+    align-content: stretch;
+    padding: 0.5% 10% 0 10%;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .content{
+    display: flex;
+    justify-content: space-around;
+    align-content: stretch;
+    padding: 0.5% 8% 0 8%;
+  }
+}
