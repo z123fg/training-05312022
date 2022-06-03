@@ -1,5 +1,15 @@
-/* .box{
-    color:red;
-} */
+#content{
+    display: flex;
+    width: 500px;
+}
+
+#content div {
+    flex-basis: 120px;
+    border: 3px solid rgba(0,0,0,.2);
+}
+
+.box{
+    flex-grow: 1;
+} 
 
 

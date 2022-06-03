@@ -7,32 +7,35 @@
       <meta name="description" content="This is a sign up template" />
       <title>Sign Up</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="index.css" />
     <style>
-
       input:hover {
-        outline: 5px solid blue;
+        outline: 2px solid blue;
+      }
+      .box{
+        flex: 1 2 25%;
       }
     </style>
-    <link rel="stylesheet" href="index.css" />
   </head>
   <body>
     <div
       style="
         display: flex;
-        flex-direction: column;
-        width: 100px;
-        height: 500px;
-        border: 1px solid black;
-
-        justify-content:flex-start;
-        align-items: flex-start;
-      "
-    >
+        justify-content: center;
+        align-items: center;
+      ">
         <font face="Arial" size="20px"> Sign up </font>
-        <input style="border: 1px solid black;" placeholder="this is a placeholder" />
+        <input class="box" style="border: 1px solid black" placeholder="First Name" /> 
+        <input class="box" style="border: 1px solid black;" placeholder="Last Name" />
+        <input style="border:1px solid black;" placeholder="Mobile No.">
+        <input style="border:1px solid black;" placeholder="Email Address">
+        <input class="box" style="border: 1px solid black" placeholder="Password" /> 
+        <input class="box" style="border: 1px solid black;" placeholder="Confirm Password" />
+        <input type="checkbox"> By clicking Register, you agree to the Terms and Conditions set out by this site, including our Cookie Use. </input>
+        <button style="color: solid blue">Register</button>
       
-        <div style="border: 1px solid black; ">child2</div>
-        <div style="border: 1px solid black; ">child3</div>
+        <!--<div class = ".box" style="border: 1px solid black">child2</div>
+        <div style="border: 1px solid black; ">child3</div>-->
     </div>
   </body>
 </html>
