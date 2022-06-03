@@ -42,21 +42,22 @@ body{
 }
 
 .ul_bar_inlink{
-    padding: 1.4rem;
+    padding: 1.2rem;
     text-decoration: none;
     color: white;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 
 .con_head{
     background: #c6bfbf;
-    padding-top: 5.3rem;
+    padding-top: 5.1rem;
     height: auto;
     box-sizing: border-box;
+    padding-bottom: 2.5rem;
 }
 
 .con_head_initial{
-    font-size: 4rem;
+    font-size: 3rem;
 }
 
 .con_body{
@@ -65,7 +66,7 @@ body{
 
 .inner_con_body{
     font-size: 1rem;
-    line-height: 1.3rem;
+    line-height: 1.2rem;
     column-count: 3;
 }
 
@@ -86,14 +87,14 @@ body{
 }
 
 .innerlist_setter{
-    line-height: 3.8rem;
+    line-height: 3.7rem;
     display: inline;
 }
 
 .setter_list_link{
-    padding: 1.3rem;
+    padding: 1.2rem;
     color: rgb(255, 255, 255);
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     text-decoration: none;
 }
 

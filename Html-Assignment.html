@@ -1,109 +1,37 @@
-<!DOCTYPE html> 
-<html>
-	<head>
-		<title>
-			HTML Assignment
-		</title>
-		<link rel="stylesheet" href="Html-Assignment.css">
-	</head>
-	<body>
-		<!-- Headings -->
-		<section class="form__container">
-			<form class="form__signup">
-				<h1 class="form__title">Sign Up</h1>
-				<div class="form__row-container">
-					<input class="form__input" placeholder="First Name" />
-					<input placeholder="Last Name"
-					class="form__input"
-					/>
-				</div>
-				<div class="form__row-container">
-					<input placeholder="Mobile No." class="form__input" />
-				</div>
-				<div class="form__row-container">
-					<input class="form__input" placeholder="Email Address" />
-				</div>
-				<div class="form__row-container">
-					<input class="form__input" placeholder="Password" />
-					<input placeholder="Confirm Password"
-					class="form__input"
-					/>
-				</div>
-				<div class="form__agreement">
-					<div class="form__checkmark">
-						<input type="checkbox" />
-						<label class="form__checkmark-label">I Agree</label>
-					</div>
-					<div class="form__agreement-text">
-						By clicking <span class="badge">Register</span>, you agree to <a class="link" href="">Terms and Conditions</a> set out by the site, including our Cookie Use.
-					</div>
-					<div class="form__act-container">
-						<button class="button form__button--primary">Register</button>
-						<button class="button form__button--secondary">Sign In</button>
-					</div>
-				</form>
-			</section>
-	</body>
-</html>				
-
-        <!-- Forms 
-        <form action="process.php" method="GET">
-        		<label>
-        			First Name
-        		</label>
-        		<input type="text" name="firstName" placeholder="First Name">
-
-        		<label>
-        			Last Name
-        		</label>
-        		<input type="text" name="lastName" placeholder="Last Name">
-
-            <br>
-
-			<div>
-        		<label>
-        			Mobile number
-        		</label>
-        		<input type="number" name="mobileNumber" placeholder="Mobile No.">
-            </div>
-
-            <br>
-
-            <div>
-        		<label>
-        			Email
-        		</label>
-        		<input type="email" name="email" placeholder="Email Address">
-        	</div>
-
-            <br>
-
-            <label>
-                Password
-            </label>
-            <input type="text" name="passWord" placeholder="Password">
-
-            <br>
-
-            <label>
-                Confirm Password
-            </label>
-            <input type="text" name="confirmPassword" placeholder="Confirm Password">
-
-            <br>
-
-            <link href='https://fonts.antra.com/css?Account=Register' rel='stylesheet' type='text/css'><p>By clicking Register, you agree to the <a href="http://google.com" target="_blank"> Terms and Conditions </a> </p>
-            <p><input id="terms" type="checkbox" onclick="agree()" name="terms" value="on" /> I agree</p>
-            <p class="hidden">set out by this site, including our Cookie Use.</p>
-
-            <br>
-
-            
-            <button>
-        	    Register
-            </button>
-
-            <button>
-        	    Sign In
-            </button>
-		-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Html-Assignment.css">
+  </head>
+<body>
+  <div></div>
+  <div class="form-container">
+    <form>
+      <header>Sign Up</header>
+	<div class="form__row-container">
+      <input class="form__input" placeholder="First Name" input/> <input placeholder="Last Name"
+	  class="form__input"/>
+	</div>
+	<div class="form__row-container">
+      <input placeholder="Mobile No." class="form__input"/>
+	</div>
+	<div class="form__row-container">
+      <input class="form__input" placeholder="Email Address"/>
+	</div>
+	<div class="form__row-container">
+      <input class="form__input" placeholder="Password"/> <input placeholder="Confirm Pasword" class="form__input"/>
+	</div>
+      <div class="agree_box">
+        <input class="checkbox_agree" type="checkbox" id="agreech" name="agreeCheck">
+        <span class="checkbox_agree">I Agree</span>
+        <span>By clicking <button id="register_button">Register</button>, you agree to the <a href="http://google.com" target="_blank">Terms and Conditions</a> set out by this site, including our Cookie Use.</p>
+        </span>
+      <input class="click_button" type="button" id="register_button" name="register" value="Register">
+      <input class="click_button" type="button" id="sign_button" name="sign_in" value="Sign In">
+    </form>
+  </div>
+</body>
+</html>
