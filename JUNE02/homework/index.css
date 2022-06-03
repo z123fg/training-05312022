@@ -1,0 +1,155 @@
+body {
+    margin: 0;
+    font-family: "arial";
+}
+
+header {
+    height: 50px;
+    background-color: black;
+    margin: 0;
+}
+header > div {
+    display: flex;
+    margin: 0 170px;
+    height: 100%;
+}
+header button {
+    cursor: pointer;
+    transition: background-color 0.5s;
+    height: 100%;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    line-height: 50px;
+    margin-left: 30px;
+}
+header button:hover {
+    text-decoration: underline;
+}
+header button:active {
+    color: black;
+}
+
+
+.top_section {
+    background-color: rgb(191, 191, 198);
+    margin: 0;
+}
+.top_section h1 {
+    margin: 0;
+}
+.top_section > div {
+    margin: 0px 170px;
+    padding: 30px 0px;
+}
+
+.middle_section {
+    margin-bottom: 130px;
+}
+.middle_section > div {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 170px;
+}
+.middle_section p {
+    width: 300px;
+    margin: 10px 0px;
+}
+
+footer {
+    background-color: rgb(11, 77, 20);
+    height: 50px;
+}
+footer > div {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 130px;
+}
+footer button {
+    cursor: pointer;
+    height: 100%;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    line-height: 50px;
+    margin-left: 30px;
+}
+footer button:hover {
+    text-decoration: underline;
+}
+footer button:active {
+    color: black;
+}
+@media only screen and (min-width: 2000px) {
+    .middle_section p {
+        width: 25%;
+        margin: 10px 0px;
+    }
+}
+@media only screen and (max-width: 1200px) {
+    .middle_section p {
+        width: 250px;
+    }
+}
+@media only screen and (max-width: 1100px) {
+    .middle_section p {
+        width: 200px;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .middle_section > div {
+        flex-direction: column;
+    }
+    .middle_section p {
+        width: unset;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .middle_section > div {
+        flex-direction: column;
+    }
+
+    header > div {
+        margin: 0px 85px;
+    }
+    .top_section > div {
+        margin: 0px 85px;
+    }
+    .middle_section > div {
+        margin: 0px 85px;
+    }
+    footer > div {
+        margin: 0px 50px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    header > div {
+        margin: 0px 42px;
+        justify-content:space-evenly;
+    }
+    header button {
+        margin-left: unset;
+    }
+
+    .top_section > div {
+        margin: 0px 42px;
+    }
+    .middle_section > div {
+        margin: 0px 42px;
+    }
+    footer > div {
+        margin: 0px 0px;
+    }
+
+    footer button {
+        margin-left: 0px;
+    }
+}
+@media only screen and (max-width: 350px) {
+    footer button {
+        width: 40px;
+        font-size: x-small;
+    }
+}
