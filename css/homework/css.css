@@ -1,0 +1,37 @@
+* {
+    margin: initial;
+    padding: initial;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-color: #000;
+}
+
+section {
+    background-color: #c6bfbf;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+}
+
+footer {
+    background-color: #0b4d14;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__navbar, .footer__navbar {
+    display: flex;
+}
+
+.header__nav, .footer__nav {
+    color: white;
+    list-style-type: none;
+    margin-right: 10px;
+}
