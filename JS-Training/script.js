@@ -84,3 +84,6 @@
 
 // const obj = { name : 'Xin'}
 
+//* Hoisting *//
+// var: only declaration can be hoisted, initialzation won't
+// let, const: termporal dead zone 
