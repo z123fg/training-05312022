@@ -1,12 +1,41 @@
+body,html{
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
 ul{
     list-style-type: none;
     margin: 0%;
     padding: 0%;
+    overflow: hidden;
     background-color: #000;
+    /* position: fixed; */
+    top: 0%;
+    width: 100%;
 }
-li{
-    display: inline;
-}
-li a{
 
+li{
+    float: left;
+}
+
+li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+li a:hover{
+    background-color: cornflowerblue;
+}
+
+div{
+    background-color: #c6bfbf;
+}
+
+.nav2{
+    background-color: #0b4d14;
+}
+footer{
+    text-align: center;
 }
