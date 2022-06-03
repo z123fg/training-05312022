@@ -1,0 +1,47 @@
+grid garden
+
+css specificity : priority of css styling
+    priority : inline > internal styling >= external styling (whichever is referenced last in html file)
+style tag : css styling within html file using <style></style>
+css selector : example in css file --> .box
+
+selectors : id (.box) > class id (div), union, direct child, descendent, sibling
+
+#name --> id
+name --> <name>
+.name --> class
+
+.parent > .child : selects child element (will not select grandchild) (direct child)
+    selects element child who has parent class parent
+    * * *
+    <div class="parent">
+        <div class="child">
+            this thing!!
+        </div>
+    </div>
+    * * *
+    <div class="parent2">
+        <div class="child">
+            but not this one
+        </div>
+    </div>
+    * * *
+    <div class="parent">
+        <div class="child">
+            <div class="child">
+                does not reach this
+            </div>
+        </div>
+    </div>
+.parent .child works too but will select grandchild (descendent selector)
+    <div class="parent">
+        <div class="child">
+            <div class="child">
+                selects this one
+            </div>
+        </div>
+    </div>
+
+* : selects all (universal selector)
+
+[id="id"] : selects all elements with id "id" (this example is the same as #id)
