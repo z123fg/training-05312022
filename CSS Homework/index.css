@@ -17,6 +17,7 @@ ul li{
     text-decoration: none;
     list-style: none;
     padding: 0px 20px;
+
 }
 .main-header{
     background-color: #c6bfbf;
@@ -54,4 +55,5 @@ footer{
 }
 a{
     color: rgb(0, 135, 176);
+    text-decoration: none;
 }
