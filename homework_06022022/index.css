@@ -21,6 +21,8 @@ body{
 }
 
 .menu__row{
+    position: relative;
+    left: 10%;
     list-style: none;
 }
 
@@ -56,6 +58,7 @@ body{
     position: relative;
     top: 5%;
     gap: 5%;
+    margin: 0 10% 0 10%;
 }
 
 .footer{
@@ -67,12 +70,23 @@ body{
     justify-content: space-between;
 }
 
+.footer--left{
+    position: relative;
+    left: 10%;
+}
+
+.footer--right{
+    position: relative;
+    right: 10%;
+}
+
 .footer__row--right, .footer__row--left{
     list-style: none;
 }
 
 .footer__list{
     display: inline;
+    padding: 10px;
 }
 
 .footer__link{
