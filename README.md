@@ -40,3 +40,9 @@
 - https://flexboxfroggy.com/
 - https://codesandbox.io/s/stoic-keller-rc4ytj?file=/index.html
 - https://cssgridgarden.com/
+
+## Javascript
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures
+- https://developer.mozilla.org/en-US/docs/Glossary/Falsy
+- https://dev.to/sandy8111112004/javascript-introduction-to-scope-function-scope-block-scope-d11
+- https://stackoverflow.com/questions/9959727/proto-vs-prototype-in-javascript
