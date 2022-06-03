@@ -4,13 +4,49 @@
 		<title>
 			HTML Assignment
 		</title>
+		<link rel="stylesheet" href="Html-Assignment.css">
 	</head>
 	<body>
 		<!-- Headings -->
-		<h1>
-			Sign Up
-		</h1>
-        <!-- Forms -->
+		<section class="form__container">
+			<form class="form__signup">
+				<h1 class="form__title">Sign Up</h1>
+				<div class="form__row-container">
+					<input class="form__input" placeholder="First Name" />
+					<input placeholder="Last Name"
+					class="form__input"
+					/>
+				</div>
+				<div class="form__row-container">
+					<input placeholder="Mobile No." class="form__input" />
+				</div>
+				<div class="form__row-container">
+					<input class="form__input" placeholder="Email Address" />
+				</div>
+				<div class="form__row-container">
+					<input class="form__input" placeholder="Password" />
+					<input placeholder="Confirm Password"
+					class="form__input"
+					/>
+				</div>
+				<div class="form__agreement">
+					<div class="form__checkmark">
+						<input type="checkbox" />
+						<label class="form__checkmark-label">I Agree</label>
+					</div>
+					<div class="form__agreement-text">
+						By clicking <span class="badge">Register</span>, you agree to <a class="link" href="">Terms and Conditions</a> set out by the site, including our Cookie Use.
+					</div>
+					<div class="form__act-container">
+						<button class="button form__button--primary">Register</button>
+						<button class="button form__button--secondary">Sign In</button>
+					</div>
+				</form>
+			</section>
+	</body>
+</html>				
+
+        <!-- Forms 
         <form action="process.php" method="GET">
         		<label>
         			First Name
@@ -62,7 +98,7 @@
 
             <br>
 
-            <!-- Buttons -->
+            
             <button>
         	    Register
             </button>
@@ -70,3 +106,4 @@
             <button>
         	    Sign In
             </button>
+		-->
