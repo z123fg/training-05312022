@@ -1,0 +1,159 @@
+* {
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+  }
+
+body {
+  font-family: Helvetica;
+  margin: 0;
+}
+
+.navbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: sticky;
+        top: 0;
+        cursor: pointer;
+    }
+ 
+.background {
+        background: black;
+        background-blend-mode: darken;
+        background-size: cover;
+        height: 50px;
+    }
+ 
+.nav-list {
+        width: 80%;
+        display: flex;
+        align-items: center;
+    }
+
+.nav-list li {
+        list-style: none;
+        padding: 26px 30px;
+    }
+ 
+.nav-list li a {
+        text-decoration: none;
+        color: white;
+    }
+ 
+.nav-list li a:hover {
+        color: grey;
+    }
+
+
+
+.section1 {
+        background-color:#c6bfbf;
+        height: 150px;
+    }
+ 
+.section2 {
+        height: 550px;
+    }
+
+.box-main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        max-width: 80%;
+        margin: auto;
+        height: 80%;
+    }
+ 
+.first{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+h1{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.column {
+  float: left;
+  width: 22%;
+  margin-top: 10px;
+  margin-left: 80px;
+  margin-right: 10px;
+}
+
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+
+
+
+ 
+.footerbar {
+        background: #0b4d14;
+        background-blend-mode: darken;
+        background-size: cover;
+        height: 50px;
+
+    }
+ 
+.list1{
+        display: flex;
+        align-items:center;
+        margin-left: 50px;
+        float: left;
+
+    }
+  
+.list1 li {
+        list-style: none;
+        padding: 15px 20px;
+    }
+ 
+.list1 li a {
+        text-decoration: none;
+        color: white;
+    }
+ 
+.list1 li a:hover {
+        color: grey;
+    }
+ 
+
+.list2{
+        display: flex;
+        align-items:center;
+        margin-right: 50px;
+        float: right;
+
+    }
+  
+.list2 li {
+        list-style: none;
+        padding: 15px 20px;
+    }
+ 
+.list2 li a {
+        text-decoration: none;
+        color: white;
+    }
+ 
+.list2 li a:hover {
+        color: grey;
+    }
+ 
+
+
+
+
+
+
