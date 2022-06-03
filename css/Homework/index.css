@@ -52,7 +52,6 @@ header li{
 
 .content li{
     list-style: none;
-    /*border:1px solid red;*/
     width: 400px;
 }
 
@@ -68,7 +67,6 @@ footer{
 footer>ul{
     display:inline-flex;
     list-style: none; 
-    /* margin: 0 20px;  When the screen size is small, get this as 0px 0px for the resizing*/
     height: 100%;
     margin-top:10px;
     margin-left:90px;
@@ -76,15 +74,205 @@ footer>ul{
 
 .footer__list--start{
     justify-content: flex-start;
-    /* width: 300px; */
 }
 
 .footer__list--end{
     justify-content: flex-end;
-    /* width: 500px; */
     padding-left:600px;
 }
 
 footer li{
     margin:15px 40px;
+}
+
+@media screen and (max-width: 1635px){
+    footer>ul{
+        display:inline-flex;
+        list-style: none; 
+        margin: 0 0px;
+        height: 100%;
+        margin-top:10px;
+        margin-left:60px;
+    }
+
+    footer li{
+        margin:15px 40px;
+    }
+  }
+
+  @media screen and (max-width: 1610px){
+    footer>ul{
+        margin-left:30px;
+        margin-top:10px;
+    }
+  }
+
+  @media screen and (max-width: 1510px){
+    footer>ul{
+        margin: 0 0px;
+        margin-left:0px;
+        margin-top:10px;
+    }
+
+    footer li{
+        margin:15px 30px;
+    }
+  }
+
+  @media screen and (max-width: 1230px){
+    footer>ul{
+        margin-top:10px;
+    }
+
+    .footer__list--end{
+        padding-left:500px;
+    }
+    
+    footer li{
+        margin:15px 30px;
+    }
+
+    @media screen and (max-width: 1340px){
+        footer>ul{
+            margin-top:10px;
+        }
+    
+        .footer__list--end{
+            padding-left:400px;
+        }
+        
+        footer li{
+            margin:15px 30px;
+        }
+  }
+
+  @media screen and (max-width: 1140px){
+        footer>ul{
+            margin-top:10px;
+        }
+
+        .footer__list--end{
+            padding-left:300px;
+        }
+    
+        footer li{
+            margin:15px 30px;
+        }
+  }
+
+    @media screen and (max-width: 1040px){
+        footer>ul{
+            margin-top:10px;
+        }
+    
+        .footer__list--end{
+            padding-left:200px;
+        }
+        
+        footer li{
+            margin:15px 30px;
+        }
+    }
+
+    @media screen and (max-width: 940px){
+        .content li{
+            width: 200px; 
+            border:1px solid var(--secondary-color);
+        }
+
+        footer>ul{
+            margin-top:10px;
+        }
+        
+        .footer__list--end{
+            padding-left:200px;
+        }
+            
+        footer li{
+            margin:15px 30px;
+        }
+    }
+
+    @media screen and (max-width: 925px){
+        .hero{
+            height:200px;
+            padding-top:30px;
+        }
+
+        .content li{
+            width: 150px; 
+            border:1px solid var(--secondary-color);
+        }
+
+        footer>ul{
+            margin-top:10px;
+        }
+        
+        .footer__list--start{
+            margin-left:40px;
+        }
+
+        .footer__list--end{
+            padding-left:0px;
+        }
+            
+        footer li{
+            margin:15px 30px;
+        }
+    }
+
+    @media screen and (max-width: 800px){
+        p, li{
+            font-size: medium;
+        }
+
+        footer>ul{
+            margin-top:10px;
+        }
+        
+        .footer__list--start{
+            margin-left:40px;
+        }
+
+        footer li{
+            margin:15px 20px;
+        }
+    }
+
+    @media screen and (max-width: 650px){
+        p, li{
+            font-size: small;
+        }
+
+        header > ul {
+            margin: 0 30px;
+        }         
+
+        .hero>h1,.hero>p{
+            padding:0px 100px;
+        }
+
+        .content > ul{
+            flex-direction: column;
+            padding-left:50px;
+        }
+
+        .content li{
+            list-style: none;
+            justify-content: space-between;
+            width: 400px;
+        }
+
+        footer>ul{
+            margin-top:10px;
+        }
+        
+        .footer__list--start{
+            margin-left:none;
+        }
+            
+        footer li{
+            margin:15px 10px;
+        }
+    }
 }
