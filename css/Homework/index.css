@@ -61,15 +61,30 @@ footer{
     color:white;
     margin-top:200px;
     margin-bottom: 200px;
+    height:60px;
+    width: 100%;
 }
 
 footer>ul{
-    display:flex;
+    display:inline-flex;
     list-style: none; 
-    margin: 0 150px;
+    /* margin: 0 20px;  When the screen size is small, get this as 0px 0px for the resizing*/
     height: 100%;
+    margin-top:10px;
+    margin-left:90px;
 }
 
 .footer__list--start{
+    justify-content: flex-start;
+    /* width: 300px; */
+}
+
+.footer__list--end{
     justify-content: flex-end;
+    /* width: 500px; */
+    padding-left:600px;
+}
+
+footer li{
+    margin:15px 40px;
 }
