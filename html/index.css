@@ -1,4 +1,5 @@
-body {
+/* body {
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,8 +18,7 @@ body {
 #first-name,
 #last-name,
 #pass,
-#confirm-password,
-#confirm {
+#confirm-password {
   margin: 0.5rem 0.5rem;
   border-radius: 5px;
   border-color: #e9e9e9;
@@ -37,11 +37,25 @@ input:focus {
   border-color: #428bca;
   box-shadow: 0px 0px 6px #428bca;
 }
-.half {
-  display: inline-block;
-  width: 45%;
+#form__row__container{
+    display: flex;
+    width:100%;
 }
-#demo-reg-btn {
+.toc{
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+}
+.flex-item {
+    flex-grow: 1;
+}
+.left {
+    flex-grow: 1;
+}
+.right {
+    flex-grow: 1;
+}
+.demo-reg-btn {
   background-color: #399bff;
   border: none;
   border-radius: 5px;
@@ -49,7 +63,7 @@ input:focus {
   font-weight: 700;
   padding: 5px;
 }
-.buttons {
+.form__actions__container {
   margin-top: 1rem;
   width: 100%;
 }
@@ -79,6 +93,92 @@ input:focus {
   font-size: 16px;
   width: 45%;
 }
-#terms {
+.link {
   color: #399bff;
+} */
+
+.form__container {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form__sign__up {
+}
+
+.form__header {
+  text-align: center;
+}
+
+.form__row__container {
+  display: flex;
+}
+
+.form__input {
+  flex-grow: 1;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+
+.form__toc{
+  display:flex;
+}
+
+.form__checkbox {
+
+}
+
+.form__toc__text {
+
+}
+
+.form__actions__container {
+  display: flex;
+}
+
+#reg-btn {
+  flex-grow: 1;
+  margin: 1rem;
+  background-color: #399bff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  justify-content: center;
+  display: inline-block;
+  font-size: 16px;
+  width: 45%;
+}
+#sign-in-btn {
+  flex-grow: 1;
+  margin: 1rem;
+  background-color: #71c94d;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  justify-content: center;
+  display: inline-block;
+  font-size: 16px;
+  width: 45%;
+}
+
+.form__toc__text a {
+  color: #399bff;
+  text-decoration: none;
+}
+.form__toc__text a:visited {
+  color: #399bff;
+  text-decoration: none;
+}
+.form__toc__text a:hover {
+  color: #3967ff;
+  text-decoration: none;
+}
+.form__toc__text a:active {
+  color: #4aff39;
+  text-decoration: none;
 }

@@ -5,45 +5,51 @@
     <meta name="keyword" content="" />
     <meta name="author" content="" />
     <meta name="description" content="" />
-    <title>Antra Training HW1</title>
+    <title>Antra Training</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
     <script src="index.js" async defer></script>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <form id="sign-up">
-      <div class="header">
-        <h1 id="header">Sign Up</h1>
-      </div>
-      <div class="content">
-        <input id="first-name" class="half" placeholder="First Name" />
-        <input id="last-name" class="half" placeholder="Last Name" />
+    <div class="form__container">
+      <form class="form__sign__up">
+        <h1 class="form__header">Sign Up</h1>
+        <div class="form__row__container">
+          <input class="form__input" placeholder="First Name" />
+          <input class="form__input" placeholder="Last Name" />
+        </div>
+        <div class="form__row__container">
+          <input class="form__input" placeholder="Mobile No." />
+        </div>
+        <div class="form__row__container">
+          <input class="form__input" type="email" placeholder="Email Address" />
+        </div>
+        <div class="form__row__container">
+          <input class="form__input" type="password" placeholder="Password" />
+          <input class="form__input" type="password" placeholder="Confirm Password" />
+        </div>
+        <div class="form__toc">
+          <div class="form__checkbox">
+            <input type="checkbox" />
+            <label class="form__checkbox__label">I agree</label>
+          </div>
+          <div class="form__toc__text">
+            <p>
+              By clicking
+              <button class="demo-reg-btn" disabled>Register</button>, you agree
+              to the
+              <a class="link" href="">Terms and Conditions</a>
+              set out by this site, including our Cookie use.
+            </p>
+          </div>
+        </div>
         <br />
-        <input id="phone" placeholder="Mobile No." />
-        <br />
-        <input id="email" type="email" placeholder="Email Address" />
-        <br />
-        <input id="pass" class="half" type="password" placeholder="Password" />
-        <input id="confirm-password" class="half" type="password" placeholder="Confirm Password"
-        />
-        <br />
-        <input placeholder="I agree" type="checkbox" />
-      </div>
-      <div id="agree">
-        <label>I agree</label>
-        <p>
-          By clicking <button id="demo-reg-btn" disabled>Register</button>, you agree to
-          the
-          <a id="terms">Terms and Conditions</a>
-          set out by this site, including our Cookie use.
-        </p>
-      </div>
-      <br />
-      <div class="buttons">
-        <button id="reg-btn" disabled>Register</button>
-        <button id="sign-in-btn" disabled>Sign In</button>
-      </div>
-    </form>
+        <div class="form__actions__container">
+          <button id="reg-btn" disabled>Register</button>
+          <button id="sign-in-btn" disabled>Sign In</button>
+        </div>
+      </form>
+    </div>
   </body>
 </html>
