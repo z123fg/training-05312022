@@ -1,3 +1,7 @@
-div{
+/* div{
     color:red
+} */
+
+*{
+    border: 1px black solid ;
 }
