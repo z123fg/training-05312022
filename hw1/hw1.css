@@ -1,6 +1,13 @@
 body{
     display: flex;
     justify-content: center;
+    
+}
+
+.table{
+    display: flex;
+    flex-direction: column;
+    
 }
 
 a{
@@ -14,47 +21,70 @@ header{
     font-size: 25px;
 }
 
-.name{
-    margin: 10px 10px 0px;
-    height: 25px;
-    width: 200px;
-    border-radius: 3px;
-    border-radius: 3px;
-    border: 1px solid grey;
+.name{ 
+    display: flex;
+    flex-direction: row;
 }
 
-.name:focus{
+.name .first-name, .name .last-name{
+    height: 40px; 
+    flex-grow: 1;
+    border-radius: 3px;
+    border-width: 1px;
+    margin: 5px;
+}
+
+.name .first-name:focus, .name .last-name:focus{
     box-shadow: 0px 0px 5px 0px rgb(12, 134, 255);
 }
 
 .info{
-    width: 433px;
-    margin: 10px 10px 0px;
-    height: 25px;
-    border-radius: 3px;
-    border: 1px solid grey;
+    display: flex;
 }
 
-.info:focus{
+.number, .email{
+    flex-grow: 1;
+    height: 40px;
+    border-radius: 3px;
+    margin: 5px;
+    border-width: 1px;
+}
+
+.info .number:focus, .info .email:focus{
     box-shadow: 0px 0px 5px 0px rgb(12, 134, 255);
 }
 
 .password{
-    margin: 10px 10px;
-    height: 25px;
-    width: 200px;
-    border-radius: 3px;
-    border-radius: 3px;
-    border: 1px solid grey;  
+    display: flex;
 }
 
-.password:focus{
+.password .pw, .password .confirm-pw{
+    height: 40px;
+    flex-grow: 1;
+    border-radius: 3px;
+    border-width: 1px;    
+    margin: 5px;
+}
+
+
+.password .pw:focus, .password .confirm-pw:focus{
     box-shadow: 0px 0px 5px 0px rgb(12, 134, 255);
 }
 
-.checkbox{
-    font-weight: bold;   
-    margin-right: 60px;
+.agreement{
+    display: flex;
+}
+
+.agreement .agree{
+    font-weight: bold;
+    font-size: 10px;
+    flex:30%;
+    margin: 10px 0px;
+}
+
+.btn{
+    display: flex;
+    gap: 10px;
 }
 
 .register-btn{
@@ -63,10 +93,8 @@ header{
     color: white;
     background-color:cornflowerblue;
     height: 30px;
-    width: 210px;
-    margin: 10px 10px;
     cursor:pointer;
-    
+    flex-grow: 1;
 }
 
 .signin-btn{
@@ -75,20 +103,25 @@ header{
     color: white;
     background-color:green;
     height: 30px;
-    width: 210px;
-    margin: 10px 10px;
     cursor:pointer;
+    flex-grow: 1;
 }
 
-.description{
-    width: 320px;
+.terms{
     font-size: 12px;
-    display: inline-block;   
+    margin: 5px 5px;
+    flex: 70%
 }
 
-.description .register{
+.terms .register{
     color: white;
     background-color: cornflowerblue;
     padding: 1px 5px;
     border-radius: 2px;
+}
+
+@media screen and (max-width: 400px) {
+    .name, .password{
+        flex-direction: column;
+    }
 }
