@@ -27,7 +27,7 @@ ul li{
     justify-content:space-around;
     padding: 20px 150px;
     height: 60vh;
-    max-height: 80vh;
+   
 }
 
 .footer-left {
@@ -51,4 +51,7 @@ footer{
 }
 .content-center{
     padding: 0px 30px;
+}
+a{
+    color: rgb(0, 135, 176);
 }
