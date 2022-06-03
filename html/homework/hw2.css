@@ -12,6 +12,8 @@ ul{
     /* position: fixed; */
     top: 0%;
     width: 100%;
+    padding: 0 200px 0 200px;
+
 }
 
 li{
@@ -31,6 +33,7 @@ li a:hover{
 
 .header{
     background-color: #c6bfbf;
+    padding: 0 200px 0 200px;
 }
 .p_container{
     display: flex;
@@ -38,6 +41,8 @@ li a:hover{
 
 .p_container > p{
     flex: 1;
+    padding: 0 200px 100px 200px;
+
 }
 
 .nav2{
