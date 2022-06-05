@@ -20,10 +20,7 @@ h1{
     border-color: lightgray;
     margin-bottom: 2%;
     padding: 2%;
-}
-#fname, #lname, #password, #cpass, #register, #sign {
-    width: 45%;
-
+    
 }
 #lname, #cpass, #agreement, #sign {
     float: right;
@@ -50,4 +47,3 @@ h1{
  input[type=text]:focus {
     border: dodgerblue;
   }
-
