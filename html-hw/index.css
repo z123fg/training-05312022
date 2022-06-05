@@ -7,6 +7,7 @@ h1{
 }
 #mobile, #email {
     width: 100%;
+<<<<<<< HEAD
     border-radius: 5px;
     border-color: lightgray;
     border-width: 1px;
@@ -21,6 +22,11 @@ h1{
     margin-bottom: 2%;
     padding: 2%;
     
+=======
+}
+#fname, #lname, #password, #cpass, #register, #sign {
+    width: 45%;
+>>>>>>> abdbea4 (Basic set up put together, still needs more styling)
 }
 #lname, #cpass, #agreement, #sign {
     float: right;
@@ -28,6 +34,7 @@ h1{
 #agreement {
     width: 60%;
     font-size: .7em;
+<<<<<<< HEAD
 }
 
 #register, #sign, #reg {
@@ -47,3 +54,6 @@ h1{
  input[type=text]:focus {
     border: dodgerblue;
   }
+=======
+}
+>>>>>>> abdbea4 (Basic set up put together, still needs more styling)
