@@ -16,3 +16,10 @@ The join() method creates and returns a new string by concatenating all of the e
 
 * join(separator)
 
+## 4. instanceof
+The `instanceof` operator tests to see if the prototype property of a constructor appears anywhere in the prototype chain of an object. The return value is a boolean value.
+
+* object `instanceof` constructor
+
+## 5. typeof
+The `typeof` operator returns a string indicating the type of the unevaluated operand.
