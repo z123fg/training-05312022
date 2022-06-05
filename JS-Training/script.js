@@ -87,3 +87,55 @@
 //* Hoisting *//
 // var: only declaration can be hoisted, initialzation won't
 // let, const: termporal dead zone 
+// functions hoisting : normal functions : both declaration & initalization will be hoisted
+// Exception: function stored in a variable; arrow function
+
+// foo()
+// var foo = () => {
+//   console.log('foo');
+// }
+
+// class Person {
+//   constructor(name, age) {
+//     this.name = name;
+//     this.age = age
+//   }
+// }
+
+// let p = new Person('J', 1)
+// console.log(p);
+
+// function FuncPerson(name, age) {
+//   this.name = name;
+//   this.age = age;
+// }
+
+// let funcP = new FuncPerson('J', 1)
+// console.log('Function', funcP); 
+
+// __proto__: the actual obj that is used in the look up chain to resolve methods
+//prototype: the object that is used to build __proto__ when you create an obj with the new keyword
+
+//* instance method vs class method *//
+
+// class Person {
+//   constructor(name, age) {
+//     this.name = name;
+//     this.age = age
+//   }
+//   walk() {
+//     console.log(this.name + ' is walking');
+//   }
+// }
+
+// let p = new Person('J', 1)
+// // p.walk = function () {
+// //   console.log(this.name + ' is walking');
+// // }
+// // console.log(p);
+// p.walk()
+
+// let newP = new Person('li', 2)
+// // newP.walk = p.walk
+// newP.walk()
+
