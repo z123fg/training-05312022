@@ -1,5 +1,7 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  list-style-type: none;
 }
 
 ul.topnav{
@@ -36,6 +38,11 @@ ul.topnav li.right{
     float: right;
 }
 
+.know-more{
+  text-decoration: underline;
+  color: #2D89E5;
+}
+
 .header-content {
   background-color: #c6bfbf;
   font-size: 16px;
@@ -58,23 +65,29 @@ ul.topnav li.right{
 }
 
 .footer {
+  color: #ddd;
   position:fixed;
   bottom:0;
   left:0;
   width:100%;
   height: 90px;
-  background-color: #D0DAEE;
+  background-color: #0b4d14;
 }
 
-.footer-text-left {
+.footer-text-left, li{
   font-size:15px;
   padding-left: 40px;
   float:left;
   word-spacing:20px;
+  color: #ddd;
+}
+
+a{
+  color: #ddd;
 }
 
 a.menu:hover {
-  background-color:yellow;
+  background-color: #fcba03;
   font-size:20px;
 }
 
@@ -82,6 +95,7 @@ a.menu:hover {
   padding-right:40px;
   margin-top:20px;
   float:right;
+  color: #ddd;
 }
 
 .Social-Media {
@@ -91,7 +105,7 @@ a.menu:hover {
 }
 
 .Social-Media:hover {
-  background-color:yellow;
+  background-color: #2D89E5;
   padding:5px;
 }
 
