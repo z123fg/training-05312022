@@ -2,6 +2,7 @@
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
   list-style-type: none;
+  
 }
 
 ul.topnav{
@@ -21,6 +22,7 @@ ul.topnav li a {
   display: block;
   color: white;
   text-align: center;
+  justify-content: center;
   padding: 14px 16px;
   text-decoration: none;
   float: left;
@@ -74,7 +76,7 @@ ul.topnav li.right{
   background-color: #0b4d14;
 }
 
-.footer-text-left, li{
+.footer-text-left, .Social-Media-li{
   font-size:15px;
   padding-left: 40px;
   float:left;
