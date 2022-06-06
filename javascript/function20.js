@@ -3,43 +3,35 @@ function stridGen(x)
 {
     //console.log("int method")
     var idLength = x;
-    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     //console.log(idLength);
     var id = "";
-    /*for(var i = 0; i < idLength; i++)
+    for(var i = 0; i < idLength; i++)
     {    
-        //var type = Math.floor(Math.random * 3);
-        var type = 0;
+        var type = Math.floor(Math.random() * 3);
+        //console.log(type);
+        //var type = 0;
         //console.log("char 0");
         switch (type)
         {
             case 0:
                 //console.log("char 0");
-                var num = Math.floor(Math.random * 26);
+                var num = Math.floor(Math.random() * 26);
                 var char = String.fromCharCode(65 + num)
-                console.log(char);
-                //id += String.fromCharCode(Math.floor(65 + Math.Random() * 26));
+                //console.log(char);
+                id += char;
                 break;
             case 1:
+                var num = Math.floor(Math.random() * 26);
+                var char = String.fromCharCode(97 + num)
+                //console.log(char);
+                id += char;
                 break;
             case 2:
+                var num = Math.floor(Math.random() * 10)
+                id += num;
                 break;
         }
-
-        /*if (type === 0)
-        {
-            console.log("char 0");
-        }
-    }*/
-
-    for(var i = 0; i < idLength; i++)
-    {
-        var p = Math.floor(Math.random() * chars.length)
-        //console.log(p);
-        //console.log(chars.slice(p,p+1))
-        id += chars.slice(p, p+1);
     }
-
     console.log(id);
 }
 
