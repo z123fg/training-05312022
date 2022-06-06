@@ -23,3 +23,12 @@ The `instanceof` operator tests to see if the prototype property of a constructo
 
 ## 5. typeof
 The `typeof` operator returns a string indicating the type of the unevaluated operand.
+
+## 6. Math.floor()
+The Math.floor() function returns the largest integer less than or equal to a given number.
+
+## 7. Math.sqrt()
+The Math.sqrt() function returns the square root of a number. Math.sqrt() 函数返回数字的平方根。
+
+## 8. Math.random()
+The Math.random() method generates the random number between 0 and 1.

@@ -144,3 +144,272 @@ console.log(findDataType(true));
 
 
 // 10. Write a JavaScript function which returns the n rows by n columns identity matrix.
+function matrix(n) {
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            if (i === j) {
+                console.log(" 1 ");
+            } else {
+                console.log(" 0 ")
+            }
+        }
+        console.log('----------');
+    }
+}
+
+matrix(4);
+
+
+// 11. Write a JavaScript function which will take an array of numbers stored and find the second lowest and second greatest numbers, respectively. 
+// Sample array: [1,2,3,4,5]
+// Expected Output: 2,4
+
+function secondLowestAndGreated(arrNum) {
+    arrNum.sort(function(x, y){
+        return x - y;
+    });
+
+    let compareNum = [arrNum[0]];
+    let result = [];
+
+    for (let i = 1; i < arrNum.length; i++) {
+        if (arrNum[i - 1] !== arrNum[i]) {
+            compareNum.push(arrNum[i])
+        }
+    }
+    result.push(compareNum[1], compareNum[compareNum.length - 2])
+    result.join(',');
+    return result;
+}
+
+console.log(secondLowestAndGreated([1,2,3,4,5]))
+
+
+// 12. Write a JavaScript function which says whether a number is perfect. 
+// According to Wikipedia: In number theory, a perfect number is a positive integer that is equal to the sum of its proper positive divisors, that is, the sum of its positive divisors excluding the
+// number itself (also known as its aliquot sum). Equivalently, a perfect number is a number that is
+// half the sum of all of its positive divisors (including itself).
+// Example: The first perfect number is 6, because 1, 2, and 3 are its proper positive divisors, and 1 + 2 + 3 = 6. Equivalently, the number 6 is equal to half the sum of all its positive divisors: ( 1 +
+// 2 + 3 + 6 ) / 2 = 6. The next perfect number is 28 = 1 + 2 + 4 + 7 + 14. This is followed by the perfect numbers 496 and 8128.
+function isPerfect(num) {
+    let current = 0;
+    for (let i = 1; i <= num / 2; i++) {
+        if (num % i === 0) {
+            current += i;
+        }
+    }
+
+    if (current === num && current !== 0) {
+        console.log("It is a perfect number.")
+    } else {
+        console.log("It is not a perfect number.")
+    }
+}
+
+isPerfect(6);
+isPerfect(28);
+
+// 13. Write a JavaScript function to compute the factors of a positive integer. 
+function factorsOfPositiveInteger(num) {
+    let numberOfFactors = [];
+
+    for (let i = 1; i < Math.floor(Math.sqrt(num)); i += 1)
+    if (num % 2 === 0) {
+        numberOfFactors.push(i);
+        if (num / i !== i)
+        numberOfFactors.push(num / i)
+    }
+
+    numberOfFactors.sort(function(x, y){
+         return x - y;  
+    })
+    return numberOfFactors;
+}
+
+console.log(factorsOfPositiveInteger(12));
+console.log(factorsOfPositiveInteger(13));
+console.log(factorsOfPositiveInteger(14));
+
+
+// 14. Write a JavaScript function to convert an amount to coins. 
+// Sample function: amountTocoins(46, [25, 10, 5, 2, 1])
+// Here 46 is the amount. and 25, 10, 5, 2, 1 are coins. 
+// Output: 25, 10, 10, 1
+function amountToCoins(amount, coins) {
+    if (amount === 0) {
+        return [];
+    } else {
+        if (amount >= coins[0]) {
+            left = (amount - coins[0]);
+            return [coins[0]].concat( amountToCoins(left, coins) );
+        } else {
+            coins.shift();
+            return amountToCoins(amount, coins);
+        }
+    }
+}
+
+console.log(amountToCoins(46, [25, 10, 5, 2,1]));
+console.log(amountToCoins(25, [25, 10, 10, 1]));
+
+
+// 15. Write a JavaScript function to compute the value of bn where n is the exponent and b is the bases. Accept b and n from the user and display the result. 
+function exponent(b, n) {
+    let value = 1;
+    for (let i = 1; i <= n; i++) {
+        value = b * value;
+    }
+    return value;
+}
+
+console.log(exponent(2, 3));
+console.log(exponent(3, 4));
+
+// 16. Write a JavaScript function to extract unique characters from a string. 
+// Example string: "thequickbrownfoxjumpsoverthelazydog"
+// Expected Output: "thequickbrownfxjmpsvlazydg"
+function uniqChar(string) {
+    let myString = string;
+    let uniqueChar = "";
+
+    for (let i = 0; i < myString.length; i++) {
+        if (uniqueChar.indexOf(myString.charAt(i)) == -1) {
+            uniqueChar += myString[i];
+        }
+    }
+    return uniqueChar;
+}
+
+console.log(uniqChar("thequickbrownfoxjumpsoverthelazydog"));
+
+
+// 17. Write a JavaScript function to get the number of occurrences of each letter in specified string.
+function letterCounts(string) {
+
+    if (string.length === 0) {
+        console.log("Empty string");
+        return;
+    }
+    
+    for (let i = 0; i < string.length; i++) {
+        let count = 0;
+        for (let j = 0; j < string.length; j++) {
+            if ( string[i] == string[j] && i > j) {
+                break;
+            }
+            if ( string[i] == string[j]) {
+                count++;
+            }
+        }
+        if (count > 0) {
+            console.log(`${string[i]} oours ${count} times`)
+        }
+    }
+}
+
+console.log(letterCounts("javascript"));
+console.log(letterCounts("mommy"));
+
+
+// 18. Write a function for searching JavaScript arrays with a binary search. 
+// Note: A binary search searches by splitting an array into smaller and smaller chunks until it finds the desired value.
+function binarySearch(arr, x) {
+    // recursive search
+    let start = 0;
+    let end = arr.length -1;
+    // base case
+    if (start > end) return false;
+
+    let middle = Math.floor((start + end) / 2);
+
+    if (arr[middle] === x) return true;
+
+    if (arr[middle] > x) {
+        return binarySearch(arr, x, start, middle - 1)
+    } else {
+        return binarySearch(arr, x, middle + 1, end)
+    }
+}
+
+console.log(binarySearch([1, 3, 5, 7, 8, 9], 5));
+
+// 19. Write a JavaScript function that returns array elements larger than a number. 
+function returnLarger(arr, num) {
+    let newArr = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        if(arr[i] > num) {
+            newArr.push(arr[i]);
+        }
+    }
+
+    return newArr;
+}
+
+console.log(returnLarger([65, 16, 0, 6, 64, 1, 68], 17));
+console.log(returnLarger([6, 46, 54, 6, 56, 54, 65, 4, 65], 50));
+
+// 20. Write a JavaScript function that generates a string id (specified length) of random characters.
+// Sample character list:
+// "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+function generateString(length) {
+    const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = ' ';
+    const characterLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * characterLength));
+    }
+
+    return result;
+}
+
+console.log(generateString(7));
+
+// 21. Write a JavaScript function to get all possible subset with a fixed length (for example 2) combinations in an array. 
+// Sample array: [1, 2, 3] and subset length is 2 
+// Expected output: [[2, 1], [3, 1], [3, 2]]
+
+
+// 22. Write a JavaScript function that accepts two arguments, a string and a letter and the function will count the number of occurrences of the specified letter within the string. 
+// Sample arguments: 'microsoft.com', 'o'
+// Expected output: 3
+
+
+// 23. Write a JavaScript function to find the first not repeated character. 
+// Sample arguments: 'abacddbec' 
+// Expected output: 'e' 
+
+
+// 24. Write a JavaScript function to apply Bubble Sort algorithm. 
+// Note: According to wikipedia "Bubble sort, sometimes referred to as sinking sort, is a simple
+// sorting algorithm that works by repeatedly stepping through the list to be sorted, comparing
+// each pair of adjacent items and swapping them if they are in the wrong order". 
+// Sample array: [12, 345, 4, 546, 122, 84, 98, 64, 9, 1, 3223, 455, 23, 234, 213]
+// Expected output: [3223, 546, 455, 345, 234, 213, 122, 98, 84, 64, 23, 12, 9, 4, 1]
+
+
+// 25. Write a JavaScript function that accept a list of country names as input and returns the longest country name as output. 
+// Sample function: Longest_Country_Name(["Australia", "Germany", "United States of America"])
+// Expected output: "United States of America"
+
+
+// 26. Write a JavaScript function to find longest substring in a given a string without repeating characters. 
+
+
+// 27. Write a JavaScript function that returns the longest palindrome in a given string. 
+// Note: According to Wikipedia "In computer science, the longest palindromic substring or longest
+// symmetric factor problem is the problem of finding a maximum-length contiguous substring of a
+// given string that is also a palindrome. For example, the longest palindromic substring of
+// "bananas" is "anana". The longest palindromic substring is not guaranteed to be unique; for
+// example, in the string "abracadabra", there is no palindromic substring with length greater than
+// three, but there are two palindromic substrings with length three, namely, "aca" and "ada".
+// In some applications it may be necessary to return all maximal palindromic substrings (that is, all
+// substrings that are themselves palindromes and cannot be extended to larger palindromic
+// substrings) rather than returning only one substring or returning the maximum length of a
+// palindromic substring.
+
+
+// 28. Write a JavaScript program to pass a 'JavaScript function' as parameter. 
+
+
+// 29. Write a JavaScript function to get the function name.
