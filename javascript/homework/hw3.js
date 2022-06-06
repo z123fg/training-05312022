@@ -344,14 +344,183 @@ console.log("q20: ", f20(10));
 // Sample array: [1, 2, 3] and subset length is 2 
 // Expected output: [[2, 1], [3, 1], [3, 2]]
 
-function f21(n) {
-    let list = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let res = "";
-
-    for(let i = 0; i < n; i++) {
-        res += list[Math.floor(Math.random() * list.length)];
+function f21(arr, n) {
+    let res = [];
+    for(let i = 0; i < arr.length; i++) {
+        let temp = [];
+        temp.push(arr[i]);
+        for(let j = i + 1; j < arr.length; j++) {
+            temp.push(arr[j]);
+            if(temp.length === n) {
+                res.push([...temp]);
+                temp.pop();
+            }
+        }
     }
     return res;
 }
 
-console.log("q21: ", f21(10));
+console.log("q21: ", f21([1,2,3,4,5], 3));
+
+// 22. Write a JavaScript function that accepts two arguments, a string and a letter and the function will 
+// count the number of occurrences of the specified letter within the string. 
+// Sample arguments: 'microsoft.com', 'o' 
+// Expected output: 3 
+
+function f22(str, c) {
+    let index = -1;
+    let count = 0;
+    do {    
+        index = str.indexOf(c, index + 1);
+        if(index !== -1) count++;
+    } while(index !== -1);
+    return count;
+}
+
+console.log("q22: ", f22('microsoft.com','o'));
+
+// 23. Write a JavaScript function to find the first not repeated character. 
+// Sample arguments: 'abacddbec' 
+// Expected output: 'e' 
+
+function f23(str) {
+    let res = {};
+
+    for(let i = 0; i < str.length; i++) {
+        if(!res[str[i]]) {
+            res[str[i]] = 1;
+        }
+        else {
+            res[str[i]]++;
+        }
+    }
+    
+    for(let key in res) {
+        if(res[key] === 1) return key;
+    }
+}
+
+console.log("q23: ", f23('microsoft.com'));
+console.log("q23: ", f23('abacddbec'));
+
+// 24. Write a JavaScript function to apply Bubble Sort algorithm. 
+// Note: According to wikipedia "Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that works 
+// by repeatedly stepping through the list to be sorted, comparing each pair of adjacent items and swapping them if they are in the wrong order". 
+// Sample array: [12, 345, 4, 546, 122, 84, 98, 64, 9, 1, 3223, 455, 23, 234, 213]
+// Expected output: [3223, 546, 455, 345, 234, 213, 122, 98, 84, 64, 23, 12, 9, 4, 1]
+
+function f24(arr) {
+    let swap = false;
+    let size = arr.length;
+
+    for(let i = 0; i < size - 1; i++) {
+        swap = false;
+        for(let j = 0; j < size - i - 1; j++) {
+            if(arr[j] < arr[j + 1]) {
+                swap = true;
+                let temp = arr[j + 1];
+                arr[j + 1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        if(!swap) break;
+    }
+    return arr;
+}
+
+console.log("q24: ", f24([12, 345, 4, 546, 122, 84, 98, 64, 9, 1, 3223, 455, 23, 234, 213]));
+
+// 25. Write a JavaScript function that accept a list of country names as input and returns the longest country name as output. 
+// Sample function: Longest_Country_Name(["Australia", "Germany", "United States of America"])
+// Expected output: "United States of America"
+
+function f25(arr) {
+    let max_len = arr[0].length;
+    let res = arr[0];
+
+    for(let i = 1; i < arr.length; i++) {
+        if(arr[i].length > max_len) {
+            max_len = arr[i].length;
+            res = arr[i];
+        }
+    }
+    return res;
+}
+
+console.log("q25: ", f25(["Australia", "Germany", "United States of America"]));
+
+// 26. Write a JavaScript function to find longest substring in a given a string without repeating characters. 
+
+function f26(str) {
+    let dic = {};
+    let size = str.length, max_len = 0;
+    let res = "";
+
+    for(let i = 0, j = 0; j < size; j++) {
+        if(dic[str[j]]) {
+            i = Math.max(dic[str[j]], i);
+        }
+        dic[str[j]] = j + 1;
+        max_len = Math.max(max_len, j - i + 1);
+        if(j - i + 1 >= max_len) {
+            res = str.substring(i, j + 1);
+        }
+    }  
+    return [max_len, res];
+}
+
+console.log("q26: ", f26("geeksforgeeks"));
+console.log("q26: ", f26("example.com"));
+
+// 27. Write a JavaScript function that returns the longest palindrome in a given string. 
+// Note: According to Wikipedia "In computer science, the longest palindromic substring or longest symmetric factor problem is the problem of finding a maximum-length contiguous substring of a given string that is also a palindrome. For example, the longest palindromic substring of "bananas" is "anana". The longest palindromic substring is not guaranteed to be unique; for example, in the string "abracadabra", there is no palindromic substring with length greater than three, but there are two palindromic substrings with length three, namely, "aca" and "ada".
+// In some applications it may be necessary to return all maximal palindromic substrings (that is, all substrings that are themselves palindromes and cannot be extended to larger palindromic substrings) rather than returning only one substring or returning the maximum length of a palindromic substring.
+
+function f27(str) {
+    let size = str.length;
+    if(size < 2) return str;
+
+    let res = "";
+
+    let max_len = 1, start = 0;
+    let low, high;
+    for(let i = 0; i < size; i++) {
+        low = i - 1;
+        high = i + 1;
+        while(high < size && str[high] === str[i]) high++;
+        while(low >= 0 && str[low] === str[i]) low--;
+        while(low >= 0 && high < size && str[low] === str[high]) {
+            low--;
+            high++;
+        }
+
+        if(max_len < high - low - 1) {
+            max_len = high - low - 1;
+            start = low + 1;
+            res = str.substring(start, start + max_len);
+        }
+    }
+    return res;
+}
+
+console.log("q27: ", f27("forgeeksskeegfor"));
+
+// 28. Write a JavaScript program to pass a 'JavaScript function' as parameter. 
+
+function f28(person, greeting) {
+    return greeting(person);
+}
+
+function greeting(person) {
+    return "Welcome, " + person;
+}
+
+console.log("q28: ", f28("Bob", greeting));
+
+// 29. Write a JavaScript function to get the function name. 
+
+function f29() {
+    return arguments.callee.name;
+}
+
+console.log("q29: ", f29());
