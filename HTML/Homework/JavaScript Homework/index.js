@@ -531,3 +531,7 @@ const employee = () => {
 console.log(addEmployee(1, employee));
 
 /* 29. Write a JavaScript function to get the function name. */
+
+const functionName = () => {
+    
+};
