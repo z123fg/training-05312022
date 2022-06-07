@@ -26,13 +26,20 @@
 // isPalindrome(string)
 
 // 3. 
-let generateComb = (str) => {
-  let combination = []
-  for (let i = 0; i < str.length; i++){
-    for (let j = i + 1; j < str.length + 1; j++){
-      combination.push(str.slice(i , j))
-    }
-  }
-  return combination
+// let generateComb = (str) => {
+//   let combination = []
+//   for (let i = 0; i < str.length; i++){
+//     for (let j = i + 1; j < str.length + 1; j++){
+//       combination.push(str.slice(i , j))
+//     }
+//   }
+//   return combination
+// }
+// console.log(generateComb('Dog'))
+
+// 4.
+function alphaOrder(str) {
+  return str.split('').sort().join('')
 }
-console.log(generateComb('Dog'))
+
+console.log(alphaOrder('Antra'));
