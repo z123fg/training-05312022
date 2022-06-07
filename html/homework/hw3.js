@@ -3,6 +3,7 @@ function reverse(num){
     const reversedNumb = num.split("").reverse().join("");
     return reversedNumb; 
 }
+//1
 
 function palindrome(str){
 
@@ -15,6 +16,7 @@ function palindrome(str){
         return false;
     }
 }
+//2
 
 function wordGenerator(str){
     let newWord = [];
@@ -25,10 +27,19 @@ function wordGenerator(str){
     }
     return newWord;
 }
+//3
+
+function alphabetizer(){
+    return str.split('').sort().join('')
+}
+//4
+
 
 function capitlaize(str){
     return str.charAt(0).toUpperCase().str.slice(1);
 }
+//5
+
 
 function longestWord(str){
     let words = str.split("")
@@ -40,6 +51,7 @@ function longestWord(str){
         }
     }
 }
+//6
 
 function vowelCounter(str){
     const vowels = [a,e,i,o,u]
@@ -52,6 +64,7 @@ function vowelCounter(str){
     }
     return count;
 }
+//7
 
 function primeCheck(num){
     if(num < 1 && num%2 !=0 ){
@@ -61,8 +74,32 @@ function primeCheck(num){
         return false
     }
 }
+//8
 
 function dataType(arg){
     return typeof(arg)
+}
+//9
+function idMatrix(n){
+    let i;
+    let j;
+
+    for (i=0; i < n; i++){
+        for(j=0; j < n; j++){
+
+            if (i === j){
+                console.log(' 1 ');
+            }
+            else{
+                console.log(' 0 ');
+            }
+        }
+            console.log('----------');
+    }
+}
+//10
+
+function numberFinder(arr){
+    
 }
 
