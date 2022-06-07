@@ -8,25 +8,38 @@
     <title>Sign Up</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
+
+    <style>
+      .button {
+        width: 200px;
+        height: 35px;
+      }
+
+      .textbox{
+        height: 35px;
+        border-radius: 10px 10px 10px 10px;
+      }
+
+      .textbox1{width: 195px;}
+      .textbox2{width: 400px;}
+    </style>
   </head>
   <body>
 
     <center>
       <h1>Sign Up</h1>
 
-      <input placeholder = "First Name"/> <input placeholder = "Last Name"/> 
+      <input placeholder = "First Name" class = "textbox textbox1"/> <input placeholder = "Last Name" class = "textbox textbox1"/> 
       <br><br>
-      <input placeholder = "Mobile No."/> 
+      <input placeholder = "Mobile No." class = "textbox textbox2"/> 
       <br><br>
-      <input placeholder = "Email"/> 
+      <input placeholder = "Email" class = "textbox textbox2"/> 
       <br><br>
-      <input placeholder = "Password"/> <input placeholder = "Confirm Password"/> 
+      <input placeholder = "Password" class = "textbox textbox1"/> <input placeholder = "Confirm Password" class = "textbox textbox1"/> 
       <br><br>
-      <a>By clicking Register, you agree to the Terms and <br> Conditions set out by this site, including our Cookie Use.</a>
-      <br>
-      <input type ="checkbox"> <a>I agree</a>
+      <input type ="checkbox"> By clicking <span style = "background-color: aqua; color: white;"> Register </span>, you agree to the Terms and <br> Conditions set out by this site, including our Cookie Use. <a>I agree</a>
       <br><br>
-      <button>Register</button> <button>Sign in</button>
+      <button style ="background-color: aqua; color: white;" class = "button">Register</button> <button style = "background-color: greenyellow; color: white;" class = "button">Sign in</button>
 
     </center>
 
