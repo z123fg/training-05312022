@@ -100,6 +100,64 @@ function idMatrix(n){
 //10
 
 function numberFinder(arr){
+    let targetnumbers=[];
+    let newnumbs= arr.sort(function(a,b)
+    {
+       return a-b;
+    });
+     secondLargest = newnumbs[newnumbs.length-2];
+     secondLowest = newnumbs[1];
     
-}
+     return targetnumbers.push(secondLargest, secondLowest)
+}//11
+
+function perfectNumValidator(numb){
+    let temp = 0;
+
+    for(var i=1;i<=numb/2;i++)
+    {
+        if(numb%i === 0)
+         {
+           temp += i;
+         }
+    }
+
+    if(temp === number && temp !== 0){
+        return true;
+    } 
+    else{
+        return false;
+    }   
+}//12
+
+function factorsFinder(numb){
+    let factors = [];
+
+    for (let i = 0; i <=numb; i++){
+        if(numb%i === 0){
+            arr.push(i);
+        }
+    }
+}//13
+
+function changeCalculator(bills, coins){
+    let tick = [];
+    for(let i = 0; i<coins.length; i++){
+        while(bills>= coins[i]){
+            tick.push(coins[i]);
+            bills = bills -coins[i];
+        }
+    }
+    return tick;
+}//14
+
+function exponential(b,n){
+    let power = 1
+    for(var i =1; i<=n; i++){
+        power = a + power
+    }
+
+    return power;
+}//15
+
 
