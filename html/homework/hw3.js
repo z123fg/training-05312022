@@ -249,6 +249,101 @@ function targetCounter(str, letter){
      return letter_Count;
 }//22
 
+function letterFinder(str){
+    var arra1 = str.split('');
+    var result = '';
+    var ctr = 0;
+   
+    for (var x = 0; x < arra1.length; x++) {
+      ctr = 0;
+   
+      for (var y = 0; y < arra1.length; y++) 
+      {
+        if (arra1[x] === arra1[y]) {
+          ctr+= 1;
+        }
+      }
+   
+      if (ctr < 2) {
+        result = arra1[x];
+        break;
+      }
+    }
+    return result;
+}//23
+
+function bubleSortAlg(a){
+    var swapp;
+    var n = a.length-1;
+    var x=a;
+    do {
+        swapp = false;
+        for (var i=0; i < n; i++)
+        {
+            if (x[i] < x[i+1])
+            {
+               var temp = x[i];
+               x[i] = x[i+1];
+               x[i+1] = temp;
+               swapp = true;
+            }
+        }
+        n--;
+    } while (swapp);
+ return x; 
+}//24
+
+function longestLenghthFinder(arr){
+    return arr.reduce(function(lname, country) 
+    {
+      return lname.length > country.length ? lname : country;
+    }, 
+  "");
+}//25
+
+function longestUniqueSubString(){
+    var rev = str1.split("").reverse().join("");
+    return str1 == rev;
+}//26
+
+function is_Palindrome(str1) {
+    var rev = str1.split("").reverse().join("");
+    return str1 == rev;
+}
+
+function longest_palindrome(str1){
+
+    var max_length = 0,
+    maxp = '';
+
+    for(var i=0; i < str1.length; i++) {
+        var subs = str1.substr(i, str1.length);
+
+        for(var j=subs.length; j>=0; j--) {
+            var sub_subs_str = subs.substr(0, j);
+            if (sub_subs_str.length <= 1)
+            continue;
+
+            if (is_Palindrome(sub_subs_str)){
+                if (sub_subs_str.length > max_length){
+                    max_length = sub_subs_str.length;
+                    maxp = sub_subs_str;
+                }
+            }
+        }
+    }
+    return maxp;
+}
+
+function reducer(init, reducer){
+    reducer(init)
+}//28
+
+function funcName(fcn){
+    console.log( arguments.callee.name );
+}
+//29
+
 
 
 
