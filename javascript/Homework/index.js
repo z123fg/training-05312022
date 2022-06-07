@@ -109,16 +109,23 @@ function qEight(input){
 }
 console.log("Question 8: " + qEight(9));
 
-//Question 9: --Not working
-// function qNine(input){
-//     // for(let i = 0; i < input.length; i++){
-//     //     if(typeof input[i] == )
-//     // }
-
-//     if(typeof input === Number)
-//         console.log("yes");
-// }
-// console.log(qNine(12));
+//Question 9: 
+function qNine(input){
+    var dtypes = [Function, RegExp, Number, String, Boolean, Object], i, len;
+    
+    if (typeof input === "object" || typeof input === "function") 
+    {
+        for (i = 0, len = dtypes.length; i < len; i++) 
+        {
+            if (value instanceof dtypes[i])
+            {
+                return dtypes[i];
+            }
+        }
+    }
+    return typeof input;
+}
+console.log("Question 9: " + qNine(12));
 
 //Question 10:
 function qTen(){
@@ -182,11 +189,20 @@ function qTThree(input){
 
 console.log("Question 13: " + qTThree(9));
 
-//Question 14: Don't understand the question 
-function qTFour(){
+//Question 14:
+function qTFour(amount, input){
+    var output = [];
+    for (let i = 0; i < input.length; i++) {
+      if (amount >= input[i]) {
+        amount = amount - input[i];
+        output.push(input[i])
+        i--;
+      }
+    }
 
+    return output;
 }
-//console.log("Question 14: " + qTFour());
+console.log("Question 14: " + qTFour(46, [25, 10, 5, 2, 1]));
 
 //Question 15:
 function qTFive(b, n){
@@ -198,7 +214,6 @@ function qTFive(b, n){
         
     return output;
 }
-
 console.log("Question 15: " + qTFive(2,3));
 
 //Question 16: Don't understand the question but completed
@@ -214,9 +229,9 @@ function qTSix(input){
 console.log("Question 16: " + qTSix("thequickbrownfoxjumpsoverthelazydog"));
 
 //Question 17: Not sure what to do...
-function qTSeven(){
-
+function qTSeven(input){
 }
+console.log("Question 17: " + qTSeven("aabec"));
 
 //Question 18:
 function qTEight(input, key){
