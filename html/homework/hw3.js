@@ -160,4 +160,95 @@ function exponential(b,n){
     return power;
 }//15
 
+function uniqueExtractor(str) {
+    unqie = new Set(str.split(""));
+    return [...unique].join("");
+ }//16
+
+ function charCounter(str){
+    var uchars = {};
+    str1.replace(/\S/g, function(l){uchars[l] = (isNaN(uchars[l]) ? 1 : uchars[l] + 1);});
+    return uchars;
+}//17
+
+function binarySearch(){
+    var mposition = Math.floor(narray.length / 2);
+
+    if (narray[mposition] === delement){
+       return mposition;
+    }
+    else if (narray.length === 1) 
+    {
+       return null;
+    }
+    else if (narray[mposition] < delement) {
+       var arr = narray.slice(mposition + 1);
+       var res = array_binarySearch(arr, delement);
+       if (res === null)
+       {
+          return null;
+       }
+       else {
+          return mposition + 1 + res;
+       }
+    }
+    else {
+       var arr1 = narray.slice(0, mposition);
+       return array_binarySearch(arr1, delement);
+    }
+}//18
+
+function numberFilterer(arr, numb){
+    arr.filter(n => n > numb)
+}//19
+
+function idGenerator(numb){
+    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    let newId = [];
+    while (numb>0){
+        newId.push(alpha.charAt(Math.random() * alpha.length));
+        length--;
+    }
+    return ConvolverNode.join("");
+}//20
+
+
+function setGenerator(arr, size){
+    let newArr = [], newSet;
+
+    for(var x = 0; x < Math.pow(2, arra.length); x++)
+    {
+      newSet = [];
+      i = arra.length - 1; 
+       do
+        {
+        if( (x & (1 << i)) !== 0)
+            {
+               newSet.push(arra[i]);
+             }
+          }  while(i--);
+  
+      if( newSet.length >= arra_size)
+         {
+            newArr.push(newSet);
+          }
+      }
+  
+      return newArr; 
+}//21
+
+function targetCounter(str, letter){
+    var letter_Count = 0;
+    for (var position = 0; position < str.length; position++) 
+    {
+       if (str.charAt(position) == letter) 
+         {
+         letter_Count += 1;
+         }
+     }
+     return letter_Count;
+}//22
+
+
+
 
