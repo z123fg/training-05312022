@@ -61,3 +61,8 @@ function primeCheck(num){
         return false
     }
 }
+
+function dataType(arg){
+    return typeof(arg)
+}
+
