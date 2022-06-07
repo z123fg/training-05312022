@@ -1,7 +1,7 @@
 /**function 28 */
 function javascriptFunction(x)
 {
-    console.log(`This function reads functions, and the name of this function is ${x}`);
+    //reads function 
 }
 
 function exFunct(){
@@ -9,5 +9,4 @@ function exFunct(){
 }
 
 console.log("function 28: ");
-const functObj = exFunct.name;
-javascriptFunction(functObj);
+javascriptFunction(exFunct());
