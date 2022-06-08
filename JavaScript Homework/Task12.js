@@ -1,4 +1,4 @@
-const isPerfectNum = (num) => {
+const PerfectNum = (num) => {
     if (num <= 1) return false;
     let divisor = ~~(num / 2);
     let sum = 0;
