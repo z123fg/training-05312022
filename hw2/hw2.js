@@ -106,10 +106,106 @@ function getIdentityMatrix(n){
 }
 
 function findSecond(arr){
+    let ans = [];
     let max = Math.max(...arr);
-    
+    let min = Math.min(...arr);
 
-    return max;
+    let secMax = Number.MIN_VALUE;
+    let secMin = Number.MAX_VALUE;
+    for(let i in arr){
+        if(arr[i] > secMax && arr[i] != max){
+            secMax = arr[i];
+        }
+
+        if(arr[i] < secMin && arr[i] != min){
+            secMin = arr[i];
+        }
+    }
+
+    ans.push(secMin);
+    ans.push(secMax);
+
+    return ans;
+}
+
+function perfect(num){
+    
+}
+
+function computeFactor(num){
+    let ans = [];
+    ans.push(1);
+    for(let i = num-1; i >= 2; i--){
+        if(num%i == 0){
+            ans.push(num/i);
+        }
+    }
+
+    ans.push(num);
+
+    return ans;
+}
+
+function amountTocoins(amount, coins){
+    let ans = [];
+    let rest = amount; 
+    for(let i in coins){
+        let count = Math.floor(rest/coins[i]);
+        for(let j = 0; j < count; j++){
+            ans.push(coins[i]);
+            rest -= coins[i];
+        }
+    }
+
+    return ans;
+}
+
+function calculateExponent(b, n){
+    let ans = b;
+    if(n == 0){
+        return 1;
+    }
+
+    for(let i = 0; i < n-1; i++){
+        ans = ans * b;
+    }
+
+    return ans;
+}
+
+function extractUnique(input){
+    let set = new Set();
+    let ans = [];
+    for(let i in input){
+        if(!set.has(input[i])){
+            set.add(input[i]);
+            ans.push(input[i]);
+        }
+    }
+
+    return ans.join("");
+}
+
+function binarySearch(arr, target){
+    let l = 0; let r = arr.length-1;
+    let mid;
+    while(l <= r){
+        mid = l+((r-l)>>1);
+        if(target < arr[mid]){ // left
+            r = mid-1;
+        }else if(target > arr[mid]){
+            l = mid+1;
+        }else{
+            return mid;
+        }
+    }
+    return l;
+}
+
+//19?
+
+function generateRandom(){
+    
 }
 
 
@@ -119,7 +215,7 @@ console.log("Reverse:", reverse(32243));
 let p1 = "madam";
 let p2 = "nurses run";
 console.log(`${p1} is a Palindrome: `, isPalindrome(p1));
-console.log(`${p2} is a Palindrome: `, isPalindrome(p2));2
+console.log(`${p2} is a Palindrome: `, isPalindrome(p2));
 
 console.log("Sort 'webmaster' in alphabetical order: ", sortAlphabetical("webmaster"));
 console.log(firstToUpperCase("the quick brown fox"));
@@ -137,4 +233,20 @@ console.log(`${type2} is`, getType(type2));
 let matrix = [];
 console.log(getIdentityMatrix(4));
 
-console.log(findSecond([1,2,3,4,5]));
+let findSec = [1,2,6,3,8];
+console.log(`Find Second smallest and second largest in ${findSec}`, findSecond(findSec));
+
+let calFac = 30;
+console.log(`Factors of ${calFac}:`, computeFactor(calFac));
+
+let amt = 46;
+console.log(`${amt}:`, amountTocoins(amt, [25, 10, 5, 2, 1]));
+
+let b = 2; let n = 10;
+console.log(`${b}^${n} =`, calculateExponent(b,n));
+
+let uni = "thequickbrownfoxjumpsoverthelazydog";
+console.log(`Get unique characters in ${uni}:`, extractUnique(uni));
+
+let sortedArr = [1,4,6,8,9,10]; let target = 8;
+console.log(`${target} is at position`, binarySearch(sortedArr, target)); 
