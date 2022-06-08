@@ -156,9 +156,17 @@
   //     console.log(this.name + ' is walking ');
   //   }
 }
+<<<<<<< HEAD
 Person.prototype.walk = function () {
   console.log(this.name + ' is walking ');
 };
+=======
+
+Person.prototype.walk = function () {
+  console.log(this.name + ' is walking ');
+};
+
+>>>>>>> 94b9d6a444d3b129bf94eeb2c9539ba27473dd0c
 let p = new Person('xin', 1);
 console.log ("typeof", typeof p);
 //instance method
@@ -167,9 +175,17 @@ console.log ("typeof", typeof p);
 // };
 // console.log(p);
 p.walk();
+<<<<<<< HEAD
 let newP = new Person('li', 2);
 // newP.walk = p.walk;
 newP.walk();
+=======
+
+let newP = new Person('li', 2);
+// newP.walk = p.walk;
+newP.walk();
+
+>>>>>>> 94b9d6a444d3b129bf94eeb2c9539ba27473dd0c
 console.log(p.__proto__ === Person.prototype); */
 
 
@@ -235,23 +251,47 @@ console.log(p.__proto__ === Person.prototype); */
     console.log(`${this.name} is walking!`);//prototype method
   }
 }
+<<<<<<< HEAD
 const person = new Person("adam",18);
 person.walk();
+=======
+
+const person = new Person("adam",18);
+person.walk();
+
+>>>>>>> 94b9d6a444d3b129bf94eeb2c9539ba27473dd0c
 class Employee extends Person{
     constructor(name,age,company){
       super(name, age);
       this.company = company;
     }
+<<<<<<< HEAD
     walk(){
       console.log(`${this.name} is walking!!!`);//prototype method
     }
+=======
+
+    walk(){
+      console.log(`${this.name} is walking!!!`);//prototype method
+    }
+
+>>>>>>> 94b9d6a444d3b129bf94eeb2c9539ba27473dd0c
     work(){
       console.log(`${this.name} is working!!!`);//prototype method
     }
 }
+<<<<<<< HEAD
 const employee = new Employee("john",19,"antra");
 employee.walk();//!!!
 employee.work();
+=======
+
+const employee = new Employee("john",19,"antra");
+employee.walk();//!!!
+employee.work();
+
+
+>>>>>>> 94b9d6a444d3b129bf94eeb2c9539ba27473dd0c
 person.work();//error */
 
 
@@ -543,20 +583,477 @@ foo(); */
 
 //iife, immediately invoked function expression
 
-const obj2 = (function () {
-  let b = 10;
-  let a = 0;
-  const increment = () => {
-    a = a+1;
-    console.log(a);
-  }
-  return {
-    a: a,
-    b:b,
-    increment: increment
-  }
-})();
+// const obj2 = (function () {
+//   let b = 10;
+//   let a = 0;
+//   const increment = () => {
+//     a = a+1;
+//     console.log(a);
+//   }
+//   return {
+//     a: a,
+//     b:b,
+//     increment: increment
+//   }
+// })();
 
-obj2.increment();
-obj2.increment();
-console.dir(obj2);
+// obj2.increment();
+// obj2.increment();
+// console.dir(obj2);
+
+//function currying, curried function
+/* function sum(a,b,c){
+  console.log(a+b+c)
+}
+sum(1);// 1 + undefined + undefined */
+
+// function sum(a){
+//   return function(b){
+//     return function(c){
+//       console.log(a+b+c);
+//     }
+//   }
+// }
+// //higher order function
+// sum(1)(2)(3);
+console.log(typeof []);//"object"
+
+// console.log(typeof typeof []);//"string"
+
+// console.log(typeof {});//"object"
+
+//non primitive data, object
+// store by reference
+
+// const obj = {name:"adam"};
+// const obj1 = obj;
+// console.log(obj === obj1); //true;
+
+// const obj2 = {name:"adam"};
+
+// console.log(obj === obj2); //false
+
+// //ES6: class, const, let, arrow function, spread, rest, detructuring, promise, fetch syntax sugar
+
+// //copy of non-primitive data, copy the property of old object to a new object with new reference
+// const obj3 = Object.assign({},obj);
+// console.log("obj3",obj3);
+
+// console.log(obj3 === obj);//false
+
+
+// console.log(obj1==obj2);//true
+
+// console.log(1 == "1");//true
+// console.log([] == 0);//
+
+//spread operator
+// const obj = {name:"adam", age:18};
+
+// const obj1 = {...obj};
+
+// console.log(obj1 === obj);//false
+// console.log(obj1 == obj);//false
+
+// const arr = [1,2,3];
+// const arr1 = [...arr];
+// console.log(arr === arr1);//false
+
+// const obj2 = {name:"adam", nested:{a:1}};
+
+// const obj3 = {...obj2};
+
+// console.log(obj2 === obj3);//false
+
+// console.log(obj2.nested === obj3.nested);//true, shallow copy
+
+// const arr2 = [1,2,3,{name:"adam"}];
+
+// const arr3 = [...arr2];
+
+// console.log(arr2 === arr3);//false
+
+// console.log(arr2[3] === arr3[3]); //true
+
+// const obj = {name:"adam",age:18};
+
+// const obj1 = {name:"jane",company:"antra"}
+
+// const obj2 = {...obj}//{name:"adam",age:18}
+
+// const obj3 = { age:19, ...obj,...obj1, name:"john"};
+// console.log(obj3);//{name:"john",age:18,company:"antra"};
+
+// const arr = [1,2,3];
+// const arr1 = [4,5,6];
+// const arr2 = [...arr,...arr1];//[1,2,3,4,5,6]
+// const arr3 = [...arr1, ...arr]; //[4,5,6,1,2,3]
+
+
+// //rest operator
+
+// function foo (a,b){
+//   console.log(a,b);
+// }
+
+// foo(1,2,3,4,5);
+
+// function foo1(...rest){
+//   console.log(rest)
+// }
+
+// foo1(1,2,3,4,5);
+
+// function foo2(){
+//   console.log(arguments)
+// }
+// foo2(1,2,3,4);
+
+//destructuring
+
+// const obj = {
+//   name: "adam",
+//   age: 18,
+//   nested1: {
+//     nested2: [
+//       { value: 1,value1:2 }
+//     ]
+//   }
+// };
+// const value = obj.nested1.nested2[0].value;
+// const value1 = obj.nested1.nested2[0].value1;
+
+// const obj = { name: "adam", age: 18 };
+
+// const { name, age } = obj;
+// console.log(name, age);
+
+// const arr = [1, 2, 3, 4];
+// console.log(arr[2]);
+// const [, no2, , no4] = arr;
+// console.log(no2, no4);
+
+
+
+// const obj = {
+//   name: "adam",
+//   age: 18,
+//   nested1: {
+//     nested2: [
+//       { value: 1, value1: 2 },
+//       [1, 2, 3]//read 3
+//     ],
+//     nested3: {
+//       value3: 3//read value3
+//     }
+//   }
+// };
+// // const value =obj.nested1.nested2[0].value;
+// // const value1 = obj.nested1.nested2[0].value1;
+
+// const { nested1: { nested2: [{ value, value1 }] } } = obj;
+
+// console.log(value, value1)
+
+// const {
+//    nested1:
+//     { 
+//       nested2: 
+//       [, [, , no3]],
+//       nested3:{value3}
+//     } 
+//   } = obj;
+
+// console.log(no3,value3);
+
+//destructure property into a new variable name, avoiding naming conflict
+// const name = "john";
+
+// const obj = {name:"adam", age:18};
+
+// const {name:newName, age} = obj;
+
+// console.log(newName,name);//adam john
+
+//set default value
+
+// const obj = {name:"adam", age:18,company:"microsoft"};
+
+// const {company="antra"} = obj;
+
+// console.log(company);
+
+
+// asynchronous programming
+
+//javascript single-thread language, it cannot do two things at the same time
+//synchronous asynchronous
+
+//event loop
+//callstack, message queue, webapi(is not part of javascript engine)
+
+//browser: javascript interpreter(javascript engine, chrome:V8 engine),web.api
+
+// console.log(1);
+// //web api
+// setTimeout(
+//   () => {
+//     console.log(2);
+//   },
+// 2000);
+
+// console.log(3);
+
+// //1,3,2
+
+
+// console.log(1);
+
+// setTimeout(()=>{
+//   console.log(2)
+// },2000);
+
+// console.log(3);
+
+/* while(true){ //infinite loop
+
+} //1,3 */
+
+// console.log(1);
+
+// setTimeout(()=>{
+//   console.log(2)
+// },0);
+
+// console.log(3);
+
+// //123
+// //132
+
+// console.log(1);
+
+// setTimeout(() => {
+//   console.log(2);
+//   setTimeout(() => {
+//     console.log(3)
+//   }, 1000)
+// }, 2000);
+
+// console.log(4);
+//1 4 --2s-- 2 --1s-- 3
+
+// console.log(1);
+// console.log(performance.now());
+
+// setTimeout(()=>{
+//   console.log(performance.now());
+//   console.log(2)
+// },0);
+
+// console.log(3);
+
+// for (var i = 0; i < 5; i++) {
+//   setTimeout(() => {
+//     console.log(i)
+//   }, i * 1000)
+// }
+
+// var i = 0;
+// for (; i < 5; i++) {
+//   setTimeout(() => {
+//     console.log(i)
+//   }, i * 1000)
+// }
+
+// var i = 0;
+// setTimeout(() => {
+//   console.log(i)
+// }, i * 1000);
+// i++;
+// setTimeout(() => {
+//   console.log(i)
+// }, i * 1000);
+// i++
+// setTimeout(() => {
+//   console.log(i)
+// }, i * 1000);
+// i++
+// setTimeout(() => {
+//   console.log(i)
+// }, i * 1000);
+// i++
+// setTimeout(() => {
+//   console.log(i)
+// }, i * 1000);
+// i++;
+
+
+// for (let i = 0; i < 5; i++) {
+//   setTimeout(() => {
+//     console.log(i)
+//   }, i * 1000)
+// };
+// //0,1,2,3,4
+
+// for (var i = 0; i < 5; i++) {
+//   let ii = i;
+//   setTimeout(() => {
+
+//     console.log(ii)
+//   }, ii * 1000)
+// };
+
+
+//callback function
+
+
+// const doSomethingWithDelay = (callback,delay) => {
+//   setTimeout(callback,delay)
+// }
+
+
+// doSomethingWithDelay(
+//   ()=>{
+//     console.log(1);
+//     doSomethingWithDelay(
+//       ()=>{
+//         console.log(2);
+//         doSomethingWithDelay(
+//           ()=>{
+//             console.log(3);
+//             doSomethingWithDelay(
+//               ()=>{
+//                 console.log(4);
+//                 doSomethingWithDelay(
+//                   ()=>{
+//                     console.log("done",5);
+//                   },
+//                   1000
+//                 )
+//               },
+//               1000
+//             )
+//           },
+//           1000
+//         )
+//       },
+//       1000
+//     )
+//   },
+//   1000
+// );
+
+
+
+//promise, es6, flatten the async code
+
+//xmlhttprequest(xhr):es5, fetch:es6,
+
+//callback hell
+
+
+//do one request, use the response of 1st request as the 2n request,...
+var xhttp = new XMLHttpRequest();
+
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+       // Typical action to be performed when the document is ready:
+       const json = xhttp.response;
+       console.log(json);
+    }
+};
+
+xhttp.open("GET", 'https://jsonplaceholder.typicode.com/todos/1');
+
+xhttp.send();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
