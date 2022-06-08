@@ -240,3 +240,82 @@ i++;
 ### `XMLhttpRequest()`
 
 - Provided by ***global window object***
+
+- `XMLHttpRequest()`
+```
+const httpRequest = function(url, method, cb, body){
+    const client = new XMLHttpRequest();
+    let stringifiedBody;
+    client.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200){
+            const json = client.response;
+            cb(json);
+        }
+    };
+    if body && stringnifiedBody = JSON.stringify(body)
+    // first argument is method
+    client.open(method, url);
+    client.setRequestHeader('Content-Type", "application/json;charset=UTF-8");
+    client.send(stringinifiedBody);
+}
+
+httpRequest('url', 'GET', (json) => {
+    console.log("response: ", json);
+})
+```
+
+### `fetch()`
+- ES6 method
+
+- GET method
+```
+fetch('url')
+.then(res => return res.json())
+.then((data) => {
+    console.log(data);
+    return data;
+})
+.then((filteredData) => {
+    ...
+})
+.catch(err => console.log(err))
+```
+
+- Other method
+```
+fetch ('url', {
+    method: '...',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+        ...
+    },
+    body: JSON.stringify(...)
+});
+```
+
+- Using `async` `await` way:
+```
+const fetchFn = async (url, data) => {
+    const fetchResult = await fetch(url, {
+        body: JSON.stringify(data)
+    })
+    return fetchResult.json();
+}
+```
+
+### Promise
+```
+new Promise((resolve, reject) => {
+    resolve('result');
+    reject('err');
+})
+.then((result) => {console.log(result)})
+.catch((err) => {console.log("error caught: ", err)})
+<!-- .finally(()=>{...}) -->
+```
+- anything in `reject` `resolve` is async 
+- `resolve` will `return` the value passed in it.
+- `reject` will `return` the value passed in it as `error`.
+- `finally` to end a Promise
