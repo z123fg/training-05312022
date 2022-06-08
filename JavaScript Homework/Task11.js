@@ -4,5 +4,5 @@
 // Expected Output: 2,4
 
 const greatestarray = (array) =>{
-    
+    array = []
 }
