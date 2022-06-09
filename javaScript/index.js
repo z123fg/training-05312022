@@ -43,3 +43,5 @@ function capitalALetterInFirstWord(string){
 }
 // test question 5
 console.log(capitalALetterInFirstWord("how are you?"));
+
+new Promise((resolve, reject) => {})
