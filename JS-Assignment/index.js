@@ -357,3 +357,98 @@
 // }
 // console.log(makeid(8));
 
+// 21 .
+// function subset(arra, arra_size)
+//  {
+//     var result_set = [], 
+//         result;
+    
+   
+// for(var x = 0; x < Math.pow(2, arra.length); x++)
+//   {
+//     result = [];
+//     i = arra.length - 1; 
+//      do
+//       {
+//       if( (x & (1 << i)) !== 0)
+//           {
+//              result.push(arra[i]);
+//            }
+//         }  while(i--);
+
+//     if( result.length >= arra_size)
+//        {
+//           result_set.push(result);
+//         }
+//     }
+
+//     return result_set; 
+// }
+
+// console.log(subset([1, 2, 3], 2));
+
+// 22 .
+// function char_count(str, letter) 
+// {
+//  var letter_Count = 0;
+//  for (var position = 0; position < str.length; position++) 
+//  {
+//     if (str.charAt(position) == letter) 
+//       {
+//       letter_Count += 1;
+//       }
+//   }
+//   return letter_Count;
+// }
+
+// console.log(char_count('Johnathan', 'a'));
+
+// 23 .
+// function find_FirstNotRepeatedChar(str) {
+//   var arra1 = str.split('');
+//   var result = '';
+//   var ctr = 0;
+ 
+//   for (var x = 0; x < arra1.length; x++) {
+//     ctr = 0;
+ 
+//     for (var y = 0; y < arra1.length; y++) 
+//     {
+//       if (arra1[x] === arra1[y]) {
+//         ctr+= 1;
+//       }
+//     }
+ 
+//     if (ctr < 2) {
+//       result = arra1[x];
+//       break;
+//     }
+//   }
+//   return result;
+// }
+// console.log(find_FirstNotRepeatedChar('abacddbec'));
+
+// 24 .
+// function bubble_Sort(a)
+// {
+//     var swapp;
+//     var n = a.length-1;
+//     var x=a;
+//     do {
+//         swapp = false;
+//         for (var i=0; i < n; i++)
+//         {
+//             if (x[i] < x[i+1])
+//             {
+//                var temp = x[i];
+//                x[i] = x[i+1];
+//                x[i+1] = temp;
+//                swapp = true;
+//             }
+//         }
+//         n--;
+//     } while (swapp);
+//  return x; 
+// }
+
+// console.log(bubble_Sort([12, 474, 8576, 39347, 5857, 37, 2, 6, 7, 1 ]));
