@@ -70,7 +70,7 @@ const Model = (() => {
       this.#onChangeCb();
     }
 
-    subscirbe = (cb) => {
+    subscribe = (cb) => {
       this.#onChangeCb = cb;
     };
   }
@@ -78,13 +78,6 @@ const Model = (() => {
     State,
   };
 })();
-
-/* 
-    [
-        {content:"work",id:1, status: true},
-        {content:"eat",id:2, status: false}
-    ]
-*/
 
 const View = (() => {
   const formEl = document.querySelector(".todo__form");
@@ -94,9 +87,21 @@ const View = (() => {
     todos
       .sort((a, b) => b.id - a.id)
       .forEach((todo) => {
-        template += `
-                <li><span>${todo.content}</span><button class="btn--delete" id="${todo.id}">${deleteIcon}</button></li>
-            `;
+        // Check if the task is completed
+        if(todo.status) {
+          template += `
+            <li>
+              <span>${todo.content}</span>
+              <button class="btn--delete" id="${todo.id}">${deleteIcon}</button>
+            </li>`;
+        } else {
+          template += `
+            <li>
+              <span>${todo.content}</span>
+              <button class="btn--edit" id="${todo.id}">${editIcon}</button>
+              <button class="btn--delete" id="${todo.id}">${deleteIcon}</button>
+            </li>`;
+        }
       });
     todoListEl.innerHTML = template;
   };
@@ -115,11 +120,11 @@ const ViewModel = ((Model, View) => {
       event.preventDefault();
       const content = event.target[0].value;
       if (content.trim() === "") return;
-      const newTodo = { content };
+      const newTodo = { content, status: false };
       APIs.addTodo(newTodo).then((res) => {
-        // console.log("Res", res);
         state.todos = [res, ...state.todos]; //anti-pattern
       });
+      event.target[0].value = "";
     });
   };
 
@@ -135,6 +140,7 @@ const ViewModel = ((Model, View) => {
           });
         });
       }
+      event.preventDefault();
     });
   };
 
@@ -148,7 +154,7 @@ const ViewModel = ((Model, View) => {
     addTodo();
     deleteTodo();
     getTodos();
-    state.subscirbe(() => {
+    state.subscribe(() => {
       View.renderTodolist(state.todos);
     });
   };
