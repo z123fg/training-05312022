@@ -116,9 +116,9 @@ const View = (() => {
 
     const renderTodolist = (todos) => {
         let template = "";
-        // let todos_list = [];
-        // todos.forEach
-
+        if(todos.length === 0) {
+            template = `<li><span id="warning">no active task</span></li>`;
+        }
         todos.sort((a,b)=> a.isCompleted - b.isCompleted || b.id-a.id).forEach((todo) => {
             let deco = todo.isCompleted ? 'line-through' : 'none';
             template += `

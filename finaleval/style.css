@@ -1,3 +1,11 @@
+:root {
+  --color-tan: #e6e2d3;
+  --color-traffic-white: #f0f0f0;
+  --color-yellow-green: #4caf50;
+  --color-vermillion-red: #c94c4c;
+  --color-blue: #008cba;
+}
+
 html {
   display: flex;
   justify-content: center;
@@ -18,14 +26,37 @@ html {
   gap:10px;
 }
 
+.todo__form input {
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  outline: none;
+  padding: 2px 10px;
+}
+
+.todo__form button {
+  border-radius: 5px;
+  border: 1px solid var(--color-blue);
+  outline: none;
+  color: var(--color-traffic-white);
+  background-color: var(--color-blue);
+}
+.todo__form button:hover {
+  box-shadow: 0 0 5px var(--color-blue);
+}
+
 .todo__list-container {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  min-width: 300px;
-  border: 1px solid black;
-  border-radius: 5px;
+  min-width: 400px;
+  border: 2px solid var(--color-tan);
+  border-radius: 15px;
   padding: 10px;
+  margin-top: 20px;
+  height: 600px;
+  overflow-y: scroll;
 }
 
 .todo__list {
@@ -36,12 +67,15 @@ html {
 }
 
 .todo__list li {
+  background-color: var(--color-tan);;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border: 1px solid black;
+  align-items: center;
+  border: 1px solid var(--color-tan);
   border-radius: 5px;
-  padding:5px
+  padding:5px;
+  margin: 5px;
 }
 
 .todo__list span {
@@ -49,11 +83,46 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30px;
+  height: 40px;
+  font-size: 25px;
 }
 
+.btn--edit {
+  width: 50px;
+  height: 40px;
+  background-color: var(--color-blue);
+  border: 1px solid var(--color-blue);
+  margin-right: 5px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: var(--color-traffic-white)
+}
 
+.btn--delete {
+  width: 50px;
+  height: 40px;
+  background-color: var(--color-vermillion-red);
+  border: 1px solid var(--color-vermillion-red);
+  margin-right: 5px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: var(--color-traffic-white)
+}
 
-/* .todo--edit {
-  display: none
-} */
+.todo--edit {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  font-size: 25px;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid gray;
+  margin: 10px;
+  padding: 0 10px;
+}
+
+#warning {
+  color: var(--color-vermillion-red);
+}
