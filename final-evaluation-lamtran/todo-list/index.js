@@ -71,13 +71,13 @@ const Model = (() => {
 
 const View = (()=>{
     const formElement = document.querySelector(".todo__form"); // .querySelector(".todo__form") <- "." represents the class name
-    const todoListElement = document.querySelector(".todo-list__item");
+    const todoListElement = document.querySelector(".tasks__ul");
     const renderTodoList = (todos) => {
         let template = "";
         let activeTasks = todos.filter(todo => todo.completed === false); // list of task not completed = 0
         // Condition to render "No Active Task" text
         (todos.length == 0 || activeTasks.length === 0)  
-        ? template = `<li class="li--item"><span class="strike-through">No Active Task</span></li>`
+        ? template = `<div class="empty-task"><span class="incomplete">No Active Task</span></div>`
         : template = ``
         // Rendering Tasks base on completed attribute
         todos.forEach( (todo,index) => {
@@ -85,18 +85,24 @@ const View = (()=>{
             todo.completed
             ? template += 
             `
-            <li class="li--item">
-                <span class="completed id="task-${todo.id}">${todo.content}</span>
+            <li class="task__li">
+                <span class="completed" id="task-${todo.id}">${todo.content}</span>
                 <button class="btn--delete" type="button" id="${todo.id}">Delete</button>
             </li>
             `
 
             : template += 
             `
-            <li class="li--item">
+            <li class="task__li">
                 <span class="incomplete" id="task-${todo.id}">${todo.content}</span>
-                <button class="btn--edit" type="button" id="${todo.id}">Edit</button>
-                <button class="btn--delete" type="button" id="${todo.id}">Delete</button>
+                <div class="sub-container">
+                    <button class="btn--edit" type="button" id="${todo.id}">
+                    Edit
+                    </button>
+                    <button class="btn--delete" type="button" id="${todo.id}">
+                    Delete
+                    </button>
+                </div>
             </li>
             `
         })
@@ -167,10 +173,6 @@ const ViewModel = ((View, todoModel)=>{
                     // send request before updating
                     APIs.updateTodo(event.target.id, selectedTodo).then(res =>{
                         return state.todos = [...state.todos];
-                        element.innerHTML = `
-                        <span class="incomplete" id="task-${selectedTodo.id}">
-                        ${inputValue}
-                        </span>`
                     }).catch(err => {console.log("Error updating task: ", err)})
                 };
             } else if (event.target.className === "incomplete"){
