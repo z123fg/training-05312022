@@ -1,0 +1,259 @@
+const EDIT = '<svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="EditIcon" aria-label="fontSize small"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path></svg>';
+const DELETE = '<svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="DeleteIcon" aria-label="fontSize small"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>';
+
+// -- API SECTION -- //
+
+const APIs = (() => {
+    const URL = "http://localhost:3000/todos";
+
+    const addTodos = (newTodos) => {
+        console.log(newTodos)
+        return fetch(URL, {
+            method: "POST",
+            body: JSON.stringify(newTodos),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => {
+            return res.json();
+        })
+    }
+
+    const deleteTodos = (id) => {
+        return fetch(`${URL}/${id}`, {
+            method: "DELETE"
+        }).then((res) => {
+            return res.json();
+        })
+    };
+
+    const modifyTodos = (id, newTodos) => {
+        return fetch(`${URL}/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(newTodos),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => {
+            return res.json();
+        })
+    }
+
+    const completeTodo = (id, newTodos) => {
+        return fetch(`${URL}/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(newTodos),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => {
+            return res.json();
+        })
+    }
+
+    const getTodos = () => {
+        return fetch(`${URL}`).then((res) => {
+            return res.json();
+        })
+    }
+
+    return {
+        getTodos,
+        deleteTodos,
+        addTodos,
+        modifyTodos,
+        completeTodo
+    }
+})()
+
+// -- MODEL SECTION -- //
+
+const Model = (() => {
+    class State {
+        #todos;
+        #onChangeCb;
+        constructor() {
+            this.#todos = [];
+            this.#onChangeCb = () => { }
+        }
+        get todos() {
+            return this.#todos
+        }
+        set todos(newTodos) {
+            this.#todos = newTodos
+            this.#onChangeCb();
+        }
+
+        subscirbe = (cb) => {
+            this.#onChangeCb = cb;
+        }
+    }
+    return {
+        State
+    }
+
+})();
+
+// -- VIEW SECTION -- //
+
+const View = (() => {
+    const formEl = document.querySelector(".todo__form");
+    const todoListElementIncomplete = document.querySelector(".todo_list--incomplete");
+    const todoListElementComplete = document.querySelector(".todo_list--complete");
+    const renderTodosList = (todos) => {
+        let templateActive = "";
+        const active = todos.filter((e) => !e.complete);
+        active.sort((a, b) => b.id - a.id).forEach((todo) => {
+            templateActive += `
+                <li>
+                    <div class="todo__content" id='content${todo.id}'>
+                        <span data-id=${todo.id} >
+                        ${todo.content}
+                        </span>
+                    </div>
+                    <button class="btn--modify" data-id="${todo.id}">
+                    ${EDIT}
+                    </button>
+                    <button class="btn--delete" data-id="${todo.id}">
+                    ${DELETE}
+                    </button>
+                </li>
+            `
+        })
+
+        if(active.length === 0){
+            todoListElementIncomplete.innerHTML = "<l1><span>No active task</span></li>";
+        }else{
+            todoListElementIncomplete.innerHTML = templateActive;
+        }
+
+        let templateInActive = "";
+        const inactive = todos.filter((e) => e.complete);
+        inactive.sort((a, b) => b.id - a.id).forEach((todo) => {
+            templateInActive += `
+                <li>
+                    <div class="todo__content" id='content${todo.id}'>
+                        <span data-id=${todo.id} class="todo__content-complete"}>
+                        ${todo.content}
+                        </span>
+                    </div>
+                    <button class="btn--delete" data-id="${todo.id}">
+                    ${DELETE}
+                    </button>
+                </li>
+            `
+        })
+        todoListElementComplete.innerHTML = templateInActive;
+    }
+    return {
+        formEl,
+        renderTodosList,
+        todoListElementIncomplete,
+        todoListElementComplete
+    }
+})();
+
+// -- VIEWMODEL SECTION -- //
+
+const ViewModel = ((Model, View) => {
+    const state = new Model.State();
+
+    const addTodos = () => {
+        View.formEl.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const content = event.target[0].value;
+            if (content.trim() === "") return;
+            const newTodo = { content, complete: false }
+            APIs.addTodos(newTodo).then(res => {
+                state.todos = [res, ...state.todos];
+            })
+
+        })
+    }
+
+    const deleteTodos = () => {
+        const operation = (event) => {
+            const dataId = event.target.getAttribute('data-id')
+            if (event.target.className === "btn--delete") {
+                APIs.deleteTodos(dataId).then(res => {
+                    console.log("Res", res);
+                    state.todos = state.todos.filter((todo) => {
+                        return +todo.id !== +dataId
+                    });
+                });
+            }
+        };
+        View.todoListElementIncomplete.addEventListener("click", operation);
+        View.todoListElementComplete.addEventListener("click", operation);
+    }
+
+    const modifyTodos = () => {
+        View.todoListElementIncomplete.addEventListener("click", (event) => {
+            console.log(event.currentTarget, event.target)
+            const dataId = event.target.getAttribute('data-id')
+            const content = event.currentTarget.querySelector("#content" + dataId);
+            
+            if (event.target.className === "btn--modify") {
+                if (content.querySelector('span')) {
+                    content.innerHTML = `<input type='text' value='${content.querySelector('span').textContent.trim()}'></input>`;
+                } else {
+                    const newContent = content.querySelector('input').value;
+                    if (newContent.trim() === "") return;
+                    content.innerHTML = `<span data-id=${dataId}>${newContent}</span>`;
+                    APIs.modifyTodos(dataId, {content: newContent, complete: false})
+                    .then(res => {
+                        console.log("res", res)
+                        state.todos = state.todos.filter((todo) => {
+                            return +todo.id !== +dataId
+                        })
+                    })
+                }
+            }
+
+            if(event.target.tagName.toLowerCase() === 'span') {
+                APIs.completeTodo(dataId, {complete: true})
+                .then(res => {
+                    console.log("res", res)
+                    state.todos = state.todos.filter((todo) => {
+                        return +todo.id !== +dataId
+                    })
+                })
+            }
+        })
+
+
+        View.todoListElementComplete.addEventListener('click', (event) => {
+            const dataId = event.target.getAttribute('data-id')
+            if(event.target.tagName.toLowerCase() === 'span') {
+                APIs.completeTodo(dataId, {complete: false})
+                .then(res => {
+                    console.log("res", res)
+                    state.todos = state.todos.filter((todo) => {
+                        return +todo.id !== +dataId
+                    })
+                })
+            }
+        })
+    }
+
+    const getTodos = () => {
+        APIs.getTodos().then(res => {
+            state.todos = res;
+        })
+    }
+
+    const bootstrap = () => {
+        addTodos();
+        deleteTodos();
+        getTodos();
+        modifyTodos();
+        state.subscirbe(() => {
+            View.renderTodosList(state.todos)
+        });
+    }
+    return {
+        bootstrap
+    }
+})(Model, View);
+
+ViewModel.bootstrap();
