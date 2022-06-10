@@ -1,4 +1,16 @@
 {
   "todos": [
+    {
+      "content": "Code review",
+      "id": 1
+    },
+    {
+      "content": "Meeting",
+      "id": 2
+    },
+    {
+      "content": "Wrap up",
+      "id": 3
+    }
   ]
 }
