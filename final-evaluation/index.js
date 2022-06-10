@@ -1,11 +1,9 @@
-const EDIT = '<svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="EditIcon" aria-label="fontSize small"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path></svg>';
-const DELETE = '<svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="DeleteIcon" aria-label="fontSize small"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>';
-
 // -- API SECTION -- //
-
 const APIs = (() => {
+    // url for the database provided //
     const URL = "http://localhost:3000/todos";
-
+    // -- ADD -- //
+    // this function adds new items to the database using fetch method post //
     const addTodos = (newTodos) => {
         return fetch(URL, {
             method: "POST",
@@ -17,7 +15,8 @@ const APIs = (() => {
             return response.json();
         })
     }
-
+    // -- DELETE -- //
+    // this function removes items from the database using fetch method delete //
     const deleteTodos = (id) => {
         return fetch(`${URL}/${id}`, {
             method: "DELETE"
@@ -25,8 +24,9 @@ const APIs = (() => {
             return response.json();
         })
     };
-
-    const modifyTodos = (id, newTodos) => {
+    // -- UPDATE -- //
+    // this function updates the text of existing items in the databse using fetch method put //
+    const updateTodos = (id, newTodos) => {
         return fetch(`${URL}/${id}`, {
             method: "PUT",
             body: JSON.stringify(newTodos),
@@ -37,7 +37,8 @@ const APIs = (() => {
             return response.json();
         })
     }
-
+    // -- COMPLETE -- //
+    // this function updates the status of existing items in the database using fetch method put //
     const completeTodo = (id, newTodos) => {
         return fetch(`${URL}/${id}`, {
             method: "PUT",
@@ -49,44 +50,59 @@ const APIs = (() => {
             return response.json();
         })
     }
-
+    // -- GET -- //
+    // this function receives information from the database using fetch //
     const getTodos = () => {
         return fetch(`${URL}`).then((response) => {
             return response.json();
         })
     }
-
+    // all functions returned here //
     return {
         getTodos,
         deleteTodos,
         addTodos,
-        modifyTodos,
+        updateTodos,
         completeTodo
     }
 })()
-
 // -- MODEL SECTION -- //
-
+// iife that is part of the mvvm design pattern - controls data //
 const Model = (() => {
+    // -- STATE CLASS -- //
+    // this class is responsible for our data //
     class State {
+        // -- #TODOS -- //
+        // this is the data we store, mutate, and display for the page //
         #todos;
+        // -- #ONCHANGECB -- //
+        // this function is used to refresh the page whenever todos is changed //
         #onChangeCb;
+        // -- CONSTRUCTOR -- //
         constructor() {
+            // initializing todos to an empty array //
             this.#todos = [];
+            // initializing onchangecb to an empty array //
             this.#onChangeCb = () => { }
         }
+        // -- GETTER FUNCTION -- //
+        // this function returns the private variable todos //
         get todos() {
             return this.#todos
         }
+        // -- SETTER FUNCTION -- //
+        // this function updates todos with a new value and calls onchangecb //
         set todos(newTodos) {
             this.#todos = newTodos
             this.#onChangeCb();
         }
-
-        subscirbe = (cb) => {
+        // -- SUBSCRIBE FUNCTION -- //
+        // this function sets the onchangecb function to whatever is passed to it //
+        subscribe = (cb) => {
             this.#onChangeCb = cb;
         }
     }
+    // state is the only thing returned as it is the only thing in the class //
     return {
         State
     }
@@ -94,58 +110,80 @@ const Model = (() => {
 })();
 
 // -- VIEW SECTION -- //
-
+// iife that is part of the mvvm design pattern - controls how the data is presented //
 const View = (() => {
-    const formEl = document.querySelector(".todo__form");
+    // -- FORMELEMENT -- //
+    // element that selects the todo form so an event listener can be placed //
+    const formElement = document.querySelector(".todo__form");
+    // -- TODOLISTELEMENTINCOMPLETE -- //
+    // element that selects the top unordered list (tasks that have not been completed) //
     const todoListElementIncomplete = document.querySelector(".todo_list--incomplete");
+    // -- TODOLISTELEMENTCOMPLETE -- //
+    // element that selects the bottom unordered list (tasks that have been completed) //
     const todoListElementComplete = document.querySelector(".todo_list--complete");
+    // -- RENDERTODOSLIST FUNCTION -- //
+    /* this function takes the todos and dynamically adds them to the unordered lists **
+    ** so that they can be changed and displayed properly                             */
     const renderTodosList = (todos) => {
-        let templateActive = "";
-        const active = todos.filter((e) => !e.complete);
-        active.sort((a, b) => b.id - a.id).forEach((todo) => {
-            templateActive += `
+        // -- INCOMPLETETASKS -- //
+        // variable that will contain all of our incomplete tasks for displaying //
+        let incomepleteTasks = "";
+        // -- COMPLETEDTASKS -- //
+        // variable that will contain all of our completed tasks for displaying //
+        let completedTasks = "";
+        // -- INCOMPLETELIST -- //
+        // variable that contains the raw data of all incomplete tasks //
+        const incompleteList = todos.filter((e) => !e.complete);
+        incompleteList
+        // sorting from highest id to lowest id //
+        .sort((a, b) => b.id - a.id)
+        // looping through the raw data and turning it html-ready //
+        .forEach((todo) => {
+            incomepleteTasks += `
                 <li>
                     <div class="todo__content" id='content${todo.id}'>
-                        <span data-id=${todo.id} >
+                        <span id="span-${todo.id}" >
                         ${todo.content}
                         </span>
                     </div>
-                    <button class="btn--edit" data-id="${todo.id}">
-                    ${EDIT}
+                    <button class="btn--edit" id="edit-${todo.id}">
+                    <i id="${todo.id}" class="fa-solid fa-pencil"></i>
                     </button>
-                    <button class="btn--delete" data-id="${todo.id}">
-                    ${DELETE}
+                    <button class="btn--delete" id="${todo.id}">
+                    <i id="${todo.id}" class="fa-solid fa-trash"></i>
                     </button>
                 </li>
             `
         })
-
-        if(active.length === 0){
-            todoListElementIncomplete.innerHTML = "<l1><span>No active task</span></li>";
-        }else{
-            todoListElementIncomplete.innerHTML = templateActive;
-        }
-
-        let templateInActive = "";
-        const inactive = todos.filter((e) => e.complete);
-        inactive.sort((a, b) => b.id - a.id).forEach((todo) => {
-            templateInActive += `
+        // -- COMPLETEDLIST -- //
+        // variable that contains the raw data of all completed tasks //
+        const completedList = todos.filter((e) => e.complete);
+        completedList
+        // sorting from highest id to lowest id //
+        .sort((a, b) => b.id - a.id)
+        // looping through the raw data and turning it html-ready //
+        .forEach((todo) => {
+            completedTasks += `
                 <li>
                     <div class="todo__content" id='content${todo.id}'>
-                        <span data-id=${todo.id} class="todo__content-complete"}>
+                        <span id="span-${todo.id}" class="todo__content-complete"}>
                         ${todo.content}
                         </span>
                     </div>
-                    <button class="btn--delete" data-id="${todo.id}">
-                    ${DELETE}
+                    <button class="btn--delete" id="${todo.id}">
+                    <i id="${todo.id}" class="fa-solid fa-trash"></i>
                     </button>
                 </li>
             `
         })
-        todoListElementComplete.innerHTML = templateInActive;
+        // this will append our html-ready data to its appropriate list //
+        todoListElementIncomplete.innerHTML = incomepleteTasks;
+        // this will append our html-ready data to its appropriate list //
+        todoListElementComplete.innerHTML = completedTasks;
     }
+    // the three variables being returned are so that they can have event listeners added //
     return {
-        formEl,
+        formElement,
         renderTodosList,
         todoListElementIncomplete,
         todoListElementComplete
@@ -153,51 +191,69 @@ const View = (() => {
 })();
 
 // -- VIEWMODEL SECTION -- //
-
+// iife that is part of the mvvm design pattern - controls how the data is mutated //
 const ViewModel = ((Model, View) => {
+    // -- STATE -- //
+    // this state variable is from our model section so we can access its variables //
     const state = new Model.State();
-
+    // -- ADDTODOS FUNCTION -- //
+    // this function will send data to the database when the form is submitted //
     const addTodos = () => {
-        View.formEl.addEventListener("submit", (event) => {
+        // targeting the formelement section of html to do something on submit //
+        View.formElement.addEventListener("submit", (event) => {
+            // stops page from refreshing automatically //
             event.preventDefault();
+            // -- CONTENT -- //
+            // this variable takes in the content that the user inputted from the form //
             const content = event.target[0].value;
+            // this if statement stops tasks with no content from being created //
             if (content.trim() === "") return;
+            // -- NEWTODO -- //
+            // this variable adds the complete key so that the element can be toggled //
             const newTodo = { content, complete: false }
+            // data is sent to the api so it can be added to the database //
             APIs.addTodos(newTodo).then((response) => {
+                // data is also added locally to the list //
                 state.todos = [response, ...state.todos];
             })
 
         })
     }
-
+    // -- DELETETODOS -- //
+    // this function will remove data from the database when the delete button is clicked //
     const deleteTodos = () => {
-        const operation = (event) => {
-            const dataId = event.target.getAttribute('data-id')
-            if (event.target.className === "btn--delete") {
-                APIs.deleteTodos(dataId).then((r) => {
+        // -- DELETEHANDLER -- //
+        // this function will delete data from either list when the button is pressed //
+        const deleteHandler = (event) => {
+            // -- { ID } -- //
+            // this variable is the id associated with the list item that has been clicked //
+            const { id } = event.target;
+            // if statement checks to see if the icon has been clicked or the edge of the button //
+            if (event.target.className === "btn--delete" || event.target.className === "fa-solid fa-trash") {
+                APIs.deleteTodos(id).then((r) => {
                     state.todos = state.todos.filter((todo) => {
-                        return +todo.id !== +dataId
+                        return +todo.id !== +dataId;
                     });
                 });
             }
         };
-        View.todoListElementIncomplete.addEventListener("click", operation);
-        View.todoListElementComplete.addEventListener("click", operation);
+        View.todoListElementIncomplete.addEventListener("click", deleteHandler);
+        View.todoListElementComplete.addEventListener("click", deleteHandler);
     }
 
-    const modifyTodos = () => {
+    const updateTodos = () => {
         View.todoListElementIncomplete.addEventListener("click", (event) => {
-            const dataId = event.target.getAttribute('data-id')
+            const dataId = event.target.getAttribute("data-id")
             const content = event.currentTarget.querySelector("#content" + dataId);
             
-            if (event.target.className === "btn--edit") {
+            if (event.target.className === "btn--edit" || event.target.className === "fa-solid fa-pencil") {
                 if (content.querySelector('span')) {
                     content.innerHTML = `<input type='text' value='${content.querySelector('span').textContent.trim()}'></input>`;
                 } else {
-                    const newContent = content.querySelector('input').value;
-                    if (newContent.trim() === "") return;
-                    content.innerHTML = `<span data-id=${dataId}>${newContent}</span>`;
-                    APIs.modifyTodos(dataId, {content: newContent, complete: false})
+                    const newTodos = content.querySelector('input').value;
+                    if (newTodos.trim() === "") return;
+                    content.innerHTML = `<span data-id=${dataId}>${newTodos}</span>`;
+                    APIs.updateTodos(dataId, {content: newTodos, complete: false})
                     .then((r) => {
                         state.todos = state.todos.filter((todo) => {
                             return +todo.id !== +dataId
@@ -206,7 +262,7 @@ const ViewModel = ((Model, View) => {
                 }
             }
 
-            if(event.target.tagName.toLowerCase() === 'span') {
+            if(event.target.tagName.toLowerCase() === "span") {
                 APIs.completeTodo(dataId, {complete: true})
                 .then((r) => {
                     state.todos = state.todos.filter((todo) => {
@@ -240,8 +296,8 @@ const ViewModel = ((Model, View) => {
         addTodos();
         deleteTodos();
         getTodos();
-        modifyTodos();
-        state.subscirbe(() => {
+        updateTodos();
+        state.subscribe(() => {
             View.renderTodosList(state.todos)
         });
     }
