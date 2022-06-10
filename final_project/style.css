@@ -54,6 +54,31 @@ html {
   align-items: center;
   height: 30px;
 }
+.complete__list {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.complete__list li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #e6e2d3;
+  border: 2px solid #e6e2d3;
+  border-radius: 5px;
+  padding:5px;
+  text-decoration: line-through;
+}
+
+.complete__list span {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
 
 .form--input {
   border-width: 1px;

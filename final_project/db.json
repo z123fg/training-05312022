@@ -1,9 +1,9 @@
 {
-  "todos": [
+  "todos": [],
+  "completed": [
     {
-      "content": "ttt",
-      "status": false,
-      "id": 6
+      "content": "completed",
+      "id": 1
     }
   ]
 }
