@@ -51,25 +51,3 @@ html {
   align-items: center;
   height: 30px;
 }
-
-.btn--edit{
-  width: 40px;
-  padding: 0;
-}
-
-.btn--delete {
-  width: 30px;
-  padding: 0;
-}
-
-.todo__content{
-  width: 200px;
-}
-
-.todo__content-complete {
-  text-decoration: line-through;
-}
-
-svg, path {
-  pointer-events: none;
-}
