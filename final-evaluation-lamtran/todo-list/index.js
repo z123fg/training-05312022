@@ -75,10 +75,7 @@ const View = (()=>{
     const renderTodoList = (todos) => {
         let template = "";
         let activeTasks = todos.filter(todo => todo.completed === false); // list of task not completed = 0
-        console.log("todo list updated: ", todos);
         // Condition to render "No Active Task" text
-        console.log('lengh of list: ', todos.length);
-        console.log('length of active task: ', activeTasks.length);
         (todos.length == 0 || activeTasks.length === 0)  
         ? template = `<li class="li--item"><span class="strike-through">No Active Task</span></li>`
         : template = ``
@@ -129,7 +126,8 @@ const ViewModel = ((View, todoModel)=>{
 
     const getTodos = () => {
         APIs.getTodos().then(res => {
-            state.todos = res;
+            let tempTodos= res.sort((a, b) => Number(a.completed) - Number(b.completed));
+            return state.todos = tempTodos;
         })
     }
 
@@ -146,7 +144,9 @@ const ViewModel = ((View, todoModel)=>{
             }
         })
     }
-    // convert <span></span> into input field
+    // editTodo will handle 2 tasks:
+    // - Complete a task
+    // - Edit a task
     const editTodo = () => {
         View.todoListElement.addEventListener('click', (event) => {
             if (event.target.className === "btn--edit" ){
@@ -181,7 +181,8 @@ const ViewModel = ((View, todoModel)=>{
                 selectedTodo.completed = true;
                 state.todos[sTodoIndex] = selectedTodo;
                 APIs.updateTodo(todoId, selectedTodo).then(res =>{
-                    return state.todos = [...state.todos];
+                    let tempTodos = [...state.todos].sort((a, b) => Number(a.completed) - Number(b.completed));
+                    return state.todos = tempTodos;
                 }).catch(err => {console.log("Error updating task: ", err)})
             }
         })
