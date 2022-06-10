@@ -452,3 +452,78 @@
 // }
 
 // console.log(bubble_Sort([12, 474, 8576, 39347, 5857, 37, 2, 6, 7, 1 ]));
+
+// 25 .
+// function Longest_Country_Name(country_name)
+//   {
+//   return country_name.reduce(function(lname, country) 
+//   {
+//     return lname.length > country.length ? lname : country;
+//   }, 
+// "");
+// }
+// console.log(Longest_Country_Name(["Australia", "Germany", "United States of America"]));
+
+// 26 .
+// function sort(names)
+// {
+//     string="";
+//     ss="";
+//     namestring=names.split("");
+
+//     for(j=0;j<namestring.length;j++) {
+//         for(i=j;i<namestring.length;i++) {
+//             if(string.includes(namestring[i]))
+//                 break;
+//             else
+//                 string+=namestring[i];
+//          }
+//          if(ss.length<string.length)
+//              ss=string;
+//          string="";
+//     }
+//     return ss;
+// }
+// console.log(sort("google.com"));
+
+// 27 . 
+// var longestPalindrome = function(s) {
+//   let start, end, result = 0;
+  
+//   for(let i=0; i < s.length; i++) {
+//       let tempStart = i;
+//       let tempEnd = i;
+      
+//       while(s[tempEnd] === s[tempEnd+1]) tempEnd++;
+      
+//       while(tempStart >= 0 && tempEnd < s.length && s[tempStart-1] == s[tempEnd+1]) {
+//           tempStart--;
+//           tempEnd++
+//       }
+      
+//       if(result < tempEnd - tempStart+1) {
+//           result = tempEnd - tempStart+1;
+//           start = tempStart;
+//           end = tempEnd;
+//       }
+//   }
+//   return s.substring(start, end+1);
+// };
+
+// 28 .
+// function addStudent(id, refreshCallback)
+// {
+//     refreshCallback();  
+// }
+
+// function refreshStudentList() {
+//     console.log('Hello');
+// }
+
+// addStudent(1, refreshStudentList);
+
+// 29 .
+// function abc() {
+//   console.log( arguments.callee.name );
+// }
+// abc();
