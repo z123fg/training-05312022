@@ -149,19 +149,21 @@ const ViewModel = ((Model, View) => {
             let spanContent = spanEl.innerHTML;
             console.log(spanEl);
 
-            if (event.target.className === "btn--edit" && spanEl.id === id && !spanEl.classList.contains("text--editable")) {
-                spanEl.innerHTML = `<input value=${spanContent}>`;
-                spanEl.classList.toggle("text--editable");
-            }else if (event.target.className === "btn--edit" && spanEl.id === id && spanEl.classList.contains("text--editable")) {
-                console.log("editable");
-                spanEl.innerHTML = spanEl.value;
-                spanEl.classList.toggle("text--editable");
+            if (event.target.className === "btn--edit" && spanEl.id === id) {
+                if (spanEl.classList.contains("text--editable")){
+                    console.log("edit");
+                    spanEl.innerHTML = spanEl.firstChild.value;
+                    spanEl.classList.toggle("text--editable");
+                }else{
+                    spanEl.innerHTML = `<input value=${spanContent}>`;
+                    spanEl.classList.toggle("text--editable");
+                }
             }
         })
     }
 
     const editTodo = () => {
-        
+        View.todoListEl.addEventListener("submit", (event) => {})
     }
 
     const changeTodoStatus = () => {
