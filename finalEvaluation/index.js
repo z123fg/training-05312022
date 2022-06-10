@@ -204,7 +204,8 @@ const ViewModel = ((Model, View) => {
                         console.log("res", res)
                         state.todos = state.todos.filter((todo) => {
                             return +todo.id !== +dataId
-                        })
+                        });
+                        state.todos = [res, ...state.todos];
                     })
                 }
             }
@@ -216,7 +217,8 @@ const ViewModel = ((Model, View) => {
                     console.log("res", res)
                     state.todos = state.todos.filter((todo) => {
                         return +todo.id !== +dataId
-                    })
+                    });
+                    state.todos = [res, ...state.todos];
                 })
             }
         })
@@ -231,7 +233,8 @@ const ViewModel = ((Model, View) => {
                     console.log("res", res)
                     state.todos = state.todos.filter((todo) => {
                         return +todo.id !== +dataId
-                    })
+                    });
+                    state.todos = [res, ...state.todos];
                 })
             }
         })
