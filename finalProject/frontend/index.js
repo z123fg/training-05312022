@@ -114,7 +114,7 @@ const View = (() => {
         `
             } else {
                 template += `
-            <li><span>${todo.content}</span><button class="btn--edit" >Edit</button> <button class="btn--delete" id="${todo.id}">Delete</button></li>
+            <li><span>${todo.content}</span><button class="btn--edit" >Edit </button> <button class="btn--delete" id="${todo.id}">Delete</button></li>
         `
             }
         })
