@@ -33,7 +33,7 @@ const APIs = (() => {
 
     const updateTodo = (id, newTodo) => {
         return fetch(`${URL}/${id}`, {
-            method: "PUT",
+            method: "PATCH",
             body: JSON.stringify({
                 content: newTodo
             }),
@@ -48,7 +48,7 @@ const APIs = (() => {
 
     const updateTodoStatus = (id, flag) => {
         return fetch(`${URL}/${id}`, {
-            method: "PUT",
+            method: "PATCH",
             body: JSON.stringify({
                 isCompleted: flag
             }),
@@ -81,11 +81,9 @@ const APIs = (() => {
 const Model = (() => {
     class State {
         #todos;
-        #todos2;
         #onChangeCb;
         constructor() {
             this.#todos = [];
-            this.#todos2 = [];
             this.#onChangeCb = () => { }
         }
         get todos() {
@@ -95,15 +93,6 @@ const Model = (() => {
             this.#todos = newTodos;
             this.#onChangeCb();
         }
-
-        get todos2() {
-            return this.#todos2;
-        }
-        set todos2(newTodos) {
-            this.#todos = newTodos;
-            this.#onChangeCb();
-        }
-
         subscirbe = (cb) => {
             this.#onChangeCb = cb;
         }
@@ -124,12 +113,16 @@ const Model = (() => {
 const View = (() => {
     const formEl = document.querySelector(".todo__form");
     const todoListEl = document.querySelector(".todo__list");
-    const totoListEl2 = document.querySelector(".toto__list--done");
+
     const renderTodolist = (todos) => {
         let template = "";
-        todos.sort((a,b)=>b.id-a.id).forEach((todo) => {
+        // let todos_list = [];
+        // todos.forEach
+
+        todos.sort((a,b)=> a.isCompleted - b.isCompleted || b.id-a.id).forEach((todo) => {
+            let deco = todo.isCompleted ? 'line-through' : 'none';
             template += `
-                <li><span id="cont_${todo.id}">${todo.content}</span>
+                <li><span id="cont_${todo.id}" style="text-decoration: ${deco}">${todo.content}</span>
                     <input class="todo--edit" id="edit_${todo.id}" style="display: none"/>
                     <button class="btn--edit" id="b_${todo.id}">Edit</button>
                     <button class="btn--delete" id="${todo.id}">Delete</button>
@@ -138,28 +131,13 @@ const View = (() => {
         })
         todoListEl.innerHTML = template;
     }
-    const renderTodolist2 = (todos) => {
-        let template = "";
-        todos.sort((a,b)=>b.id-a.id).forEach((todo) => {
-            template += `
-                <li><span id="cont_${todo.id}">${todo.content}</span>
-                    <input class="todo--edit" id="edit_${todo.id}" style="display: none"/>
-                    <button class="btn--edit" id="b_${todo.id}">Edit</button>
-                    <button class="btn--delete" id="${todo.id}">Delete</button>
-                </li>
-            `
-        })
-        todoListEl2.innerHTML = template;
-    }
+
     return {
         formEl,
         renderTodolist,
-        renderTodolist2,
         todoListEl
     }
 })();
-
-
 
 const ViewModel = ((Model, View) => {
     const state = new Model.State();
@@ -217,21 +195,36 @@ const ViewModel = ((Model, View) => {
                     cont_span.style.display = "";
                 }
             }
+            else if(event.target.className === "todo--edit") {
+                //
+            }
             else if (event.target.id === `${id}`) {
                 console.log("status");
-                // const n_id = id.slice(id.indexOf('cont_') + 5);
-                // const cont_span = document.querySelector(`#cont_${n_id}`);
+                const n_id = id.slice(id.indexOf('cont_') + 5);
+                const cont_span = document.querySelector(`#cont_${n_id}`);
+                console.log(cont_span)
+                if(cont_span.style.textDecoration != "line-through") {
+                    APIs.updateTodoStatus(n_id, true).then(res => {
+                        state.todos = state.todos.filter((todo) => {
+                            if(todo.id == n_id) {
+                                todo.isCompleted = true;
+                            }
+                            return +todo.id !== +id;
+                        });
+                        cont_span.style.textDecoration = 'line-through';
+                    });
+                }
+                else {
+                    APIs.updateTodoStatus(n_id, false).then(res => {
+                        state.todos = state.todos.filter((todo) => {
+                            if(todo.id == n_id) {
+                                todo.isCompleted = false;
+                            }
+                            return +todo.id !== +id;
+                        });
 
-                // APIs.updateTodoStatus(n_id, true).then(res => {
-                //     state.todos = state.todos.filter((todo) => {
-                //         if(todo.id == n_id) {
-                //             todo.isCompleted = true;
-                //             state.todos2 = [todo, ...state.todos2];
-                //         }
-                //         return +todo.id !== +id;
-                //     });
-
-                // });
+                    });
+                }
             }
         })
     }
