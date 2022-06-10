@@ -91,12 +91,13 @@ const View = (()=>{ //display content
         let template = "";
         todos.sort((a,b)=>b.id-a.id).forEach((todo)=>{
             template += `
-                <li class="" id="item--${todo.id}">
-                    <form class="todo__item" style="display:none">
+                <li class="todo__item" id="item--${todo.id}">
+                    <form class="todo__input" style="display:none">
                         <input type = "text"><button>Edit</button>
                     </form>
                     <span class="content">
-                            ${todo.content}                        
+                        <span id="content--${todo.id}">${todo.content}</span>
+
                         <button class="btn--update" id="${todo.id}">Edit</button>
                     </span>
                     <button class="btn--delete" id="${todo.id}">Delete</button>
@@ -137,6 +138,7 @@ const ViewModel = ((Model, View)=>{ //logic | change the state
     const deleteTodo = () => {
         View.todoListElem.addEventListener("click", (event)=>{
             const {id} = event.target;
+            //console.log(event.target);
             if(event.target.className === "btn--delete"){ //target is button | event.currentTarget -> target that is binded to the event (todo list)
                 //APIs.deleteTodo
                 APIs.deleteTodo(id).then(res => {
@@ -150,26 +152,43 @@ const ViewModel = ((Model, View)=>{ //logic | change the state
         })
     }
 
+    const updateDone = () => {
+        View.todoListElem.addEventListener("click", (event)=>{
+            //console.log(111);
+            const {id} = event.target;
+            console.log(event.target);
+            if(isNaN(+id)){
+                let cur_item = document.getElementById(id);
+                cur_item.style.textDecoration = "line-through";
+            }
+
+        });
+
+            
+    }
+
     const updateTodo = () => {
         View.todoListElem.addEventListener("click", (event)=>{
             const {id} = event.target;
+            let cur_item = document.getElementById(`item--${id}`);
+
             if(event.target.className === "btn--update"){
-                let cur_item = document.getElementById(`item--${id}`);
-                let form = cur_item.getElementsByClassName("todo__item").item(0);
+                let form = cur_item.getElementsByClassName("todo__input").item(0);
                 let text = cur_item.getElementsByClassName("content").item(0);
                 
                 //hide
                 text.style.display = "none";
                 form.style.display = "inline";
 
-                const todoItemElem = document.querySelector(".todo__item");
-                todoItemElem.addEventListener("submit", (event)=>{
+                const todoInputElem = document.querySelector(".todo__input");
+                todoInputElem.addEventListener("submit", (event)=>{
                     event.preventDefault();
                     text.style.display = "inline";
                     form.style.display = "none";
                     
                     const content = event.target[0].value;
-                    const newTodo = {content};
+                    if(content.trim() === "") return;
+                    const newTodo = {content};   
                     APIs.updateTodo(id, newTodo).then((res)=>{
                         //console.log("Res", res);
                         const newTodos = [...state.todos];
@@ -180,9 +199,10 @@ const ViewModel = ((Model, View)=>{ //logic | change the state
                         }
                         state.todos = newTodos;
                     })
-
                 });
+
             }
+
             
         });
     }
@@ -196,8 +216,8 @@ const ViewModel = ((Model, View)=>{ //logic | change the state
     const bootstrap = () => {
         addTodo();
         deleteTodo();
-        updateTodo();
-
+        updateTodo();  
+        updateDone();
         getTodos();
         state.subscribe(()=>{
             View.renderTodoList(state.todos);
