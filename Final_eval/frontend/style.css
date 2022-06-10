@@ -1,0 +1,74 @@
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-size: 40px;
+  text-decoration: underline;
+}
+
+body {
+  background-color: rgb(217, 217, 193);
+}
+
+.todo__form > button {
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgb(71, 74, 75);
+  color: white;
+  background-color: rgb(87, 87, 194);
+  padding: 3px;
+  font-size: 18px;
+}
+
+.todo__form > input {
+  border-radius: 5px;
+  margin: 5px;
+  height: 25px;
+}
+
+.todo__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.todo__list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 300px;
+  border: 5px solid rgb(144, 109, 109);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.todo__list {
+  padding: 0px;
+
+}
+
+
+.todo__list li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 3px solid rgb(88, 35, 35);
+  border-radius: 5px;
+  padding: 15px;
+  margin: 15px;
+  align-items: center;
+}
+
+.btn--edit {
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgb(71, 74, 75);
+}
+
+.btn--delete {
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgb(71, 74, 75);
+}
