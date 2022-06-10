@@ -36,18 +36,21 @@ html {
   flex-direction: column;
   gap: 10px;
 }
-
-.todo__list li {
+.todo--none {
+  text-align: center;
+}
+.todo--item {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background-color: #e6e2d3;
   border: 2px solid #e6e2d3;
   border-radius: 5px;
-  padding:5px
+  padding:5px;
+  order: 1;
 }
 
-.todo__list span {
+.todo--content {
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -55,14 +58,8 @@ html {
   height: 30px;
   cursor: pointer;
 }
-.complete__list {
-  padding: 0px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
 
-.complete__list li {
+.completed--item {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -71,9 +68,11 @@ html {
   border-radius: 5px;
   padding:5px;
   text-decoration: line-through;
+  color: gray;
+  order: 2;
 }
 
-.complete__list span {
+.completed--content {
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -88,6 +87,7 @@ html {
   border-color: #e6e2d3;
   background-color: #f0f0f0;
   padding: 10px;
+  box-shadow: none;
 }
 
 .btn--submit {

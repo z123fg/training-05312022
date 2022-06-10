@@ -42,13 +42,6 @@ const APIs = (() => {
       return res.json();
     });
   };
-  const deleteCompleted = (id) => {
-    return fetch(`${CURL}/${id}`, {
-      method: "DELETE",
-    }).then((res) => {
-      return res.json();
-    });
-  };
 
   const editTodo = (id) => {
     return fetch(`${URL}/${id}`, {
@@ -57,20 +50,27 @@ const APIs = (() => {
       return res.json();
     });
   };
-  const completeTodo = (newComplete) => {
-    fetch(CURL, {
-      method: "POST",
-      body: JSON.stringify({ content: newComplete.innerHTML }),
+  const completeTodo = (id) => {
+    console.log("finishing todo... id: " + id);
+    return fetch(`${URL}/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ status: true }),
       headers: {
         "Content-Type": "application/json",
       },
     }).then((res) => {
-      // return res.json();
-      return fetch(`${URL}/${newComplete.id}`, {
-        method: "DELETE",
-      }).then((res) => {
-        return res.json();
-      });
+      return res.json();
+    });
+  };
+  const unfinishTodo = (id) => {
+    return fetch(`${URL}/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ status: false }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      return res.json();
     });
   };
 
@@ -106,10 +106,10 @@ const APIs = (() => {
     getTodos,
     getCompleted,
     deleteTodo,
-    deleteCompleted,
     addTodo,
     editTodo,
     completeTodo,
+    unfinishTodo,
     reAddTodo,
   };
 })();
@@ -118,27 +118,16 @@ const APIs = (() => {
 const Model = (() => {
   class State {
     #todos;
-    #completed;
     #onChangeCb;
     constructor() {
       this.#todos = [];
-      this.#completed = [];
       this.#onChangeCb = () => {};
     }
-    // List of todos
     get todos() {
       return this.#todos;
     }
     set todos(newTodos) {
       this.#todos = newTodos;
-      this.#onChangeCb();
-    }
-    // List of completed tasks
-    get completed() {
-      return this.#completed;
-    }
-    set completed(newComplete) {
-      this.#completed = newComplete;
       this.#onChangeCb();
     }
 
@@ -157,42 +146,37 @@ const View = (() => {
   const todoListEl = document.querySelector(".todo__list");
   const renderTodolist = (todos) => {
     let template = "";
-    if (todos.length === 0) {
-      template += `<span class="todo--none">No active tasks</span>`;
-    } else {
-      todos
-        .sort((a, b) => b.id - a.id)
-        .forEach((todo) => {
+    const todoInc = todos.filter((todo) => {
+      todo.status === false;
+    });
+    const todoComp = todos.filter((todo) => {
+      todo.status === true;
+    });
+    todos
+      .sort((a, b) => b.id - a.id)
+      .forEach((todo) => {
+        if (todo.status) {
           template += `
-            <li class="todo--item" id="${todo.id}">
-              <span class="todo--content" id="${todo.id}">${todo.content}</span>
-              <button class="btn--edit" id="${todo.id}">${editIcon}</button>
+            <li class="completed--item" id="${todo.id}" value="${todo.content}">
+              <span class="completed--content" id="${todo.id}">${todo.content}</span>
               <button class="btn--delete" id="${todo.id}">${deleteIcon}</button>
             </li>`;
-        });
-    }
-    todoListEl.innerHTML = template;
-  };
-  const completeListEl = document.querySelector(".complete__list");
-  const renderCompleteList = (completed) => {
-    let template = "";
-    completed
-      .sort((a, b) => b.id - a.id)
-      .forEach((completed) => {
-        template += `
-        <li class="completed--item" id="${completed.id}" value="${completed.content}">
-          <span class="completed--content" id="${completed.id}">${completed.content}</span>
-          <button class="btn--delete" id="${completed.id}">${deleteIcon}</button>
-        </li>`;
+        } else {
+          template += `
+              <li class="todo--item" id="${todo.id}">
+                <span class="todo--content" id="${todo.id}">${todo.content}</span>
+                <button class="btn--edit" id="${todo.id}">${editIcon}</button>
+                <button class="btn--delete" id="${todo.id}">${deleteIcon}</button>
+              </li>`;
+        }
       });
-    completeListEl.innerHTML = template;
+
+    todoListEl.innerHTML = template;
   };
   return {
     formEl,
     renderTodolist,
-    renderCompleteList,
     todoListEl,
-    completeListEl,
   };
 })();
 
@@ -216,41 +200,29 @@ const ViewModel = ((Model, View) => {
     View.todoListEl.addEventListener("click", (event) => {
       event.preventDefault();
       const { id } = event.target;
+      console.log(id);
       if (event.target.className === "todo--content") {
         const { innerHTML } = event.target;
-        APIs.completeTodo({ id, innerHTML }).then((res) => {
+        console.log({ id, innerHTML });
+        APIs.completeTodo(id).then((res) => {
           state.todos = state.todos.filter((todo) => {
             return +todo.id !== +id;
           });
-          state.completed = state.completed.filter((complete) => {
-            return +complete.id !== +id;
+          state.todos = [res, ...state.todos];
+        });
+      } else if (event.target.className === "completed--content") {
+        const { innerHTML } = event.target;
+        console.log({ id, innerHTML });
+        APIs.unfinishTodo(id).then((res) => {
+          state.todos = state.todos.filter((todo) => {
+            return +todo.id !== +id;
           });
+          state.todos = [res, ...state.todos];
         });
       } else if (event.target.className === "btn--delete") {
         APIs.deleteTodo(id).then((res) => {
           state.todos = state.todos.filter((todo) => {
             return +todo.id !== +id;
-          });
-        });
-      }
-    });
-    View.completeListEl.addEventListener("click", (event) => {
-      event.preventDefault();
-      const { id } = event.target;
-      if (event.target.className === "completed--content") {
-        const { innerHTML } = event.target;
-        APIs.reAddTodo({ id, innerHTML }).then((res) => {
-          state.todos = state.todos.filter((todo) => {
-            return +todo.id !== +id;
-          });
-          state.completed = state.completed.filter((complete) => {
-            return +complete.id !== +id;
-          });
-        });
-      } else if (event.target.className === "btn--delete") {
-        APIs.deleteCompleted(id).then((res) => {
-          state.completed = state.completed.filter((complete) => {
-            return +complete.id !== +id;
           });
         });
       }
@@ -262,20 +234,13 @@ const ViewModel = ((Model, View) => {
       state.todos = res;
     });
   };
-  const getCompleted = () => {
-    APIs.getCompleted().then((res) => {
-      state.completed = res;
-    });
-  };
 
   const bootstrap = () => {
     addTodo();
     clickEvents();
     getTodos();
-    getCompleted();
     state.subscribe(() => {
       View.renderTodolist(state.todos);
-      View.renderCompleteList(state.completed);
     });
   };
   return {
