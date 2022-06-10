@@ -1,0 +1,14 @@
+#result li{
+    display: flex;
+   
+    align-items: center;
+    padding: 1em;
+}
+
+
+button{
+    margin:.5em;
+}
+.strike{
+    text-decoration: line-through;
+}
