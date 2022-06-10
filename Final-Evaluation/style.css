@@ -1,0 +1,60 @@
+:root {
+  --clr-primary: #f0f0f0;
+  --clr-secondary: #000000;
+  --clr-accent-bg: #e6e2d3;
+  --clr-btn-primary: #008cba;
+  --clr-btn-warn: #c94c4c;
+
+  --font-family-primary: Arial, Sans-Serif;
+  --font-family-secondary: Helvetica, Sans-Serif;
+  --font-weight-primary: 600;
+  --font-weight-secondary: 400;
+
+  --grid-gutter: 3.75rem;
+  --max-layout-width: 80rem;
+  --section-space: calc(10 * 0.5rem);
+  --space-unit: 0.5rem;
+  --nav-height: 4rem;
+}
+
+*,
+* ::before,
+* ::after {
+  vertical-align: baseline;
+  box-sizing: border-box;
+  font-size: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+::selection {
+  color: var(--clr-primary);
+  background-color: var(--clr-secondary);
+}
+:focus {
+  outline: 5px dashed var(--clr-primary);
+  outline-offset: 3px;
+}
+:focus-visible {
+  outline-offset: 3px;
+  outline: 5px dashed var(--clr-primary);
+}
+
+html,
+body,
+main,
+section {
+  display: block;
+}
+main {
+  margin-top: var(--nav-height);
+}
+ul {
+  list-style-type: none;
+}
+
+/* TEMP */
+svg {
+  height: 30px;
+  width: 30px;
+}
