@@ -2,71 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
     <link rel="stylesheet" href="style.css" />
-    <title>Sign Up</title>
   </head>
   <body>
-    <h1 id="title">Sign Up</h1>
-    <div class="form-container">
-      <form id="form">
-        <input
-          class="first"
-          type="text"
-          name="firstName"
-          placeholder="First Name"
-          autofocus
-        />
-        <input
-          class="last"
-          type="text"
-          name="lastName"
-          placeholder="Last Name"
-        />
-        <input
-          class="phone"
-          type="text"
-          name="phoneNumber"
-          placeholder="Mobile No."
-        />
-        <input
-          class="email"
-          type="email"
-          name="email"
-          placeholder="Email Address"
-        />
-        <input
-          class="pass"
-          type="password"
-          name="password"
-          placeholder="Password"
-        />
-        <input
-          class="confirmPass"
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-        />
+    <div class="todo__container">
+      <header><h3>Todo list</h3></header>
+      <form class="todo__form">
+        <input id="enter-todo" />
+        <button id="submit-button">Submit</button>
       </form>
-    </div>
-    <section id="termsAndConditions">
-      <input id="check" name="agreeCheck" type="checkbox" />
-      <label class="label" for="agreeCheck"><strong>I Agree</strong></label>
-      <p id="termsText">
-        By clicking <span class="register">Register</span>, you agree to the
-        <a id="terms" href="https://www.mikerooze.com" target="_blank"
-          >Terms and Conditions</a
-        >
-        set<br />
-        out by this site, including our Cookie use.
-      </p>
-    </section>
-    <section id="submitContainer">
-      <div id="submit">
-        <input id="register" type="submit" value="Register" />
-        <input id="sign-in" type="submit" value="Sign In" />
+      <div class="todo__list-container">
+        <ul class="todo__list"></ul>
       </div>
-    </section>
+    </div>
+    <script src="index.js"></script>
   </body>
 </html>
