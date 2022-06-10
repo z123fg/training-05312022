@@ -1,4 +1,4 @@
-const API = (()=>{
+const APIs = (()=>{
     const URL = "http://localhost:3000/todos";
     const addTodo = (newTodos) => {
         return fetch(URL, {
@@ -74,7 +74,7 @@ const View = (()=>{ //display content
     const todoListElem = document.querySelector(".todo__list");
     const renderTodoList = (todos) => {
         let template = "";
-        todos.forEach((todo, index)=>{
+        todos.sort((a,b)=>b.id-a.id).forEach((todo, index)=>{
             template += `
                 <li><span>${todo.content}</span><button class="btn--delete" id="${index}">Delete</button></li>
             `
@@ -97,20 +97,32 @@ const ViewModel = ((Model, View)=>{ //logic | change the state
         View.formElem.addEventListener("submit", (event)=>{
             event.preventDefault();
             const content = event.target[0].value;
+            if(content.trim() === "") return;
             //do api first
-            //if failed, not update page
-            state.todos = [{content:content},...state.todos]; //assign to 'todos'
+            const newTodo = { content };
+            APIs.addTodo(newTodo).then(res => {
+                // console.log("Res", res);
+                state.todos = [res, ...state.todos];
+            });
+            // //if failed, not update page
+            // state.todos = [{content:content},...state.todos]; //assign to 'todos'
         });
     }
 
     const deleteTodo = () => {
         View.todoListElem.addEventListener("click", (event)=>{
             const {id} = event.target;
-            if(event.target.className == "btn-delete"){ //target is button | event.currentTarget -> target that is binded to the event (todo list)
+            if(event.target.className === "btn-delete"){ //target is button | event.currentTarget -> target that is binded to the event (todo list)
                 //APIs.deleteTodo
-                state.todos = state.todos.filter((todo, index)=>{
-                    return +index !== +id
+                APIs.deleteTodo(id).then(res => {
+                    console.log("Res", res);
+                    state.todos = state.todos.filter((todo) => {
+                        return +todo.id !== +id
+                    });
                 });
+                // state.todos = state.todos.filter((todo, index)=>{
+                //     return +index !== +id
+                // });
             }
         })
 
