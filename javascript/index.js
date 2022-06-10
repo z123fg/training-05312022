@@ -982,35 +982,26 @@ const httpRequest = (url, cb) => {
 // fetch('https://jsonplaceholder.typicode.com/todos/1').then((res)=>{
 //   return res.json();
 // }).then((data)=>{
-//   console.log(data)
+//   console.log(data) 
 // });
 
 //first request, use the response of first to make second, use the response from second request to make third  request
 
-// fetch('https://jsonplaceholder.typicode.com/todos/1').then((res)=>{
-//   return res.json();
-// }).then((data1)=>{
-//   //console.log("response from 1st request",data1);
-//   return data1
-// }).then((data1)=>{
-//   console.log("response from 1st request",data1)
-//   return fetch('https://jsonplaceholder.typicode.com/todos',{
-//     method:"POST",
-//     body:JSON.stringify(data1)
-//   })
-// }).then(res2=>{
-//   return res2.json()
-// }).then(data2=>{
-//   console.log("response from 2nd request",data2)
-//   return fetch('https://jsonplaceholder.typicode.com/todos',{
-//     method:"POST",
-//     body:JSON.stringify(data2)
-//   })
-// }).then(res3=>{
-//   return res3.json();
-// }).then(data3=>{
-//   console.log("response from 3rd request",data3)
-// });
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+.then((res)=>{return res.json();})
+.then((data1)=>{return data1})  //console.log("response from 1st request",data1);
+
+  .then((data1)=>{
+    return fetch('https://jsonplaceholder.typicode.com/todos', {method:"POST", body:JSON.stringify(data1)} )
+    // console.log("response from 1st request",data1)
+  })
+  .then(res2=>{return res2.json()})
+    .then(data2=>{ 
+        return fetch('https://jsonplaceholder.typicode.com/todos',{method:"POST", body:JSON.stringify(data2)} )
+        // console.log("response from 2nd request",data2)
+      })
+    .then(res3=>{return res3.json();})
+      .then(data3=>{console.log("response from 3rd request",data3)});
 
 //promise, a way to achieve async programming with es6 
 
