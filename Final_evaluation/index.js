@@ -27,6 +27,7 @@ const APIs = (() =>{
         })
     };
 
+    //web api for editTodo
     const editTodo = (content, id) => {
         return fetch(`${URL}/${content}/${id}`, {
             method: "PUT"
@@ -35,6 +36,7 @@ const APIs = (() =>{
         })
     };
 
+    //web api for doneEdit
     const doneEdit = (content, id) => {
         return fetch(`${URL}/${content}/${id}`, {
             method: "PUT"
@@ -43,6 +45,7 @@ const APIs = (() =>{
         })
     }
 
+    //web api for todoStatus
     const todoStatus = (id) => {
         return fetch(`${URL}/${id}`, {
             method: "PATCH"
@@ -150,6 +153,7 @@ const View = (() =>{
         todoListEl.innerHTML = template;
     })
 
+    //attempt to render for when there's an edit being made.
     const renderEdit = (todos => {
         let template = "";
         todos.sort((a,b) => b.id-a.id).forEach((todo) => {
@@ -226,6 +230,7 @@ const ViewModel = ((Model, View) => {
         })
     }
 
+    //begins to edi item from todo list
     const editTodo = () => {
         View.todoListEl.addEventListener("click", (event) => {
             console.log(event.currentTarget, event.target)
@@ -247,6 +252,7 @@ const ViewModel = ((Model, View) => {
         })
     }
 
+    //intent was to finish edit on todo list element
     const editDone = () => {
         View.todoListEl.addEventListener("click", (event) => {
             event.preventDefault();
@@ -264,6 +270,9 @@ const ViewModel = ((Model, View) => {
         })
     }
 
+    //intent was to change the status of a certain element. 
+    //should've spent some time on this since I kept hitting a wall with
+    //the edit fucntion
     const todoStatus = () => {
 
     }
