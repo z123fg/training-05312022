@@ -1,0 +1,82 @@
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 500px;
+}
+
+.todo__submit-btn {
+  background-color: blue;
+  border-radius: 5px;
+  border-style: none;
+}
+
+.todo__form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.todo__list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 300px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.todo__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0px;
+}
+
+.todo__list li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.todo__list span {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+
+.todo__list .btn--not-done {
+  width: 200px;
+  border: none;
+  background: none;
+}
+
+.todo__list .span--done {
+  width: 200px;
+  border: none;
+  background: none;
+  text-decoration: line-through;
+}
+
+.todo__list .btn--edit,
+.todo__list .btn--delete {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+}

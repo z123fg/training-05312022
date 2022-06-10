@@ -1,4 +1,8 @@
 {
   "todos": [
+    {
+      "content": "clean",
+      "id": 1
+    }
   ]
 }
