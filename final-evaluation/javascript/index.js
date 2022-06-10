@@ -91,7 +91,7 @@ const View = (() => {
       .forEach((todo) => {
         template += `
               <li>
-              <button class='btn--not-done' id="${todo.id}"><span class="span">${todo.content}</span></button>
+              <button class='btn--not-done' id="${todo.id}"><span id="${todo.id}" class="span" >${todo.content}</span></button>
               <button class="btn--edit" id="${todo.id}"><img src="../assets/edit.svg" height='20'
               width='20'></button>
               <button class="btn--delete" id="${todo.id}"><img src="../assets/delete.svg" height='20'
@@ -127,13 +127,20 @@ const ViewModel = ((Model, View) => {
     View.todoListEl.addEventListener("click", (event) => {
       const { id } = event.target;
       if (event.target.className === "btn--edit") {
-        editableSpan = document.getElementById(`${id}`);
-        newText = editableSpan.innerHTML;
-        editableSpan.innerHTML = `<input type="text" />`;
+        let editSpan = document.querySelector(".span");
+        console.log(editSpan);
+        editSpan.innerHTML = `<input type='text'/>`;
+        editSpan.addEventListener("submit", (event) => {
+          event.preventDefault();
+          let content = event.target.value;
+          if (content.trim() === "") return;
+          let newText = { content };
+          //capture new value and push it to the array in the same spot
+          APIs.editToDo(newText).then((res) => {
+            state.toDos = [...state.toDos];
+          });
+        });
       }
-      APIs.editToDo(newTodo).then((res) => {
-        state.toDos = [res, ...state.toDos];
-      });
     });
   };
 
