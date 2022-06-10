@@ -90,7 +90,7 @@ const View = (() => {
     const formEl = document.querySelector(".todo__form");
     const todoListEl = document.querySelector(".todo__list");
     const renderTodolist = (todos) => {
-        console.log("current todos when in render", todos);
+        // console.log("current todos when in render", todos);
         todoListEl.replaceChildren();
         todos.sort((a,b)=>{
             // "pending" > "completed" returns true
@@ -202,7 +202,7 @@ const ViewModel = ((Model, View) => {
 
     const editTodo = () => {
         View.todoListEl.addEventListener("click", (event) => {
-            console.log(event.currentTarget, event.target);
+            // console.log(event.currentTarget, event.target);
             if (event.target.classList.contains("btn--edit")) {
                 const { id } = event.target;
                 const realId = id.slice("edit-".length);
