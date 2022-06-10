@@ -1,0 +1,259 @@
+body {
+    margin: 0;
+    font-family: "arial";
+}
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.todo_container {
+    width:500px;
+    height: 100%;
+}
+.add_container {
+    display: flex;
+    justify-content: center;
+}
+.add_container > input {
+    width: 200px;
+    height: 40px;
+    margin-right: 20px;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    box-sizing: border-box;
+}
+.add_container > button {
+    transition: background-color 0.5s;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    background-color: #008cba;
+    color: white;
+    font-size: large;
+    cursor: pointer;
+}
+.add_container > button:hover {
+    background-color: blue;
+}
+.add_container > button:active {
+    background-color: white;
+}
+.add_filter_container {
+    display: flex;
+    flex-direction: column;
+}
+.add_filter_container > label {
+    text-align: center;
+    font-size: x-large;
+    margin-top: 20px;
+}
+
+.todo_container {
+    display: flex;
+    flex-direction: column;
+    flex-flow: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.filter_sort_container {
+    display: flex;
+    flex-direction: column;
+}
+.filter_sort_container > label {
+    text-align: center;
+    font-size: x-large;
+    margin-top: 20px;
+}
+
+.list_container {
+    overflow-y: auto;
+}
+
+.listitem > .label {
+    text-decoration: unset;
+}
+.listitem > .label.completed {
+    text-decoration: line-through;
+}
+
+.filter_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filter_content_container {
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+}
+.filter_completed_container {
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+}
+
+.sort_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sort_content_container {
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+}
+.sort_age_container {
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+}
+.sort_completed_container {
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+}
+
+.filter_sort_container_button {
+    margin-top: 5px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.list_container {
+    box-sizing: border-box;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 15px;
+    border: 3px solid #e6e2d3;
+    flex: 1;
+}
+.list_container > .listitem {
+    margin-top: 10px;
+}
+.list_container > .listitem:first-child {
+    margin-top: 0px;
+}
+
+.listitem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    background-color: #e6e2d3;
+    border-radius: 6px;
+    padding: 10px;
+}
+.listitem > .label {
+    display: inline-block;
+    width: 400px;
+    font-size: large;
+    cursor: pointer;
+    text-align: center;
+}
+.listitem > .input {
+    width: 400px;
+    margin-right: 10px;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    outline: none;
+}
+.listitem > .edit {
+    background-color: #008cba;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.listitem > .delete {
+    background-color: #c94c4c;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.listitem > .cancel {
+    background-color: #c94c4c;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.listitem > .save {
+    background-color: #008cba;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+
+
+.edit > svg {
+    width: 25px;
+    height: 25px;
+    fill: white;
+}
+.delete > svg {
+    width: 25px;
+    height: 25px;
+    fill: white;
+}
+.cancel > svg {
+    width: 25px;
+    height: 25px;
+    fill: white;
+}
+.save > svg {
+    width: 25px;
+    height: 25px;
+    fill: white;
+}
+
+
+
+
+
+
+.listitem > .input {
+    display: none;
+}
+.listitem > .cancel {
+    display: none;
+}
+.listitem > .save {
+    display: none;
+}
+.listitem.edit > .edit {
+    display: none;
+}
+.listitem.edit > .label {
+    display: none;
+}
+.listitem.edit > .input {
+    display: unset;
+}
+.listitem.edit > .cancel {
+    display: unset;
+}
+.listitem.edit > .save {
+    display: unset;
+}
+
+
+
+@media only screen and (max-width: 500px) {
+    .todo_container {
+        width: 350px;
+        padding: 20px 0px;
+    }
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./index.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body id="BODY">
+        <div class="container">
+            <div class="todo_container">
+                
+                <div class="add_filter_container">
+                    <div class="add_container">
+                        <input type="text" id="ADD_INPUT"/>
+                        <button id="ADD_BUTTON">submit</button>
+                    </div>
+                    <div class="filter_sort_container" id="FILTER_SORT_CONTAINER">
+                        <label>Filters</label><br />
+                        <div class="filter_container">
+                            <div class="filter_content_container">
+                                <label>Content </label>
+                                <select id="FILTER_CONTENT_OPTION">
+                                    <option>Equal to</option>
+                                    <option selected>Contains</option>
+                                </select>
+                                <input id="FILTER_CONTENT_VALUE" type="text" />
+                            </div>
+                            <br />
+                            <div class="filter_completed_container">
+                                <label>Completed </label>
+                                <label>Equal To</label>
+                                <select id="FILTER_COMPLETED_VALUE">
+                                    <option>No Filter</option>
+                                    <option>True</option>
+                                    <option>False</option>
+                                </select>
+                            </div>
+                        </div>
+                    <br />
+                    <label>Sorting</label><br />
+                    <div class="sort_container">
+                        <div class="sort_content_container">
+                            <label>Content: </label>
+                            <select id="SORT_CONTENT">
+                                <option>No Sort</option>
+                                <option>Ascending</option>
+                                <option>Descending</option>
+                            </select>
+                        </div>
+                        <br />
+
+                        <div class="sort_age_container">
+                            <label>Age: </label>
+                            <select id="SORT_AGE">
+                                <option>No Sort</option>
+                                <option>Ascending</option>
+                                <option>Descending</option>
+                            </select>
+                        </div>
+                        <br />
+
+                        <div class="sort_completed_container">
+                            <label>Completed: </label>
+                            <select id="SORT_COMPLETED">
+                                <option>No Sort</option>
+                                <option selected>Ascending</option>
+                                <option>Descending</option>
+                            </select>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <button class="filter_sort_container_button" id="FILTER_SORT_BUTTON">Hide filters and sorting options</button>
+                <div class="list_container" id="LIST_CONTAINER">
+
+                </div>
+            </div>
+        </div>
+
+        <script src="./mvvm/apis.js"></script>
+        <script src="./mvvm/model.js"></script>
+        <script src="./mvvm/view.js"></script>
+        <script src="./mvvm/view_model.js"></script>
+    </body>
+</html>
