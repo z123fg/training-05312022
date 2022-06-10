@@ -93,13 +93,12 @@ const View = (()=>{ //display content
             template += `
                 <li class="todo__item" id="item--${todo.id}">
                     <form class="todo__input" style="display:none">
-                        <input type = "text"><button>Edit</button>
+                        <input type = "text">
+                        <button>Edit</button>
                     </form>
-                    <span class="content">
-                        <span id="content--${todo.id}">${todo.content}</span>
-
-                        <button class="btn--update" id="${todo.id}">Edit</button>
-                    </span>
+                    <span class = "content" id="content--${todo.id}">${todo.content}</span>
+                    
+                    <button class="btn--update" id="${todo.id}">Edit</button>
                     <button class="btn--delete" id="${todo.id}">Delete</button>
                 </li>
             `
@@ -175,18 +174,19 @@ const ViewModel = ((Model, View)=>{ //logic | change the state
             if(event.target.className === "btn--update"){
                 let form = cur_item.getElementsByClassName("todo__input").item(0);
                 let text = cur_item.getElementsByClassName("content").item(0);
-                
+                let btn_update = cur_item.getElementsByClassName("btn--update").item(0);
                 //hide
-                text.style.display = "none";
-                form.style.display = "inline";
+                text.style.display = "none"; btn_update.style.display="none";
+                form.style.display = "flex";
 
                 const todoInputElem = document.querySelector(".todo__input");
                 todoInputElem.addEventListener("submit", (event)=>{
                     event.preventDefault();
-                    text.style.display = "inline";
+                    text.style.display = "flex"; btn_update.style.display="";
                     form.style.display = "none";
                     
                     const content = event.target[0].value;
+                    console.log(content);
                     if(content.trim() === "") return;
                     const newTodo = {content};   
                     APIs.updateTodo(id, newTodo).then((res)=>{

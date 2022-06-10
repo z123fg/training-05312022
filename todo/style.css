@@ -1,7 +1,3 @@
-.todo__input{
-    display: inline;
-}
-
 html {
     display: flex;
     justify-content: center;
@@ -21,6 +17,14 @@ html {
     flex-direction: row;
     justify-content: space-between;
     gap:10px;
+    margin-bottom: 10px;
+  }
+
+  .todo__form input{
+      flex-grow: 1;
+      border: 2px solid gray;
+      border-radius: 5px;
+      height: 30px;
   }
 
   .todo__list-container {
@@ -28,9 +32,9 @@ html {
     flex-direction: column;
     align-items: stretch;
     min-width: 300px;
-    border: none;
+    border: 0px solid gray;
     border-radius: 5px;
-    padding: 10px;
+    padding: 0px;
   }
 
   .todo__list {
@@ -38,16 +42,32 @@ html {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-top:5px;
   }
 
   .todo__list li {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: 1px solid black;
+    border: 0px solid black;
     border-radius: 5px;
-    padding:5px
+    padding:6px;
+    background-color: #e6e2d3;
+    height: 30px;
   }
+
+  .todo__input{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-right: 5px;
+  }
+
+.todo__input input{
+    border: 0px solid;
+    border-radius: 5px;
+    
+}
 
   .todo__list span {
     flex-grow: 1;
@@ -55,5 +75,21 @@ html {
     justify-content: center;
     align-items: center;
     height: 30px;
+  } 
+
+  button{
+      background-color:#008cba;
+      border: none;
+      border-radius: 5px;
+      color: white;
+  }
+
+  .btn--update{
+      margin-right: 5px;
+  }
+
+  .btn--delete{
+    background-color: #c94c4c;
+    
   }
   
