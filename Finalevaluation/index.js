@@ -94,9 +94,12 @@ const View = (() => {
     const renderTodolist = (todos) => {
         let tasks = "";
         todos.sort((a,b)=>b.id-a.id).forEach((todo) => {
-            tasks += `
-                <li><span>${todo.content}</span><button class="btn--delete" id="${todo.id}">Delete</button><button class="btn--edit" id="${todo.id}">Edit</button></li>
-            `
+            tasks += 
+            `<li>
+                <span>${todo.id}. ${todo.content}</span>
+                <button class="btn--delete" id="${todo.id}">Delete</button>
+                <button class="btn--edit" id="${todo.id}">Edit</button>
+            </li>`
         })
         eventList.innerHTML = tasks;
     }
@@ -129,19 +132,19 @@ const ViewModel = ((Model, View) => {
 
 
     const alterTodo = () => {
-        View.eventList.addEventListener("click", (event) => {
+        View.eventList.addEventListener("click", (event) => {debugger
             // console.log(event.currentTarget, event.target)
             // const { id } = event.target
-            if (event.target.className === "btn--edit") {
+            if (event.target.innerText === "Edit") {
                 console.log(event.target.parentElement)
                 const id = event.target.id;
-                const oldTask = event.target.parentElement
-                
+                const listElement = event.target.parentElement
                 const oldTaskObj =state.todos.find((todo) => {
                     return +todo.id === +id
                 });
+
                 const oldContent = oldTaskObj.content
-                oldTask.innerHTML = `<input type="text value="${oldContent} id="newCont"/> <button class="btn--save" id="${todo.id}">save</button><button class="btn--delete" id="${todo.id}">Delete</button> `
+                // oldTask.innerHTML = `<input type="text value="${oldContent} id="newCont"/> <button class="btn--save" id="${todo.id}">save</button><button class="btn--delete" id="${todo.id}">Delete</button> `
                 // console.log(oldTaskCont.content)
                 // updatedCont(){
                 //     this.cont = document.getElementById("newCont").value
@@ -156,6 +159,11 @@ const ViewModel = ((Model, View) => {
                         return +todo.id !== +id
                     });
                 });
+            }
+
+            else if (event.target.innerText ==="Save"){
+                console.log("save")
+
             }
         })
     }
