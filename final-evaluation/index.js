@@ -7,23 +7,22 @@ const APIs = (() => {
     const URL = "http://localhost:3000/todos";
 
     const addTodos = (newTodos) => {
-        console.log(newTodos)
         return fetch(URL, {
             method: "POST",
             body: JSON.stringify(newTodos),
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then((res) => {
-            return res.json();
+        }).then((response) => {
+            return response.json();
         })
     }
 
     const deleteTodos = (id) => {
         return fetch(`${URL}/${id}`, {
             method: "DELETE"
-        }).then((res) => {
-            return res.json();
+        }).then((response) => {
+            return response.json();
         })
     };
 
@@ -34,8 +33,8 @@ const APIs = (() => {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then((res) => {
-            return res.json();
+        }).then((response) => {
+            return response.json();
         })
     }
 
@@ -46,14 +45,14 @@ const APIs = (() => {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then((res) => {
-            return res.json();
+        }).then((response) => {
+            return response.json();
         })
     }
 
     const getTodos = () => {
-        return fetch(`${URL}`).then((res) => {
-            return res.json();
+        return fetch(`${URL}`).then((response) => {
+            return response.json();
         })
     }
 
@@ -111,7 +110,7 @@ const View = (() => {
                         ${todo.content}
                         </span>
                     </div>
-                    <button class="btn--modify" data-id="${todo.id}">
+                    <button class="btn--edit" data-id="${todo.id}">
                     ${EDIT}
                     </button>
                     <button class="btn--delete" data-id="${todo.id}">
@@ -164,8 +163,8 @@ const ViewModel = ((Model, View) => {
             const content = event.target[0].value;
             if (content.trim() === "") return;
             const newTodo = { content, complete: false }
-            APIs.addTodos(newTodo).then(res => {
-                state.todos = [res, ...state.todos];
+            APIs.addTodos(newTodo).then((response) => {
+                state.todos = [response, ...state.todos];
             })
 
         })
@@ -175,8 +174,7 @@ const ViewModel = ((Model, View) => {
         const operation = (event) => {
             const dataId = event.target.getAttribute('data-id')
             if (event.target.className === "btn--delete") {
-                APIs.deleteTodos(dataId).then(res => {
-                    console.log("Res", res);
+                APIs.deleteTodos(dataId).then((r) => {
                     state.todos = state.todos.filter((todo) => {
                         return +todo.id !== +dataId
                     });
@@ -189,11 +187,10 @@ const ViewModel = ((Model, View) => {
 
     const modifyTodos = () => {
         View.todoListElementIncomplete.addEventListener("click", (event) => {
-            console.log(event.currentTarget, event.target)
             const dataId = event.target.getAttribute('data-id')
             const content = event.currentTarget.querySelector("#content" + dataId);
             
-            if (event.target.className === "btn--modify") {
+            if (event.target.className === "btn--edit") {
                 if (content.querySelector('span')) {
                     content.innerHTML = `<input type='text' value='${content.querySelector('span').textContent.trim()}'></input>`;
                 } else {
@@ -201,8 +198,7 @@ const ViewModel = ((Model, View) => {
                     if (newContent.trim() === "") return;
                     content.innerHTML = `<span data-id=${dataId}>${newContent}</span>`;
                     APIs.modifyTodos(dataId, {content: newContent, complete: false})
-                    .then(res => {
-                        console.log("res", res)
+                    .then((r) => {
                         state.todos = state.todos.filter((todo) => {
                             return +todo.id !== +dataId
                         })
@@ -212,8 +208,7 @@ const ViewModel = ((Model, View) => {
 
             if(event.target.tagName.toLowerCase() === 'span') {
                 APIs.completeTodo(dataId, {complete: true})
-                .then(res => {
-                    console.log("res", res)
+                .then((r) => {
                     state.todos = state.todos.filter((todo) => {
                         return +todo.id !== +dataId
                     })
@@ -226,8 +221,7 @@ const ViewModel = ((Model, View) => {
             const dataId = event.target.getAttribute('data-id')
             if(event.target.tagName.toLowerCase() === 'span') {
                 APIs.completeTodo(dataId, {complete: false})
-                .then(res => {
-                    console.log("res", res)
+                .then((r) => {
                     state.todos = state.todos.filter((todo) => {
                         return +todo.id !== +dataId
                     })
@@ -237,8 +231,8 @@ const ViewModel = ((Model, View) => {
     }
 
     const getTodos = () => {
-        APIs.getTodos().then(res => {
-            state.todos = res;
+        APIs.getTodos().then((response) => {
+            state.todos = response;
         })
     }
 
