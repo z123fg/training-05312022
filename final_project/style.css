@@ -53,6 +53,7 @@ html {
   justify-content: center;
   align-items: center;
   height: 30px;
+  cursor: pointer;
 }
 .complete__list {
   padding: 0px;
@@ -78,6 +79,7 @@ html {
   justify-content: center;
   align-items: center;
   height: 30px;
+  cursor: pointer;
 }
 
 .form--input {
