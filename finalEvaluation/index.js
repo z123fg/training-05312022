@@ -106,18 +106,20 @@ const View = (() => {
                         ${todo.content}
                         </span>
                     </div>
+                    <div class="todo__form">
                     <button class="btn--modify" data-id="${todo.id}">
                     ${EDITICON}
                     </button>
                     <button class="btn--delete" data-id="${todo.id}">
                     ${DELETEICON}
                     </button>
+                    </div>
                 </li>
             `
         })
 
         if(active.length === 0){
-            todoListElActive.innerHTML = "<l1><span>No active task</span></li>";
+            todoListElActive.innerHTML = "<l1><span class='span__noactive'>No active task</span></li>";
         }else{
             todoListElActive.innerHTML = templateActive;
         }
