@@ -41,3 +41,4 @@ The Math.pow() static method, given two arguments, base and exponent, returns ba
 The arguments.callee property contains the currently executing function.
 
 callee is a property of the arguments object. It can be used to refer to the currently executing function inside the function body of that function. This is useful when the name of the function is unknown, such as within a function expression with no name (also called "anonymous functions").
+
