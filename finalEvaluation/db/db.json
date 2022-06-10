@@ -1,0 +1,14 @@
+{
+  "todos": [
+    {
+      "content": "asd",
+      "complete": true,
+      "id": 1
+    },
+    {
+      "content": "dqw",
+      "complete": false,
+      "id": 2
+    }
+  ]
+}
