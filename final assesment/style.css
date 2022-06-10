@@ -1,0 +1,83 @@
+
+
+
+  html,
+  body {
+    width:100%;
+    margin: 0;
+    display: flex;
+    justify-content:center;
+    align-items:flex-end;
+  }
+  .todo__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    width: 80%;
+    
+  }
+  
+  .todo__form {
+    display: flex;
+    flex-direction:row;
+    justify-content:space-evenly;
+    
+    padding: 10px;
+    width: 80%;
+    height:30px;
+  }
+  .todo__form,input{
+      width: 80%;
+      gap:10px;      
+  }
+  .submit{
+      background-color:  #008cba;
+      border-radius: 5px;
+      border-width: .2px;
+      color: white;
+  }
+  
+  .todo__list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 100%;
+    border: 1px solid #e6e2d3;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .todo__list {
+     
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .todo__list li {
+    background-color: #e6e2d3;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding:5px
+  }
+  
+  .todo__list span {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+  }
+  .btn--delete{
+      background-color: #c94c4c;
+  }
+
+  .btn--edit{
+    background-color: #008cba;
+  }
