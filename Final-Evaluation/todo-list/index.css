@@ -1,0 +1,71 @@
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* body {
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+} */
+
+.todo__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 500px;
+}
+
+.todo__form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap:10px;
+}
+
+.todo__list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 300px;
+  border: 1px solid #e6e2d3;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.todo__list {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.todo__list li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid #4caf50;
+  border-radius: 5px;
+  padding:5px
+}
+
+.todo__list span {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+
+.btn--delete{
+  color: #e6e2d3;
+  background-color: #c94c4c;
+}
+
+.btn--edit, .Submit--btn{
+  color: #e6e2d3;
+  background-color: #008cba;
+}
