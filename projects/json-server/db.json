@@ -1,12 +1,14 @@
 {
   "todos": [
     {
-      "userInput": "test",
-      "id": 1
+      "content": "wrong",
+      "id": 1,
+      "completed": true
     },
     {
-      "userInput": "test123",
-      "id": 2
+      "content": "ok2112",
+      "id": 2,
+      "completed": true
     }
   ]
 }
