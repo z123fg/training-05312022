@@ -1287,7 +1287,7 @@ const foo =  async () => {
   console.log(1);
   console.log(data);
 
-  return 1
+  return 1;
 }
 
 foo().then(data=>{
