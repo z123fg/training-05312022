@@ -20,15 +20,29 @@ const APIs = (()=>{
         })
     };
 
+    const updateTodo = (id, newTodos) => {
+        return fetch(`${URL}/${id}`, {
+            method: "PUT",
+            body:JSON.stringify(newTodos),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+
+        }).then((res)=>{
+            return res.json();
+        });
+    }
+
     const getTodos = () => {
         return fetch(`${URL}`).then((res) => {
             return res.json();
         })
     }
 
-    return {
+    return {//
         getTodos,
         deleteTodo,
+        updateTodo,
         addTodo
     }
 
@@ -72,11 +86,21 @@ const Model = (()=>{
 const View = (()=>{ //display content
     const formElem = document.querySelector(".todo__form");
     const todoListElem = document.querySelector(".todo__list");
+    const todoItemElem = document.querySelector(".todo__item");
     const renderTodoList = (todos) => {
         let template = "";
-        todos.sort((a,b)=>b.id-a.id).forEach((todo, index)=>{
+        todos.sort((a,b)=>b.id-a.id).forEach((todo)=>{
             template += `
-                <li><span>${todo.content}</span><button class="btn--delete" id="${index}">Delete</button></li>
+                <li class="" id="item--${todo.id}">
+                    <form class="todo__item" style="display:none">
+                        <input type = "text"><button>Edit</button>
+                    </form>
+                    <span class="content">
+                            ${todo.content}                        
+                        <button class="btn--update" id="${todo.id}">Edit</button>
+                    </span>
+                    <button class="btn--delete" id="${todo.id}">Delete</button>
+                </li>
             `
         });
         todoListElem.innerHTML = template;
@@ -85,6 +109,7 @@ const View = (()=>{ //display content
     return {
         formElem,
         todoListElem,
+        todoItemElem,
         renderTodoList
     }
 
@@ -101,10 +126,10 @@ const ViewModel = ((Model, View)=>{ //logic | change the state
             //do api first
             const newTodo = { content };
             APIs.addTodo(newTodo).then(res => {
-                // console.log("Res", res);
+                console.log("Res", res);
                 state.todos = [res, ...state.todos];
             });
-            // //if failed, not update page
+            // if failed, not update page
             // state.todos = [{content:content},...state.todos]; //assign to 'todos'
         });
     }
@@ -112,7 +137,7 @@ const ViewModel = ((Model, View)=>{ //logic | change the state
     const deleteTodo = () => {
         View.todoListElem.addEventListener("click", (event)=>{
             const {id} = event.target;
-            if(event.target.className === "btn-delete"){ //target is button | event.currentTarget -> target that is binded to the event (todo list)
+            if(event.target.className === "btn--delete"){ //target is button | event.currentTarget -> target that is binded to the event (todo list)
                 //APIs.deleteTodo
                 APIs.deleteTodo(id).then(res => {
                     console.log("Res", res);
@@ -120,17 +145,60 @@ const ViewModel = ((Model, View)=>{ //logic | change the state
                         return +todo.id !== +id
                     });
                 });
-                // state.todos = state.todos.filter((todo, index)=>{
-                //     return +index !== +id
-                // });
+                
             }
         })
+    }
 
+    const updateTodo = () => {
+        View.todoListElem.addEventListener("click", (event)=>{
+            const {id} = event.target;
+            if(event.target.className === "btn--update"){
+                let cur_item = document.getElementById(`item--${id}`);
+                let form = cur_item.getElementsByClassName("todo__item").item(0);
+                let text = cur_item.getElementsByClassName("content").item(0);
+                
+                //hide
+                text.style.display = "none";
+                form.style.display = "inline";
+
+                const todoItemElem = document.querySelector(".todo__item");
+                todoItemElem.addEventListener("submit", (event)=>{
+                    event.preventDefault();
+                    text.style.display = "inline";
+                    form.style.display = "none";
+                    
+                    const content = event.target[0].value;
+                    const newTodo = {content};
+                    APIs.updateTodo(id, newTodo).then((res)=>{
+                        //console.log("Res", res);
+                        const newTodos = [...state.todos];
+                        for(let i = 0; i < state.todos.length; i++){
+                            if(newTodos[i].id == id){
+                                newTodos[i] = res;
+                            }
+                        }
+                        state.todos = newTodos;
+                    })
+
+                });
+            }
+            
+        });
+    }
+
+    const getTodos = ()=>{
+        APIs.getTodos().then(res=>{
+            state.todos = res;
+        })
     }
 
     const bootstrap = () => {
         addTodo();
-        //deleteTodo();
+        deleteTodo();
+        updateTodo();
+
+        getTodos();
         state.subscribe(()=>{
             View.renderTodoList(state.todos);
         });
