@@ -86,7 +86,8 @@ const ViewModel = ((Model, View) => {
       const { id } = event.target;
       if (event.target.className === "btn--edit") {
         APIs.updateTodo(id).then((res) => {
-          state.todos.map((todo) => {todo.id === id ? todo : todo})
+          console.log("Res", res);
+          state.todos = state.todos.map((todo) => {+todo.id === +id ? "hi" : todo})
         });
       }
     });
