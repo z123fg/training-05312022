@@ -155,30 +155,42 @@ const ViewModel = ((Model, View) => {
 
     const editTodo = () => {
         View.todoListEl.addEventListener("click", (event) => {
-            const id = event.target.id.split("-")[1];
+            
+            createEditField = () => {
               
-            const editTodoItem = state.todos.find((todo) => +todo.id === +id)
-
-            const editSpanEl = event.target.previousElementSibling;
-            if (event.target.textContent === "Edit") {
-                event.target.textContent = "Save"
+                const id = event.target.id.split("-")[1];   
+                
+                const editTodoItem = state.todos.find((todo) => todo.id == id)
+                const editSpanEl = event.target.previousElementSibling;
                 editSpanEl.innerHTML = `
-                <input type="text" value="${editTodoItem.content}" />
+                <input type="text" value="${editTodoItem.content}" id="edit-field"/>
                 `
-                // need to fiugre out how to save the user input and send it to the API
             }
+
+            updateTodo = () => {
+                const id = event.target.id.split("-")[1];              
+                const editTodoItem = state.todos.find((todo) => +todo.id === +id)
+                const editedTodo = document.querySelector("#edit-field").value
+                
+                let updatedTodoItem = {...editTodoItem, content: `${editedTodo}`}
+                APIs.editTodo(updatedTodoItem)
+
+                const editSpanEl = event.target.previousElementSibling;
+                editSpanEl.innerHTML = `
+                <span>${updatedTodoItem.content}</span>
+                `
+            }
+
+            if (event.target.textContent === "Edit") {
+                event.target.textContent = "Save";
+                createEditField();
+            } else if (event.target.textContent === "Save") {
+                event.target.textContent = "Edit";
+                updateTodo();
+            } 
+            
         })
     }
-
-    // NEED TO figure out how to get the user input value and send the updatedItem back to the API
-    // const saveEditTodo = () => {
-    //     View.todoListEl.addEventListener("submit", (event) => {
-    //         console.log(event.target);
-    //         debugger
-// 
-    //     })
-// 
-    // }
 
     const deleteTodo = () => {
         View.todoListEl.addEventListener("click", (event) => {
@@ -195,32 +207,31 @@ const ViewModel = ((Model, View) => {
     
     }
 
-     const toggleTodo = () => {
-         View.todoListEl.addEventListener("click", (event) => {
-             const id = event.target.parentElement.id;
-             const toggleTodoItem = state.todos.find((todo) => +todo.id === +id)
-             // const idx = state.todos.findIndex((todo) => todo.id === toggleTodoItem.id)
-              if (toggleTodoItem.complete === false && event.target.nodeName == "SPAN"){
-                 event.target.className = "strike";
-                 
-                 // here still need to figure out how to handle API PATCH request
-                 // toggleTodoItem.complete = true;
-                 // APIs.editTodo(toggleTodoItem).then(res => {
-                 //     state.todos = [...state.todos.slice(0, idx), res, ...state.todos.slice(idx + 1)];
-                 // })
-              }
-             
-         })
-     }
+    // const toggleTodo = () => {
+    //     View.todoListEl.addEventListener("click", (event) => {
+    //         const id = event.target.parentElement.id;
+    //         const toggleTodoItem = state.todos.find((todo) => +todo.id === +id)
+    //         // const idx = state.todos.findIndex((todo) => todo.id === toggleTodoItem.id)
+    //          if (toggleTodoItem.complete === false && event.target.nodeName == "SPAN"){
+    //             event.target.className = "strike";
+    //             
+    //             // here still need to figure out how to handle API PATCH request
+    //             // toggleTodoItem.complete = true;
+    //             // APIs.editTodo(toggleTodoItem).then(res => {
+    //             //     state.todos = [...state.todos.slice(0, idx), res, ...state.todos.slice(idx + 1)];
+    //             // })
+    //          }
+    //         
+    //     })
+    // }
 
     
     const bootstrap = () => {
         getTodos();
         addTodo();
         editTodo();
-        // saveEditTodo();
         deleteTodo();
-        toggleTodo();
+        // toggleTodo();
         state.subscirbe(() => {
             View.renderTodolist(state.todos)
         });
