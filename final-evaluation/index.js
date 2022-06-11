@@ -39,7 +39,7 @@ const APIs = (() => {
     }
     // -- COMPLETE -- //
     // this function updates the status of existing items in the database using fetch method put //
-    const completeTodo = (id, newTodos) => {
+    const toggleTodos = (id, newTodos) => {
         return fetch(`${URL}/${id}`, {
             method: "PUT",
             body: JSON.stringify(newTodos),
@@ -63,7 +63,7 @@ const APIs = (() => {
         deleteTodos,
         addTodos,
         updateTodos,
-        completeTodo
+        toggleTodos
     }
 })()
 // -- MODEL SECTION -- //
@@ -141,16 +141,12 @@ const View = (() => {
         .forEach((todo) => {
             incomepleteTasks += `
                 <li>
-                    <div class="todo__content" id='content${todo.id}'>
-                        <span id="span-${todo.id}" >
-                        ${todo.content}
-                        </span>
-                    </div>
-                    <button class="btn--edit" id="edit-${todo.id}">
-                    <i id="${todo.id}" class="fa-solid fa-pencil"></i>
+                    <span id="${todo.id}" class="todo__content-incomplete">${todo.content}</span>
+                    <button class="btn--edit" id="${todo.id}">
+                        <i id="${todo.id}" class="fa-solid fa-pencil"></i>
                     </button>
                     <button class="btn--delete" id="${todo.id}">
-                    <i id="${todo.id}" class="fa-solid fa-trash"></i>
+                        <i id="${todo.id}" class="fa-solid fa-trash"></i>
                     </button>
                 </li>
             `
@@ -165,13 +161,11 @@ const View = (() => {
         .forEach((todo) => {
             completedTasks += `
                 <li>
-                    <div class="todo__content" id='content${todo.id}'>
-                        <span id="span-${todo.id}" class="todo__content-complete"}>
+                    <span id="${todo.id}" class="todo__content-complete"}>
                         ${todo.content}
-                        </span>
-                    </div>
+                    </span>
                     <button class="btn--delete" id="${todo.id}">
-                    <i id="${todo.id}" class="fa-solid fa-trash"></i>
+                        <i id="${todo.id}" class="fa-solid fa-trash"></i>
                     </button>
                 </li>
             `
@@ -214,7 +208,7 @@ const ViewModel = ((Model, View) => {
             // data is sent to the api so it can be added to the database //
             APIs.addTodos(newTodo).then((response) => {
                 // data is also added locally to the list //
-                state.todos = [response, ...state.todos];
+                return state.todos = [response, ...state.todos];
             })
 
         })
@@ -230,60 +224,65 @@ const ViewModel = ((Model, View) => {
             const { id } = event.target;
             // if statement checks to see if the icon has been clicked or the edge of the button //
             if (event.target.className === "btn--delete" || event.target.className === "fa-solid fa-trash") {
+                // stops the page from refreshing automatically //
+                event.preventDefault();
+                // api is called so that the data can be deleted //
                 APIs.deleteTodos(id).then((r) => {
+                    // task is also filtered out of the list locally //
                     state.todos = state.todos.filter((todo) => {
-                        return +todo.id !== +dataId;
+                        // filter method returns all items but the one that was deleted //
+                        return +todo.id !== +id;
                     });
                 });
             }
         };
+        // deletehandler function is added to incomplete tasks //
         View.todoListElementIncomplete.addEventListener("click", deleteHandler);
+        // deletehandler function is added to completed tasks //
         View.todoListElementComplete.addEventListener("click", deleteHandler);
     }
+    // -- UPDATETODOS -- //
 
     const updateTodos = () => {
         View.todoListElementIncomplete.addEventListener("click", (event) => {
-            const dataId = event.target.getAttribute("data-id")
-            const content = event.currentTarget.querySelector("#content" + dataId);
-            
-            if (event.target.className === "btn--edit" || event.target.className === "fa-solid fa-pencil") {
-                if (content.querySelector('span')) {
-                    content.innerHTML = `<input type='text' value='${content.querySelector('span').textContent.trim()}'></input>`;
+            const { id } = event.target;
+            if(event.target.className === "btn--edit" || event.target.className === "fa-solid fa-pencil") {
+                event.preventDefault();
+                let itemToEdit = document.getElementById(`span-${id}`);
+                let textToEdit = itemToEdit.innerText;
+                if(textToEdit) {
+                    itemToEdit.innerHTML = `
+                        <input type="text" class="edit-text" id="edit-text-${id}" value="${textToEdit}">
+                        </input>
+                    `;
                 } else {
-                    const newTodos = content.querySelector('input').value;
-                    if (newTodos.trim() === "") return;
-                    content.innerHTML = `<span data-id=${dataId}>${newTodos}</span>`;
-                    APIs.updateTodos(dataId, {content: newTodos, complete: false})
-                    .then((r) => {
-                        state.todos = state.todos.filter((todo) => {
-                            return +todo.id !== +dataId
-                        })
-                    })
+                    let updatedText = document.getElementById(`edit-text-${id}`).value;
+                    let updatedTodo = state.todos.find((todo) => +todo.id === +id);
+                    console.log(updatedTodo);
+                    updatedTodo.content = updatedText;
+                    APIs
+                        .updateTodos(id, updatedTodo)
+                        .then((r) => {
+                            return state.todos = [...state.todos];
+                    });
                 }
             }
-
-            if(event.target.tagName.toLowerCase() === "span") {
-                APIs.completeTodo(dataId, {complete: true})
-                .then((r) => {
-                    state.todos = state.todos.filter((todo) => {
-                        return +todo.id !== +dataId
-                    })
-                })
-            }
         })
+    }
 
-
-        View.todoListElementComplete.addEventListener('click', (event) => {
-            const dataId = event.target.getAttribute('data-id')
-            if(event.target.tagName.toLowerCase() === 'span') {
-                APIs.completeTodo(dataId, {complete: false})
+    const toggleTodos = () => {
+        const toggleHandler = (event) => {
+            const { id } = event.target;
+            let toggledTodo = state.todos.find((todo) => +todo.id === +id);
+            toggledTodo = { ...toggledTodo, complete: !toggledTodo.complete };
+            APIs
+                .toggleTodos(id, toggledTodo)
                 .then((r) => {
-                    state.todos = state.todos.filter((todo) => {
-                        return +todo.id !== +dataId
-                    })
+                    return state.todos = [...state.todos];
                 })
-            }
-        })
+        }
+        View.todoListElementIncomplete.addEventListener("click", toggleHandler);
+        View.todoListElementComplete.addEventListener("click", toggleHandler);
     }
 
     const getTodos = () => {
@@ -297,6 +296,7 @@ const ViewModel = ((Model, View) => {
         deleteTodos();
         getTodos();
         updateTodos();
+        toggleTodos();
         state.subscribe(() => {
             View.renderTodosList(state.todos)
         });
