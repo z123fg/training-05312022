@@ -29,19 +29,19 @@ const APIs = (() => {
         })
     };
 
-    const updateTodo = (todo) =>{
-
-        const {id, content} = todo
+    const updateTodo = (newTaskObj) =>{
+        // debugger
+        // const {id, content} = todo
         // let newCont = {...todo, content:`${}`}
         const configObject ={
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(newCont)
+            body: JSON.stringify(newTaskObj)
         }
 
-        return fetch(`${URL}/${id}`, configObject)
+        return fetch(`${URL}/${newTaskObj.id}`, configObject)
                .then((res) => {
             return res.json();
         })
@@ -96,7 +96,7 @@ const View = (() => {
         todos.sort((a,b)=>b.id-a.id).forEach((todo) => {
             tasks += 
             `<li>
-                <span>${todo.id}. ${todo.content}</span>
+                <span> ${todo.content}</span>
                 <button class="btn--delete" id="${todo.id}">Delete</button>
                 <button class="btn--edit" id="${todo.id}">Edit</button>
             </li>`
@@ -132,27 +132,45 @@ const ViewModel = ((Model, View) => {
 
 
     const alterTodo = () => {
-        View.eventList.addEventListener("click", (event) => {debugger
-            // console.log(event.currentTarget, event.target)
-            // const { id } = event.target
-            if (event.target.innerText === "Edit") {
-                console.log(event.target.parentElement)
+        View.eventList.addEventListener("click", (event) => {
+            
+            displayEditField=()=>{
                 const id = event.target.id;
-                const listElement = event.target.parentElement
                 const oldTaskObj =state.todos.find((todo) => {
-                    return +todo.id === +id
-                });
+                    // debugger
+                    return todo.id == id
+                }); 
+                const  task= event.target.parentElement.children[0]
+                const value = oldTaskObj.content
+                task.innerHTML = `<input type="text" value="${value}" id="edited"/>`
+            }
 
-                const oldContent = oldTaskObj.content
-                // oldTask.innerHTML = `<input type="text value="${oldContent} id="newCont"/> <button class="btn--save" id="${todo.id}">save</button><button class="btn--delete" id="${todo.id}">Delete</button> `
-                // console.log(oldTaskCont.content)
-                // updatedCont(){
-                //     this.cont = document.getElementById("newCont").value
-                // }
+            updateTask=()=>{
+                const id = event.target.id;
+                const oldTaskObj = state.todos.find((todo) => {
+                    return todo.id == id
+                }); 
+                const editedTask = document.getElementById("edited").value
 
+                let newTaskObj = {...oldTaskObj,content:`${editedTask}`}
+
+                // debugger
+                // const newTaskObj = 
+                // console.log(editedTask)
+                // 
+                
+                APIs.updateTodo(newTaskObj)
+            }
+
+
+            if (event.target.innerText === "Edit") {
+                // console.log(event.target.parentElement)
+                event.target.innerText = "Save";
+                displayEditField();
             }
 
             else if (event.target.className === "btn--delete") {
+                const id = event.target.id
                 APIs.deleteTodo(id).then(res => {
                     console.log("Res", res);
                     state.todos = state.todos.filter((todo) => {
@@ -163,8 +181,10 @@ const ViewModel = ((Model, View) => {
 
             else if (event.target.innerText ==="Save"){
                 console.log("save")
-
+                event.target.innerText="Edit";
+                updateTask();
             }
+
         })
     }
 
