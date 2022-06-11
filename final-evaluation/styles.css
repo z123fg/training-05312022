@@ -91,6 +91,6 @@ span {
 }
 
 .hidden {
-    visibility: hidden;
+    text-decoration: none;
 }
   

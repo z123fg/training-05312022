@@ -101,12 +101,14 @@ const View = (() => {
     const formEl = document.querySelector(".todo__form");
     const todoListEl = document.querySelector(".todo__list");
 
+    // need to write a conditional statement to check if the boolean value of the todo.complete
     const renderTodolist = (todos) => {
         let template = "";
         todos.sort((a,b)=> b.id - a.id).forEach((todo) => {
             template += `
                 <li id="${todo.id}">
-                  <span>
+                  <span id="span-${todo.id}"
+                  class=${todo.complete === false ? "hidden" : "strike"}>
                      ${todo.content}
                   </span>
                   <button class="btn--edit" id="todo-${todo.id}">Edit</button>
@@ -181,13 +183,29 @@ const ViewModel = ((Model, View) => {
                 `
             }
 
+            toggleTodo = () => {
+                const id = event.target.id.split("-")[1];  
+                console.log(id);             
+                const toggleTodoItem = state.todos.find((todo) => +todo.id === +id)
+                console.log(toggleTodoItem)
+                const editSpanEl = event.target;
+                if (toggleTodoItem.complete === false){
+                    editSpanEl.className = "strike";
+                    let updatedTodoItem = {...toggleTodoItem, complete: true}
+                    APIs.editTodo(updatedTodoItem)
+                } 
+            }
+
+
             if (event.target.textContent === "Edit") {
                 event.target.textContent = "Save";
                 createEditField();
             } else if (event.target.textContent === "Save") {
                 event.target.textContent = "Edit";
                 updateTodo();
-            } 
+            } else if (event.target.nodeName == "SPAN") {
+                toggleTodo();
+            }
             
         })
     }
@@ -206,32 +224,12 @@ const ViewModel = ((Model, View) => {
         })
     
     }
-
-    // const toggleTodo = () => {
-    //     View.todoListEl.addEventListener("click", (event) => {
-    //         const id = event.target.parentElement.id;
-    //         const toggleTodoItem = state.todos.find((todo) => +todo.id === +id)
-    //         // const idx = state.todos.findIndex((todo) => todo.id === toggleTodoItem.id)
-    //          if (toggleTodoItem.complete === false && event.target.nodeName == "SPAN"){
-    //             event.target.className = "strike";
-    //             
-    //             // here still need to figure out how to handle API PATCH request
-    //             // toggleTodoItem.complete = true;
-    //             // APIs.editTodo(toggleTodoItem).then(res => {
-    //             //     state.todos = [...state.todos.slice(0, idx), res, ...state.todos.slice(idx + 1)];
-    //             // })
-    //          }
-    //         
-    //     })
-    // }
-
     
     const bootstrap = () => {
         getTodos();
         addTodo();
         editTodo();
         deleteTodo();
-        // toggleTodo();
         state.subscirbe(() => {
             View.renderTodolist(state.todos)
         });
