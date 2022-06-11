@@ -110,8 +110,6 @@ const View = (() => {
     }
 })();
 
-
-
 const ViewModel = ((Model, View) => {
     const state = new Model.State();
 
@@ -128,8 +126,6 @@ const ViewModel = ((Model, View) => {
 
         })
     }
-
-
 
     const alterTodo = () => {
         View.eventList.addEventListener("click", (event) => {
@@ -151,14 +147,12 @@ const ViewModel = ((Model, View) => {
                     return todo.id == id
                 }); 
                 const editedTask = document.getElementById("edited").value
-
-                let newTaskObj = {...oldTaskObj,content:`${editedTask}`}
+                 let newTaskObj = {...oldTaskObj,content:`${editedTask}`}
 
                 // debugger
                 // const newTaskObj = 
                 // console.log(editedTask)
                 // 
-                
                 APIs.updateTodo(newTaskObj)
             }
 
