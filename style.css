@@ -10,7 +10,6 @@ html {
   border: none;
   padding: 10px;
   border-radius: 4px;
-
 }
 
 .todo__container {
@@ -33,7 +32,7 @@ html {
   flex-direction: column;
   align-items: stretch;
   min-width: 300px;
-  border: 1px solid black;
+  border: 2px solid #e6e2d3;
   border-radius: 5px;
   padding: 10px;
 }
@@ -48,6 +47,7 @@ html {
 .todo__list li {
   display: flex;
   flex-direction: row;
+  background-color: #e6e2d3;
   justify-content: space-between;
   border: 1px solid black;
   border-radius: 5px;
@@ -60,6 +60,38 @@ html {
   justify-content: center;
   align-items: center;
   height: 30px;
+}
+.btn--edit {
+  background-color: #008cba;
+  color: #f0f0f0;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.btn--save {
+  background-color: #4caf50;;
+  color: #f0f0f0;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+}
+.btn--delete {
+  background-color:#c94c4c;
+  width: 44px;
+  color: #f0f0f0;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+input:focus {
+  outline:none!important;
+}
+
+.todo-input {
+  border-radius: 4px;
+  border: 0;
 }
 
 .strike { 
