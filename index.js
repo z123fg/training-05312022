@@ -73,7 +73,7 @@ const Model = (() => {
             this.#onChangeCb();
         }
 
-        subscirbe = (cb) => {
+        subscribe = (cb) => {
             this.#onChangeCb = cb;
         }
     }
@@ -83,18 +83,23 @@ const Model = (() => {
 
 })();
 
-
 const View = (() => {
     const formEl = document.querySelector(".todo__form");
     const todoListEl = document.querySelector(".todo__list");
+    let template;
     const renderTodolist = (todos) => {
-        let template = "";
-        todos.sort((a, b) => b.id - a.id).forEach((todo) => {
+        console.log(todos)
+        if (todos.length === 0) {
+            template = "no active task";
+        } else {
+            template = "";
+        }
+        todos.forEach((todo) => {
             template += `
                 <li id="${todo.id}">
                     <input type=text class="todo-input" value=${todo.content} readonly>
                     <button class="btn--edit">Edit</button>
-                    <button class="btn--delete" id="${todo.id}">Delete</button>
+                    <button class="btn--delete" id="${todo.id}"> <i class="fa fa-trash"></i></button>
                 </li>
             `
         })
@@ -131,17 +136,20 @@ const ViewModel = ((Model, View) => {
     }
 
     const editTodo = () => {
-        View.todoListEl.addEventListener("click", (event) => {
 
-            if (event.target.className === "btn--edit") {
+        View.todoListEl.addEventListener("click", (event) => {
+            if (event.target.className.includes("btn--edit")) {
+
                 let li = event.target.parentElement;
                 let input = li.querySelector('.todo-input');
 
                 if (event.target.innerHTML === 'Edit') {
+                    event.target.classList.add('btn--save');
                     event.target.innerHTML = 'Save'
                     input.removeAttribute("readonly");
                 } else if (event.target.innerHTML === 'Save') {
 
+                    event.target.classList.remove('btn--save');
                     let content = input.value;
                     let newContent = { content }
 
@@ -191,7 +199,7 @@ const ViewModel = ((Model, View) => {
         completeTodo();
         editTodo();
         getTodos();
-        state.subscirbe(() => {
+        state.subscribe(() => {
             View.renderTodolist(state.todos)
         });
     }
