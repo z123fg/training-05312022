@@ -37,7 +37,7 @@ const APIs = (() => {
             return response.json();
         })
     }
-    // -- COMPLETE -- //
+    // -- TOGGLE -- //
     // this function updates the status of existing items in the database using fetch method put //
     const toggleTodos = (id, newTodos) => {
         return fetch(`${URL}/${id}`, {
@@ -141,7 +141,7 @@ const View = (() => {
         .forEach((todo) => {
             incomepleteTasks += `
                 <li>
-                    <span id="${todo.id}" class="todo__content-incomplete">${todo.content}</span>
+                    <span id="span-${todo.id}" class="todo__content-incomplete">${todo.content}</span>
                     <button class="btn--edit" id="${todo.id}">
                         <i id="${todo.id}" class="fa-solid fa-pencil"></i>
                     </button>
@@ -161,7 +161,7 @@ const View = (() => {
         .forEach((todo) => {
             completedTasks += `
                 <li>
-                    <span id="${todo.id}" class="todo__content-complete"}>
+                    <span id="span-${todo.id}" class="todo__content-complete strikethrough"}>
                         ${todo.content}
                     </span>
                     <button class="btn--delete" id="${todo.id}">
@@ -213,7 +213,7 @@ const ViewModel = ((Model, View) => {
 
         })
     }
-    // -- DELETETODOS -- //
+    // -- DELETETODOS FUNCTION -- //
     // this function will remove data from the database when the delete button is clicked //
     const deleteTodos = () => {
         // -- DELETEHANDLER -- //
@@ -222,7 +222,7 @@ const ViewModel = ((Model, View) => {
             // -- { ID } -- //
             // this variable is the id associated with the list item that has been clicked //
             const { id } = event.target;
-            // if statement checks to see if the icon has been clicked or the edge of the button //
+            // if statement checks to see if the icon has been clicked or the edge of the delete button //
             if (event.target.className === "btn--delete" || event.target.className === "fa-solid fa-trash") {
                 // stops the page from refreshing automatically //
                 event.preventDefault();
@@ -241,27 +241,46 @@ const ViewModel = ((Model, View) => {
         // deletehandler function is added to completed tasks //
         View.todoListElementComplete.addEventListener("click", deleteHandler);
     }
-    // -- UPDATETODOS -- //
-
+    // -- UPDATETODOS FUNCTION -- //
+    // this function will update the text on an incomplete task //
     const updateTodos = () => {
+        // event listener added to the list element //
         View.todoListElementIncomplete.addEventListener("click", (event) => {
+            // -- ID -- //
+            // this variable is the id associated with the list item that has been clicked //
             const { id } = event.target;
+            // if statement checks to see if the icon has been clicked or the edge of the edit button //
             if(event.target.className === "btn--edit" || event.target.className === "fa-solid fa-pencil") {
+                // stops the page from refreshing automatically //
                 event.preventDefault();
+                // -- ITEMTOEDIT -- //
+                // variable representing the element selected //
                 let itemToEdit = document.getElementById(`span-${id}`);
+                // -- TEXTTOEDIT -- //
+                // variable representing the text of the element selected //
                 let textToEdit = itemToEdit.innerText;
+                // if statement checks if there is text to transform to an input //
                 if(textToEdit) {
+                    // itemtoedit is changed to an input with a default text of its current value //
                     itemToEdit.innerHTML = `
                         <input type="text" class="edit-text" id="edit-text-${id}" value="${textToEdit}">
                         </input>
                     `;
-                } else {
+                }
+                // else statement means the text is an input that must be updated //
+                else {
+                    // -- UPDATEDTEXT -- //
+                    // value represents the updated text the user has inputted //
                     let updatedText = document.getElementById(`edit-text-${id}`).value;
+                    // -- UPDATEDTODO -- //
+                    // variable is the element associated with the updated text //
                     let updatedTodo = state.todos.find((todo) => +todo.id === +id);
-                    console.log(updatedTodo);
+                    // setting the element with its new text //
                     updatedTodo.content = updatedText;
+                    // calling api to update the text //
                     APIs
                         .updateTodos(id, updatedTodo)
+                        // returning todos so that the page updates //
                         .then((r) => {
                             return state.todos = [...state.todos];
                     });
@@ -269,41 +288,66 @@ const ViewModel = ((Model, View) => {
             }
         })
     }
-
+    // -- TOGGLETODOS FUNCTION -- //
+    // this function toggles the completion status of list items //
     const toggleTodos = () => {
+        // -- TOGGLEHANDLER FUNCTION -- //
+        // this function will be applied to both lists so that the items can be marked complete or not //
         const toggleHandler = (event) => {
+            // -- ID -- //
+            // this variable is the id associated with the list item that has been clicked //
             const { id } = event.target;
-            let toggledTodo = state.todos.find((todo) => +todo.id === +id);
+            // -- TOGGLEDTODO -- //
+            // variable represents the item where the span has been clicked to toggle its status //
+            let toggledTodo = state.todos.find((todo) => `span-${todo.id}` === id);
+            //  setting the variable to be toggled with its opposite status //
             toggledTodo = { ...toggledTodo, complete: !toggledTodo.complete };
+            // calling api to update the status of the variable//
             APIs
-                .toggleTodos(id, toggledTodo)
+                // id[id.length - 1] represents the number id associated with the item to toggle //
+                .toggleTodos(id[id.length - 1], toggledTodo)
                 .then((r) => {
-                    return state.todos = [...state.todos];
+                    // gettodos() called to refresh the page with the updated item //
+                    getTodos();
                 })
         }
+        // togglehandler function is added to incomplete tasks //
         View.todoListElementIncomplete.addEventListener("click", toggleHandler);
+        // togglehandler function is added to complete tasks //
         View.todoListElementComplete.addEventListener("click", toggleHandler);
     }
-
+    // -- GETTODOS FUNCTION -- //
+    // this function will fetch the data so that after any update it can be displayed properly //
     const getTodos = () => {
+        // calling to the api so that the data can be fetched //
         APIs.getTodos().then((response) => {
+            // setting the data in its updated form //
             state.todos = response;
         })
     }
-
+    // -- BOOTSTRAP FUNCTION -- //
+    /* this function calls all of the previous functions to that the event listeners can be **
+    ** applied, and also so that the subscribe function can be properly set to render the items */
     const bootstrap = () => {
+        // calling addtodos function //
         addTodos();
+        // calling deletetodos function //
         deleteTodos();
+        // calling gettodos function //
         getTodos();
+        // calling updatetodos function //
         updateTodos();
+        // calling toggletodos function //
         toggleTodos();
+        // setting the state subscribe function to render the list //
         state.subscribe(() => {
             View.renderTodosList(state.todos)
         });
     }
+    // returning bootstrap so that it can be used //
     return {
         bootstrap
     }
 })(Model, View);
-
+// calling bootstrap to run all functions when the page is loaded //
 ViewModel.bootstrap();
