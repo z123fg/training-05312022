@@ -1,15 +1,15 @@
 {
   "todos": [
     {
-      "content": "Code review",
+      "content": "This is an example",
       "id": 1
     },
     {
-      "content": "Meeting",
+      "content": "This is an example",
       "id": 2
     },
     {
-      "content": "Wrap up",
+      "content": "This is an example",
       "id": 3
     }
   ]
