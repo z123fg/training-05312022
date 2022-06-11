@@ -26,11 +26,11 @@ const APIs = (() => {
   //   return fetch(`${BASE_URL}/${id}`)
   // }
 
-  const editTask = (id, newTask) => {
-    return fetch(`${URL}/${id}`, {
-      method: "PUT",
+  const editTasks = (id, newTask) => {
+    return fetch(`${BASE_URL}/${id}`, {
+      method: "PATCH",
       body: JSON.stringify({
-        content: newTask,
+        title: newTask,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -41,11 +41,11 @@ const APIs = (() => {
     });
   };
 
-  const updateTasksStatus = (id, newTask) => {
-    return fetch(`${URL}/${id}`, {
+  const updateTasksStatus = (id, item) => {
+    return fetch(`${BASE_URL}/${id}`, {
       method: "PATCH",
       body: JSON.stringify({
-        isCompleted: flag,
+        isCompleted: item,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +58,6 @@ const APIs = (() => {
 
   const getAllTasks = () => {
     return fetch(BASE_URL).then((res) => {
-      // console.log(res);
       return res.json();
     });
   };
@@ -67,7 +66,7 @@ const APIs = (() => {
     getAllTasks,
     deleteTasks,
     addTasks,
-    editTask,
+    editTasks,
     updateTasksStatus,
   };
 })();
@@ -77,11 +76,9 @@ const Model = (() => {
 
   class State {
     #tasks;
-    // #editedTasks;
     #updateDOMOnChange = () => {};
     constructor() {
       this.#tasks = [];
-      // this.#editedTasks = []
       this.#updateDOMOnChange = () => {};
     }
     get tasks() {
@@ -109,14 +106,20 @@ const View = (() => {
 
   const renderAllTasks = (tasks) => {
     let temp = "";
+    if (tasks.length === 0) {
+      temp = `<li><span>No Active Tasks</span></li>`
+    }
     tasks
-      .sort((a, b) => b.id - a.id)
+      .sort((a, b) => a.isCompleted - b.isCompleted || b.id-a.id)
       .forEach((task) => {
+        let lineThrough = task.isCompleted ? 'line-through' : 'none';
         temp += `
-        <li><span id="title_${task.id}">${task.content}</span>
-          <input class="todo--edit" id="edit_${task.id}" style="display: none"/>
+        <li><span id="title_${task.id}" style="text-decoration: ${lineThrough}">${task.title}</span>
+          <div>
+          <input id="edit_${task.id}" style="display: none"/>
           <button class="btn--edit" id="btn_${task.id}">Edit</button>
-          <button class="btn--delete" id="${task.id}">Delete</button>
+          <button class="btn--delete" id="${task.id}" style="background-color: #c94c4c">Delete</button>
+          </div>
         </li>
         `;
         //add edit button
@@ -146,12 +149,12 @@ const ViewModel = ((Model, View) => {
         console.log(res);
         state.tasks = [res, ...state.tasks];
       });
+      // document.querySelector(".tasks__form input").value = "";
     });
   };
 
-  const deleteTasks = () => {
+  const updateTasks = () => {
     View.tasksListEl.addEventListener("click", (e) => {
-      console.log(e.currentTarget, e.target);
       const { id } = e.target;
       if (e.target.className === "btn--delete") {
         APIs.deleteTasks(id).then((res) => {
@@ -160,6 +163,57 @@ const ViewModel = ((Model, View) => {
             return +task.id !== +id;
           });
         });
+      } else if (e.target.className === "btn--edit") {
+        // console.log(edit);
+        const new_id = id.slice(id.indexOf("btn_") + 4);
+        const newEl = document.querySelector(`#edit_${new_id}`);
+        const newTitle = document.querySelector(`#title_${new_id}`);
+
+        if (newEl.style.display === "none") {
+          newEl.style.display = "";
+          newTitle.style.display = "none";
+        } 
+        else {
+          const newTask = newEl.value;
+          if (newTask.trim() === "") {
+          } else {
+            APIs.editTasks(new_id, newTask).then((res) => {
+              state.tasks = state.tasks.filter((task) => {
+                if (task.id == new_id) {
+                  task.title = newTask;
+                }
+                return true;
+              });
+            });
+          }
+          newEl.style.display = "none";
+          newTitle.style.display = "";
+        }
+      }
+      else if (e.target.id === `${id}`) {
+        console.log("status");
+        const new_id = id.slice(id.indexOf("title_") + 6);
+        const newTitle = document.querySelector(`#title_${new_id}`);
+        if (newTitle.style.textDecoration != "line-through") {
+          APIs.updateTasksStatus(new_id, true).then((res) => {
+            state.tasks = state.tasks.filter((task) => {
+              if (task.id == new_id) {
+                task.isCompleted = true;
+              }
+              return +task.id !== +id;
+            });
+            newTitle.style.textDecoration = "line-through";
+          });
+        } else {
+          APIs.updateTasksStatus(new_id, false).then((res) => {
+            state.tasks = state.tasks.filter((task) => {
+              if (task.id == new_id) {
+                task.isCompleted = false;
+              }
+              return +task.id !== +id;
+            });
+          });
+        }
       }
     });
   };
@@ -171,73 +225,10 @@ const ViewModel = ((Model, View) => {
     });
   };
 
-  const editTasks = () => {
-    View.tasksListEl.addEventListener("click", (e) => {
-        const { id } = e.target
-        console.log("event,", e);
-        if (e.target.className === "btn--edit") {
-            console.log("edit");
-            const new_id = id.slice(id.indexOf('btn_') + 4);
-            const newContent = document.querySelector(`#edit_${new_id}`);
-            const newTitle = document.querySelector(`#title_${new_id}`);
-
-            if(newContent.style.display == 'none') {
-                newContent.style.display = '';
-                newTitle.style.display = 'none';
-            } 
-            else {
-                const newTask = newContent.value;
-                if(newTask.trim() === "") {}
-                else {
-                    APIs.updateTasksStatus(new_id, newTask).then(res => {
-                        state.tasks = state.tasks.filter((task) => {
-                            if(task.id == new_id) {
-                                task.content = newTask;
-                            }
-                            return true;
-                        });
-                    });
-                }
-                newContent.style.display = "none";
-                newTitle.style.display = "";
-            }
-        }
-        else if (e.target.id === `${id}`) {
-            console.log("status");
-            const new_id = id.slice(id.indexOf('newid_') + 6);
-            const newTitle = document.querySelector(`#title_${new_id}`);
-            console.log(newTitle)
-            if(newTitle.style.textDecoration !== "line-through") {
-                APIs.updateTasksStatus(new_id, true).then(res => {
-                    state.tasks = state.tasks.filter((task) => {
-                        if(task.id == new_id) {
-                            task.isCompleted = true;
-                        }
-                        return +task.id !== +id;
-                    });
-                    newTitle.style.textDecoration = 'line-through';
-                });
-            }
-            else {
-                APIs.updateTasksStatus(new_id, false).then(res => {
-                    state.tasks = state.tasks.filter((task) => {
-                        if(task.id == new_id) {
-                          task.isCompleted = false;
-                        }
-                        return +task.id !== +id;
-                    });
-
-                });
-            }
-        }
-    })
-}
-
   const rootRender = () => {
     getAllTasks();
     addTasks();
-    deleteTasks();
-    editTasks();
+    updateTasks();
     state.subscribe(() => {
       View.renderAllTasks(state.tasks);
     });
