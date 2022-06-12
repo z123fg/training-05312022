@@ -530,8 +530,22 @@ function isPalindrome(str){
 
 function longestPalindrome(str){
     let maxLength=0;
-    
+    let maxstr="";
+    for(let i=0; i< str.length;i++){
+        let IncreasingIndexFromLeft=str.substr(i,str.length);
+        for(let j=str.length; j>=0; j--){
+            if(isPalindrome(IncreasingIndexFromLeft.substr(0,j))){
+                if(maxLength<IncreasingIndexFromLeft.substr(0,j).length){
+                    maxLength=IncreasingIndexFromLeft.substr(0,j).length;
+                    maxstr=IncreasingIndexFromLeft.substr(0,j);
+                }
+            }
+        }
+    }
+    return maxstr;
+
 }
+console.log(longestPalindrome("atydbsbdyh"))
 
 //28.Write a JavaScript program to pass a 'JavaScript function' as parameter.
 
