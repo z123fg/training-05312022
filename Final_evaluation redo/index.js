@@ -1,4 +1,5 @@
 var testVal = 0;
+var statusDone = [];
 
 //These are the web API's
 const APIs = (() => {
@@ -9,7 +10,7 @@ const APIs = (() => {
     const addTodo = (newTodos) => {
         return fetch(URL, {
             method: "POST",
-            body: JSON.stringify(newTodos),
+            body: JSON.stringify(newTodos, false),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -29,7 +30,7 @@ const APIs = (() => {
 
     //web api to edit an item on the todo list
     const editTodo = (id) => {
-        return fetch(`${URL}/${content}/${id}`, {
+        return fetch(`${URL}/${id}`, {
             method: "PUT"
         }).then((res) => {
             return res.json();
@@ -146,34 +147,59 @@ const View = (() => {
         //console.log(todos); 
         //sorts through everything in the todo list, and makes it appear on the user's end.
         todos.sort((a,b)=>b.id-a.id).forEach((todo) => {
-            console.log(testVal);
+            //console.log(testVal);
+            //console.log(todo.id);
+            var isActive = true;
             //console.log(todo.content)
             //console.log(todo.id);
-            if(todo.id == testVal)
+            if (statusDone.length !== 0)
+            {
+                console.log("in first if statement");
+                for (var i = 0; i < statusDone.length; i++)
+                {
+                    console.log("In for loop");
+                    if (statusDone[i] == todo.id)
+                    {
+                        isActive = false;
+                    }
+                }
+            }
+            if (isActive == false)
             {
                 template += `
-                <li>
-                <input placeholder = "${todo.content}"></input>
-                <button class="btn--done" id="${todo.id}">Done</button>
-                </li>
-            `
+                 <li>
+                 <span>${todo.content}</span>
+                 <button class="btn--delete" id="${todo.id}">Delete</button>
+                 </li>
+             `
             }
             else
             {
-            template += `
-                <li>
-                <span>${todo.content}</span>
-                <button class="btn--edit" content = "${todo.content}" id="${todo.id}">Edit</button>
-                <button class="btn--delete" id="${todo.id}">Delete</button>
-                </li>
-            `
+            if(todo.id == testVal)
+                {
+                    template += `
+                   <li>
+                    <input placeholder = "${todo.content}"></input>
+                    <button class="btn--done" id="${todo.id}">Done</button>
+                    </li>
+                `
+                }
+            else
+                {
+                template += `
+                    <li>
+                    <span class="status--change" id = ${todo.id}>${todo.content}</span>
+                    <button class="btn--edit" content = "${todo.content}" id="${todo.id}">Edit</button>
+                    <button class="btn--delete" id="${todo.id}">Delete</button>
+                    </li>
+                `
+                }
             }
+
+            //replaces element's desendants with nodes
+            todoListEl.innerHTML = template;
         })
-
-        //replaces element's desendants with nodes
-        todoListEl.innerHTML = template;
     }
-
     //returns elements from view
     return {
         formEl,
@@ -215,9 +241,10 @@ const ViewModel = ((Model, View) => {
     //deletes and item from the todo list
     const deleteTodo = () => {
         View.todoListEl.addEventListener("click", (event) => {
+            //console.log(todoListEl);
             console.log(event);
-            //console.log(event.currentTarget, event.target)
-            const { id } = event.target
+            console.log(event.target)
+            const { id } = event.target;
             //console.log(id);
             if (event.target.className === "btn--delete") {
                 APIs.deleteTodo(id).then(res => {
@@ -235,8 +262,9 @@ const ViewModel = ((Model, View) => {
         View.todoListEl.addEventListener("click", (event) => {
             //console.log("We are in edit");
             //console.log(event);
+            
             const { id } = event.target;
-            const {content}= event.target;
+            //const content= filter(id);
             //console.log(event.target);
             //console.log(content);
             //console.log(id);
@@ -245,18 +273,29 @@ const ViewModel = ((Model, View) => {
                 console.log(testVal);
                 View.renderTodolist(state.todos);
             }
-            
             if(event.target.className === "btn--done")
             {
-                testVal = 0;
-                View.renderTodolist(state.todos);
+                APIs.editTodo(id).then (res => {
+                    testVal = 0;
+                    View.renderTodolist(state.todos);
+                })
             }
         })
     }
 
     //updates completion status of an item from the todolist
     const updateStatus = () => {
-        
+        View.todoListEl.addEventListener("click", (event) => {
+            const {id} = event.target;
+            if (event.target.className == "status--change")
+            {
+                APIs.updateStatus(id).then (res => {
+                    statusDone.push(id);
+                    console.log(statusDone);
+                    View.renderTodolist(state.todos);
+                })
+            }
+        })
     }
 
     //get the todo list
