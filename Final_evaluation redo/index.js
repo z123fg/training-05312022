@@ -10,7 +10,7 @@ const APIs = (() => {
     const addTodo = (newTodos) => {
         return fetch(URL, {
             method: "POST",
-            body: JSON.stringify(newTodos, false),
+            body: JSON.stringify(newTodos),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -29,9 +29,13 @@ const APIs = (() => {
     };
 
     //web api to edit an item on the todo list
-    const editTodo = (id) => {
+    const editTodo = (id, content) => {
         return fetch(`${URL}/${id}`, {
-            method: "PUT"
+            method: "PUT",
+            body: JSON.stringify({ id, content }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }).then((res) => {
             return res.json();
         })
@@ -179,7 +183,7 @@ const View = (() => {
                 {
                     template += `
                    <li>
-                    <input placeholder = "${todo.content}"></input>
+                    <input placeholder = "${todo.content}" id = "editItem"></input>
                     <button class="btn--done" id="${todo.id}">Done</button>
                     </li>
                 `
@@ -273,10 +277,14 @@ const ViewModel = ((Model, View) => {
                 console.log(testVal);
                 View.renderTodolist(state.todos);
             }
+
             if(event.target.className === "btn--done")
             {
-                APIs.editTodo(id).then (res => {
+                const content = document.getElementById("editItem").value;
+                APIs.editTodo(id, content).then (res => {
                     testVal = 0;
+                    const itemIndex = state.todos.findIndex(todo => todo.id == id);
+                    state.todos[itemIndex].content = res.content;
                     View.renderTodolist(state.todos);
                 })
             }
