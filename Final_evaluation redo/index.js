@@ -168,7 +168,7 @@ const View = (() => {
             {
                 template += `
                  <li>
-                 <span>${todo.content}</span>
+                 <span style = "text-decoration:line-through;">${todo.content}</span>
                  <button class="btn--delete" id="${todo.id}">Delete</button>
                  </li>
              `
