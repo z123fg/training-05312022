@@ -1,16 +1,8 @@
 {
   "todos": [
     {
-      "content": "hey",
-      "id": 1
-    },
-    {
-      "content": "hey",
+      "content": "he",
       "id": 3
-    },
-    {
-      "content": "hu",
-      "id": 4
     }
   ]
 }
