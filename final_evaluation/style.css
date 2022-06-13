@@ -51,3 +51,9 @@ html {
   align-items: center;
   height: 30px;
 }
+.todo__update{
+  display: none;
+}
+.btn--submit{
+  display: none;
+}

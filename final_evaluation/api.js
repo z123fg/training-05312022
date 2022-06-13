@@ -13,9 +13,13 @@ const APIs = (() => {
     });
   };
 
-  const updateTodo = (id) => {
+  const updateTodo = (id, updateTodo) => {
     return fetch(`${URL}/${id}`, {
       method: "PUT",
+      body: JSON.stringify(updateTodo),
+      headers: {
+        "Content-Type": "application/json",
+      },
     }).then((res) => {
       return res.json();
     });
