@@ -1,14 +1,128 @@
-#result li{
+
+body{
+    box-sizing: border-box;
+}
+header{
+    font-size: 1.6em;
+    font-family: sans-serif;
+    text-align: center;
+}
+form{
     display: flex;
-   
-    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.todo__form__input{
+    border-radius: 5px;
+    border: solid black 2px;
+    outline: none;
+    padding: .5em;
+}
+
+.todo__form__submit{
+    background-color: #008cba;
+    color: #f0f0f0;
+    border: none;
     padding: 1em;
+    border-radius: 10px;
+    margin-left: 30px;
+}
+.todo__container{
+    overflow:hidden
 }
 
-
-button{
-    margin:.5em;
+.todo__list__container{
+    border: solid lightgray 2px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    margin:auto;
+    height: 60vh;
+    overflow-y: scroll ;
+        
 }
-.strike{
+
+::-webkit-scrollbar{
+    display:none
+}
+
+.todo__list{
+   
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: inherit;
+}
+
+li{
+    /* list-style-type: none; */
+    background: #e6e2d3;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding:1em 2em 1em 2em;
+    font-size: 1.2em;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+span{
+    padding: .5em 1em .5em 1em;
+
+}
+
+p{
+    font-size: 1.2em;
+    font-family: sans-serif;
+}
+
+.btn--delete{
+    background-color: #c94c4c;
+    color: #f0f0f0;
+    border: none;
+    padding: 1em;
+    border-radius: 10px;
+   
+}
+.btn--edit{
+    background-color: #008cba;
+    color: #f0f0f0;
+    border: none;
+    padding: 1em;
+    border-radius: 10px;
+}
+
+.btn--edit--editing{
+    background-color: #008cba;
+    color: #f0f0f0;
+    border: none;
+    padding: 1em;
+    border-radius: 10px;
+}
+.editing{
+    border: solid #008cba 2px;
+    border-radius: 5px;
+    animation-name: editing;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+.strikeout{
     text-decoration: line-through;
+}
+
+@keyframes editing {
+    0%{
+       border: solid 2pxrgba(0, 140, 186, 1) 
+    }
+    50%{
+        border:solid 2px rgba(0, 140, 186, .3) 
+    }
+    100%{
+        border:solid 2px rgba(0, 140, 186, 1) 
+    }
 }
