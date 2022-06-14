@@ -17,7 +17,12 @@ html {
   justify-content: space-between;
   gap:10px;
 }
-
+.todo__form input {
+  border: 1px solid;
+  border-color: #f0f0f0;
+  width: 160px;
+  height: 30px;
+}
 .todo__list-container {
   display: flex;
   flex-direction: column;
@@ -26,6 +31,7 @@ html {
   border: 1px solid black;
   border-radius: 5px;
   padding: 10px;
+  border-color: #e6e2d3;
 }
 
 .todo__list {
@@ -33,16 +39,16 @@ html {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: #f0f0f0;
 }
 
 .todo__list li {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border: 1px solid black;
   border-radius: 5px;
-  padding:5px
+  padding:5px;
+  background-color: #e6e2d3;
+  border: none;
 }
 
 .todo__list span {
