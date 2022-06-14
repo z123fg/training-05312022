@@ -98,7 +98,7 @@ const View = (() => {
     const renderTodolist = (todos) => {
         // get the incomplete items
         let templateActive = "";
-        const active = todos.filter((e) => !e.complete && !e.show);
+        const active = todos.filter((e) => !e.complete);
         active.sort((a, b) => b.id - a.id).forEach((todo) => {
             templateActive += `
                 <li>
@@ -127,7 +127,7 @@ const View = (() => {
 
         // get complete items
         let templateInActive = "";
-        const inactive = todos.filter((e) => e.complete && !e.show);
+        const inactive = todos.filter((e) => e.complete);
         inactive.sort((a, b) => b.id - a.id).forEach((todo) => {
             templateInActive += `
                 <li>
@@ -170,20 +170,16 @@ const ViewModel = ((Model, View) => {
         })
     }
 
-
     const filterTode = () => {
         View.formFilter.addEventListener('submit', (event) => {
             event.preventDefault();
             const content = event.target[0].value;
             if (content.trim() === "") {
-                state.todos = state.todos.map((todo) =>  {
-                    todo.show = false
-                    return todo;
-                })
-            }else{
-                
-                state.todos = state.todos.map((todo) => todo.content.includes(content.trim()) ? {show: true, ...todo} : todo)
+                getTodos()
+                return;
             }
+
+            state.todos = state.todos.filter((todo) => todo.content.includes(content.trim()));
         })
     }
 

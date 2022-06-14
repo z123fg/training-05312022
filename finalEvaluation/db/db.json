@@ -12,7 +12,7 @@
     },
     {
       "content": "test 2",
-      "complete": true,
+      "complete": false,
       "id": 3
     },
     {
