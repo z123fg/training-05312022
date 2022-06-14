@@ -12,12 +12,12 @@
     },
     {
       "content": "test 2",
-      "complete": false,
+      "complete": true,
       "id": 3
     },
     {
       "content": "test 3",
-      "complete": false,
+      "complete": true,
       "id": 4
     }
   ]
