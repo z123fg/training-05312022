@@ -2,12 +2,47 @@ class View {
     /*
         This method will take an array of objects as an argument and update the to do list ui to represent the data.
     */
+
+    static amount_loaded = 1;
     static UpdateToDoList(data) {
+        if (View.amount_loaded * 2 > data.length) {
+            View.amount_loaded = Math.ceil(data.length / 2);
+            localStorage.setItem('loaded_data', View.amount_loaded);
+        }
         View.NumberOfItems = 0;
         document.getElementById("LIST_CONTAINER").innerHTML = "";
-        for (let i = 0; i < data.length; i++) {
+
+        let add_loadmore_button = false;
+        let load_less_button = false;
+        if (data.length > 2 && View.amount_loaded * 2 < data.length) {
+            add_loadmore_button = true;
+        }
+        if (View.amount_loaded > 1) {
+            load_less_button = true;
+        }
+        for (let i = 0; i < data.length && i < 2 * View.amount_loaded; i++) {
             View.NumberOfItems++;
             document.getElementById("LIST_CONTAINER").appendChild(this.GenerateListItem(data[i].id, data[i].content, data[i].completed));
+        }
+        if (add_loadmore_button) {
+            const loadmore_button = document.createElement("button");
+            loadmore_button.onclick = function() {
+                View.amount_loaded++;
+                localStorage.setItem('loaded_data', View.amount_loaded);
+                View.UpdateToDoList(data);
+            }
+            loadmore_button.innerHTML = "Load more";
+            document.getElementById("LIST_CONTAINER").appendChild(loadmore_button);
+        }
+        if (load_less_button) {
+            const loadless_button = document.createElement("button");
+            loadless_button.onclick = function() {
+                View.amount_loaded--;
+                localStorage.setItem('loaded_data', View.amount_loaded);
+                View.UpdateToDoList(data);
+            }
+            loadless_button.innerHTML = "Load less";
+            document.getElementById("LIST_CONTAINER").appendChild(loadless_button);
         }
     }
 
@@ -88,27 +123,41 @@ class View {
         This method is called on load and initiates all ui events for the page.
     */
     static InitiateEvents() {
+        document.getElementById("ADD_INPUT").oninput = function() {
+            if (document.getElementById("ADD_INPUT").value.trim() === "") {
+                localStorage.removeItem("add_value");
+            }
+            else {
+                localStorage.setItem("add_value", document.getElementById("ADD_INPUT").value);
+            }
+        }
         document.getElementById("ADD_BUTTON").onclick = function() {
             let content = document.getElementById("ADD_INPUT").value;
             ViewModel.AddItem(content);
             document.getElementById("ADD_INPUT").value = "";
         }
         document.getElementById("FILTER_CONTENT_VALUE").oninput = function() {
+            localStorage.setItem("filter_content_value", document.getElementById("FILTER_CONTENT_VALUE").value);
             ViewModel.UpdateFilterSort();
         }
         document.getElementById("FILTER_CONTENT_OPTION").oninput = function() {
+            localStorage.setItem("filter_content_option", document.getElementById("FILTER_CONTENT_OPTION").value);
             ViewModel.UpdateFilterSort();
         }
         document.getElementById("FILTER_COMPLETED_VALUE").oninput = function() {
+            localStorage.setItem("filter_completed_value", document.getElementById("FILTER_COMPLETED_VALUE").value);
             ViewModel.UpdateFilterSort();
         }
         document.getElementById("SORT_CONTENT").oninput = function() {
+            localStorage.setItem("sorting_content", document.getElementById("SORT_CONTENT").value);
             ViewModel.UpdateFilterSort();
         }
         document.getElementById("SORT_AGE").oninput = function() {
+            localStorage.setItem("sorting_age", document.getElementById("SORT_AGE").value);
             ViewModel.UpdateFilterSort();
         }
         document.getElementById("SORT_COMPLETED").oninput = function() {
+            localStorage.setItem("sorting_completed", document.getElementById("SORT_COMPLETED").value);
             ViewModel.UpdateFilterSort();
         }
         document.getElementById("FILTER_SORT_BUTTON").onclick = function() {
@@ -123,5 +172,50 @@ class View {
             }
         }
     }
+
+    static LoadFilterOrderAddValues() {
+        let selectItemByValue = function(el, vl) {
+            for (let i = 0; i < el.options.length; i++) {
+                if (el.options[i].innerHTML === vl) {
+                    el.selectedIndex = i;
+                }
+            }
+        }
+
+        let loaded_data = localStorage.getItem('loaded_data');
+        let add_value = localStorage.getItem('add_value');
+        let filter_content_option = localStorage.getItem('filter_content_option');
+        let filter_content_value = localStorage.getItem('filter_content_value');
+        let filter_completed_value = localStorage.getItem('filter_completed_value');
+        let sorting_content = localStorage.getItem('sorting_content');
+        let sorting_age = localStorage.getItem('sorting_age');
+        let sorting_completed = localStorage.getItem('sorting_completed');
+
+        if (loaded_data) {
+            View.amount_loaded = parseInt(loaded_data);
+        }
+        if (add_value) {
+            document.getElementById("ADD_INPUT").value = add_value;
+        }
+        if (filter_content_option) {
+            selectItemByValue(document.getElementById("FILTER_CONTENT_OPTION"), filter_content_option);
+        }
+        if (filter_content_value) {
+            document.getElementById("FILTER_CONTENT_VALUE").value = filter_content_value;
+        }
+        if (filter_completed_value) {
+            selectItemByValue(document.getElementById("FILTER_COMPLETED_VALUE"), filter_completed_value);
+        }
+        if (sorting_content) {
+            selectItemByValue(document.getElementById("SORT_CONTENT"), sorting_content);
+        }
+        if (sorting_age) {
+            selectItemByValue(document.getElementById("SORT_AGE"), sorting_age);
+        }
+        if (sorting_completed) {
+            selectItemByValue(document.getElementById("SORT_COMPLETED"), sorting_completed);
+        }
+    }
 }
 View.InitiateEvents();
+View.LoadFilterOrderAddValues();
