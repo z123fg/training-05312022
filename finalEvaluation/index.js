@@ -92,12 +92,13 @@ const Model = (() => {
 
 const View = (() => {
     const formEl = document.querySelector(".todo__form");
+    const formFilter = document.querySelector('.todo__form--filter');
     const todoListElActive = document.querySelector(".todo_list--active");
     const todoListElNoActive = document.querySelector(".todo_list--noactive");
     const renderTodolist = (todos) => {
         // get the incomplete items
         let templateActive = "";
-        const active = todos.filter((e) => !e.complete);
+        const active = todos.filter((e) => !e.complete && !e.show);
         active.sort((a, b) => b.id - a.id).forEach((todo) => {
             templateActive += `
                 <li>
@@ -126,7 +127,7 @@ const View = (() => {
 
         // get complete items
         let templateInActive = "";
-        const inactive = todos.filter((e) => e.complete);
+        const inactive = todos.filter((e) => e.complete && !e.show);
         inactive.sort((a, b) => b.id - a.id).forEach((todo) => {
             templateInActive += `
                 <li>
@@ -145,12 +146,12 @@ const View = (() => {
     }
     return {
         formEl,
+        formFilter,
         renderTodolist,
         todoListElActive,
         todoListElNoActive
     }
 })();
-
 
 
 const ViewModel = ((Model, View) => {
@@ -166,6 +167,23 @@ const ViewModel = ((Model, View) => {
                 state.todos = [res, ...state.todos];//anti-pattern
             })
 
+        })
+    }
+
+
+    const filterTode = () => {
+        View.formFilter.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const content = event.target[0].value;
+            if (content.trim() === "") {
+                state.todos = state.todos.map((todo) =>  {
+                    todo.show = false
+                    return todo;
+                })
+            }else{
+                
+                state.todos = state.todos.map((todo) => todo.content.includes(content.trim()) ? {show: true, ...todo} : todo)
+            }
         })
     }
 
@@ -251,6 +269,7 @@ const ViewModel = ((Model, View) => {
         deleteTodo();
         getTodos();
         modifyTodo();
+        filterTode();
         state.subscirbe(() => {
             View.renderTodolist(state.todos)
         });
