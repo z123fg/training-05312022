@@ -1,3 +1,8 @@
+const EDITICON =  '<svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="EditIcon" aria-label="fontSize small"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path></svg>'
+
+const DELETEICON = '<svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="DeleteIcon" aria-label="fontSize small"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>'
+
+
 /* 
   closure, IIFE
   event bubbling, event capturing
@@ -38,19 +43,18 @@ const Model = (() => {
 const View = (() => {
   const formEl = document.querySelector(".todo__form");
   const todoListEl = document.querySelector(".todo__list");
-  const currentInput = document.querySelector(".todo__update");
   const renderTodolist = (todos) => {
     let template = "";
     todos
       .sort((a, b) => b.id - a.id)
       .forEach((todo) => {
         template += `
-              <li><span>${todo.content}</span>
+              <li><span id="span${todo.id}">${todo.content}</span>
               <form class="todo__form" id="todo__form${todo.id}">
                 <input class ="todo__update" id="todo__update${todo.id}" />
-                <button class="btn--edit" id="${todo.id}">Edit</button>
+                <button class="btn--edit" id="${todo.id}"><div class="icon">${EDITICON}</div></button>
+                <button class="btn--delete" id="${todo.id}"><div class="icon">${DELETEICON}</div></button></li>
               </form>
-              <button class="btn--delete" id="${todo.id}">Delete</button></li>
           `;
       });
     todoListEl.innerHTML = template;
@@ -58,7 +62,6 @@ const View = (() => {
   return {
     formEl,
     renderTodolist,
-    currentInput,
     todoListEl,
   };
 })();
@@ -86,16 +89,21 @@ const ViewModel = ((Model, View) => {
       const updateInput = event.currentTarget.querySelector(
         "#todo__update" + id
       );
+      //toggle todo list
+      // const span = event.currentTarget.querySelector("#span" + id);
+      // if(span.innerHTML){
+      //   const content = span.innerHTML;
+      //   span.innerHTML = `<strike>${content}</strike>`
+      // }
 
       // change input display to block
       if (event.target.className === "btn--edit") {
         if ((updateInput.style.display = "none")) {
           updateInput.style.display = "block";
-
+          const updateContent = newForm.querySelector("input").value;
           // update content from "the new" input
-          if (newForm.querySelector("input").value) {
+          if (updateContent) {
             updateInput.style.display = "none";
-            const updateContent = newForm.querySelector("input").value;
             console.log(updateContent);
             APIs.updateTodo(id, { content: updateContent }).then((res) => {
               console.log("Res", res);

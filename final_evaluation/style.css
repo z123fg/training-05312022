@@ -33,6 +33,7 @@ html {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background-color: #f0f0f0;
 }
 
 .todo__list li {
@@ -54,6 +55,19 @@ html {
 .todo__update{
   display: none;
 }
-.btn--submit{
-  display: none;
+button{
+  width: 55px;
+  height: 100%;
 }
+.todo__form button{
+  color: #f0f0f0;
+  background-color: #008cba;
+}
+.todo__form .btn--delete{
+  color: #f0f0f0;
+  background-color: #c94c4c;
+}
+.icon{
+  pointer-events: none;
+}
+
