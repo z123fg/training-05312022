@@ -8,6 +8,7 @@ const APIs = (() => {
 
     //web api to add an item on the todo list
     const addTodo = (newTodos) => {
+        //fetches url and puts new string/id in json file.
         return fetch(URL, {
             method: "POST",
             body: JSON.stringify(newTodos),
@@ -21,6 +22,7 @@ const APIs = (() => {
 
     //web api to delete an item on the todo list
     const deleteTodo = (id) => {
+        //fetches url and id and deletes item with said id
         return fetch(`${URL}/${id}`, {
             method: "DELETE"
         }).then((res) => {
@@ -30,6 +32,7 @@ const APIs = (() => {
 
     //web api to edit an item on the todo list
     const editTodo = (id, content) => {
+        //fetchs url and id and puts in new content at id.
         return fetch(`${URL}/${id}`, {
             method: "PUT",
             body: JSON.stringify({ id, content }),
@@ -43,6 +46,7 @@ const APIs = (() => {
 
     //web api to update status of an item on the todo list
     const updateStatus = (id) => {
+        //fetches url and id and intended to update status of id.
         return fetch(`${URL}/${id}`, {
             method: "PATCH"
         }).then((res) => {
@@ -52,6 +56,7 @@ const APIs = (() => {
 
     //web api to get an item on the todo list
     const getTodos = () => {
+        //fetches url and returns entire json file
         return fetch(`${URL}`).then((res) => {
             return res.json();
         })
@@ -78,7 +83,7 @@ const APIs = (() => {
 
 //This is the model for the back-end
 const Model = (() => {
-    //state class
+    //states class
     class State {
         //local variable for the state class
         #todos;
@@ -107,13 +112,13 @@ const Model = (() => {
             this.#onChangeCb();
         }
 
-        //setter function for state status
+        //setter function intended for state status
         set status(status) {
             this.#status = status;
             this.#onChangeCb();
         }
 
-        //setter function for editing value 
+        //setter function intended for editing value 
         set editing(editing){
             this.#editing = editing;
             this.#onChangeCb();
@@ -139,7 +144,7 @@ const Model = (() => {
 
 //Renders webpage view
 const View = (() => {
-    //variables for the indifidual forms and the entire list itself.
+    //variables for the inditifiable forms and the entire list itself.
     const formEl = document.querySelector(".todo__form");
     const todoListEl = document.querySelector(".todo__list");
 
@@ -156,6 +161,9 @@ const View = (() => {
             var isActive = true;
             //console.log(todo.content)
             //console.log(todo.id);
+            
+            //checks the length of status length array and
+            //sees finds the values in said array.
             if (statusDone.length !== 0)
             {
                 console.log("in first if statement");
@@ -168,6 +176,7 @@ const View = (() => {
                     }
                 }
             }
+            //runs only if task is no longer active (NOT FINISHED)
             if (isActive == false)
             {
                 template += `
@@ -179,6 +188,7 @@ const View = (() => {
             }
             else
             {
+            //checks if the value is currently being edited.
             if(todo.id == testVal)
                 {
                     template += `
@@ -188,6 +198,7 @@ const View = (() => {
                     </li>
                 `
                 }
+            //draws everything else
             else
                 {
                 template += `
@@ -220,16 +231,30 @@ const ViewModel = ((Model, View) => {
 
     //adds an item to the todolist
     const addTodo = () => {
+        //looks up event of form
         View.formEl.addEventListener("submit", (event) => {
             //console.log(event);
             //console.log(event.currentTarget, event.target)
+
+            //tells handler that if an event is not explicitly handled,
+            //its default actoin should not be taken as it normally would.
             event.preventDefault();
+
+            //gets content from target
             const content = event.target[0].value;
             console.log(content);
+
+            //attempts to set status (NOT FINISHED)
             const status = false;
+
+            //trims content
             if(content.trim() === "") return;
+
+            //sets newTodo to json content
             const newTodo = { content }
             console.log(newTodo);
+
+            //adds newTodo to json through api, and adds todo into state.
             APIs.addTodo(newTodo).then(res => {
                 // console.log("Res", res);
                 console.log(res);
@@ -248,9 +273,14 @@ const ViewModel = ((Model, View) => {
             //console.log(todoListEl);
             console.log(event);
             console.log(event.target)
+
+            //sets json id to target id.
             const { id } = event.target;
             //console.log(id);
+
+            //checks if the button event has the delete class
             if (event.target.className === "btn--delete") {
+                //runs delete API, and removes item from todos state
                 APIs.deleteTodo(id).then(res => {
                     console.log("Res", res);
                     state.todos = state.todos.filter((todo) => {
@@ -267,20 +297,30 @@ const ViewModel = ((Model, View) => {
             //console.log("We are in edit");
             //console.log(event);
             
+            //sets id to event id
             const { id } = event.target;
             //const content= filter(id);
             //console.log(event.target);
             //console.log(content);
             //console.log(id);
+
+            //checks if button clicked is the edit button
             if (event.target.className === "btn--edit"){
+                //changes testVal global for drawing reference, and
+                //renders list
                 testVal = id;
                 console.log(testVal);
                 View.renderTodolist(state.todos);
             }
 
+            //checks if button clicked is the donw button
             if(event.target.className === "btn--done")
             {
+                //gets new content that user inputed
                 const content = document.getElementById("editItem").value;
+
+                //calls edit api, gets the item index from the list, and 
+                //replaces original string with new string.
                 APIs.editTodo(id, content).then (res => {
                     testVal = 0;
                     const itemIndex = state.todos.findIndex(todo => todo.id == id);
@@ -291,12 +331,16 @@ const ViewModel = ((Model, View) => {
         })
     }
 
-    //updates completion status of an item from the todolist
+    //updates completion status of an item from the todolist (NOT FINISHED)
     const updateStatus = () => {
         View.todoListEl.addEventListener("click", (event) => {
+            //sets id to target id
             const {id} = event.target;
+
+            //checks if tasked was clicked on to change status 
             if (event.target.className == "status--change")
             {
+                //calls updateStatus api and updates the status of todo (NOT FINISHED)
                 APIs.updateStatus(id).then (res => {
                     statusDone.push(id);
                     console.log(statusDone);
