@@ -45,10 +45,14 @@ const APIs = (() => {
     }
 
     //web api to update status of an item on the todo list
-    const updateStatus = (id) => {
+    const updateStatus = (id, status) => {
         //fetches url and id and intended to update status of id.
         return fetch(`${URL}/${id}`, {
-            method: "PATCH"
+            method: "PATCH",
+            body: JSON.stringify({id, status}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }).then((res) => {
             return res.json();
         })
@@ -164,42 +168,21 @@ const View = (() => {
             
             //checks the length of status length array and
             //sees finds the values in said array.
-            if (statusDone.length !== 0)
-            {
-                console.log("in first if statement");
-                for (var i = 0; i < statusDone.length; i++)
-                {
-                    console.log("In for loop");
-                    if (statusDone[i] == todo.id)
-                    {
-                        isActive = false;
-                    }
-                }
-            }
             //runs only if task is no longer active (NOT FINISHED)
-            if (isActive == false)
+            if (todo.status === false)
             {
-                template += `
-                 <li>
-                 <span style = "text-decoration:line-through;">${todo.content}</span>
-                 <button class="btn--delete" id="${todo.id}">Delete</button>
-                 </li>
-             `
-            }
-            else
-            {
-            //checks if the value is currently being edited.
-            if(todo.id == testVal)
+                //checks if the value is currently being edited.
+                if(todo.id == testVal)
                 {
                     template += `
-                   <li>
+                    <li>
                     <input placeholder = "${todo.content}" id = "editItem"></input>
                     <button class="btn--done" id="${todo.id}">Done</button>
                     </li>
-                `
+                    `
                 }
-            //draws everything else
-            else
+                //draws everything else
+                else
                 {
                 template += `
                     <li>
@@ -207,8 +190,34 @@ const View = (() => {
                     <button class="btn--edit" content = "${todo.content}" id="${todo.id}">Edit</button>
                     <button class="btn--delete" id="${todo.id}">Delete</button>
                     </li>
-                `
+                    `
                 }
+            }
+
+            //replaces element's desendants with nodes
+            todoListEl.innerHTML = template;
+        })
+
+        template += "<br>";
+
+        todos.sort((a,b)=>b.id-a.id).forEach((todo) => {
+            //console.log(testVal);
+            //console.log(todo.id);
+            var isActive = true;
+            //console.log(todo.content)
+            //console.log(todo.id);
+            
+            //checks the length of status length array and
+            //sees finds the values in said array.
+            //runs only if task is no longer active (NOT FINISHED)
+            if (todo.status === true)
+            {
+                template += `
+                 <li>
+                 <span style = "text-decoration:line-through;">${todo.content}</span>
+                 <button class="btn--delete" id="${todo.id}">Delete</button>
+                 </li>
+             `
             }
 
             //replaces element's desendants with nodes
@@ -242,6 +251,7 @@ const ViewModel = ((Model, View) => {
 
             //gets content from target
             const content = event.target[0].value;
+            event.target[0].value = '';
             console.log(content);
 
             //attempts to set status (NOT FINISHED)
@@ -251,7 +261,7 @@ const ViewModel = ((Model, View) => {
             if(content.trim() === "") return;
 
             //sets newTodo to json content
-            const newTodo = { content }
+            const newTodo = { content,status }
             console.log(newTodo);
 
             //adds newTodo to json through api, and adds todo into state.
@@ -340,10 +350,14 @@ const ViewModel = ((Model, View) => {
             //checks if tasked was clicked on to change status 
             if (event.target.className == "status--change")
             {
+                const status = true;
                 //calls updateStatus api and updates the status of todo (NOT FINISHED)
-                APIs.updateStatus(id).then (res => {
-                    statusDone.push(id);
-                    console.log(statusDone);
+                APIs.updateStatus(id, status).then (res => {
+                    //statusDone.push(id);
+                    //console.log(statusDone);
+
+                    const itemIndex = state.todos.findIndex(todo => todo.id == id);
+                    state.todos[itemIndex].status = true;
                     View.renderTodolist(state.todos);
                 })
             }

@@ -1,24 +1,3 @@
 {
-  "todos": [
-    {
-      "content": "This is an example",
-      "id": 1
-    },
-    {
-      "id": 2,
-      "content": "Changeing 2"
-    },
-    {
-      "id": 3,
-      "content": "a"
-    },
-    {
-      "id": 4,
-      "content": "Changing"
-    },
-    {
-      "content": "This is an example",
-      "id": 5
-    }
-  ]
+  "todos": []
 }
