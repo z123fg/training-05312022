@@ -27,8 +27,7 @@ const APIs = (() => {
 		});
 	};
 
-	const editTodo = (newTodos, id) => {
-		console.log(newTodos, id);
+	const editTodo = (newTodos, check, id) => {
 		return fetch(`${URL}/${id}`, {
 			method: 'PATCH',
 			headers: {
@@ -36,6 +35,7 @@ const APIs = (() => {
 			},
 			body: JSON.stringify({
 				content: newTodos,
+				check: check,
 				id: id,
 			}),
 		}).then((res) => {
@@ -91,28 +91,42 @@ const Model = (() => {
 
 const View = (() => {
 	const formEl = document.querySelector('.todo__form');
+	const List = document.querySelector('.todo__list-container');
 	const todoListEl = document.querySelector('.todo__list');
+	const completedListEl = document.getElementById('completed');
 	const input = document.querySelector('.todo__form-input');
 
 	const renderTodoList = (todos) => {
 		let template = '';
+		let completedTemplate = '';
 		todos
-			// .sort((a, b) => b.id - a.id)
+			.sort((a, b) => b.id - a.id)
 			.forEach((todo) => {
-				const check = todo.check ? '.' : '';
-				template += `<li id='${todo.id}'>
+				if (todo.check) {
+					completedTemplate += `<li id='${todo.id}'>
+				<span class='editable' id='completed' contenteditable='false'>${todo.content}</span>
+				<button class='btn--edit' id='${todo.id}' style="visibility:hidden">Edit</button>
+				<button class='btn--delete' id='${todo.id}'>Delete</button>
+				</li>`;
+					completedListEl.innerHTML = completedTemplate;
+				} else {
+					template += `<li id='${todo.id}'>
 				<span class='editable' id='active' contenteditable='false'>${todo.content}</span>
 				<button class='btn--edit' id='${todo.id}'>Edit</button>
 				<button class='btn--delete' id='${todo.id}'>Delete</button>
 				</li>`;
+				}
 			});
+		completedListEl.innerHTML = completedTemplate;
 		todoListEl.innerHTML = template;
 		input.value = '';
 	};
 	return {
+		List,
 		formEl,
 		renderTodoList,
 		todoListEl,
+		completedListEl,
 	};
 })();
 
@@ -129,8 +143,9 @@ const ViewModel = ((Model, View) => {
 		View.formEl.addEventListener('submit', (event) => {
 			event.preventDefault();
 			const content = event.target[0].value;
+			const check = false;
 			if (content.trim() === '') return;
-			const newTodo = { content };
+			const newTodo = { content, check };
 			APIs.addTodo(newTodo).then((res) => {
 				state.todos = [res, ...state.todos];
 			});
@@ -138,7 +153,7 @@ const ViewModel = ((Model, View) => {
 	};
 
 	const deleteTodo = () => {
-		View.todoListEl.addEventListener('click', (event) => {
+		View.List.addEventListener('click', (event) => {
 			const { id } = event.target;
 			if (event.target.className === 'btn--delete') {
 				APIs.deleteTodo(id).then((res) => {
@@ -146,6 +161,21 @@ const ViewModel = ((Model, View) => {
 						return +todo.id !== +id;
 					});
 				});
+			}
+		});
+	};
+
+	const clearTodo = () => {
+		View.formEl.addEventListener('click', (event) => {
+			let li = View.completedListEl.firstElementChild;
+			while (li) {
+				let id = li.getAttribute('id');
+				APIs.deleteTodo(id).then((res) => {
+					state.todos = state.todos.filter((todo) => {
+						return +todo.id !== +id;
+					});
+				});
+				li = li.nextElementSibling;
 			}
 		});
 	};
@@ -158,11 +188,11 @@ const ViewModel = ((Model, View) => {
 				save = !save;
 				const inputField = document.querySelector('.editable');
 				inputField.setAttribute('contenteditable', true);
-				console.log(save);
-				if (!save) {
-					APIs.editTodo(inputField.innerText, id).then((res) => {
+				if (save) {
+					APIs.editTodo(inputField.innerText, false, id).then((res) => {
 						if (state.todos.id === id) {
 							state.todos.content = inputField.innerText;
+							save = !save;
 						}
 					});
 				}
@@ -171,31 +201,60 @@ const ViewModel = ((Model, View) => {
 	};
 
 	const completedTodo = () => {
+		let count = false;
 		View.todoListEl.addEventListener('click', (event) => {
-			const { id } = event.target.parentElement.id;
-			if (event.target.className === 'editable') {
-				if (event.target.id === 'active') {
-					event.target.style.textDecoration = 'line-through';
-					event.target.id = 'completed';
-					// APIs.updateTodo(state.todos, id).then(
-					// 	(res) => {
-					var index = state.todos
-						.map(function (e) {
-							return e.content;
-						})
-						.indexOf(event.target.innerText);
-					if (event.target.id === 'active') {
-						var item = state.todos.splice(index, 1);
-						state.todos.concat(item);
-					}
-					console.log(state.todos);
-					// 	}
-					// );
-				} else {
-					event.target.style.textDecoration = 'none';
-					event.target.id = 'active';
-				}
+			if (count) {
+				event.stopPropagation();
 			}
+			count = !count;
+			View.List.addEventListener('click', (event) => {
+				const { id } = event.target;
+				if (event.target.className === 'editable') {
+					if (id === 'active') {
+						event.target.style.textDecoration = 'line-through';
+						event.target.nextElementSibling.style.visibility = 'hidden';
+						View.completedListEl.insertBefore(
+							event.target.parentElement,
+							View.completedListEl.firstElementChild
+						);
+						event.target.id = 'completed';
+
+						APIs.editTodo(
+							event.target.innerText,
+							true,
+							event.target.nextElementSibling.id
+						).then((res) => {
+							if (state.todos.id === id) {
+								state.todos.check = true;
+							}
+						});
+					} else {
+						event.target.style.textDecoration = 'none';
+						event.target.nextElementSibling.style.visibility = 'visible';
+						View.todoListEl.insertBefore(
+							event.target.parentElement,
+							View.todoListEl.firstElementChild
+						);
+						event.target.id = 'active';
+
+						// var index = state.todos
+						// 	.map(function (e) {
+						// 		return e.content;
+						// 	})
+						// 	.indexOf(event.target.innerText);
+
+						APIs.editTodo(
+							event.target.innerText,
+							false,
+							event.target.nextElementSibling.id
+						).then((res) => {
+							if (state.todos.id === id) {
+								state.todos.check = true;
+							}
+						});
+					}
+				}
+			});
 		});
 	};
 
@@ -203,6 +262,7 @@ const ViewModel = ((Model, View) => {
 		getTodos();
 		addTodo();
 		deleteTodo();
+		clearTodo();
 		editTodo();
 		completedTodo();
 		state.subcribe(() => {

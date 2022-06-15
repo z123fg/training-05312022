@@ -76,6 +76,10 @@ header {
     height: 30px;
 }
 
+#completed span{
+    text-decoration: line-through;
+}
+
 button {
     width: fit-content;
     border: none;
