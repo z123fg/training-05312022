@@ -43,7 +43,7 @@ const APIs = (() => {
 		});
 	};
 
-	const updateTodo = (newTodos, id, check) => {
+	const updateTodo = (newTodos, id) => {
 		return fetch(`${URL}/${id}`, {
 			method: 'PUT',
 			headers: {
@@ -103,7 +103,7 @@ const View = (() => {
 			.sort((a, b) => b.id - a.id)
 			.forEach((todo) => {
 				if (todo.check) {
-					completedTemplate += `<li id='${todo.id}'>
+					completedTemplate += `<li'>
 				<span class='editable' id='completed' contenteditable='false'>${todo.content}</span>
 				<button class='btn--edit' id='${todo.id}' style="visibility:hidden">Edit</button>
 				<button class='btn--delete' id='${todo.id}'>Delete</button>
@@ -188,11 +188,13 @@ const ViewModel = ((Model, View) => {
 				save = !save;
 				const inputField = document.querySelector('.editable');
 				inputField.setAttribute('contenteditable', true);
-				if (save) {
+				if (!save) {
 					APIs.editTodo(inputField.innerText, false, id).then((res) => {
-						if (state.todos.id === id) {
-							state.todos.content = inputField.innerText;
-							save = !save;
+						console.log('here');
+						if (+state.todos[parseInt(id) - 1].id === +(id - 1)) {
+							state.todos[parseInt(id) - 1].content = inputField.innerText;
+							//save = !save;
+							inputField.setAttribute('contenteditable', false);
 						}
 					});
 				}
@@ -218,14 +220,17 @@ const ViewModel = ((Model, View) => {
 							View.completedListEl.firstElementChild
 						);
 						event.target.id = 'completed';
-
+						const index = parseInt(event.target.nextElementSibling.id) - 1;
 						APIs.editTodo(
+							//state.todos[index].content,
 							event.target.innerText,
 							true,
 							event.target.nextElementSibling.id
 						).then((res) => {
-							if (state.todos.id === id) {
-								state.todos.check = true;
+							for (let i = 0; i < state.todos.length; i++) {
+								if (state.todos[i].id === index) {
+									state.todos[i].check = true;
+								}
 							}
 						});
 					} else {
@@ -237,19 +242,17 @@ const ViewModel = ((Model, View) => {
 						);
 						event.target.id = 'active';
 
-						// var index = state.todos
-						// 	.map(function (e) {
-						// 		return e.content;
-						// 	})
-						// 	.indexOf(event.target.innerText);
-
+						const index = parseInt(event.target.nextElementSibling.id) - 1;
 						APIs.editTodo(
 							event.target.innerText,
+							//state.todos[index].content,
 							false,
 							event.target.nextElementSibling.id
 						).then((res) => {
-							if (state.todos.id === id) {
-								state.todos.check = true;
+							for (let i = 0; i < state.todos.length; i++) {
+								if (state.todos[i].id === index) {
+									state.todos[i].check = false;
+								}
 							}
 						});
 					}
