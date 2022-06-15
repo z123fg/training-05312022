@@ -56,9 +56,11 @@ const APIs = (() => {
 const Model = (() => {
     class State {
         #todos;
+        #searchKeyword;
         #onChangeCb;
         constructor() {
             this.#todos = [];
+            this.#searchKeyword = '';
             this.#onChangeCb = () => { }
         }
         get todos() {
@@ -66,6 +68,13 @@ const Model = (() => {
         }
         set todos(newTodos) {
             this.#todos = newTodos
+            this.#onChangeCb();
+        }
+        get searchKeyword() {
+            return this.#searchKeyword
+        }
+        set searchKeyword(newKeyword) {
+            this.#searchKeyword = newKeyword
             this.#onChangeCb();
         }
 
@@ -89,9 +98,17 @@ const Model = (() => {
 const View = (() => {
     const formEl = document.querySelector(".todo__form");
     const todoListEl = document.querySelector(".todo__list");
-    const renderTodolist = (todos) => {
+    const renderTodolist = (state) => {
+        let { todos, searchKeyword } = state;
         // console.log("current todos when in render", todos);
         todoListEl.replaceChildren();
+
+        if (searchKeyword.length > 0) {
+            todos = todos.filter((elem) => {
+                return elem.content.includes(searchKeyword);
+            });
+        }
+
         todos.sort((a,b)=>{
             // "pending" > "completed" returns true
             if (a.status > b.status) {
@@ -274,6 +291,14 @@ const ViewModel = ((Model, View) => {
         })
     }
 
+    const addFilterListener = () => {
+        const filterEl = document.querySelector("#todo-form-filter");
+        filterEl.addEventListener("input", (event) => {
+            // console.log("filter event fired", event.target.value);
+            state.searchKeyword = event.target.value
+        })
+    }
+
     const getTodos = () => {
         APIs.getTodos()
             .then((res) => {
@@ -287,9 +312,10 @@ const ViewModel = ((Model, View) => {
         editTodo();
         toggleTodo();
         deleteTodo();
+        addFilterListener();
         getTodos();
         state.subscirbe(() => {
-            View.renderTodolist(state.todos)
+            View.renderTodolist(state)
         });
     }
     return {
