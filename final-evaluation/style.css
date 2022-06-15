@@ -38,12 +38,20 @@ html {
   justify-content: space-between;
   align-items: center;
   gap:10px;
+  min-width: 100%;
+  width: 0px;
 }
 
 .todo__form-input {
   height: 25px;
   border-radius: 5px;
   border: 2px solid var(--tan);
+  min-width: 0;
+  flex: 1;
+}
+
+#todo-form-input {
+  flex: 2;
 }
 
 .todo__form-submit {
