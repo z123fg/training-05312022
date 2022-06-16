@@ -1,3 +1,5 @@
+let myArray;
+
 const APIs = (() => {
     const URL = "http://localhost:3000/todos";
 
@@ -100,19 +102,20 @@ const Model =(() => {
 const View = (() => {
     const formEl = document.querySelector(".todo__form");
     const todoListEl = document.querySelector(".todo__list");
+    const alert = document.querySelector(".todo--alert"); 
+    const loadMore = document.querySelector(".btn--load");
 
-    // need to write a conditional statement to check if the boolean value of the todo.complete
     const renderTodolist = (todos) => {
         let template = "";
-        todos.sort((a,b)=> b.id - a.id).forEach((todo) => {
+        todos.forEach((todo) => {
             template += `
-                <li id="${todo.id}">
-                  <span id="span-${todo.id}"
+                <li data-id="${todo.id}">
+                  <span
                   class=${todo.complete === false ? "hidden" : "strike"}>
                      ${todo.content}
                   </span>
-                  <button class="btn--edit" id="todo-${todo.id}">Edit</button>
-                  <button class="btn--delete">Delete</button>
+                  <button type="button" class="btn--edit">EDIT</button>
+                  <button type="button" class="btn--delete">DELETE</button>
                 </li>
             `
         })
@@ -121,6 +124,8 @@ const View = (() => {
     return {
         formEl,
         todoListEl,
+        alert,
+        loadMore,
         renderTodolist
     }
 
@@ -132,104 +137,159 @@ const ViewModel = ((Model, View) => {
 
     const getTodos = () => {
         APIs.getTodos().then(data => {
-            state.todos = data;
+            myArray = data;
+            state.todos = myArray.slice(0, 5);
+            myArray.splice(0, 5);
+            // check if the todo list is empty or not
+            if (state.todos.length === 0) {
+                displayAlert("No Active Task", 'danger');
+            }
         })
     }
 
     const addTodo = () => {
         View.formEl.addEventListener("submit", (event) => {
             event.preventDefault();
-            const content = event.target[0].value;
-            const complete = false;
-            if(content.trim() === "") return;
+            let content = event.target[0].value;
+            let complete = false;
+
+            if(content.trim() === "") {
+               displayAlert("Please enter a task.", "danger");
+               return;
+            };
 
             const newTodo = { content, complete };
             
             APIs.addTodo(newTodo).then(res => {
                 state.todos = [res, ...state.todos];
             })
-
+            displayAlert("A task has been created", "success");
             event.target[0].value = "";
             
         })
     }
     
-
+    // MODIFY a task - edit content / delete a task / toggle status
     const editTodo = () => {
         View.todoListEl.addEventListener("click", (event) => {
-            
-            createEditField = () => {
-              
-                const id = event.target.id.split("-")[1];   
-                
-                const editTodoItem = state.todos.find((todo) => todo.id == id)
-                const editSpanEl = event.target.previousElementSibling;
-                editSpanEl.innerHTML = `
-                <input type="text" value="${editTodoItem.content}" id="edit-field"/>
-                `
+
+            deleteTodo = () => {
+                const id = event.target.parentElement.dataset.id; 
+                APIs.deleteTodo(id).then(data => state.todos = state.todos.filter(todo => +todo.id !== +id))
             }
 
+
+            toggleTodo = () => {
+                const id = event.target.parentElement.dataset.id;              
+                const toggleTodoItem = state.todos.find((todo) => todo.id == id)
+                const editSpanEl = event.target;
+
+                if (toggleTodoItem.complete && event.target.className === "strike") {
+                    displayAlert("Task Already Completed", "danger");
+                    return;
+                } else if (!toggleTodoItem.complete && event.target.className === "hidden") {
+                    toggleTodoItem.complete = true;
+                    const toggledItem = {...toggleTodoItem, complete: true};
+                    APIs.editTodo(toggledItem).then(data => {
+                        const idx = state.todos.findIndex((todo) => +todo.id === +id)
+                        state.todos = [...state.todos.slice(0, idx), data, ...state.todos.slice(idx + 1)];
+                    });
+                    editSpanEl.classList.remove("hidden");
+                    editSpanEl.classList.add("strike");
+                    displayAlert("Task Completed", "success");
+                }
+            }
+
+            // create an edit field
+            createEditField = () => {
+                const id = event.target.parentElement.dataset.id;
+                const editTodoItem = state.todos.find(todo => todo.id == id);
+                const editSpanEl = event.target.previousElementSibling;
+
+                if (editTodoItem.complete) {
+                    displayAlert("Completed Task Cannot be edited", "danger")
+                    event.target.textContent = "EDIT"
+                    return;
+                } else {
+                    editSpanEl.innerHTML = `
+                    <input type="text" value="${editTodoItem.content}" id="edit-field" />
+                    `
+                }
+            }
+            
+            
             updateTodo = () => {
-                const id = event.target.id.split("-")[1];              
-                const editTodoItem = state.todos.find((todo) => +todo.id === +id)
+                const id = event.target.parentElement.dataset.id;
+                const editTodoItem = state.todos.find(todo => todo.id == id);
                 const editedTodo = document.querySelector("#edit-field").value
                 
                 let updatedTodoItem = {...editTodoItem, content: `${editedTodo}`}
-                APIs.editTodo(updatedTodoItem)
+                APIs.editTodo(updatedTodoItem).then(data => {
+                    const idx = state.todos.findIndex((todo) => +todo.id === +id);
+                    return state.todos = [...state.todos.slice(0, idx), data, ...state.todos.slice(idx + 1)]; 
+                });
 
                 const editSpanEl = event.target.previousElementSibling;
                 editSpanEl.innerHTML = `
                 <span>${updatedTodoItem.content}</span>
                 `
-            }
-
-            toggleTodo = () => {
-                const id = event.target.id.split("-")[1];  
-                console.log(id);             
-                const toggleTodoItem = state.todos.find((todo) => +todo.id === +id)
-                console.log(toggleTodoItem)
-                const editSpanEl = event.target;
-                if (toggleTodoItem.complete === false){
-                    editSpanEl.className = "strike";
-                    let updatedTodoItem = {...toggleTodoItem, complete: true}
-                    APIs.editTodo(updatedTodoItem)
-                } 
+                editSpanEl.classList.add("hidden");
+                displayAlert("Task has been successfully updated.", "success")
             }
 
 
-            if (event.target.textContent === "Edit") {
-                event.target.textContent = "Save";
+            if (event.target.className === "btn--delete") {
+                deleteTodo();
+                displayAlert("A task has been deleted.", "danger");
+            } else if (event.target.textContent === "EDIT") {
+                event.target.textContent = "SAVE";
                 createEditField();
-            } else if (event.target.textContent === "Save") {
-                event.target.textContent = "Edit";
+            } else if (event.target.textContent === "SAVE") {
+                event.target.textContent = "EDIT";
                 updateTodo();
-            } else if (event.target.nodeName == "SPAN") {
+            } 
+            
+            else if (event.target.className === "hidden" || event.target.className === "strike") {
                 toggleTodo();
             }
-            
         })
+
     }
 
-    const deleteTodo = () => {
-        View.todoListEl.addEventListener("click", (event) => {
-            const id = event.target.parentElement.id;
-            
-            if (event.target.className === "btn--delete") {
-                APIs.deleteTodo(id).then(res => {
-                    state.todos = state.todos.filter((todo) => {
-                        return +todo.id !== +id
-                    });
-                });
+    // load more
+    const loadMore = () => {
+        let currentIndex = 0;
+        View.loadMore.addEventListener("click", (event) => {
+            event.preventDefault();
+            let maxResult = 5;
+            for (let i = 0; i < maxResult; i++) {
+                if (currentIndex > myArray.length) {
+                    event.target.className = "hide";
+                }
+               state.todos = [...state.todos, myArray[i+currentIndex]]
             }
+            currentIndex += maxResult;      
         })
-    
     }
+ 
+    // add a text alert functionality
+    const displayAlert = (alertText, action) => {
+        View.alert.textContent = alertText;
+        View.alert.classList.add(`alert-${action}`);
+
+        // remove text alert after 1 seconds
+         setTimeout(function(){
+             View.alert.textContent = "";
+             View.alert.classList.remove(`alert-${action}`);
+         }, 1000)
+    }
+
     
     const bootstrap = () => {
         getTodos();
         addTodo();
         editTodo();
-        deleteTodo();
+        loadMore();
         state.subscirbe(() => {
             View.renderTodolist(state.todos)
         });
@@ -237,7 +297,7 @@ const ViewModel = ((Model, View) => {
 
 
     return {
-        bootstrap
+        bootstrap,
     }
 
 })(Model, View);
