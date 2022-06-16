@@ -105,7 +105,7 @@ const View = (() => {
 
         if (searchKeyword.length > 0) {
             todos = todos.filter((elem) => {
-                return elem.content.includes(searchKeyword);
+                return elem.content.toLowerCase().includes(searchKeyword.toLowerCase());
             });
         }
 
