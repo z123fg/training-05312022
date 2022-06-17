@@ -68,7 +68,7 @@ html {
   background: none;
 }
 
-.todo__list .task--done {
+.todo__list-inactive-task .task--done {
   text-decoration: line-through;
 }
 
