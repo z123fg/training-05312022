@@ -16,7 +16,6 @@ const APIs = (() => {
         })
     }
 
-
     const deleteTodo = (id) => {
         return fetch(`${URL}/${id}`, {
             method: "DELETE"
@@ -27,6 +26,7 @@ const APIs = (() => {
 
     const getTodos = () => {
         return fetch(`${URL}`).then((res) => {
+            console.log("getTodo:", res)
             return res.json();
         })
     }
@@ -113,6 +113,8 @@ const Model = (() => {
 const View = (() => {
     const formEl = document.querySelector(".todo__form");
     const todoListEl = document.querySelector(".todo__list");
+    const fil = document.querySelector("#filter");
+    const reset = document.querySelector("#reset");
 
     const renderTodolist = (todos) => {
         let template = "";
@@ -134,12 +136,15 @@ const View = (() => {
 
     return {
         formEl,
+        fil,
+        reset,
         renderTodolist,
         todoListEl
     }
 })();
 
 const ViewModel = ((Model, View) => {
+
     const state = new Model.State();
 
     const addTodo = () => {
@@ -235,10 +240,32 @@ const ViewModel = ((Model, View) => {
         })
     }
 
+    const filterTodos = ()=>{
+        View.fil.addEventListener("click", (event) => {
+            const content = View.formEl[0].value;
+            if(content.trim() === "") return;
+            APIs.getTodos().then(res=>{
+                res = res.filter((res) => {return res.content.includes(content)})
+                state.todos = res;
+            })
+        })
+    }
+
+    const resetTodos = () => {
+        View.reset.addEventListener("click", (event) => {
+            APIs.getTodos().then(res=>{
+                state.todos = res;
+            })
+        })
+    }
+
+
     const bootstrap = () => {
         addTodo();
         modifyTodo();
         getTodos();
+        filterTodos();
+        resetTodos();
         state.subscirbe(() => {
             View.renderTodolist(state.todos)
         });
@@ -249,5 +276,3 @@ const ViewModel = ((Model, View) => {
 })(Model, View);
 
 ViewModel.bootstrap();
-
-
