@@ -15,10 +15,10 @@ const APIs = (() => {
     }).then((res) => res.json());
   };
 
-  const updateToDo = (newToDos, id) => {
+  const updateToDo = (newToDo, id) => {
     return fetch(`${URL}/${id}`, {
       method: "PUT",
-      body: JSON.stringify(newToDos),
+      body: JSON.stringify(newToDo),
       headers: {
         "Content-Type": "application/json",
       },
@@ -27,10 +27,10 @@ const APIs = (() => {
     });
   };
 
-  const patchToDo = (newToDos, id) => {
+  const patchToDo = (newToDo, id) => {
     return fetch(`${URL}/${id}`, {
       method: "PATCH",
-      body: JSON.stringify(newToDos),
+      body: JSON.stringify(newToDo),
       headers: {
         "Content-Type": "application/json",
       },
@@ -84,27 +84,68 @@ const Model = (() => {
 const View = (() => {
   const formEl = document.querySelector(".todo__form");
   const todoListEl = document.querySelector(".todo__list");
+  const todoListElActive = document.querySelector(".todo__list-active-task");
+  const todoListElInactive = document.querySelector(
+    ".todo__list-inactive-task"
+  );
   const renderToDoList = (toDos) => {
     let template = "";
+    let active = "";
+    let inactive = "";
+
     toDos
       .sort((a, b) => b.id - a.id)
       .forEach((todo) => {
         template += `
-              <li>
-              <button class='btn--not-done' id="${todo.id}"><span id="${todo.id}" class="span" >${todo.content}</span></button>
-              <button class="btn--edit" id="${todo.id}"><img src="../assets/edit.svg" height='20'
-              width='20'></button>
-              <button class="btn--delete" id="${todo.id}"><img src="../assets/delete.svg" height='20'
-              width='20'></button>
+              <li class="todo__list-active-task">
+              <input  id="${todo.id}" type="text" class='${
+          todo.taskComplete ? "task task--done" : "task"
+        }' value="${todo.content}" disabled />
+              <button class="btn--edit" id="${todo.id}"></button>
+              <button class="btn--delete" id="${todo.id}"></button>
               </li>
           `;
       });
+
+    const activeTasks = toDos.filter((todo) => todo.isActive);
+    activeTasks
+      .sort((a, b) => b.id - a.id)
+      .forEach((todo) => {
+        active += `
+              <li class="todo__list-active-task">
+              <input  id="${todo.id}" type="text" class='${
+          todo.taskComplete ? "task task--done" : "task"
+        }' value="${todo.content}" disabled />
+              <button class="btn--edit" id="${todo.id}"></button>
+              <button class="btn--delete" id="${todo.id}"></button>
+              </li>
+          `;
+      });
+
+    const inactiveTasks = toDos.filter((todo) => !todo.isActive);
+    inactiveTasks
+      .sort((a, b) => b.id - a.id)
+      .forEach((todo) => {
+        inactive += `
+                <li class="todo__list-inactive-task">
+                <input  id="${todo.id}" type="text" class='${
+          todo.taskComplete ? "task task--done" : "task"
+        }' value="${todo.content}" disabled />
+                <button class="btn--edit" id="${todo.id}"></button>
+                <button class="btn--delete" id="${todo.id}"></button>
+                </li>
+            `;
+      });
     todoListEl.innerHTML = template;
+    todoListElActive.innerHTML = activeTasks;
+    todoListElInactive.innerHTML = inactiveTasks;
   };
   return {
     formEl,
     renderToDoList,
     todoListEl,
+    todoListElActive,
+    todoListElInactive,
   };
 })();
 
@@ -115,8 +156,11 @@ const ViewModel = ((Model, View) => {
     View.formEl.addEventListener("submit", (event) => {
       event.preventDefault();
       const content = event.target[0].value;
+      const taskComplete = false;
+      const isActive = true;
+      const isEditable = false;
       if (content.trim() === "") return;
-      const newTodo = { content };
+      const newTodo = { content, taskComplete, isEditable, isActive };
       APIs.addToDo(newTodo).then((res) => {
         state.toDos = [res, ...state.toDos];
       });
@@ -126,19 +170,23 @@ const ViewModel = ((Model, View) => {
   const editToDo = () => {
     View.todoListEl.addEventListener("click", (event) => {
       const { id } = event.target;
+      event.preventDefault();
       if (event.target.className === "btn--edit") {
-        let editSpan = document.querySelector(".span");
-        console.log(editSpan);
-        editSpan.innerHTML = `<input type='text'/>`;
-        editSpan.addEventListener("submit", (event) => {
-          event.preventDefault();
-          let content = event.target.value;
-          if (content.trim() === "") return;
-          let newText = { content };
-          //capture new value and push it to the array in the same spot
-          APIs.editToDo(newText).then((res) => {
-            state.toDos = [...state.toDos];
-          });
+        //Toggle state to be editable or not
+        event.target.isEditable = !event.target.isEditable;
+        event.target.className = "btn--save";
+        const editField = document.getElementById(`${id}`);
+        editField.removeAttribute("disabled");
+      } else if (event.target.className === "btn--save") {
+        event.target.isEditable = !event.target.isEditable;
+        event.target.className = "btn--edit";
+        const editField = document.getElementById(`${id}`);
+        editField.setAttribute("disabled", "true");
+        const editedTask = document.getElementById(`${id}`).value;
+        const editedToDo = state.toDos.find((todo) => +todo.id === +id);
+        editedToDo.content = editedTask;
+        APIs.updateToDo(editedToDo, id).then((res) => {
+          state.toDos = res;
         });
       }
     });
@@ -147,6 +195,7 @@ const ViewModel = ((Model, View) => {
   const deleteToDo = () => {
     View.todoListEl.addEventListener("click", (event) => {
       const { id } = event.target;
+      event.preventDefault();
       if (event.target.className === "btn--delete") {
         APIs.deleteToDo(id).then((res) => {
           state.toDos = state.toDos.filter((todo) => {
@@ -165,8 +214,20 @@ const ViewModel = ((Model, View) => {
 
   const setToDone = () => {
     View.todoListEl.addEventListener("click", (event) => {
-      if (event.target.className === "span") {
-        event.target.className = "span--done";
+      event.preventDefault();
+      if (event.target.classList.contains("task")) {
+        //toggle between done and not done
+        let clickedId = event.target.id;
+        state.toDos = state.toDos.map((todo, id) => {
+          if (+todo.id === +clickedId) {
+            todo.taskComplete = !todo.taskComplete;
+            todo.isActive = !todo.isActive;
+            APIs.patchToDo(todo, todo.id).then((res) => {
+              state.toDos = res;
+            });
+          }
+          return todo;
+        });
       }
     });
   };

@@ -51,24 +51,20 @@ html {
   padding: 5px;
 }
 
-.todo__list span {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
-}
-
-.todo__list .btn--not-done {
+.todo__list .task {
+  text-align: center;
   width: 200px;
   border: none;
   background: none;
 }
 
-.todo__list .span--done {
-  width: 200px;
-  border: none;
-  background: none;
+.todo__list-active-task {
+}
+
+.todo__list-inactive-task {
+}
+
+.todo__list .task--done {
   text-decoration: line-through;
 }
 
@@ -78,5 +74,36 @@ html {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin: 5px;
+}
+
+.todo__list .btn--edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../assets/edit.png");
+  background-color: blue;
+  height: 28px;
+  width: 28px;
+}
+
+.todo__list .btn--delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../assets/delete.png");
+  background-color: red;
+  height: 28px;
+  width: 28px;
+}
+
+.todo__list .btn--save {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../assets/save.png");
+  background-color: blue;
+  height: 28px;
+  width: 28px;
   margin: 5px;
 }
