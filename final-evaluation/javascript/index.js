@@ -137,6 +137,10 @@ const View = (() => {
             `;
       });
     //todoListEl.innerHTML = template;
+    if (active === "") {
+      let span = document.querySelector(".todo__list-span");
+      span.innerHTML = "no active task";
+    }
     todoListElActive.innerHTML = active;
     todoListElInactive.innerHTML = inactive;
   };
