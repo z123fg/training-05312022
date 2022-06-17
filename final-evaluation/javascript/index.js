@@ -83,29 +83,29 @@ const Model = (() => {
 
 const View = (() => {
   const formEl = document.querySelector(".todo__form");
-  const todoListEl = document.querySelector(".todo__list");
+  //const todoListEl = document.querySelector(".todo__list");
   const todoListElActive = document.querySelector(".todo__list-active-task");
   const todoListElInactive = document.querySelector(
     ".todo__list-inactive-task"
   );
   const renderToDoList = (toDos) => {
-    let template = "";
+    //let template = "";
     let active = "";
     let inactive = "";
 
-    toDos
-      .sort((a, b) => b.id - a.id)
-      .forEach((todo) => {
-        template += `
-              <li class="todo__list-active-task">
-              <input  id="${todo.id}" type="text" class='${
-          todo.taskComplete ? "task task--done" : "task"
-        }' value="${todo.content}" disabled />
-              <button class="btn--edit" id="${todo.id}"></button>
-              <button class="btn--delete" id="${todo.id}"></button>
-              </li>
-          `;
-      });
+    // toDos
+    //   .sort((a, b) => b.id - a.id)
+    //   .forEach((todo) => {
+    //     template += `
+    //           <li class="todo__list-active-task">
+    //           <input  id="${todo.id}" type="text" class='${
+    //       todo.taskComplete ? "task task--done" : "task"
+    //     }' value="${todo.content}" disabled />
+    //           <button class="btn--edit" id="${todo.id}"></button>
+    //           <button class="btn--delete" id="${todo.id}"></button>
+    //           </li>
+    //       `;
+    //   });
 
     const activeTasks = toDos.filter((todo) => todo.isActive);
     activeTasks
@@ -136,14 +136,14 @@ const View = (() => {
                 </li>
             `;
       });
-    todoListEl.innerHTML = template;
-    todoListElActive.innerHTML = activeTasks;
-    todoListElInactive.innerHTML = inactiveTasks;
+    //todoListEl.innerHTML = template;
+    todoListElActive.innerHTML = active;
+    todoListElInactive.innerHTML = inactive;
   };
   return {
     formEl,
     renderToDoList,
-    todoListEl,
+    //todoListEl,
     todoListElActive,
     todoListElInactive,
   };
@@ -168,7 +168,7 @@ const ViewModel = ((Model, View) => {
   };
 
   const editToDo = () => {
-    View.todoListEl.addEventListener("click", (event) => {
+    View.todoListElActive.addEventListener("click", (event) => {
       const { id } = event.target;
       event.preventDefault();
       if (event.target.className === "btn--edit") {
@@ -193,7 +193,18 @@ const ViewModel = ((Model, View) => {
   };
 
   const deleteToDo = () => {
-    View.todoListEl.addEventListener("click", (event) => {
+    View.todoListElActive.addEventListener("click", (event) => {
+      const { id } = event.target;
+      event.preventDefault();
+      if (event.target.className === "btn--delete") {
+        APIs.deleteToDo(id).then((res) => {
+          state.toDos = state.toDos.filter((todo) => {
+            return +todo.id !== +id;
+          });
+        });
+      }
+    });
+    View.todoListElInactive.addEventListener("click", (event) => {
       const { id } = event.target;
       event.preventDefault();
       if (event.target.className === "btn--delete") {
@@ -213,7 +224,24 @@ const ViewModel = ((Model, View) => {
   };
 
   const setToDone = () => {
-    View.todoListEl.addEventListener("click", (event) => {
+    View.todoListElActive.addEventListener("click", (event) => {
+      event.preventDefault();
+      if (event.target.classList.contains("task")) {
+        //toggle between done and not done
+        let clickedId = event.target.id;
+        state.toDos = state.toDos.map((todo, id) => {
+          if (+todo.id === +clickedId) {
+            todo.taskComplete = !todo.taskComplete;
+            todo.isActive = !todo.isActive;
+            APIs.patchToDo(todo, todo.id).then((res) => {
+              state.toDos = res;
+            });
+          }
+          return todo;
+        });
+      }
+    });
+    View.todoListElInactive.addEventListener("click", (event) => {
       event.preventDefault();
       if (event.target.classList.contains("task")) {
         //toggle between done and not done

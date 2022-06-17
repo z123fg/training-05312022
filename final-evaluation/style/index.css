@@ -35,14 +35,23 @@ html {
   padding: 10px;
 }
 
-.todo__list {
+.todo__list-span {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo__list-active-task,
+.todo__list-inactive-task {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 0px;
 }
 
-.todo__list li {
+.todo__list-active-task li,
+.todo__list-inactive-task li {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -51,25 +60,22 @@ html {
   padding: 5px;
 }
 
-.todo__list .task {
+.todo__list-active-task .task,
+.todo__list-inactive-task .task {
   text-align: center;
   width: 200px;
   border: none;
   background: none;
 }
 
-.todo__list-active-task {
-}
-
-.todo__list-inactive-task {
-}
-
 .todo__list .task--done {
   text-decoration: line-through;
 }
 
-.todo__list .btn--edit,
-.todo__list .btn--delete {
+.todo__list-active-task .btn--edit,
+.todo__list-active-task .btn--delete,
+.todo__list-inactive-task .btn--edit,
+.todo__list-inactive-task .btn--delete {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -77,7 +83,8 @@ html {
   margin: 5px;
 }
 
-.todo__list .btn--edit {
+.todo__list-active-task .btn--edit,
+.todo__list-inactive-task .btn--edit {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +94,8 @@ html {
   width: 28px;
 }
 
-.todo__list .btn--delete {
+.todo__list-active-task .btn--delete,
+.todo__list-inactive-task .btn--delete {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,7 +105,7 @@ html {
   width: 28px;
 }
 
-.todo__list .btn--save {
+.todo__list-active-task .btn--save {
   display: flex;
   justify-content: center;
   align-items: center;
