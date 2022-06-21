@@ -22,7 +22,7 @@ const APIs = (() => {
   };
 
   const editTodo = (id, updateTodos) => {
-    console.log("Edit todo " + updateTodos);
+    //console.log("Edit todo " + updateTodos);
     return fetch(`${URL}/${id}`, {
       method: "PATCH",
       body: JSON.stringify(updateTodos),
@@ -199,7 +199,7 @@ const ViewModel = ((Model, View) => {
 
       if (event.target.className === "btn--edit") {
         if (state.edit == false) {
-          console.log(event.target.parentNode);
+          console.log("false ", state.edit);
           let template = "";
 
           console.log("liEl " + event.target.parentNode);
@@ -213,6 +213,8 @@ const ViewModel = ((Model, View) => {
           textEl.style.color = "red";
           state.edit = true;
         } else {
+          console.log("true ", state.edit);
+
           console.log(event.target.parentNode);
           let template = "";
           let inputEl = document.querySelector("#input__" + id);
@@ -227,15 +229,12 @@ const ViewModel = ((Model, View) => {
 
           liEl.innerHTML = template;
 
-          //state.todos = { content: currentContent, id: id };
-          //console.log("content " + state.todos[id].content);
-
           const newTodo = { content: currentContent };
 
           APIs.editTodo(id, newTodo).then((res) => {
             state.todos = [res, ...state.todos];
           });
-
+          window.location.reload();
           state.edit = false;
         }
       }
