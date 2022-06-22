@@ -2,6 +2,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #f0f0f0;
   }
   .parent__container {
     display: flex;
@@ -22,10 +23,12 @@ html {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    min-width: 300px;
-    border: 1px solid black;
+    min-width: 600px;
+    max-width: 1200px;
+    border: 2px solid #e6e2d3;
     border-radius: 5px;
     padding: 10px;
+
   }
   
   .events__list{
@@ -33,22 +36,79 @@ html {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
   }
   
   .events__list li {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: 1px solid black;
+    border: 1px solid #e6e2d3;
     border-radius: 5px;
-    padding:5px
+    padding: 7px;
+    background-color: #e6e2d3;
   }
   
-  .events span {
+  .events__list span {
     flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30px;
-  }
+    margin-right: 5px;
+  } 
   
+  .submit{
+    /* display: flex;
+    justify-content: flex-end;  */
+    background-color: #008cba ;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 5px  rgb(195, 187, 187);
+  }
+  .submit:hover{
+    background-color: aquamarine;
+    cursor: pointer;
+  }
+
+  .submit:active{
+    background-color:red ;
+    box-shadow: 0 2px #6dccf2;
+    transform: translateY(4px);
+  }
+
+  .btn--delete{
+    background-color: #c94c4c;
+    border: none;
+    border-radius: 2px;
+    width: 30px;
+  }
+  .btn--delete:hover{
+    background-color: white;
+    cursor: pointer;
+  }
+
+  .btn--delete:active{
+    background-color:yellow ;
+    box-shadow: 5px 2px 2px ;
+    transform: translateY(2px);
+  }
+
+  .btn--edit{
+    background-color: #008cba;
+    border: none;
+    border-radius: 2px;
+    margin-right: 5px;
+    width: 30px;
+  }
+
+  .btn--edit:hover{
+    background-color: aquamarine;
+    cursor: pointer;
+  }
+
+  .btn--edit:active{
+    background-color: rgb(32, 198, 32) ;
+    box-shadow: 5px 2px 2px ;
+    transform: translateY(2px);
+  }
