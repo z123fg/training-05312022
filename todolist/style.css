@@ -51,3 +51,12 @@ html {
   align-items: center;
   height: 30px;
 }
+
+.line-through{
+  text-decoration:line-through
+}
+
+.todo__content{
+  cursor: pointer;
+  user-select: none;
+}
