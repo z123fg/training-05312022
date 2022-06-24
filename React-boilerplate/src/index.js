@@ -31,14 +31,20 @@ import { createRoot } from 'react-dom/client'; */
   node project
   node powered workflow
 
-  babel: transpiler polyfill
+  babel: transpiler, polyfill
 
-  webpack: bundler, minification
+  css-loader: inject css into javascript file
+  style-loader: bundle css files
+
+
+
+
+  webpack: bundler, minification, code spliting, module federation, tree shaking
 */
 // console.log("hello world");
 // console.log("react", React);
 // console.log("react-dom", ReactDOM);
-
+import React from "react"
 import HelloMessage from "./components/HelloMessage";
 import { createRoot } from "react-dom/client";
 
