@@ -46,3 +46,7 @@
 - https://developer.mozilla.org/en-US/docs/Glossary/Falsy
 - https://dev.to/sandy8111112004/javascript-introduction-to-scope-function-scope-block-scope-d11
 - https://stackoverflow.com/questions/9959727/proto-vs-prototype-in-javascript
+
+## React
+- https://reactjs.org/docs/reconciliation.html
+- https://hackernoon.com/virtual-dom-reconciliation-and-diffing-algorithm-explained-simply-ycn34gr
