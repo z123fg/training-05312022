@@ -1,0 +1,8 @@
+.header_component_h1 {
+    width: 100%;
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+    color: white;
+    background-color: black;
+}
