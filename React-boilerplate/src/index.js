@@ -44,6 +44,7 @@ import { createRoot } from 'react-dom/client'; */
 // console.log("hello world");
 // console.log("react", React);
 // console.log("react-dom", ReactDOM);
+/**imports react, hello message component, and client */
 import React from "react"
 import HelloMessage from "./components/HelloMessage";
 import { createRoot } from "react-dom/client";
@@ -55,6 +56,7 @@ import { createRoot } from "react-dom/client";
 //   React.createElement("div", null, "123")
 // );
 
+/**sets variables of root and root elelment, and renders root */
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 root.render(<HelloMessage name="Taylor" />);
