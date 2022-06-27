@@ -49,8 +49,10 @@ const Model = (() => {
   class State {
     #todos;
     #onChangeCb;
+    #showAll;
     constructor() {
       this.#todos = [];
+      this.#showAll = false;
       this.#onChangeCb = () => {};
     }
     get todos() {
@@ -73,11 +75,12 @@ const Model = (() => {
 const View = (() => {
   const formEl = document.querySelector(".todo__form");
   const todoListEl = document.querySelector(".todo__list");
-  const renderTodolist = (todos) => {
+  const showAllBtn = document.querySelector(".showAll");
+  const renderTodolist = (todos, showAll) => {
     let template = "";
     todos
       .sort((a, b) => b.id - a.id)
-      .forEach((todo) => {
+      .forEach((todo, index) => {
         template += `<li id=${todo.id}>`;
         template += todo.complete
           ? `<input type="checkbox" checked><s>${todo.content}</s>`
@@ -95,7 +98,7 @@ const View = (() => {
 
 const ViewModel = ((Model, View) => {
   const state = new Model.State();
-
+  state.showAll = false;
   const addTodo = () => {
     View.formEl.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -152,18 +155,22 @@ const ViewModel = ((Model, View) => {
               : todo;
           });
         });
-        state.todos = state.todos.map((todo) => {
-          return +todo.id === +id
-            ? { ...todo, complete: !todo.complete }
-            : todo;
+      }
+    });
+  };
+  const getAllTodos = () => {
+    View.todoContainerEl.addEventListener("click", (event) => {
+      if (event.target.className === "showAll") {
+        state.showAll = true;
+        APIs.getTodos().then((res) => {
+          state.todos = res;
         });
       }
     });
   };
-
   const getTodos = () => {
     APIs.getTodos().then((res) => {
-      state.todos = res;
+      state.todos = res.slice(0, 5);
     });
   };
 
@@ -173,8 +180,9 @@ const ViewModel = ((Model, View) => {
     toggleTodo();
     editTodo();
     getTodos();
+    getAllTodos();
     state.subscirbe(() => {
-      View.renderTodolist(state.todos);
+      View.renderTodolist(state.todos, state.showAll);
     });
   };
   return {

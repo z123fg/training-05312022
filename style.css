@@ -1,0 +1,97 @@
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.todo__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 500px;
+  font-family: "Courier", monospace;
+}
+
+.todo__form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 80%;
+  gap: 10px;
+}
+.todo__form input {
+  width: 65%;
+  height: 30px;
+  border-radius: 0.4em;
+  font-family: "Courier";
+}
+.todo__form button {
+  width: 25%;
+  color: #f0f0f0;
+  border: none;
+  font-size: 18px;
+  border-radius: 0.4em;
+  background-color: rgb(101, 140, 196);
+}
+
+.todo__list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 300px;
+  border: 2px solid #4caf50;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+.todo__list {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.todo__list li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: lightsteelblue;
+  height: 35px;
+}
+
+.todo__list span {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+.todo__list checkbox {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+.todo__list s {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+
+.todo__list button {
+  background-color: #c94c4c;
+  color: #f0f0f0;
+  border-radius: 0.4em;
+  height: 30px;
+}
+
+button:hover {
+  background-color: lightblue;
+}

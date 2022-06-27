@@ -35,7 +35,6 @@
 // console.log(!0);
 // console.log(!'');
 // console.log(!null);
-// console.log(!document.all);
 
 // let obj = {};
 // // console.log(obj);
@@ -147,34 +146,34 @@
 
 //instance method vs. class method
 
-/* class Person {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-  //   walk() {
-  //     console.log(this.name + ' is walking ');
-  //   }
-}
+// class Person {
+//   constructor(name, age) {
+//     this.name = name;
+//     this.age = age;
+//   }
+// walk() {
+//   console.log(this.name + " is walking ");
+// }
+// }
 
-Person.prototype.walk = function () {
-  console.log(this.name + ' is walking ');
-};
+// Person.prototype.walk = function () {
+//   console.log(this.name + " is walking ");
+// };
 
-let p = new Person('xin', 1);
-console.log ("typeof", typeof p);
-//instance method
+// let p = new Person("xin", 1);
+// console.log("typeof", typeof p);
+
+// instance method
 // p.walk = function () {
-//   console.log(this.name + ' is walking ');
+//   console.log(this.name + " is walking ");
 // };
 // console.log(p);
-p.walk();
+// p.walk();
 
-let newP = new Person('li', 2);
+// let newP = new Person("li", 2);
 // newP.walk = p.walk;
-newP.walk();
-
-console.log(p.__proto__ === Person.prototype); */
+// newP.walk();
+// console.log(p.__proto__ === Person.prototype);
 
 // const person = new Person("adam", 18);
 
@@ -260,7 +259,7 @@ employee.work();
 person.work();//error */
 
 // getter setter function
-//private field
+// private field
 
 // class Person {
 //   #name
@@ -409,7 +408,7 @@ person.work();//error */
 // console.log("result", result)
 
 // Array.prototype.myForEach = function (fn) {
-//   //const arr = this;
+//   const arr = this;
 //   for (let key = 0; key < this.length; key++) {
 //     fn(this[key], key)
 //   }
@@ -499,8 +498,8 @@ person.work();//error */
 //oop: object oriented programming
 //abstraction, inheritance, ploymorphism,encapsulation
 
-//inheritance: prototype chain
-//encapsulation: closure
+// inheritance: prototype chain
+// encapsulation: closure
 
 /* function foo (){
   const a =1;
@@ -524,33 +523,33 @@ foo(); */
 // function foo1() {
 //   let a = 0;
 //   const increment = () => {
-//     a = a+1;
+//     a = a + 1;
 //     console.log(a);
-//   }
+//   };
 //   return {
 //     a: a,
-//     increment: increment
-//   }
+//     increment: increment,
+//   };
 // }
 
-// const obj2 = foo();
+// const obj2 = foo1();
 // obj2.increment();
-// obj2.increment();
-
+// obj2.increment();d
+// console.log(obj2.a);
 //iife, immediately invoked function expression
 
 // const obj2 = (function () {
 //   let b = 10;
 //   let a = 0;
 //   const increment = () => {
-//     a = a+1;
+//     a = a + 1;
 //     console.log(a);
-//   }
+//   };
 //   return {
 //     a: a,
-//     b:b,
-//     increment: increment
-//   }
+//     b: b,
+//     increment: increment,
+//   };
 // })();
 
 // obj2.increment();
@@ -602,7 +601,7 @@ sum(1);// 1 + undefined + undefined */
 // console.log(1 == "1");//true
 // console.log([] == 0);//
 
-//spread operator
+// spread operator
 // const obj = {name:"adam", age:18};
 
 // const obj1 = {...obj};
@@ -652,11 +651,11 @@ sum(1);// 1 + undefined + undefined */
 
 // foo(1,2,3,4,5);
 
-// function foo1(...rest){
-//   console.log(rest)
+// function foo1(...rest) {
+//   console.log(rest);
 // }
 
-// foo1(1,2,3,4,5);
+// foo1(1, 2, 3, 4, 5);
 
 // function foo2(){
 //   console.log(arguments)
@@ -765,9 +764,9 @@ sum(1);// 1 + undefined + undefined */
 
 // console.log(3);
 
-/* while(true){ //infinite loop
-
-} //1,3 */
+// while (true) {
+//   //infinite loop
+// } //1,3
 
 // console.log(1);
 
@@ -795,10 +794,10 @@ sum(1);// 1 + undefined + undefined */
 // console.log(1);
 // console.log(performance.now());
 
-// setTimeout(()=>{
+// setTimeout(() => {
 //   console.log(performance.now());
-//   console.log(2)
-// },0);
+//   console.log(2);
+// }, 0);
 
 // console.log(3);
 
@@ -889,7 +888,7 @@ sum(1);// 1 + undefined + undefined */
 //   1000
 // );
 
-//promise, es6, flatten the async code
+// promise, es6, flatten the async code
 // const getUsers = (callback) => {
 //   setTimeout(() => {
 //     callback([
@@ -970,7 +969,7 @@ sum(1);// 1 + undefined + undefined */
 //   console.log(data)
 // });
 
-//first request, use the response of first to make second, use the response from second request to make third  request
+//first request, use the response of first to make second, use the response from second request to make third request
 
 // fetch('https://jsonplaceholder.typicode.com/todos/1').then((res)=>{
 //   return res.json();
@@ -1023,27 +1022,30 @@ sum(1);// 1 + undefined + undefined */
 //   },1000)
 // },1000);
 
-// new Promise((resolve,reject)=>{
-//   setTimeout(()=>{
-//     resolve()
-//   },1000)
-// }).then(()=>{
-//   console.log(1);
-//  return new Promise((resolve, reject)=>{
-//     setTimeout(()=>{
-//       resolve()
-//     },1000)
+// new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve();
+//   }, 1000);
+// })
+//   .then(() => {
+//     console.log(1);
+//     return new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//         resolve();
+//       }, 1000);
+//     });
 //   })
-// }).then(()=>{
-//   console.log(2)
-//   return new Promise((resolve, reject)=>{
-//     setTimeout(()=>{
-//       resolve()
-//     },1000)
+//   .then(() => {
+//     console.log(2);
+//     return new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//         resolve();
+//       }, 1000);
+//     });
 //   })
-// }).then(()=>{
-//   console.log(3)
-// });
+//   .then(() => {
+//     console.log(3);
+//   });
 
 // a[1]; //object or array
 // a.b;//object
@@ -1100,22 +1102,22 @@ sum(1);// 1 + undefined + undefined */
 //   console.log(data);
 // });
 
-// console.log(1);
+console.log(1);
 
-// const promise = new Promise((resolve, reject)=>{
-//   console.log(2)
-//   setTimeout(()=>{
-//     resolve(123);
-//   },0);
-// });
+const promise = new Promise((resolve, reject) => {
+  console.log(2);
+  setTimeout(() => {
+    resolve(123);
+  }, 0);
+});
 
-// console.log(3)
+console.log(3);
 
-// promise.then((data)=>{
-//   console.log(data)
-// });
+promise.then((data) => {
+  console.log(data);
+});
 
-// console.log(4);
+console.log(4);
 
 // console.log(1);
 
