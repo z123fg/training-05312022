@@ -1,9 +1,10 @@
 
 import React from "react"
+import "./HelloMessage.css";
 
 class HelloMessage extends React.Component {
   render() {
-    return <div>Hello {this.props.name} <div>123</div></div>
+    return <div className="hello">Hello {this.props.name} <div>123</div></div>
     
   }
 }
