@@ -14,7 +14,6 @@ class ListControl extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log("e.target", e.target);
     e.preventDefault();
     const content = e.target[0].value;
     if(content.trim() === "") return;
