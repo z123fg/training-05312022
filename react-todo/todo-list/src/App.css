@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+:root{
+  --tan: #e6e2d3;
+  --white: #f0f0f0;
+  --yellow-green: #4caf50;
+  --vermiliion-red: #c94c4c;
+  --blue: #008cba;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +42,87 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+  background-color: var(--white);
+}
+
+.todo-div{
+  background-color: red;
+  width: auto;
+}
+
+.todo__li{
+  display: flex;
+  line-height: 1.7rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 5px 10px;
+  margin-bottom: 1.5rem;
+  background-color: rgb(229,226,212);
+}
+
+.btn--edit{
+  background-color: var(--blue);
+  color: white;
+  padding: 0.7rem;
+  margin: 0.2rem;
+  border: 0;
+  font-size: 1.2rem;
+  border-radius: 5px;
+
+}
+
+.btn--delete{
+  background-color: var(--vermiliion-red);
+  border: 0;
+  border-radius: 4px;
+  padding: 0.7rem;
+  color: white;
+  font-size: 1.2rem;
+  margin: 0.2rem;
+}
+
+.sub-container{
+  display: flex;
+  justify-items: center;
+}
+
+.todo__form{
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input--form{
+  border: 2px solid var(--tan);
+  height: 2rem;
+  line-height: 1.5rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  margin-right: 0.3rem;
+}
+
+.btn--submit{
+  height: 2.3rem;
+  border: 2px solid var(--blue);
+  background-color: var(--blue);
+  border: 0;
+  border-radius: 4px;
+  color: white;
+  font-size: 1.2rem;
+  padding: auto;
+}
+
+.completed{
+  text-decoration: line-through;
+  color: rgb(130,133,146);
 }
