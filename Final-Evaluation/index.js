@@ -28,7 +28,7 @@ const APIs = (() => {
 
   const editTasks = (id, newTask) => {
     return fetch(`${BASE_URL}/${id}`, {
-      method: "PATCH",
+      method: "PUT",
       body: JSON.stringify({
         title: newTask,
       }),
@@ -41,11 +41,11 @@ const APIs = (() => {
     });
   };
 
-  const updateTasksStatus = (id, item) => {
+  const updateTasksStatus = (id, bool) => {
     return fetch(`${BASE_URL}/${id}`, {
       method: "PATCH",
       body: JSON.stringify({
-        isCompleted: item,
+        isCompleted: bool,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -116,9 +116,9 @@ const View = (() => {
         temp += `
         <li><span id="title_${task.id}" style="text-decoration: ${lineThrough}">${task.title}</span>
           <div>
-          <input id="edit_${task.id}" style="display: none"/>
-          <button class="btn--edit" id="btn_${task.id}">Edit</button>
-          <button class="btn--delete" id="${task.id}" style="background-color: #c94c4c">Delete</button>
+            <input id="edit_${task.id}" style="display: none"/>
+            <button class="btn--edit" id="btn_${task.id}">Edit</button>
+            <button class="btn--delete" id="${task.id}" style="background-color: #c94c4c">Delete</button>
           </div>
         </li>
         `;
@@ -143,13 +143,12 @@ const ViewModel = ((Model, View) => {
     View.tasksFormEl.addEventListener("submit", (e) => {
       e.preventDefault();
       const title = e.target[0].value;
+      const isCompleted = false
       if (title.trim() === "") return;
-      const newTask = { title };
+      const newTask = { title, isCompleted };
       APIs.addTasks(newTask).then((res) => {
-        console.log(res);
         state.tasks = [res, ...state.tasks];
       });
-      // document.querySelector(".tasks__form input").value = "";
     });
   };
 
@@ -158,7 +157,6 @@ const ViewModel = ((Model, View) => {
       const { id } = e.target;
       if (e.target.className === "btn--delete") {
         APIs.deleteTasks(id).then((res) => {
-          console.log(res);
           state.tasks = state.tasks.filter((task) => {
             return +task.id !== +id;
           });
@@ -175,6 +173,7 @@ const ViewModel = ((Model, View) => {
         } 
         else {
           const newTask = newEl.value;
+          console.log(newTask);
           if (newTask.trim() === "") {
           } else {
             APIs.editTasks(new_id, newTask).then((res) => {
@@ -240,25 +239,3 @@ const ViewModel = ((Model, View) => {
 })(Model, View);
 
 ViewModel.rootRender();
-
-/**
- * THINGS TO ADD
- *
- * <=== VIEW ===>
- * Scrolling Header
- * Scroll To Top Button
- * Total Complete
- * Total Incomplete
- *
- * extras
- * ? Search filter ? => If have Time
- * If addTask btn is clicked show message = please input to-do task
- * throw alert that warns when deleting a task
- *
- */
-
-/**
- * THINGS TO FIX
- *
- * clear inputs on reload
- */
