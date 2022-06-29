@@ -51,9 +51,8 @@ class Todo extends React.Component {
         })
             .then((res) => res.json())
             .then((res) => {
-                this.setState({ todos: [...this.state.todos, res] })
+                this.setState({ todos: [...this.state.todos, res], input: "" })
             })
-        this.setState({ input: "" })
     }
 
     // Update the input 
