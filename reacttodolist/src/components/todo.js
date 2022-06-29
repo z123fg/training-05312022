@@ -19,12 +19,6 @@ class Todo extends React.Component {
             todos: [],
             input: ""
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleInput = this.handleInput.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
-        this.handdleToggle = this.handdleToggle.bind(this);
-        this.handleEdit = this.handleEdit.bind(this);
-        this.handleInputEdit = this.handleInputEdit.bind(this);
     }
 
     // Get the initial state from endpoint
@@ -36,7 +30,7 @@ class Todo extends React.Component {
             })
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         // Prevent form to refresh the page
         event.preventDefault();
         if (!this.state.input) { return }
@@ -56,13 +50,13 @@ class Todo extends React.Component {
     }
 
     // Update the input 
-    handleInput(e) {
+    handleInput = (e) => {
         const newVal = e.target.value;
         this.setState({ input: newVal })
     }
 
     // Delete one todo from todo list
-    handleDelete(e) {
+    handleDelete = (e) => {
         const { id } = e.target.parentElement;
         fetch(`${URL}/${id}`, {
             method: "DELETE"
@@ -75,7 +69,7 @@ class Todo extends React.Component {
     }
 
     // Handle the edit button
-    handleEdit(e) {
+    handleEdit = (e) => {
         const { id } = e.target.parentElement;
         const todo = this.state.todos.find((todo) => +todo.id === +id);
         fetch(`${URL}/${id}`, {
@@ -93,7 +87,7 @@ class Todo extends React.Component {
     }
 
     // Handle the todo input if it's isEdit
-    handleInputEdit(e) {
+    handleInputEdit = (e) => {
         const { id } = e.target.parentElement;
         const newContent = e.target.value;
         const newTodos = this.state.todos.map((todo) => {
@@ -106,7 +100,7 @@ class Todo extends React.Component {
     }
 
     // Toggle the todo items
-    handdleToggle(e) {
+    handdleToggle = (e) => {
         const { id } = e.target.parentElement;
         const todo = this.state.todos.find((todo) => +todo.id === +id);
         fetch(`${URL}/${id}`, {
