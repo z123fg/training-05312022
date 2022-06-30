@@ -30,8 +30,14 @@ import React from "react";
 
 
 
-  event binding
+  event binding: function.bind(return the binded function), function.call function.apply(invoke the function)
   props
+
+  two way binding: mvvm, decoupling
+  event target: the element that emit the event
+  event currentTarget: the element that receive the event
+
+  synthetic event: wrapper of native, browser compatibility
   
   const test = new Test(props)
 
@@ -48,7 +54,7 @@ class Test extends React.Component{
       name:"adam"
     }
     console.log("constructor this",this)
-    this.handleClick = this.handleClick.bind(this);
+    //this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount(){
