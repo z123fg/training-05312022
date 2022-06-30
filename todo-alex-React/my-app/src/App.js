@@ -2,8 +2,15 @@ import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import todoList from './components/todoList';
+import TodoSubmit from './components/todoSubmit';
+import TodoInput from'./components/todoInput';
 
 class App extends React.Component{
+  state = {
+    todoList: [],
+    todoElement: ""
+  };
+
 
   addTodo = () =>{
 
@@ -13,8 +20,8 @@ class App extends React.Component{
     return (
       <div className="todo__header">
         <form class="todo__form">
-          <input class = "input" onfocus="this.value=''"/>
-          <button class = "submit__button">Submit</button>
+          <TodoInput todoElement={this.todoElement}/>
+          <TodoSubmit todoElement={this.todoElement}/>
         </form>
         <div class="todo__list-container">
           <ul class="todo__list">
