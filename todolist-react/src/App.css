@@ -95,6 +95,15 @@ svg {
   box-shadow: none;
 }
 
+.input--edit {
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #e6e2d3;
+  background-color: #f0f0f0;
+  padding: 10px;
+  box-shadow: none;
+}
+
 .btn--submit {
   background: #008cba;
   border: 0px;
