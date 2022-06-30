@@ -1,0 +1,125 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+.todo__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 500px;
+}
+
+.todo__form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap:10px;
+}
+
+.todo__list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 300px;
+  border: 2px solid #e6e2d3;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.todo__list {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.todo--none {
+  text-align: center;
+  list-style-type: none;
+}
+.todo--item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #e6e2d3;
+  border: 2px solid #e6e2d3;
+  border-radius: 5px;
+  padding:5px;
+  order: 1;
+}
+
+.todo--content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  cursor: pointer;
+}
+
+.completed--item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #e6e2d3;
+  border: 2px solid #e6e2d3;
+  border-radius: 5px;
+  padding:5px;
+  text-decoration: line-through;
+  color: gray;
+  order: 2;
+}
+
+.completed--content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  cursor: pointer;
+}
+
+.form--input {
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #e6e2d3;
+  background-color: #f0f0f0;
+  padding: 10px;
+  box-shadow: none;
+}
+
+.btn--submit {
+  background: #008cba;
+  border: 0px;
+  border-radius: 5px;
+  color: #f0f0f0;
+  padding: 10px;
+}
+
+.btn--edit {
+  background: #008cba;
+  border: 0px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+.btn--edit svg {
+  height: 25px;
+  width: 25px;
+  fill: #f0f0f0;
+}
+.btn--delete {
+  background: #c94c4c;
+  border: 0px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+.btn--delete svg {
+  height: 25px;
+  width: 25px;
+  fill: #f0f0f0;
+  pointer-events: none;
+}

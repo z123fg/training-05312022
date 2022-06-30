@@ -1,98 +1,68 @@
-import React, { PureComponent } from "react";
+import React from "react";
 
-class TodoList extends PureComponent {
-  constructor(props) {
-    super(props);
+const editIcon = (
+  <svg
+    focusable="false"
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    data-testid="EditIcon"
+    aria-label="fontSize small"
+  >
+    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
+  </svg>
+);
 
-    this.state = {
-      todos: [],
-      hasError: false,
-    };
-  }
+const deleteIcon = (
+  <svg
+    focusable="false"
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    data-testid="DeleteIcon"
+    aria-label="fontSize small"
+  >
+    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
+  </svg>
+);
 
-  componentDidMount = () => {
-    console.log("TodoList mounted");
-  };
+function TodoList({ todos, editTodo, deleteTodo }) {
+  const completed = todos.filter((todo) => todo.status === false);
+  const incomplete = todos.filter((todo) => todo.status !== false);
 
-  static getDerivedStateFromError(error) {
-    // getDerivedStateFromError -> Update state so the next render will show the fallback UI.
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, info) {
-    // You can also log the error to an error reporting service
-  }
-
-  getDerivedStateFromProps = (nextProps, prevState) => {
-    console.log("TodoList getDerivedStateFromProps", nextProps, prevState);
-  };
-
-  getSnapshotBeforeUpdate = (prevProps, prevState) => {
-    console.log("TodoList getSnapshotBeforeUpdate", prevProps, prevState);
-  };
-
-  componentDidUpdate = () => {
-    console.log("TodoList did update");
-  };
-
-  componentWillUnmount = () => {
-    console.log("TodoList will unmount");
-  };
-  completed = () => {
-    return this.todos.filter((todo) => todo.status === false);
-  };
-  incomplete = () => {
-    return this.todos.filter((todo) => todo.status !== false);
-  };
-
-  render() {
-    if (this.state.hasError) {
-      return <h1>Something went wrong.</h1>;
-    }
-    return (
-      <div class="todo__list-container">
-        <ul class="todo__list">
-          {this.incomplete.length > 0 ? (
-            this.incomplete.map((todo) => {
-              return (
-                <li class="todo--item" id={todo.id}>
-                  <span class="todo--content" id={todo.id}>
-                    ${todo.content}
-                  </span>
-                  <button class="btn--edit" id={todo.id}>
-                    ${editIcon}
-                  </button>
-                  <button class="btn--delete" id={todo.id}>
-                    ${deleteIcon}
-                  </button>
-                </li>
-              );
-            })
-          ) : (
-            <li>No active tasks</li>
-          )}
-          {this.completed.length > 0 && (
-            <li class="completed--item" id={todo.id} value={todo.content}>
-              <span class="completed--content" id={todo.id}>
-                {todo.content}
-              </span>
-              <button class="btn--delete" id={todo.id}>
-                {deleteIcon}
-              </button>
-            </li>
-          )}
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div class="todo__list-container">
+      <ul class="todo__list">
+        {incomplete.length > 0 ? (
+          incomplete.map((todo) => {
+            return (
+              <li class="todo--item" id={todo.id}>
+                <span class="todo--content" id={todo.id}>
+                  {todo.content}
+                </span>
+                <button class="btn--edit" id={todo.id}>
+                  {editIcon}
+                </button>
+                <button class="btn--delete" id={todo.id}>
+                  {deleteIcon}
+                </button>
+              </li>
+            );
+          })
+        ) : (
+          <li class="todo--none">No active tasks</li>
+        )}
+        {completed.length > 0 && (
+          <li class="completed--item" id={todo.id} value={todo.content}>
+            <span class="completed--content" id={todo.id}>
+              {todo.content}
+            </span>
+            <button class="btn--delete" id={todo.id}>
+              {deleteIcon}
+            </button>
+          </li>
+        )}
+      </ul>
+    </div>
+  );
 }
-
-TodoList.propTypes = {
-  // bla: PropTypes.string,
-};
-
-TodoList.defaultProps = {
-  // bla: 'test',
-};
 
 export default TodoList;
