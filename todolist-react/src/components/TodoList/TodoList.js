@@ -25,8 +25,8 @@ const deleteIcon = (
 );
 
 function TodoList({ todos, editTodo, deleteTodo }) {
-  const completed = todos.filter((todo) => todo.status === false);
-  const incomplete = todos.filter((todo) => todo.status !== false);
+  const completed = todos.filter((todo) => todo.status === true);
+  const incomplete = todos.filter((todo) => todo.status === false);
 
   return (
     <div class="todo__list-container">
@@ -50,16 +50,19 @@ function TodoList({ todos, editTodo, deleteTodo }) {
         ) : (
           <li class="todo--none">No active tasks</li>
         )}
-        {completed.length > 0 && (
-          <li class="completed--item" id={todo.id} value={todo.content}>
-            <span class="completed--content" id={todo.id}>
-              {todo.content}
-            </span>
-            <button class="btn--delete" id={todo.id}>
-              {deleteIcon}
-            </button>
-          </li>
-        )}
+        {completed.length > 0 &&
+          completed.map((todo) => {
+            return (
+              <li class="completed--item" id={todo.id} value={todo.content}>
+                <span class="completed--content" id={todo.id}>
+                  {todo.content}
+                </span>
+                <button class="btn--delete" id={todo.id}>
+                  {deleteIcon}
+                </button>
+              </li>
+            );
+          })}
       </ul>
     </div>
   );
