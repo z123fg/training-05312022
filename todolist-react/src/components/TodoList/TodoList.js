@@ -24,7 +24,7 @@ const deleteIcon = (
   </svg>
 );
 
-function TodoList({ todos, editTodo, deleteTodo }) {
+function TodoList({ todos, editTodo, deleteTodo, refreshTodos }) {
   const completed = todos.filter((todo) => todo.status === true);
   const incomplete = todos.filter((todo) => todo.status === false);
 

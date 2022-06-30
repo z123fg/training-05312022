@@ -4,7 +4,7 @@ const CURL = "http://localhost:3000/completed";
 const addTodo = (newTodos) => {
   return fetch(URL, {
     method: "POST",
-    body: JSON.stringify(newTodos),
+    body: JSON.stringify({ ...newTodos, status: false }),
     headers: {
       "Content-Type": "application/json",
     },

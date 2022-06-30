@@ -14,18 +14,25 @@ const root = createRoot(rootElement);
 export default function App() {
   const [todos, setTodos] = useState([]);
 
-  useEffect(() => {
+  const refreshTodos = () => {
     getTodos().then((res) => {
       if (res) {
         setTodos(res);
       }
     });
+  };
+  useEffect(() => {
+    refreshTodos();
   }, []);
 
   return (
     <>
-      <TodoInput addTodo={addTodo} />
-      <TodoList todos={todos} deleteTodo={deleteTodo} />
+      <TodoInput addTodo={addTodo} refreshTodos={refreshTodos} />
+      <TodoList
+        todos={todos}
+        deleteTodo={deleteTodo}
+        refreshTodos={refreshTodos}
+      />
     </>
   );
 }

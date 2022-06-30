@@ -1,29 +1,35 @@
 import React, { useState } from "react";
 
-function TodoInput({ addTodo }) {
+function TodoInput({ addTodo, refreshTodos }) {
   const [todo, setTodo] = useState("");
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     if (todo === "" || todo === null) {
       return;
     } else {
-      addTodo(todo);
+      addTodo(todo).then(() => {
+        setTodo({ content: "" });
+        refreshTodos();
+      });
     }
-    event.preventDefault();
   };
-
   const handleInputChange = (event) => {
     if (!event) {
       return;
     }
 
     const newValue = event.target.value;
-    setTodo(newValue);
+    setTodo({ content: newValue });
   };
 
   return (
     <form class="todo__form">
-      <input class="form--input" value={todo} onChange={handleInputChange} />
+      <input
+        class="form--input"
+        value={todo.content}
+        onChange={handleInputChange}
+      />
       <button class="btn--submit" onClick={(e) => handleSubmit(e)}>
         Submit
       </button>
