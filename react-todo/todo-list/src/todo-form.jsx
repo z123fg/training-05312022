@@ -7,58 +7,59 @@ import APIs from "./APIs";
 function Todo(){
     const [loading, setLoading] = useState(true);
     const [todos, setTodos] = useState([]);
+    // fetch data from backend
     useEffect(()=> {
         // fetch todos from backend
-            //completed: false
+            // completed: false
             // id: 1
             // title: "delectus aut autem"
-        // console.log(APIs);
-        fetch('https://jsonplaceholder.typicode.com/todos')
-            .then(response => response.json())
-            .then((todos)=> {
+        APIs.getTodos().then((todos)=> {
                 setLoading(false);
                 let tempTodos = todos.map(obj => ({...obj, isEditing: false}));
                 tempTodos.sort((a, b) => Number(a.completed) - Number(b.completed))
+                console.log("todos: ", tempTodos);
                 setTodos(tempTodos);
             })
             .catch(err => {console.log("error fetching data")})
     },[])
-
+    // add new todo
     const handleAddTodo = (e) => {
         e.preventDefault();
         let newTodo = {
-            id: Math.random(),
             title: e.target.title.value,
             completed: false
         }
-        // send this todo to backend
-
-        // ...
-        newTodo.isEditing = false;
-        let newTodos = [...todos, newTodo].sort((a, b) => Number(a.completed) - Number(b.completed));
-        setTodos(newTodos);
+        APIs.addTodo(newTodo).then(res=> {
+            let newTodos = [...todos, {...res, isEditing: false}].sort((a, b) => Number(a.completed) - Number(b.completed));
+            setTodos(newTodos);
+        })
 
     }
-
+    // update complete task
     const handleCompleteTask = (id) => {
-        let newTodos = todos.map(todo => {
-            if (todo.id === id){
-                return {...todo, completed: !todo.completed};
-            } else {return {...todo}}
+        let updatedTodo = todos.find(todo => todo.id === id);
+        updatedTodo.completed = !updatedTodo.completed;
+        delete updatedTodo.isEditing;
+        let sTodoIndex = todos.findIndex(todo => +todo.id === +id);
+        APIs.updateTodo(id, updatedTodo).then(res =>{
+            let tempTodos = [...todos];
+            tempTodos[sTodoIndex] = {...updatedTodo, isEditing: false};
+            tempTodos.sort((a, b) => Number(a.completed) - Number(b.completed));
+            setTodos(tempTodos);
         })
-        newTodos.sort((a, b) => Number(a.completed) - Number(b.completed))
-        setTodos(newTodos);
     }
-
+    // Update content of todo
     const toggleEdit = (id) => {
-        let newTodos = todos.map(todo => {
-            if (todo.id === id){
-                // check if is Editing if editing => update the title with backend
-                return {...todo, isEditing: !todo.isEditing}
-
-            } else {return {...todo}}
-        })
-        setTodos(newTodos);
+        let sTodoIndex = todos.findIndex(todo => +todo.id === +id);
+        let tempTodos = [...todos];
+        if(tempTodos[sTodoIndex].isEditing){
+            let updatedTodo = tempTodos[sTodoIndex];
+            delete updatedTodo.isEditing;
+            APIs.updateTodo(id, updatedTodo).then(res => {
+                tempTodos[sTodoIndex].isEditing = false;
+            })
+        } else {tempTodos[sTodoIndex].isEditing = true}
+        setTodos(tempTodos);
     }
     
     const handleOnChangeTodo = (e, id) =>{
@@ -72,13 +73,14 @@ function Todo(){
 
     const handleDelete = (id) => {
         // update with backend first then
-        let newTodos = todos.filter( todo =>(todo.id !== id))
-        setTodos(newTodos);
+        APIs.deleteTodo(id).then(res => {
+            let newTodos = todos.filter( todo =>(todo.id !== id))
+            setTodos(newTodos);
+        })
     }
 
     return (
         <div>
-            <h1>TODO</h1>
             <form className="todo__form" onSubmit={(e)=>{handleAddTodo(e)}}>
                 <input className="input--form" type="text" name="title" required/>
                 <button className="btn--submit">Submit</button>
