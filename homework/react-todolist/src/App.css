@@ -1,0 +1,79 @@
+.todolist {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.todolist__input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 300px;
+  height: 20px;
+}
+.todolist__input input {
+  width: 65%;
+  height: 100%;
+  border-radius: 0.5em;
+}
+
+.todolist__input button {
+  width: 25%;
+  height: 100%;
+  color: #f0f0f0;
+  border: none;
+  font-size: 18px;
+  border-radius: 0.4em;
+  background-color: rgb(101, 140, 196);
+}
+.todolist__list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 300px;
+  border: 2px solid #4caf50;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+.todolist__list-container li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: lightsteelblue;
+  margin: 0.2em;
+}
+li span {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+li checkbox {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+
+li s {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+li button {
+  background-color: #c94c4c;
+  color: #f0f0f0;
+  border-radius: 0.4em;
+  height: 30px;
+}
+button:hover {
+  background-color: lightblue;
+}

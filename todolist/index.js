@@ -1,10 +1,10 @@
 const APIs = (() => {
   const URL = "http://localhost:3000/todos";
 
-  const addTodo = (newTodos) => {
+  const addTodo = (newTodo) => {
     return fetch(URL, {
       method: "POST",
-      body: JSON.stringify(newTodos),
+      body: JSON.stringify(newTodo),
       headers: {
         "Content-Type": "application/json",
       },
