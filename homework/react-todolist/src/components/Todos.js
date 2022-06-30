@@ -7,8 +7,8 @@ class Todos extends React.Component {
       <>
         <div className="todolist__container">
           <ul className="todolist__list-container">
-            {todos.map((todo) => (
-              <li key={todo.id} className="todolist_list-element">
+            {todos.map((todo, index) => (
+              <li key={index} className="todolist_list-element">
                 <Todo
                   todo={todo}
                   toggleTodo={toggleTodo}

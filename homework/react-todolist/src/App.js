@@ -5,22 +5,38 @@ import "./App.css";
 class App extends React.Component {
   state = {
     newTodoVal: "",
-    todos: [{ id: 1, context: "make coffee", complete: false }],
+    todos: [],
   };
-
+  getTodo = () => {
+    this.setState(() => {
+      fetch("http://localhost:3000/todos")
+        .then((res) => res.json())
+        .then((result) =>
+          this.setState({
+            todos: result,
+          })
+        );
+    });
+  };
+  componentDidMount() {
+    this.getTodo();
+  }
   addTodo = (newTodoVal) => {
     newTodoVal = newTodoVal.trim();
     if (newTodoVal) {
-      const { todos } = this.state;
-      let newId = todos.length === 0 ? 0 : todos[todos.length - 1].id + 1;
-      todos.push({
-        id: newId,
-        context: newTodoVal,
-        complete: false,
+      let newTodo = { context: newTodoVal, complete: false };
+      let res = fetch("http://localhost:3000/todos", {
+        method: "POST",
+        body: JSON.stringify(newTodo),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        return res.json();
       });
-      this.setState({ newTodoVal: "", todos });
+      this.setState({ todos: [res, ...this.state.todos] });
     } else {
-      alert("please enter some text");
+      alert("please enter some texts");
     }
   };
   toggleTodo = (todo) => {
@@ -34,9 +50,15 @@ class App extends React.Component {
     this.setState({ todos });
   };
   deleteTodo = (todo) => {
-    const todos = this.state.todos.filter((t) => {
-      return todo.id !== t.id;
+    fetch(`http://localhost:3000/todos/${todo.id}`, {
+      method: "DELETE",
+    }).then((res) => {
+      return res.json();
     });
+    let todos = this.state.todos.filter((t) => {
+      return +todo.id !== +t.id;
+    });
+    console.log(todos);
     this.setState({ todos });
   };
 
