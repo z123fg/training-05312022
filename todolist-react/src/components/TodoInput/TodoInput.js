@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 
-class TodoList extends PureComponent {
+class TodoInput extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -10,7 +10,7 @@ class TodoList extends PureComponent {
   }
 
   componentDidMount = () => {
-    console.log("TodoList mounted");
+    console.log("TodoInput mounted");
   };
 
   static getDerivedStateFromError(error) {
@@ -23,19 +23,19 @@ class TodoList extends PureComponent {
   }
 
   getDerivedStateFromProps = (nextProps, prevState) => {
-    console.log("TodoList getDerivedStateFromProps", nextProps, prevState);
+    console.log("TodoInput getDerivedStateFromProps", nextProps, prevState);
   };
 
   getSnapshotBeforeUpdate = (prevProps, prevState) => {
-    console.log("TodoList getSnapshotBeforeUpdate", prevProps, prevState);
+    console.log("TodoInput getSnapshotBeforeUpdate", prevProps, prevState);
   };
 
   componentDidUpdate = () => {
-    console.log("TodoList did update");
+    console.log("TodoInput did update");
   };
 
   componentWillUnmount = () => {
-    console.log("TodoList will unmount");
+    console.log("TodoInput will unmount");
   };
 
   render() {
@@ -43,19 +43,20 @@ class TodoList extends PureComponent {
       return <h1>Something went wrong.</h1>;
     }
     return (
-      <div class="todo__list-container">
-        <ul class="todo__list"></ul>
-      </div>
+      <form class="todo__form">
+        <input class="form--input" />
+        <button class="btn--submit">Submit</button>
+      </form>
     );
   }
 }
 
-TodoList.propTypes = {
+TodoInput.propTypes = {
   // bla: PropTypes.string,
 };
 
-TodoList.defaultProps = {
+TodoInput.defaultProps = {
   // bla: 'test',
 };
 
-export default TodoList;
+export default TodoInput;
