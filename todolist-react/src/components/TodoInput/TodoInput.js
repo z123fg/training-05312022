@@ -38,6 +38,10 @@ class TodoInput extends PureComponent {
     console.log("TodoInput will unmount");
   };
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+  };
+  
   render() {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
@@ -45,7 +49,9 @@ class TodoInput extends PureComponent {
     return (
       <form class="todo__form">
         <input class="form--input" />
-        <button class="btn--submit">Submit</button>
+        <button class="btn--submit" onClick={(e => this.handleSubmit(e))}>
+          Submit
+        </button>
       </form>
     );
   }

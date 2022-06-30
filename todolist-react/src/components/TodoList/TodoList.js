@@ -5,6 +5,7 @@ class TodoList extends PureComponent {
     super(props);
 
     this.state = {
+      todos: [],
       hasError: false,
     };
   }
@@ -37,6 +38,12 @@ class TodoList extends PureComponent {
   componentWillUnmount = () => {
     console.log("TodoList will unmount");
   };
+  completed = () => {
+    return this.todos.filter((todo) => todo.status === false);
+  };
+  incomplete = () => {
+    return this.todos.filter((todo) => todo.status !== false);
+  };
 
   render() {
     if (this.state.hasError) {
@@ -44,7 +51,37 @@ class TodoList extends PureComponent {
     }
     return (
       <div class="todo__list-container">
-        <ul class="todo__list"></ul>
+        <ul class="todo__list">
+          {this.incomplete.length > 0 ? (
+            this.incomplete.map((todo) => {
+              return (
+                <li class="todo--item" id={todo.id}>
+                  <span class="todo--content" id={todo.id}>
+                    ${todo.content}
+                  </span>
+                  <button class="btn--edit" id={todo.id}>
+                    ${editIcon}
+                  </button>
+                  <button class="btn--delete" id={todo.id}>
+                    ${deleteIcon}
+                  </button>
+                </li>
+              );
+            })
+          ) : (
+            <li>No active tasks</li>
+          )}
+          {this.completed.length > 0 && (
+            <li class="completed--item" id={todo.id} value={todo.content}>
+              <span class="completed--content" id={todo.id}>
+                {todo.content}
+              </span>
+              <button class="btn--delete" id={todo.id}>
+                {deleteIcon}
+              </button>
+            </li>
+          )}
+        </ul>
       </div>
     );
   }
