@@ -28,3 +28,5 @@ function TodoList() {
 }
 
 export default TodoList;
+
+//Need class component!!!
