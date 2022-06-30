@@ -5,6 +5,9 @@ html {
   align-items: center;
   background-color: #f0f0f0;
 }
+svg {
+  pointer-events: none;
+}
 .todo__container {
   display: flex;
   flex-direction: column;
@@ -17,7 +20,7 @@ html {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap:10px;
+  gap: 10px;
 }
 
 .todo__list-container {
@@ -48,7 +51,7 @@ html {
   background-color: #e6e2d3;
   border: 2px solid #e6e2d3;
   border-radius: 5px;
-  padding:5px;
+  padding: 5px;
   order: 1;
 }
 
@@ -68,7 +71,7 @@ html {
   background-color: #e6e2d3;
   border: 2px solid #e6e2d3;
   border-radius: 5px;
-  padding:5px;
+  padding: 5px;
   text-decoration: line-through;
   color: gray;
   order: 2;

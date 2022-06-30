@@ -21,9 +21,13 @@ const deleteTodo = (id) => {
   });
 };
 
-const editTodo = (id) => {
+const editTodo = (id, newTodo) => {
   return fetch(`${URL}/${id}`, {
     method: "PUT",
+    body: JSON.stringify({ ...newTodo }),
+    headers: {
+      "Content-Type": "application/json",
+    },
   }).then((res) => {
     return res.json();
   });

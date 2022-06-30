@@ -1,5 +1,4 @@
-import React from "react";
-import { unfinishTodo } from "../../utils/API";
+import React, { useEffect, useState } from "react";
 
 const editIcon = (
   <svg
@@ -36,6 +35,9 @@ function TodoList({
   const completed = todos.filter((todo) => todo.status === true);
   const incomplete = todos.filter((todo) => todo.status === false);
 
+  const [showingField, setShowingField] = useState("");
+  const [newTodo, setTodo] = useState({ content: "" });
+
   const handleComplete = (event) => {
     event.preventDefault();
     const id = event.target.id;
@@ -63,30 +65,83 @@ function TodoList({
     });
   };
 
+  const handleEdit = (id) => {
+    editTodo(id, newTodo).then(() => {
+      refreshTodos();
+      hideField();
+    });
+  };
+
+  const showField = (fieldId, value) => {
+    if (!fieldId) {
+      return;
+    }
+    setShowingField(fieldId);
+    setTodo({ content: value, id: fieldId, status: false });
+  };
+
+  const hideField = () => {
+    setShowingField("");
+    setTodo({ content: false });
+  };
+
+  const changeTodo = (event) => {
+    if (!event) {
+      return;
+    }
+
+    const newValue = event.target.value;
+    setTodo({ ...newTodo, content: newValue });
+  };
   return (
     <div class="todo__list-container">
       <ul class="todo__list">
         {incomplete.length > 0 ? (
           incomplete.map((todo) => {
             return (
-              <li
-                class="todo--item"
-                id={todo.id}
-                onClick={(e) => handleComplete(e)}
-              >
-                <span class="todo--content" id={todo.id}>
-                  {todo.content}
-                </span>
-                <button class="btn--edit" id={todo.id}>
-                  {editIcon}
-                </button>
-                <button
-                  class="btn--delete"
-                  id={todo.id}
-                  onClick={(e) => handleDelete(e)}
-                >
-                  {deleteIcon}
-                </button>
+              <li class="todo--item" id={todo.id}>
+                {parseInt(showingField) === todo.id ? (
+                  <>
+                    <input
+                      class="input--edit"
+                      id={todo.id}
+                      value={newTodo.content}
+                      onChange={(e) => changeTodo(e)}
+                    />
+                    <button
+                      class="btn--edit"
+                      id={todo.id}
+                      onClick={(e) => handleEdit(e.target.id)}
+                    >
+                      {editIcon}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span
+                      class="todo--content"
+                      id={todo.id}
+                      onClick={(e) => handleComplete(e)}
+                    >
+                      {todo.content}
+                    </span>
+                    <button
+                      class="btn--edit"
+                      id={todo.id}
+                      value={todo.content}
+                      onClick={(e) => showField(e.target.id, e.target.value)}
+                    >
+                      {editIcon}
+                    </button>
+                    <button
+                      class="btn--delete"
+                      id={todo.id}
+                      onClick={(e) => handleDelete(e)}
+                    >
+                      {deleteIcon}
+                    </button>
+                  </>
+                )}
               </li>
             );
           })
@@ -96,13 +151,12 @@ function TodoList({
         {completed.length > 0 &&
           completed.map((todo) => {
             return (
-              <li
-                class="completed--item"
-                id={todo.id}
-                value={todo.content}
-                onClick={(e) => handleUnfinish(e)}
-              >
-                <span class="completed--content" id={todo.id}>
+              <li class="completed--item" id={todo.id} value={todo.content}>
+                <span
+                  class="completed--content"
+                  id={todo.id}
+                  onClick={(e) => handleUnfinish(e)}
+                >
                   {todo.content}
                 </span>
                 <button

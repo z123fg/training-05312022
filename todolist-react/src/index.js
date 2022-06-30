@@ -12,6 +12,7 @@ import {
   deleteTodo,
   completeTodo,
   unfinishTodo,
+  editTodo,
 } from "./utils/API";
 
 const rootElement = document.getElementById("root");
@@ -37,6 +38,7 @@ export default function App() {
       <TodoList
         todos={todos}
         deleteTodo={deleteTodo}
+        editTodo={editTodo}
         completeTodo={completeTodo}
         unfinishTodo={unfinishTodo}
         refreshTodos={refreshTodos}
