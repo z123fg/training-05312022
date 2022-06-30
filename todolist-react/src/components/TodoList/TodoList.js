@@ -1,4 +1,5 @@
 import React from "react";
+import { unfinishTodo } from "../../utils/API";
 
 const editIcon = (
   <svg
@@ -24,9 +25,43 @@ const deleteIcon = (
   </svg>
 );
 
-function TodoList({ todos, editTodo, deleteTodo, refreshTodos }) {
+function TodoList({
+  todos,
+  editTodo,
+  deleteTodo,
+  refreshTodos,
+  completeTodo,
+  unfinishTodo,
+}) {
   const completed = todos.filter((todo) => todo.status === true);
   const incomplete = todos.filter((todo) => todo.status === false);
+
+  const handleComplete = (event) => {
+    event.preventDefault();
+    const id = event.target.id;
+
+    completeTodo(id).then(() => {
+      refreshTodos();
+    });
+  };
+
+  const handleUnfinish = (event) => {
+    event.preventDefault();
+    const id = event.target.id;
+
+    unfinishTodo(id).then(() => {
+      refreshTodos();
+    });
+  };
+
+  const handleDelete = (event) => {
+    event.preventDefault();
+    const id = event.target.id;
+
+    deleteTodo(id).then(() => {
+      refreshTodos();
+    });
+  };
 
   return (
     <div class="todo__list-container">
@@ -34,14 +69,22 @@ function TodoList({ todos, editTodo, deleteTodo, refreshTodos }) {
         {incomplete.length > 0 ? (
           incomplete.map((todo) => {
             return (
-              <li class="todo--item" id={todo.id}>
+              <li
+                class="todo--item"
+                id={todo.id}
+                onClick={(e) => handleComplete(e)}
+              >
                 <span class="todo--content" id={todo.id}>
                   {todo.content}
                 </span>
                 <button class="btn--edit" id={todo.id}>
                   {editIcon}
                 </button>
-                <button class="btn--delete" id={todo.id}>
+                <button
+                  class="btn--delete"
+                  id={todo.id}
+                  onClick={(e) => handleDelete(e)}
+                >
                   {deleteIcon}
                 </button>
               </li>
@@ -53,11 +96,20 @@ function TodoList({ todos, editTodo, deleteTodo, refreshTodos }) {
         {completed.length > 0 &&
           completed.map((todo) => {
             return (
-              <li class="completed--item" id={todo.id} value={todo.content}>
+              <li
+                class="completed--item"
+                id={todo.id}
+                value={todo.content}
+                onClick={(e) => handleUnfinish(e)}
+              >
                 <span class="completed--content" id={todo.id}>
                   {todo.content}
                 </span>
-                <button class="btn--delete" id={todo.id}>
+                <button
+                  class="btn--delete"
+                  id={todo.id}
+                  onClick={(e) => handleDelete(e)}
+                >
                   {deleteIcon}
                 </button>
               </li>

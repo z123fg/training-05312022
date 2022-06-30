@@ -6,44 +6,14 @@
       "status": false
     },
     {
-      "content": "2",
-      "id": 2,
-      "status": true
+      "content": "todo1",
+      "status": true,
+      "id": 2
     },
     {
-      "content": "3",
-      "id": 3,
-      "status": true
-    },
-    {
-      "content": "4",
-      "id": 4,
-      "status": true
-    },
-    {
-      "content": "react",
+      "content": "todo2",
       "status": false,
-      "id": 5
-    },
-    {
-      "content": "gamer",
-      "status": false,
-      "id": 6
-    },
-    {
-      "content": "gggfdgs",
-      "status": false,
-      "id": 7
-    },
-    {
-      "content": "testerser",
-      "status": false,
-      "id": 8
-    },
-    {
-      "content": "noice",
-      "status": false,
-      "id": 9
+      "id": 3
     }
   ]
 }

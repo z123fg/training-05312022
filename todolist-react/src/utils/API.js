@@ -29,7 +29,6 @@ const editTodo = (id) => {
   });
 };
 const completeTodo = (id) => {
-  console.log("finishing todo... id: " + id);
   return fetch(`${URL}/${id}`, {
     method: "PATCH",
     body: JSON.stringify({ status: true }),

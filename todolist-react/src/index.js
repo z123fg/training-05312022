@@ -6,7 +6,13 @@ import TodoList from "./components/TodoList";
 
 import "./App.css";
 
-import { getTodos, addTodo, deleteTodo } from "./utils/API";
+import {
+  getTodos,
+  addTodo,
+  deleteTodo,
+  completeTodo,
+  unfinishTodo,
+} from "./utils/API";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
@@ -31,6 +37,8 @@ export default function App() {
       <TodoList
         todos={todos}
         deleteTodo={deleteTodo}
+        completeTodo={completeTodo}
+        unfinishTodo={unfinishTodo}
         refreshTodos={refreshTodos}
       />
     </>
