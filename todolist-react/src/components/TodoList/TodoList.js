@@ -93,6 +93,29 @@ function TodoList({
     const newValue = event.target.value;
     setTodo({ ...newTodo, content: newValue });
   };
+
+  const handleKeyDown = (event, fieldId) => {
+    if (!event || !fieldId) {
+      return;
+    }
+
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+      return;
+    }
+
+    const key = event.key;
+
+    if (!key) {
+      return;
+    }
+
+    if (key === "Escape") {
+      hideField();
+    } else if (key === "Enter") {
+      handleEdit(fieldId);
+    }
+  };
+
   return (
     <div class="todo__list-container">
       <ul class="todo__list">
@@ -107,6 +130,7 @@ function TodoList({
                       id={todo.id}
                       value={newTodo.content}
                       onChange={(e) => changeTodo(e)}
+                      onKeyDown={(e) => handleKeyDown(e, e.target.id)}
                     />
                     <button
                       class="btn--edit"
