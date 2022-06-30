@@ -1,0 +1,97 @@
+.FilterSort_Container {
+    transition: display 1s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.SearchFilter_Add {
+    display: flex;
+    justify-content: center;
+    padding: 0px 
+}
+.SearchFilter_Add_Text {
+    width: min(100%, 250px);
+    height: 35px;
+    margin-right: 20px;
+    border: lightgray 1px solid;
+    border-radius: 10px;
+}
+.SearchFilter_Add_Button {
+    width: min(75px, 75px);
+    background-color: #008cba;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: larger;
+}
+.SearchFilter_FilterSort {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.FilterSort_Toggle {
+    cursor: pointer;
+    background-color: rgba(0, 140, 186, 0.5);
+    border: none;
+    border-radius: 15px;
+    height: 35px;
+    font-size: larger;
+    color: white;
+}
+.FilterSort_Container {
+    display: flex;
+    flex-direction: column;
+    border:3px solid #e6e2d3;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+.FilterSort_Filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.FilterSort_Filter_Label {
+    font-size: larger;
+    background-color: #e6e2d3;
+    width: 100%;
+}
+.FilterSort_Filter_FilterContentContainer {
+    display: flex;
+    justify-content: space-between;
+    width: min(100%, 320px);
+    margin-top: 5px;
+}
+.FilterSort_Filter_FilterCompletedContainer {
+    display: flex;
+    justify-content: space-between;
+    width: min(100%, 320px);
+    margin-top: 5px;
+}
+.FilterSort_Sort {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.FilterSort_Sort_Label {
+    font-size: larger;
+    background-color: #e6e2d3;
+    width: 100%;
+}
+.FilterSort_Sort_SortContentContainer {
+    display: flex;
+    justify-content: space-between;
+    width: min(100%, 200px);
+    margin-top: 5px;
+}
+.FilterSort_Sort_SortCompletedContainer {
+    display: flex;
+    justify-content: space-between;
+    width: min(100%, 200px);
+    margin-top: 5px;
+}
+.FilterSort_Sort_SortAgeContainer {
+    display: flex;
+    justify-content: space-between;
+    width: min(100%, 200px);
+    margin-top: 5px;
+}

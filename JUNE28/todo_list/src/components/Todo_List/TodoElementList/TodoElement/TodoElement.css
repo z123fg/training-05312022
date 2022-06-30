@@ -1,0 +1,51 @@
+svg {
+    width: 25px;
+    height: 25px;
+    fill: white;
+}
+
+.TodoElement {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #e6e2d3;
+    margin-top: 10px;
+    border-radius: 15px;
+}
+.TodoElement_ContentContainer {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}
+.TodoElement_ContentContainer_Label {
+    font-size: larger;
+    cursor: pointer;
+}
+.TodoElement_ContentContainer_Label.completed {
+    text-decoration: line-through;
+}
+.TodoElement_EditText {
+    flex: 1;
+    margin-right: 20px;
+    border-radius: 10px;
+    border: 1px solid grey;
+}
+.TodoElementButton {
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    margin: 3px;
+}
+.TodoElement_EditButton {
+    background-color: #008cba;
+}
+.TodoElement_DeleteButton {
+    background-color: #c94c4c;
+}
+.TodoElement_CancelButton {
+    margin-right: 10px;
+    background-color: #c94c4c;
+}
+.TodoElement_SaveButton {
+    background-color: #008cba;
+}
