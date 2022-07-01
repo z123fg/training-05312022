@@ -50,3 +50,19 @@
 ## React
 - https://reactjs.org/docs/reconciliation.html
 - https://hackernoon.com/virtual-dom-reconciliation-and-diffing-algorithm-explained-simply-ycn34gr
+
+### React lifecycle methods
+![](https://i2.wp.com/programmingwithmosh.com/wp-content/uploads/2018/10/Screen-Shot-2018-10-31-at-1.44.28-PM.png?ssl=1)
+- Mounting
+  - constructor
+  - *getDerivedStateFromProps*
+  - render
+  - componentDidMount
+- Updating
+  - *getDerivedStateFromProps*
+  - *shouldComponentUpdate*
+  - render
+  - *getSnapshotBeforeUpdate*
+  - componentDidUpdate
+- Unmounting
+  - componentWillUnmount
