@@ -32,17 +32,11 @@ import SpanElement from "./SpanElement";
 class TodoList extends React.Component {
   render() {
     // const { handleSpan, handleEdit, handleDelete } = this.props;
-    const { handleEdit, handleDelete, content } = this.props;
+    const { handleEdit, handleDelete, list } = this.props;
     return (
-      // <li>
-      //   {/* <SpanElement handleSpan={handleSpan} /> */}
-      //   <SpanElement content={content} />
-      //   <EditElement handleEdit={handleEdit} />
-      //   <DeleteElement handleDelete={handleDelete} />
-      // </li>
       <ul>
-        {content.map((item) => (
-          <li key={item.id}>
+        {list.map((item) => (
+          <li key={item.id} id={item.id}>
             <SpanElement content={item.content} />
             <EditElement handleEdit={handleEdit} />
             <DeleteElement handleDelete={handleDelete} />

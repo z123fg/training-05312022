@@ -3,48 +3,49 @@ import "./App.css";
 import TodoList from "./components/ListElement/ElementGroup";
 import React from "react";
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <h1>Todo List</h1>
-
-//       {/* <li>{todoList[0].content}</li> */}
-//       <TodoList />
-//       {/* {todoList.map((item) => (
-//           <TodoList key={item.id} item={item} />
-//         ))} */}
-//     </div>
-//   );
-// }
-
 class App extends React.Component {
-  // state = [
-  //   { id: 1, content: "one", isComplete: false },
-  //   { id: 2, content: "two", isComplete: false },
-  //   { id: 3, content: "three", isComplete: false },
-  // ];
-
-  // state = {
-  //   item: {
-  //     list: [
-  //       { id: 1, content: "one", isComplete: false },
-  //       { id: 2, content: "two", isComplete: false },
-  //       { id: 3, content: "three", isComplete: false },
-  //     ],
-  //   },
-  // };
-
   state = {
     list: [
-      { id: 1, content: "one", isComplete: false },
-      { id: 2, content: "two", isComplete: false },
+      { id: 1, content: "one", isComplete: false, isEdit: false },
+      { id: 2, content: "two", isComplete: false, isEdite: false },
     ],
   };
   // handleSpan = () => {};
 
-  handleEdit = () => {};
+  handleEdit = (event) => {
+    // for (let i = 0; i < this.state.list.length; i++) {
+    //   if (this.state.list[i].id === 1) {
+    //     console.log(
+    //       "in the handle edit ",
+    //       this.state.list[0],
+    //       this.state.list[1]
+    //     );
+    //     this.state.list[i].content = "changed";
+    //     this.setState((this.state.list = [...this.state.list]));
+    //   }
+    // }
 
-  handleDelete = () => {};
+    //const el = event.target.
+    const inputEl = event.target.parentElement.children.item(0);
+    //console.log("Event ", event.target.parentElement.children.item(0));
+  };
+
+  handleDelete = (event) => {
+    const el = event.target.parentElement;
+    for (let i = 0; i < this.state.list.length; i++) {
+      //if (this.state.list[i].id === 1)
+      if (this.state.list[i].id === el.id) {
+        console.log(
+          "in the handle edit ",
+          this.state.list[0].id,
+          this.state.list[1].id,
+          el.id
+        );
+        this.state.list[i].content = "changed";
+        this.setState((this.state.list = [...this.state.list]));
+      }
+    }
+  };
 
   render() {
     return (
@@ -57,7 +58,7 @@ class App extends React.Component {
             handleEdit={this.handleEdit}
             handleDelete={this.handleDelete}
             //content={this.state.list[0].content}
-            content={this.state.list}
+            list={this.state.list}
           />
         </ul>
       </div>
