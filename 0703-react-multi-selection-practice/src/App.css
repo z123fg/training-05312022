@@ -1,0 +1,35 @@
+.App {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.selection__container {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  align-content: center;
+  gap: 20px;
+}
+
+.alert {
+  margin-bottom: 20px;
+  background-color: rgb(242, 242, 151);
+  padding: 10px;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.select-items {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.btn--clear {
+  padding: 10px;
+  color: green;
+  font-size: 1.2rem;
+  font-weight: 800;
+  border: 1px solid green;
+}
