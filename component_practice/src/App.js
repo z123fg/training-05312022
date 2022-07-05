@@ -1,28 +1,26 @@
-//import logo from './logo.svg';
+import logo from './logo.svg';
 import './App.css';
+import React from "react";
+import List from "./components/List";
 
-function App() {
-  return (
+class App extends React.Component{
+  state = {
+    listElement:''
+  };
+
+  render () {
+    return(
     <div className="App">
       <header className="App-header">
-      <p>Selected Value: </p>
-      <br/>
-      <input type="checkbox" id="c1"/>
-      <label for="c1">Thing 1</label>
-      <br/><br/>
-      <input type="checkbox" id="c2"/>
-      <label for="c2">Thing 2</label>
-      <br/><br/>
-      <input type="checkbox" id="c3"/>
-      <label for="c3">Thing 3</label>
-      <br/><br/>
-      <input type="checkbox" id="c4"/>
-      <label for="c4">Thing 4</label>
-      <br/><br/>
-      <button>Clear all</button>
+        <div className="App_top">
+          <p>Selected Value: </p>
+        </div>
+        <br/>
+      <List listElement={this.listElement}/>
       </header>
     </div>
-  );
+    );
+  }
 }
 
 export default App;
