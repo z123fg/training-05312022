@@ -1,0 +1,45 @@
+body {
+  box-sizing: border-box;
+}
+.outerContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 450px;
+  border: 1px solid green;
+  border-radius: 8px;
+  padding: 8px;
+}
+.selectedValue {
+  background-color: #faf1da;
+  padding: 10px;
+}
+
+.selectAll {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: left;
+}
+
+.options:nth-last-child(2){
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 5px;
+  padding-bottom: 15px;
+}
+
+.clear-button {
+  padding: 10px;
+  border: 1px solid green;
+  color: green;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
