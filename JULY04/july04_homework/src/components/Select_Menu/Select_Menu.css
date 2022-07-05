@@ -1,0 +1,76 @@
+.SelectMenu {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 500px;
+    font-size: larger;
+    background-color: white;
+    max-width: 100vw;
+}
+.SelectMenuTopSection {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    flex: 1;
+}
+.SelectMenuSelectedValueContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    width: 100%;
+    height: 75px;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    background-color: #DFCFAB;
+    margin-bottom: 50px;
+}
+.SelectMenuSelectedValueLabelContainer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.SelectMenuCheckContainer {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.SelectMenuInput {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+.SelectMenuInput:checked {
+    accent-color: #447A1A;
+    color: white;
+}
+.SelectMenuSelectedLabel {
+    font-size: large;
+}
+.SelectMenuInputsContainer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.SelectMenuBottomSection {
+    border-top: 2px solid #A4A59D;
+    margin-top: 15px;
+    height: 75px;
+    padding: 15px;
+}
+.SelectMenuClear {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    color: #447A1A;
+    border: 2px solid #447A1A;
+    border-radius: 10px;
+    font-size: larger;
+}
