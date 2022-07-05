@@ -1,0 +1,11 @@
+.select-container{
+    background-color: rgb(230, 235, 83);
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 10px;
+
+    font-size: 20px;
+    letter-spacing: 3px;    
+    text-align: left;
+}
