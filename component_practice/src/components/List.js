@@ -32,7 +32,14 @@ function List(){
             <label for="c4">No Egg</label>
             <br/><br/>
             </label>
-            <button onClick={() => setChecked((c) => !c)} checked={checked} onChange={(e) => setChecked(e.target.checked)}>clear all</button>
+            <button onClick={() => 
+              [setChecked((c) => !c), 
+              setChecked2((c) => !c),
+              setChecked3((c) => !c)]} 
+              checked={checked} checked2={checked2} checked3={checked3} 
+              onChange={(e,f,g) => [setChecked(e.target.checked),
+                setChecked2(f.target.checked2),
+                setChecked3(g.target.checked3)]}>clear all</button>
             </>
         );
 }
