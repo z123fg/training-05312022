@@ -12,10 +12,6 @@ class App extends React.Component{
     return(
     <div className="App">
       <header className="App-header">
-        <div className="App_top">
-          <p>Selected Value: </p>
-        </div>
-        <br/>
       <List listElement={this.listElement}/>
       </header>
     </div>
