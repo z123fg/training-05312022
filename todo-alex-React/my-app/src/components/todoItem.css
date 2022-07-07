@@ -1,0 +1,18 @@
+.todo__list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap:15px;
+    padding:10px;
+    max-width: 300px;
+}
+
+.todo__list-item span{
+    flex-grow: 1;
+
+}
+
+.todo__list-item--completed-span{
+    text-decoration: line-through;
+}

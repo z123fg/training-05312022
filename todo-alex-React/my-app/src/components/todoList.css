@@ -1,0 +1,22 @@
+.todo__container{
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    gap: 10px;
+    align-items: center;
+    margin: 30px;
+}
+
+.todo__list-container{
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.todo_form{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}

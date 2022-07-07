@@ -1,33 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
-import React from 'react';
-import TodoInput from'./components/todoInput';
+import { useState } from 'react';
+import TodoList from './components/todoList'
 
-class App extends React.Component{
-  state = {
-    todoList: [],
-    todoElement: ""
-  };
-
-
-  addTodo = () =>{
-
-  }
-
-  render() {
-    return (
-      <div class="todo__container">
-        <form class="todo__form">
-          <TodoInput todoElement={this.todoElement}/>
-        </form>
-        <div class="todo__list-container">
-          <ul class="todo__list">
-
-          </ul>
-        </div>
-      </div>
+function App() {
+  const [showCounter, setShowCounter] = useState(true);
+  return (
+    <div className="App">
+      <TodoList/>
+    </div>
   );
-  }
 }
 
 export default App;
