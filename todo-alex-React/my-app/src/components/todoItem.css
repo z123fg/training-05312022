@@ -10,7 +10,7 @@
 
 .todo__list-item span{
     flex-grow: 1;
-
+    max-width: 300px;
 }
 
 .todo__list-item--completed-span{
