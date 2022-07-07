@@ -64,11 +64,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {/*  <CounterApp/> */}
-        {/* <CounterBoard counter={this.state.counter}/>
+         {/* <CounterApp/> */}
+        <CounterBoard counter={this.state.counter}/>
         <ButtonGroup handleDecrement={this.handleDecrement} handleIncrement={this.handleIncrement}/>
-        <Child/> */}
-        <CarsApp/>
+        <Child/>
+        {/* <CarsApp/> */}
       </div>
     );
   }
