@@ -1,15 +1,17 @@
 import React from "react";
-import { dispatch } from "../../../redux/redux";
-
-
+import { useDispatch } from "react-redux";
 
 const DecrementButton = () => {
+  const dispatch = useDispatch();
   const handleDecrement = () => {
-    dispatch({type:"COUNTER/DECREMENT"})
-  }
+    dispatch({ type: "COUNTER/DECREMENT" });
+  };
   return (
-    <button onClick={handleDecrement}>decrement</button>
-  ) 
-}
+    <>
+      <button onClick={handleDecrement}>decrement</button>
+     
+    </>
+  );
+};
 
 export default DecrementButton;
