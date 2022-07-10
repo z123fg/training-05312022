@@ -1,14 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
+const DecrementButton = ({handleDecrement}) => {
+  const {handleDecrementTestCounter} = useContext(TestContext);
+  const dispatch = useDispatch();
 
-class DecrementButton extends React.Component{
-  render(){
-    const {handleDecrement} = this.props;
 
     return (
+      <>
       <button onClick={handleDecrement}>decrement</button>
+      <button onClick={handleDecrementTestCounter}>decrement context counter</button>
+      </>
     ) 
-  }
 }
 
 export default DecrementButton;

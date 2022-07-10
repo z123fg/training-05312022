@@ -1,8 +1,9 @@
 import React from "react";
-
+import { useDispatch } from "react-redux";
 
 const IncrementButton = ({handleIncrement}) => {
-    const handleIncrement =() =>{
+  const dispatch = useDispatch();
+  const handleIncrement =() =>{
       dispatch ({type:"COUNTER/DECREMENT"})
     }
   

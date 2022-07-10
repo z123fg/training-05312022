@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import TodoItem from "./todoItem"
+import TodoItem from "./TodoItem"
+import "./Todolist.css";
 
 const URL = "http://localhost:3000/todos"
 
@@ -13,8 +14,9 @@ const TodoList = () => {
             console.log("res", res);
             setTodos(res.data.map(item=>({
                 ...item,
-
-            })));
+                isEdit: false,
+            }))
+            );
         });
     },[])
   
@@ -29,8 +31,9 @@ const TodoList = () => {
         }
         axios.post(URL,newTodo).then(res=>{
             setTodos(prev=>{
-                return[{...res.data, isEdit:false},...prev]
-            })
+                return[{...res.data, isEdit:false},...prev];
+            });
+            setValue("");
         })
     };
 
@@ -48,19 +51,21 @@ const TodoList = () => {
         const targetIndex = todos.findIndex(item=> (+item.id === +id));
         const targetTodo = todo.find[targetIndex];
         if(!targetTodo.isEdit){
-            setTodos(prev=>{
+            setTodos((prev)=>{
                 return [
                     ...prev.slice(0,targetIndex),
                     {
                         ...prev[targetIndex],
-                        isEdit:true
+                        isEdit:true,
                     },
                     ...prev.slice(targetIndex+1)
                 ]
             })
         }
         else{
-            axios.patch(`${URL}/${id}`,{content: targetTodo.content}).then(res=>{
+            axios
+            .patch(`${URL}/${id}`,{content: targetTodo.content})
+            .then(res=>{
                 setTodos(prev=> [
                 ...prev.slice(0,targetIndex),
                 {
@@ -74,27 +79,30 @@ const TodoList = () => {
         }
     };
 
-    const completeTodo = () => {
+    const completeTodo = (id) => {
         const targetIndex = todos.findIndex(item=>+item.id === +id);
-        axios.patch(`${URL}/${id}`,{})
-        setTodos(prev=>[
-            ...prev.slice(0,targetIndex),
-            {
-                ...prev[targetIndex],
-                content:res.data.isCompleted
-            },
-            ...prev.slice(targetIndex+1)
-        ])
+        axios
+        .patch(`${URL}/${id}`,{ isCompleted: !todos[targetIndex].isCompleted })
+        .then((res) =>{
+            setTodos(prev=>[
+                ...prev.slice(0,targetIndex),
+                {
+                    ...prev[targetIndex],
+                    content:res.data.isCompleted,
+                },
+                ...prev.slice(targetIndex+1),
+            ]);
+        });
     };
 
-    const changeItemTodo = (id) => {
+    const changeItemTodo = (id, e) => {
         const targetIndex = todos.findIndex(item=> (+item.id === +id));
-        setTodos(prev=>{
+        setTodos((prev)=>{
             return [
                 ...prev.slice(0, targetIndex),
                 {
                     ...prev[targetIndex],
-                    content:res.data.target,
+                    content: e.data.target,
 
                 },
                 ...prev.slice(targetIndex+1)

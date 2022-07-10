@@ -13,11 +13,39 @@ function counterReducer(state={counter:0}, action){
     }
 }
 
-const store = createStore(counterReducer);
+const myCreateStore  = (reducerFn) =>{
+    const callbackArray = [];
+
+    let state = reducerFn(undefined,{});
+    
+    const dispatch = (action) =>{
+        state = reducerFn(state,action===undefined?{}:action);
+        callbackArray.forEach(cb=>cb());
+    }
+
+    const getState = () =>{
+        return state;
+    }
+
+    const subscribe = (cb) =>{
+        callbackArray.push(callback);
+    }
+    
+    const store = {
+        dispatch,
+        getState, 
+        subscribe
+    }
+
+    return store;
+}
+
+const store = myCreateStore(counterReducer);
 
 export const {dispatch, getState, subscribe} = store;
 console.log(dispatch, getState, subscribe);
 
+//export store; 
 subscribe(() => {
     console.log("current State", getState());
 })
