@@ -9,8 +9,13 @@ const Table2 = (props) => {
 
     // needs refactor
     // should not hard code these two arrays
-    const regions = ["US", "EU", "CA"];
-    const models = ["A", "B", "C", "D"];
+    // const regions = ["US", "EU", "CA"];
+    // const models = ["A", "B", "C", "D"];
+
+    // The Array.from() static method creates a new, shallow-copied Array instance from an iterable or array-like object.
+    // The Set object lets you store unique values of any type, whether primitive values or object references.
+    const regions = Array.from(new Set(data.map(data => data.region)));
+    const models = Array.from(new Set(data.map(data => data.model))); 
 
     const handleRegionChange = (e) => {
         setRegion(e.target.value)
@@ -78,3 +83,6 @@ const Table2 = (props) => {
 }
 
 export default Table2
+
+// The Array.from() static method creates a new, shallow-copied Array instance from an iterable or array-like object.
+// The Set object lets you store unique values of any type, whether primitive values or object references.
