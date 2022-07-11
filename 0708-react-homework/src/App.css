@@ -1,0 +1,12 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 auto;
+  padding: 4rem;
+}
+
+table, th, td {
+  border:1px solid black;
+}
+
