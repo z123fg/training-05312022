@@ -1,5 +1,6 @@
 import React from "react";
 import DisplayData from "./DisplayData";
+import DisplayData2 from "./DisplayData2";
 import "./TeslaData.css"
 
 const TeslaData = () =>{
@@ -64,7 +65,13 @@ const TeslaData = () =>{
     return(
         <>
         <table>
+          <h>Question 1</h>
             <DisplayData data={data} />
+        </table>
+        <table>
+        <h>Question 2</h>
+        <br />
+            <DisplayData2 data={data} />
         </table>
         </>
     );
