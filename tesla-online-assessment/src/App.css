@@ -1,0 +1,16 @@
+.table__container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  padding:4px;
+  width: 500px;
+  font-weight:600;
+}
+
+
