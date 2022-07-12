@@ -57,7 +57,7 @@ https://www.evernote.com/shard/s706/sh/56f695b5-5f88-683d-bf2b-42bfec1c5764/0f81
 
 **practice**
 Build this multi-selection component using functional component with hooks
-![](https://files.slack.com/files-pri/TKUCL919N-F03L853130C/selectall.jpg)
+![selectall](https://files.slack.com/files-pri/TKUCL919N-F03L853130C/selectall.jpg)
 
 ### 2022/07/07
 
