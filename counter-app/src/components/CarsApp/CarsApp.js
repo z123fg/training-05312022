@@ -12,8 +12,19 @@ import SellButton from "./SellButton";
   shouldComponentUpdate
   PureComponent
 
+  HOC: higher order component, reuse logic for class component, reuse state management and life cycle logic
+  react router: withRouter(hoc)
+  react redux: connect(function return another hoc)
+  hoc hell: drawbacks of hoc
+
+  analytic
+
 */
+
+
 class CarsApp extends React.Component {
+
+ 
   state = {
     dealer: "goodcar",
     cars: {
@@ -36,7 +47,11 @@ class CarsApp extends React.Component {
       ],
     },
   };
-
+ constructor(props){
+  super(props);
+  console.log(document.querySelectorAll(".counter"));//[]
+  console.log(document.getElementsByClassName("counter"));//[div]
+ }
   handleSellCar = (id) => {
     //update the state
     console.log("sell", id);
@@ -105,7 +120,7 @@ class CarsApp extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="counter">
         <span>{this.state.dealer}</span>
         <div style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
           {this.state.cars.sedan.map((car) => {

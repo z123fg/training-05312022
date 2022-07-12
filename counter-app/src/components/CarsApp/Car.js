@@ -1,4 +1,6 @@
 import React from "react";
+import withLog from "../../hoc/withLog";
+import withLog2 from "../../hoc/withLog2";
 
 class Car extends React.Component {
   componentDidUpdate() {
@@ -13,22 +15,6 @@ class Car extends React.Component {
   //   return true;
   // }
 
-  shouldComponentUpdate(nextProps) {
-    //pureComponent
-    /*  if(this.props.car === nextProps.car){
-      return false
-    } */
-    if (
-      Object.entries(this.props).every(([key, value]) => {
-        return value === nextProps[key];
-      })
-    ) {
-      return false;
-    }
-    return true;
-  }
-
-  
   render() {
     const { brand, number } = this.props.car;
     return (
@@ -40,4 +26,4 @@ class Car extends React.Component {
   }
 }
 
-export default Car;
+export default withLog2(withLog2(withLog2(withLog(Car))));
