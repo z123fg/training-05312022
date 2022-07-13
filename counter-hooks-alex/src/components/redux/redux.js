@@ -1,4 +1,20 @@
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
+import thunk from "redux-thunk"
+
+export const incrementAndPrint = () => (dispatch, getState) =>{
+    setTimeout(() => {
+        console.log("setTimeout");
+    },1000);
+    dispatch({type: "COUNTER/INCREMENT"});
+}
+
+// const getBookList = () => (dispathch, getState) => {
+//     getBookListApi(URL). then(res => {
+//         dispatch ({type: "UPDATEBOOKLIST", payload:res})})
+//     })
+// }
+
+export const increment = () => ({type:"COUNTER/INCREMENT"});
 
 function counterReducer(state={counter:0}, action){
     switch(action.type){
@@ -12,6 +28,8 @@ function counterReducer(state={counter:0}, action){
             return state;
     }
 }
+
+
 
 const myCreateStore  = (reducerFn) =>{
     const callbackArray = [];
@@ -38,6 +56,22 @@ const myCreateStore  = (reducerFn) =>{
     }
 
     return store;
+}
+
+const myThunk = function(store) {
+    return function(next) {
+        return function(action){
+            try{
+            console.log("action", action);
+            if (typeof action === "object"){
+                next(action);
+            } else if (typeof action === "function"){
+                console.log(store);
+                next();
+            }
+        } catch (err) {}
+    }
+    }
 }
 
 const store = myCreateStore(counterReducer);
