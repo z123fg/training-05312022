@@ -7,4 +7,8 @@ export const store = configureStore({
     searchbook: searchbookReducer,
     wishlist:wishlistReducer
   },
+  middleware: (getDefaultMiddleware) => {
+    console.log("defaultMiddleware", getDefaultMiddleware())
+    return getDefaultMiddleware()
+  }
 })

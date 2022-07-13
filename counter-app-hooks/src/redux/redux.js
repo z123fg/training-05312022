@@ -6,7 +6,40 @@
 
 */
 
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+
+import thunk from "redux-thunk";
+
+/* 
+  thunk allows you to dispatch a function
+  without thunk you can only dispatch action object
+*/
+
+export const incrementAndPrint /* action creator */ =
+  () => (dispatch, getState) => {
+    setTimeout(() => {
+      //side Effect
+      console.log("setTimeout");
+    }, 1000);
+    dispatch({ type: "COUNTER/INCREMENT" });
+    /* 
+      getBooklist api,
+      then, dispatch, update state
+    
+    */
+  };
+
+/*  
+ const getBookList = () => (dispatch, getState) => {
+    getBookListApi(URL).then(res=>{
+      dispatch({type:"UPDATEBOOKLIST", payload:res})
+    }).catch((err)=>{
+      dispatch({type:"UPDATEBOOKLISTFAILED"})
+    })
+  } 
+  */
+
+export const increment = () => ({ type: "COUNTER/INCREMENT" });
 
 function counterReducer(
   state = { counter: 0, nested: { nestedArr: [] } },
@@ -16,8 +49,11 @@ function counterReducer(
   switch (
     action.type //dot notation
   ) {
-    case "COUNTER/INCREMENT":
+    case "COUNTER/INCREMENT": {
+      //setTimeout(()=>{console.log("setTimeout")},1000)
       return { ...state, counter: state.counter + 1 };
+    }
+
     case "COUNTER/DECREMENT":
       return { ...state, counter: state.counter - 1 };
     case "COUNTER/CLEAR":
@@ -74,7 +110,30 @@ const myCreateStore = (reducerFn) => {
   return store;
 };
 
-export const store = createStore(counterReducer);
+/* 
+  const myThunk = store => next => action => {
+
+  }
+
+*/
+
+const myThunk = function (store) {
+  return function (next) {
+    return function (action) {
+      try {
+        if (typeof action === "object") {
+          next(action);
+        } else if (typeof action === "function") {
+          //console.log(store)
+          action(store.dispatch, store.getState);
+          next();
+        }
+      } catch (err) {}
+    };
+  };
+};
+
+export const store = createStore(counterReducer, applyMiddleware(myThunk));
 
 export const { dispatch, getState, subscribe } = store;
 
