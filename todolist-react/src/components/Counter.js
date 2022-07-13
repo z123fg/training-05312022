@@ -27,11 +27,11 @@ function Counter (props){
 
   useEffect(()=>{
     //const timeout = setInterval(()=>{console.log("interval")}, 1000)
-    return ()=>{
+    return ()=>{ //componentWillUnmount
       console.log("componentWillUnmount")
       //clearTimeout(timeout)
     }
-  },[]);//componentWillUnmount
+  },[]);
 
 
   useEffect(()=>{
