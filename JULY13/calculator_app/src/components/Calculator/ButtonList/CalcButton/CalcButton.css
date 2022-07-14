@@ -1,0 +1,22 @@
+.calculator_calcbutton {
+    flex: 1;
+    border: solid 1px rgb(38, 38, 38);
+    box-sizing: border-box;
+    color: white;
+    font-size: x-large;
+}
+.calculator_calcbutton.light {
+    background-color: rgb(19,19,19);
+}
+.calculator_calcbutton.dark {
+    background-color: rgb(6, 6, 6);
+}
+.calculator_calcbutton.equal {
+    background-color: rgb(19, 67, 105);
+}
+.calculator_calcbutton:hover {
+    background-color: rgb(120, 120, 120);
+}
+.calculator_calcbutton.equal:hover {
+    background-color: rgb(19, 67, 200);
+}

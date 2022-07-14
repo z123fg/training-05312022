@@ -1,0 +1,24 @@
+.calculator_history {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.calculator_history_label {
+    color: white;
+    font-size: xx-large;
+    margin-bottom: 50px;
+}
+.calculator_history_list {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.calculator_history_list_label {
+    color: white;
+    font-size: larger;
+    margin-bottom: 15px;
+}

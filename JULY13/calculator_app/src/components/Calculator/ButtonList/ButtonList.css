@@ -1,0 +1,11 @@
+.calculator_buttonlist {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.calculator_buttonlist_buttonrow {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
