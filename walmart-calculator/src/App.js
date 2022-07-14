@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import ResultDisplay from './components/ResultDisplay';
 import Control from './components/Control';
 import { OPERATIONS } from './operations';
@@ -12,19 +12,13 @@ function App() {
   const [operation, setOperation] = useState(null);
   const [shouldReplace, setShouldReplace] = useState(false);
 
-  useEffect(() => {
-    const result = calculate();
-    setResult(result);
-    if (result !== null) {
-      setCurrentNumber(String(result));
-    }
-  }, [previousNumber1, previousNumber2]);
-
-  const calculate = () => {
-    if (previousNumber1 !== null &&
+  const calculate = useCallback(() => {
+    if (
+      previousNumber1 !== null &&
       operation !== null &&
-      previousNumber2 !== null) {
-      switch(operation) {
+      previousNumber2 !== null
+    ) {
+      switch (operation) {
         case OPERATIONS.ADD:
           return Number(previousNumber1) + Number(previousNumber2);
         case OPERATIONS.SUBTRACT:
@@ -38,7 +32,15 @@ function App() {
       }
     }
     return null;
-  };
+  }, [operation, previousNumber1, previousNumber2]);
+
+  useEffect(() => {
+    const result = calculate();
+    setResult(result);
+    if (result !== null) {
+      setCurrentNumber(String(result));
+    }
+  }, [previousNumber1, previousNumber2, calculate]);
 
   const calculateWithParams = (num1, num2, operation) => {
     switch(operation) {
