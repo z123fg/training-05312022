@@ -7,10 +7,10 @@ import "./SearchResult.css"
 const SearchResult = () => {
   const searchResult = useSelector(state=>state.searchbook.searchResult);
   const isLoading = useSelector(state=>state.searchbook.isLoading);
-
+  //console.log("searchResult", searchResult);
   return (
     <div className='search-result__container' style={{position:"relative"}}>
-      <ul className='search-result__list'>
+      {!isLoading&&<ul className='search-result__list'>
         {
           searchResult.map(book=>{
             return (
@@ -18,7 +18,7 @@ const SearchResult = () => {
             )
           })
         }
-      </ul>
+      </ul>}
       <div className="loader" style={{display:isLoading?"block":"none"}}></div>
     </div>
   )
