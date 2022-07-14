@@ -157,7 +157,7 @@ const Calculator = () => {
                 <button onClick={handleAdd}>+</button>
             </div>
             <div>
-                <button id="0" onClick={handleAddNum}>0</button>
+                <button className="button_zero" id="0" onClick={handleAddNum}>0</button>
                 <button onClick={handleAddNum}>.</button>
                 <button onClick={handleSolution}>=</button>
             </div>

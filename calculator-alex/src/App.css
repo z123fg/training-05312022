@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+button {
+  height:60px;
+  width: 60px;
+}
+
+.button_zero{
+  height: 60px;
+  width: 120px;
+}
+
+.calculator{
+  border: 1px solid black;
+  margin: auto;
+  background-color: grey;
+}
