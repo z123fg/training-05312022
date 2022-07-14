@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
   * ::after {
     vertical-align: baseline;
     box-sizing: border-box;
+    scroll-behavior: smooth;
     font-size: 100%;
     padding: 0;
     margin: 0;
@@ -17,55 +18,183 @@ const GlobalStyle = createGlobalStyle`
     color: var(--clr-base);
     background-color: var(--clr-primary-text);
   }
-  /* Default :focus style */
-  :focus {
-    outline: 3px dashed var(--clr-primary-text);
-    outline-offset: 3px;
-  }
-  /* If :focus-visible is supported, provide :focus styles for keyboard. */
   :focus-visible {
     outline-offset: 3px;
-    outline: 3px dashed var(--clr-secondary);
+    outline: 3px dashed var(--clr-primary-text);
   }
-  
+  textarea:focus-visible, input:focus-visible {
+    outline: none;
+  }
+
+  //
+  html {
+    background-color: var(--clr-base);
+
+  }
+
   body {
     display: block;
     color: var(--clr-primary-text);
     background-color: var(--clr-primary);
   }
+  
+  main, section, article, ul, li, h1, h2, h3 {
+    display: block;
+  }
+  
+  main {
+    margin-top: calc(var(--grid-gutter) / 2);
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  //
 
   h1 {
-    letter-spacing: 0.05em;
-    line-height: 2.5rem;
-    font-size: clamp(1.5em, 6vw, 2em);
-    font-family: var(--font-secondary);
-    font-weight: var(--font-weight-secondary);
-  }
-  /* EX. section title: All Tasks, Todays Tasks */
-  h2 {
-    line-height: 2rem;
-    letter-spacing: 0.2em;
     color: var(--clr-secondary-text);
-    font-size: clamp(0.75em, 6vw, 1em);
     font-family: var(--font-primary);
+    font-weight: var(--font-weight-primary);
+
+    font-size: 1.2em;
+    line-height: 1.3em;
+    @media (min-width: 40rem) {
+      font-size: 1.3em;
+      line-height: 1.4em;
+    }
+    @media (min-width: 60rem) {
+      font-size: 1.4em;
+      line-height: 1.5em;
+    }
+  }
+  h2 {
+    color: var(--clr-primary-text);
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-primary);
+
+    font-size: 1.2em;
+    line-height: 1.3em;
+    @media (min-width: 40rem) {
+      font-size: 1.3em;
+      line-height: 1.4em;
+    }
+    @media (min-width: 60rem) {
+      font-size: 1.4em;
+      line-height: 1.5em;
+    }
+  }
+  h3 {
+    color: var(--clr-secondary-text);
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-primary);
+
+    font-size: 1em;
+    line-height: 1.1em;
+    @media (min-width: 40rem) {
+      font-size: 1.1em;
+      line-height: 1.2em;
+    }
+    @media (min-width: 60rem) {
+      font-size: 1.2em;
+      line-height: 1.3em;
+    }
+  }
+
+  //
+
+  span {
+    line-height: 1.5rem;
+    color: var(--clr-secondary-text);
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-primary);
+
+    font-size: 1em;
+    line-height: 1.1em;
+    @media (min-width: 40rem) {
+      font-size: 1.1em;
+      line-height: 1.2em;
+    }
+    @media (min-width: 60rem) {
+      font-size: 1.2em;
+      line-height: 1.3em;
+    }
+  }
+
+  p {
+    line-height: 1.5rem;
+    color: var(--clr-primary-text);
+
+    font-family: var(--font-primary);
+    font-size: clamp(0.75em, 6vw, 1em);
     font-weight: var(--font-weight-primary);
   }
 
-  /* EX. Category Title */
-  h3 {
-    line-height: 2rem;
-    font-size: clamp(1em, 6vw, 1.1em);
-    font-family: var(--font-secondary);
-    font-weight: var(--font-weight-secondary); 
-  }
+  //
 
-  a {
+  button {
+    // button reset
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    
     line-height: 1.5rem;
-    text-decoration: none;
     color: var(--clr-primary-text);
+    font-family: var(--font-secondary);
     font-size: clamp(0.75em, 6vw, 1em);
+    font-weight: var(--font-weight-secondary);
+  }
+  a {
+    // Link Reset
+    cursor: pointer;
+    text-decoration: none;
+    
+    line-height: 1.5rem;
+    color: var(--clr-primary-text);
+    font-family: var(--font-secondary);
+    font-size: clamp(0.75em, 6vw, 1em);
+    font-weight: var(--font-weight-secondary);
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  input {
+    // Input Reset
+    border: none;
+    background: transparent;
+
+    line-height: 1.5rem;
+    color: var(--clr-tertiary);
     font-family: var(--font-secondary);
     font-weight: var(--font-weight-secondary);
+
+    font-size: 1em;
+    line-height: 1.1em;
+    @media (min-width: 40rem) {
+      font-size: 1.1em;
+      line-height: 1.2em;
+    }
+    @media (min-width: 60rem) {
+      font-size: 1.2em;
+      line-height: 1.3em;
+    } 
+  }
+
+  //
+
+  svg {
+    height: calc(var(--grid-gutter) / 3);
+    width: calc(var(--grid-gutter) / 3);
+
+    @media (min-width: 40rem) {
+      height: calc(var(--grid-gutter) / 2.5);
+      width: calc(var(--grid-gutter) / 2.5);
+    }
+    @media (min-width: 60rem) {
+      height: calc(var(--grid-gutter) / 2);
+      width: calc(var(--grid-gutter) / 2);
+    }
+    &:hover {
+      opacity: 0.8;
+    }
   }
 `;
 

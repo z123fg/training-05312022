@@ -1,0 +1,284 @@
+@font-face {
+  font-display: swap;
+  font-family: "Open Sans", sans-serif;
+  src: url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+  font-weight: 400;
+}
+@font-face {
+  font-display: swap;
+  font-family: "Ubuntu", sans-serif;
+  src: url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap");
+  font-weight: 700;
+}
+
+:root {
+  --clr-bg-primary: hsl(0, 0%, 0%);
+  --clr-txt-primary: hsl(0, 0%, 93%);
+
+  --clr-bg-secondary: hsl(0, 0%, 93%);
+  --clr-txt-secondary: hsl(0, 0%, 19%);
+
+  --clr-accent-primary: hsl(145, 35%, 42%);
+  --clr-txt-accent-primary: hsl(0, 0%, 93%);
+  
+  --clr-accent-secondary: hsl(207, 42%, 44%);
+  --clr-txt-accent-secondary: hsl(0, 0%, 93%);
+
+  --clr-calculator: hsl(0, 0%, 31%);
+
+  --font-primary: "Open Sans", sans-serif;
+  --font-secondary: "Ubuntu", sans-serif;
+  --font-weight-primary: 400;
+  --font-weight-secondary: 700;
+
+  --max-layout-width: 60rem;
+  --spacing-unit: 0.5rem;
+  --grid-gutters: 4rem;
+}
+
+*,
+::before,
+::after {
+  vertical-align: baseline;
+  box-sizing: border-box;
+  font-size: 100%;
+  padding: 0;
+  margin: 0;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+  screen and (min-resolution: 2dppx) {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+body, html {
+  background-color: var(--clr-bg-primary);
+  color: var(--clr-txt-primary);
+}
+
+main, header,
+section, article, footer {
+  display: block;
+}
+
+h1 {
+  line-height: 2.25rem;
+  font-size: clamp(1.5em, 6vw, 1.75em);
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-secondary);
+}
+h2 {
+  line-height: 1.75rem;
+  font-size: clamp(1em, 6vw, 1.25em);
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-secondary);
+}
+p {
+  line-height: 1.5rem;
+  font-size: clamp(0.75em, 6vw, 1em);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-primary);
+}
+a {
+  line-height: 1.5rem;
+  font-size: clamp(0.75em, 6vw, 1em);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-primary);
+
+  text-decoration: none;
+}
+button {  
+  line-height: 1.5rem;
+  font-size: clamp(0.75em, 6vw, 1em);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-primary);
+}
+button:hover {  
+  opacity: 0.8;
+}
+
+svg {
+  height: 75px;
+  width: 75px;
+}
+
+.calculator__container {
+  display: flex;
+  flex-direction: column;
+  padding-right: calc(var(--grid-gutters) / 4);
+  padding-left: calc(var(--grid-gutters) / 4);
+  padding-top: calc(var(--grid-gutters) / 2);
+  padding-bottom: calc(var(--grid-gutters) / 2);
+  max-width: var(--max-layout-width);
+  background-color: var(--clr-calculator);
+  /* margin-top: calc(var(--grid-gutters) / 2) */
+  height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 60rem) {
+  .container {
+    padding-right: calc(var(--grid-gutters) / 2);
+    padding-left: calc(var(--grid-gutters) / 2);
+  }
+}
+@media (min-width: 80rem) {
+  .container {
+    padding-right: var(--grid-gutters);
+    padding-left: var(--grid-gutters);
+  }
+}
+
+.textbox__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  border-radius: var(--spacing-unit);
+  background-color: var(--clr-bg-primary);
+
+}
+.textbox__container h1 {
+  font-size: clamp(1.5em, 6vw, 1.75em);
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-secondary);
+  color: var(--clr-accent-primary);
+  min-height: 5rem;
+  /* padding: calc(var(--grid-gutters) / 2) calc(var(--grid-gutters) / 4); */
+
+}
+.textbox__container p {
+  font-size: clamp(1em, 6vw, 1.25em);
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-secondary);
+  color: var(--clr-accent-secondary);
+  min-height: 5rem;
+  /* padding: calc(var(--grid-gutters) / 2) calc(var(--grid-gutters) / 4); */
+
+}
+
+.buttonbox__wrapper {
+  margin-top: calc(var(--grid-gutters) / 2);
+  width: 100%;
+  display: grid;
+  grid-template-areas:
+    "a b c d"
+    "e f g h"
+    "i j k l"
+    "m n o p"
+    "q r s s";
+}
+.buttonbox__wrapper button {
+  cursor: pointer;
+  margin: calc(var(--spacing-unit) / 3);
+  padding-top: calc(var(--grid-gutters) / 2);
+  padding-bottom: calc(var(--grid-gutters) / 2);
+  
+  border: none;
+  color: var(--clr-txt-secondary);
+  background-color: var(--clr-bg-secondary);
+}
+.buttonbox__wrapper button:nth-of-type(1) {
+  grid-area: a;
+  background-color: var(--clr-accent-primary);
+  color: var(--clr-txt-accent-primary);
+}
+.buttonbox__wrapper button:nth-of-type(2) {
+  grid-area: b;
+  background-color: var(--clr-accent-secondary);
+  color: var(--clr-txt-accent-secondary);
+}
+.buttonbox__wrapper button:nth-of-type(3) {
+  grid-area: c;
+  background-color: var(--clr-accent-secondary);
+  color: var(--clr-txt-accent-secondary);
+}
+.buttonbox__wrapper button:nth-of-type(4) {
+  grid-area: d;
+  background-color: var(--clr-accent-secondary);
+  color: var(--clr-txt-accent-secondary);
+}
+.buttonbox__wrapper button:nth-of-type(5) {
+  grid-area: h;
+  background-color: var(--clr-accent-secondary);
+  color: var(--clr-txt-accent-secondary);
+}
+.buttonbox__wrapper button:nth-of-type(6) {
+  grid-area: l;
+  background-color: var(--clr-accent-secondary);
+  color: var(--clr-txt-accent-secondary);
+}
+.buttonbox__wrapper button:nth-of-type(7) {
+  grid-area: p;
+  background-color: var(--clr-accent-secondary);
+  color: var(--clr-txt-accent-secondary);
+}
+
+.buttonbox__wrapper button:nth-of-type(8) {
+  grid-area: s;
+  background-color: var(--clr-accent-primary);
+  color: var(--clr-txt-accent-primary);
+}
+.buttonbox__wrapper button:nth-of-type(9) {
+  grid-area: r;
+  /* background-color: var(--clr-accent-secondary);
+  color: var(--clr-txt-accent-secondary); */
+}
+.buttonbox__wrapper button:nth-of-type(10) {
+  grid-area: q;
+}
+.buttonbox__wrapper button:nth-of-type(11) {
+  grid-area: m;
+}
+.buttonbox__wrapper button:nth-of-type(12) {
+  grid-area: n;
+}
+.buttonbox__wrapper button:nth-of-type(13) {
+  grid-area: o;
+}
+.buttonbox__wrapper button:nth-of-type(14) {
+  grid-area: i;
+}
+.buttonbox__wrapper button:nth-of-type(15) {
+  grid-area: j;
+}
+.buttonbox__wrapper button:nth-of-type(16) {
+  grid-area: k;
+}
+.buttonbox__wrapper button:nth-of-type(17) {
+  grid-area: e;
+}
+.buttonbox__wrapper button:nth-of-type(18) {
+  grid-area: f;
+}
+.buttonbox__wrapper button:nth-of-type(19) {
+  grid-area: g;
+}
+
+
+
+
+/* "C" = 1 */
+/* "+-" = 2 */
+/* "%" = 3 */
+/* "/" = 4 */
+/* "x" = 5 */
+/* "-" = 6 */
+/* "+" = 7 */
+/* "=" = 8 */
+/* "." = 9 */
+/* "0" = 10 */
+/* "1" = 11 */
+/* "2" = 12 */
+/* "3" = 13 */
+/* "4" = 14 */
+/* "5" = 15 */
+/* "6" = 16 */
+/* "7" = 17 */
+/* "8" = 18 */
+/* "9" = 19 */
+

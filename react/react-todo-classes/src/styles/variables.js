@@ -15,13 +15,18 @@ const variables = css`
       font-weight: 700;
     }
 
-    --clr-base: #010319;
-    --clr-primary: #344fa1;
-    --clr-secondary: #031956;
-    --clr-primary-text: #fcffff;
-    --clr-secondary-text: #d7e1e8;
-    --clr-accent-pink: #eb05ff;
-    --clr-accent-blue: #3078e9;
+    --clr-base: #000000;
+    --clr-primary: #000000;
+    --clr-secondary: #1a1b1d;
+    --clr-tertiary: rgba(142, 147, 159, 0.8);
+
+    --clr-primary-text: #FDFFFF;
+    --clr-secondary-text: #BBC2D8;
+    --clr-primary-accent: #00C098; // green
+    --clr-secondary-accent: #4FA2FF; // blue
+    --clr-tertiary-accent: #DF5563; // red-pink
+    /* --clr-secondary-accent: #D103FC; // pink */
+    /* --clr-primary-accent: #4F74FF; // blue */
 
     --font-primary: "Open Sans", sans-serif;
     --font-secondary: "Ubuntu", sans-serif;
@@ -30,7 +35,8 @@ const variables = css`
 
     --max-layout-width: 60rem;
     --spacing-unit: 0.5rem;
-    --grid-gutter: 5rem;
+    --grid-gutter: 6rem;
+    --card-radius: 1rem;
   }
 `;
 

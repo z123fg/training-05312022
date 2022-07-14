@@ -1,49 +1,97 @@
 import React from "react";
 import styled from "styled-components";
+
+import MobileMenu from "./header/MobileMenu";
+import Search from "./header/Search";
 import { Outlet } from "react-router-dom";
 
+// Global Containers
 export const Container = styled.div`
-  max-width: 60rem;
+  max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
-  padding-left: calc(var(--grid-gutter) / 4);
-  padding-right: calc(var(--grid-gutter) / 4);
-`;
+  position: relative;
 
+  @media (min-width: 40rem) {
+  }
+  @media (min-width: 60rem) {
+  }
+`;
+export const RouteSection = styled.section`
+  display: block;
+
+  @media (min-width: 40rem) {
+  }
+  @media (min-width: 60rem) {
+  }
+`;
+export const SectionContainer = styled.section`
+  display: block;
+
+  @media (min-width: 40rem) {
+  }
+  @media (min-width: 60rem) {
+  }
+`;
+// Errors
+export const NoDataMessage = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--clr-secondary);
+  border-radius: var(--card-radius);
+`;
+export const LoadingMessage = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--clr-secondary);
+  border-radius: var(--card-radius);
+`;
+// Layout
 const Header = styled.header`
-  padding-top: calc(var(--grid-gutter) / 4);
-  padding-bottom: calc(var(--grid-gutter) / 4);
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
-const Footer = styled.footer``;
-const Author = styled.div``;
+const Footer = styled.footer`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--clr-secondary);
+`;
 
-export const Layout = () => {
-  return (
-    <>
-      <Header>
-        <Container>
-          <nav>
-            {/* <HamburgerIcon /> */}
-            {/* <SearchIcon /> */}
+export default class Layout extends React.Component {
+  
+  render() {
+    return (
+      <>
+        <Header>
+          <Container>
+            <nav>
+              <MobileMenu />
+              <Search />
+            </nav>
+          </Container>
+        </Header>
 
-            {/* <NavDrawer /> */}
-            {/* <SearchDrawer /> */}
-          </nav>
-        </Container>
-      </Header>
-
-      <main id="content">
-        <Container>
+        <main id="content">
           <Outlet />
+        </main>
 
-          <Footer>
-            <Author>
-              © <a href="https://lenharta.netlify.app/">Developed by Andrew</a>,{" "}
-              {new Date().getFullYear()}
-            </Author>
-          </Footer>
-        </Container>
-      </main>
-    </>
-  );
-};
+        <Footer>
+          <Container>
+            <span>
+              @ <a href="https://lenharta.netlify.app/">Developed by Andrew</a>,{" "}
+              {new window.Date().getFullYear()}
+            </span>
+          </Container>
+        </Footer>
+      </>
+    );
+  }
+}
