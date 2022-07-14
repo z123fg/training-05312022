@@ -10,7 +10,7 @@
 }
 
 .calculator--input {
-  height: 60px;
+  height: 70px;
   width: 90%;
   background: transparent;
   border: none;
@@ -18,7 +18,11 @@
   color: white;
   font-size: 28px;
 }
-
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .calculator--actions--row {
   display: flex;
   flex-direction: row;
