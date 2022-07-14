@@ -1,0 +1,62 @@
+:root {
+  --primary: #FBBF29;
+  --secondary: #c79923;
+  --dark: #333;
+  --light: grey;
+  --white: #FFF;
+}
+/* use minmax to set the rows:
+*  The very first row will have a minimum height of 7rem. The max will be auto because it will grow to fit very long numbers.
+* Then set the rest of 5 rows with the height of 6rem
+*/
+ 
+.calculator-conatainer {
+  display: grid;
+  margin-top: 2rem;
+  justify-content: center;
+  grid-template-columns: repeat(4, 6rem);
+  grid-template-rows: minmax(7rem, auto) repeat(5, 6rem);
+}
+ 
+.calculator-conatainer > button {
+  cursor: pointer;
+  font-size: 2rem;
+  border: 1px solid var(--white);
+  outline: none;
+  background-color: var(--primary);
+}
+ 
+.calculator-conatainer > button:hover,
+.calculator-conatainer > button:focus {
+  background-color: var(--secondary);
+ 
+}
+ 
+.span-two {
+  grid-column: span 2;
+}
+ 
+.calculator-output {
+  grid-column: 1 / -1;
+  background-color: var(--dark);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding: .75rem;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+ 
+.calculator-output .previous-operand {
+  color: var(--light);
+  font-size: 1.5rem;
+ 
+}
+ 
+.calculator-output .current-operand {
+  color: var(--white);
+  font-size: 2.5rem;
+ 
+}
+
