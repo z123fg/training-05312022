@@ -80,3 +80,11 @@ https://codesandbox.io/s/jovial-christian-731j2v?file=/src/styles.css
 **materials**
 https://developers.google.com/books/docs/v1/using
 
+### 2022/07/13
+
+**practice**
+https://www.evernote.com/shard/s706/sh/c0a0a8a3-0016-ae6c-0c7e-c3036d983623/377c1f3d598f25526d1ecfbc5b40323c
+
+**solution to practice**
+https://codesandbox.io/s/naughty-frog-qeg574
+
