@@ -1,55 +1,52 @@
 import React from 'react';
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { addDigit, clearDigit, chooseOperation, evaluateResult } from './redux/calculatorSlice';
+import { addText, calculateResult, clear, deletePrevText } from './redux/calculatorSlice';
  
 function App() {
-  const currentOperand = useSelector(state=>state.calculator.currentOperand);
-  const previousOperand = useSelector(state=>state.calculator.previousOperand);
-  const operation = useSelector(state=>state.calculator.operation);
-  const state = useSelector(state=>state.calculator);
+  const text = useSelector(state=>state.calculator.text);
+  const result = useSelector(state=>state.calculator.result);
   const dispatch = useDispatch();
  
-  const handleDigitClick = (e) => {
-       dispatch(addDigit(e.target.name));
+  const handleAddTextClick = (e) => {
+       dispatch(addText(e.target.name));
   }
- 
-  const handleClearClick = () => {
-    dispatch(clearDigit())
-  }
- 
-  const handleOperationClick = (e) => {
-    dispatch(chooseOperation(e.target.name));
-}
 
-const handleResult = () => {
-  console.log(state)
-  dispatch(evaluateResult())
-}
+  const handleResult = () => {
+    dispatch(calculateResult());
+  }
+
+  const clearAll = () => {
+    dispatch(clear())
+  }
+
+  const deleteLast = () => {
+    dispatch(deletePrevText())
+  }
  
   return (
     <div className="calculator-conatainer">
       <div className="calculator-output">
-        <div className="previous-operand">{previousOperand}{operation}</div>
-        <div className="current-operand">{currentOperand}</div>
+        <div className="previous-operand">{text}</div>
+        <div className="current-operand">{result}</div>
       </div>
-      <button className="span-two" onClick={handleClearClick}>AC</button>
-      <button >DEL</button>
-      <button onClick={handleOperationClick} value={operation} name="/">÷</button>
-      <button onClick={handleDigitClick} value={currentOperand} name="1">1</button>
-      <button onClick={handleDigitClick} value={currentOperand} name="2">2</button>
-      <button onClick={handleDigitClick} value={currentOperand} name="3">3</button>
-      <button onClick={handleOperationClick} value={operation} name="*">*</button>
-      <button onClick={handleDigitClick} value={currentOperand} name="4">4</button>
-      <button onClick={handleDigitClick} value={currentOperand} name="5">5</button>
-      <button onClick={handleDigitClick} value={currentOperand} name="6">6</button>
-      <button onClick={handleOperationClick} value={operation} name="+">+</button>
-      <button onClick={handleDigitClick} value={currentOperand} name="7">7</button>
-      <button onClick={handleDigitClick} value={currentOperand} name="8">8</button>
-      <button onClick={handleDigitClick} value={currentOperand} name="9">9</button>
-      <button onClick={handleOperationClick} value={operation} name="-">-</button>
-      <button onClick={handleDigitClick} value={currentOperand} name=".">.</button>
-      <button onClick={handleDigitClick} value={currentOperand} name="0">0</button>
+      <button onClick={clearAll} className="span-two">AC</button>
+      <button onClick={deleteLast}>DEL</button>
+      <button onClick={handleAddTextClick} value={text} name="/">÷</button>
+      <button onClick={handleAddTextClick} value={text} name="1">1</button>
+      <button onClick={handleAddTextClick} value={text} name="2">2</button>
+      <button onClick={handleAddTextClick} value={text} name="3">3</button>
+      <button onClick={handleAddTextClick} value={text} name="*">*</button>
+      <button onClick={handleAddTextClick} value={text} name="4">4</button>
+      <button onClick={handleAddTextClick} value={text} name="5">5</button>
+      <button onClick={handleAddTextClick} value={text} name="6">6</button>
+      <button onClick={handleAddTextClick} value={text} name="+">+</button>
+      <button onClick={handleAddTextClick} value={text} name="7">7</button>
+      <button onClick={handleAddTextClick} value={text} name="8">8</button>
+      <button onClick={handleAddTextClick} value={text} name="9">9</button>
+      <button onClick={handleAddTextClick} value={text} name="-">-</button>
+      <button onClick={handleAddTextClick} value={text} name=".">.</button>
+      <button onClick={handleAddTextClick} value={text} name="0">0</button>
       <button onClick={handleResult} className="span-two">=</button>
     </div>
   );

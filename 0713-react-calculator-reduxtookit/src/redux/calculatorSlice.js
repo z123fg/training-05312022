@@ -1,109 +1,52 @@
 import { createSlice } from '@reduxjs/toolkit';
+import * as math from "mathjs";
  
 const initialState = {
-  currentOperand: "",
-  previousOperand: "",
-  operation: "",
-  overwrite: true
+  text: "",
+  result: "",
 };
  
+const operations = ["/", "*", "+", "-", "."];
+
 const calculatorSlice = createSlice({
   name: "calculator",
   initialState,
   reducers: {
-    addDigit: (state, action) => {
-        if (state.overwrite) {
-            return {
-                currentOperand: action.payload,
-                overwrite: false
-            }
-        }
-         if (action.payload === "0" && state.currentOperand === "0") return;
-         if (action.payload === "." && state.currentOperand.includes(".")) return;
-         return {
-          currentOperand: `${state.currentOperand || ""}${action.payload}`
-         }
-    },
-
-    clearDigit: (state, action) => {
-      return {
-        currentOperand: "",
-        previousOperand: "",
-        operation: ""
-      }
-    },
-
-    deleteDigit: (state, action) => {
-      state.currentOperand = action.payload
-    },
-
-    chooseOperation: (state, action) => {
-        if (state.currentOperand == null && state.previousOperand == null) return;
-          
-        if (state.currentOperand == null) {
-          return {
-            operation: action.payload,
-          }
-        }
-    
-        if (state.previousOperand == null) {
-          return {
-            operation: action.payload,
-            previousOperand: state.currentOperand,
-            currentOperand: null,
-          }
-        }
-
-        return {
-            previousOperand: evaluate(state),
-            operation: action.payload,
-            currentOperand: null,
-          }
-    },
-      
-    evaluateResult: (state, action) => {
-      if (
-        state.operation == null ||
-        state.currentOperand == null ||
-        state.previousOperand == null
-      ) return;
+    addText: (state, action) => {
+      if (action.payload === "0" && state.text === "0") return;
+      if (action.payload === "." && state.text.includes(".")) return;
+      if (operations.includes(action.payload) && operations.includes(state.text.slice(-1))) return;
 
       return {
-        overwrite: true,
-        previousOperand: null,
-        operation: null,
-        currentOperand: evaluate(state)
+        text: `${state.text || ""}${action.payload}`,
       }
+    },
+    calculateResult: (state, action) => {
+      const input = state.text
+      return {
+        result: math.evaluate(input)
+      }
+    }, 
+    clear: (state, action) => {
+      return {
+        text: "",
+        result: "",
+      }
+    }, 
+    deletePrevText: (state, action) => {
+      return {
+        text: state.text.slice(0, -1)
+      }
+
     }
- 
-  }
+
+    
+  }   
 })
 
-function evaluate(state) {
-    const { currentOperand, previousOperand, operation } = state;
-    const prev = parseFloat(previousOperand);
-    const current = parseFloat(currentOperand);
 
-    if (isNaN(prev) || isNaN(current)) return "";
-    let computation = "";
-    switch (operation) {
-        case "+":
-      computation = prev + current
-      break
-    case "-":
-      computation = prev - current
-      break
-    case "*":
-      computation = prev * current
-      break
-    case "÷":
-      computation = prev / current
-      break
-    }
-    return computation.toString();
-}
  
 const calculatorReducer = calculatorSlice.reducer;
 export default calculatorReducer;
  
-export const { addDigit, clearDigit, chooseOperation, evaluateResult } = calculatorSlice.actions;
+export const { addText, calculateResult, clear, deletePrevText } = calculatorSlice.actions;
