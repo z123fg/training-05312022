@@ -1,35 +1,46 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: 0,
+  value: "",
+  prevChar: "",
 };
 
 export const calculatorSlice = createSlice({
-  name: 'calculator',
+  name: "calculator",
   initialState,
   reducers: {
     add: (state, action) => {
-      state.value += action.payload;
-    },
-    subtract: (state, action) => {
-      state.value -= action.payload;
-    },
-    multiply: (state, action) => {
-      state.value *= action.payload;
-    },
-    divide: (state, action) => {
-      state.value /= action.payload;
+      if (state.prevChar !== action.payload) state.value += action.payload;
     },
     square: (state, action) => {
       state.value *= state.value;
     },
     squareRoot: (state, action) => {
-      state.value /= state.value;
-    }
+      state.value = Math.sqrt(state.value);
+    },
+    backspace: (state, action) => {
+      state.value = state.value.slice(0, -1);
+    },
+    clear: (state) => {
+      state.value = "";
+    },
+    set: (state, action) => {
+      state.value = action.payload;
+    },
   },
 });
 
-export const { add, subtract, multiply, divide, square, squareRoot } = calculatorSlice.actions;
+export const {
+  add,
+  subtract,
+  multiply,
+  divide,
+  square,
+  squareRoot,
+  backspace,
+  clear,
+  set,
+} = calculatorSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

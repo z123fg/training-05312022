@@ -1,17 +1,22 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
-export default function CalculatorButton({ button }) {
+import { set } from "../../../app/store/calculatorSlice";
+
+export default function CalculatorButton({ button, currentValue }) {
+  const dispatch = useDispatch();
+
   const handleClick = (event) => {
-    event.preventDefault();
-    switch (typeof button.value) {
-      case "string":
-        console.log(button.value);
-        break;
-      case "function":
-        console.log(button.symbol);
-        break;
-      default:
-        console.log(button);
+    if (button.symbol === "=") {
+      try {
+        let evaluation = eval(currentValue);
+        dispatch(set(evaluation));
+        console.log(evaluation);
+      } catch (err) {
+        console.log("An error has occurred");
+      }
+    } else {
+      button.function();
     }
   };
   return (
