@@ -1,0 +1,89 @@
+:root {
+  --num-white: #FAFAFA;
+  --hover: #BFB2B2;
+  --operation: #D7D7D7;
+  --equal: #73A3C9;
+  --equal-hover: #3A8ED0;
+  --general-background: #E6E6E6;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  text-align: center;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: var(--general-background);
+}
+
+.result-display {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.result-display__previous, .result-display__main {
+  display: flex;
+  justify-content: end;
+}
+
+.result-display__main {
+  font-size: xx-large;
+}
+
+.result-display__previous--hidden {
+  visibility: hidden;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.control-row {
+  display: flex;
+  gap: 5px;
+}
+
+.control-row__button {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  padding: 10px;
+}
+
+.button--number {
+  background-color: var(--num-white);
+}
+
+.button--number:hover {
+  cursor: pointer;
+  background-color: var(--hover);
+}
+
+.button--operation {
+  background-color: var(--operation);
+}
+
+.button--operation:hover {
+  cursor: pointer;
+  background-color: var(--hover);
+}
+
+.button--equal {
+  background-color: var(--equal);
+}
+
+.button--equal:hover {
+  cursor: pointer;
+  background-color: var(--equal-hover);
+}
