@@ -1,0 +1,72 @@
+.CalculatorWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #6d6d6d;
+  width: fit-content;
+  padding: 2px;
+  border: 1px solid;
+}
+
+.calculator--input {
+  height: 60px;
+  width: 90%;
+  background: transparent;
+  border: none;
+  text-align: right;
+  color: white;
+  font-size: 28px;
+}
+
+.calculator--actions--row {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.calculator--action--internal {
+  display: flex;
+  height: 60px;
+  width: 85px;
+  border: 1px solid;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #000000cc;
+  font-size: 20px;
+}
+.calculator--action--internal:hover {
+  background-color: #626262;
+}
+.calculator--action--external {
+  display: flex;
+  height: 60px;
+  width: 85px;
+  border: 1px solid;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #0000008f;
+  font-size: 20px;
+}
+.calculator--action--external:hover {
+  background-color: #626262;
+}
+.calculator--action--equals {
+  display: flex;
+  height: 60px;
+  width: 85px;
+  border: 1px solid;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #00000000;
+  font-size: 20px;
+}
+.calculator--action--equalsl:hover {
+  background-color: #626262;
+}
