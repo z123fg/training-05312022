@@ -127,10 +127,15 @@ function App() {
           //   //console.log("after while");
           //   setoperatorStack(operatorStack.push(text[j]));
           // }
-
+          console.log(
+            "before loop text[j]",
+            getOrder(text[j]),
+            " peek",
+            getOrder(operatorStack.peek())
+          );
           if (
-            operatorStack.length !== 0 &&
-            getOrder(text[j]) <= getOrder(operatorStack.peek())
+            getOrder(text[j]) <= getOrder(operatorStack.peek()) &&
+            operatorStack.length !== 0
           ) {
             console.log("In the while loop!!!!!");
           }
