@@ -1,13 +1,35 @@
+import "./Header.css";
 
-const Header = ({handleChangePage}) => {
-
-  //home, wishlist
-  return (
-    <header>
-      <a href="#" onClick={e=>{e.preventDefault(); handleChangePage("home")}}>Home</a>
-      <a href="#" onClick={e=>{e.preventDefault(); handleChangePage("wishlist")}}>Wishlist</a>
-    </header>
-  )
-}
+const Header = ({ handleChangePage }) => {
+    //home, wishlist
+    return (
+        <header className="header">
+          <div className="banner">
+            <h3>Book Search</h3>
+            
+          </div>
+            <div className="nav__container">
+                <button
+                    href="#"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        handleChangePage("home");
+                    }}
+                >
+                    Home
+                </button>
+                <button
+                    href="#"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        handleChangePage("wishlist");
+                    }}
+                >
+                    Wishlist
+                </button>
+            </div>
+        </header>
+    );
+};
 
 export default Header;

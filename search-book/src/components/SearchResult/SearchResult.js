@@ -1,19 +1,20 @@
 import React from 'react';
 import {useSelector} from "react-redux"
+import BookInfo from './BookInfo/BookInfo';
+import "./SearchResult.css"
+
 
 const SearchResult = () => {
   const searchResult = useSelector(state=>state.searchbook.searchResult);
   const isLoading = useSelector(state=>state.searchbook.isLoading);
 
   return (
-    <div style={{position:"relative"}}>
-      <ul>
+    <div className='search-result__container' style={{position:"relative"}}>
+      <ul className='search-result__list'>
         {
           searchResult.map(book=>{
             return (
-              <li key={book?.id}>
-                {book?.volumeInfo?.title}
-              </li>
+              <BookInfo key={book.id} bookInfo={book}/>
             )
           })
         }

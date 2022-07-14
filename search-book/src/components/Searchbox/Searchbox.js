@@ -1,6 +1,8 @@
 import React from "react";
 import {useSelector, useDispatch} from "react-redux"
 import { getBooklist, getBookListAndUpdateState, updateKeyword } from "../../redux/slices/searchbookSlice";
+import "./Searchbox.css"
+
 
 const Searchbox = () => {
   const keyword = useSelector(state=>state.searchbook.keyword);
@@ -12,15 +14,16 @@ const Searchbox = () => {
     dispatch(updateKeyword(e.target.value))
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     //dispatch(getBookListAndUpdateState());
     dispatch(getBooklist())
   }
   return (
-    <div>
+    <form onSubmit={handleSubmit} className="searchbox__container">
       <input value={keyword} onChange={handleChange}/>
-      <button onClick={handleSubmit}>submit</button>
-    </div>
+      <button>submit</button>
+    </form>
   )
 }
 
