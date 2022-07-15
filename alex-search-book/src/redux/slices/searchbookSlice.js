@@ -20,6 +20,25 @@ const getBookList = createAsyncThunk(
     //shit goes here
 )
 
+export const changePage = createAsyncThunk(
+    "searchbook/changePage",
+    async (pageNum, thunkAPI) => {
+
+        const keyword = thunkAPI.getState().searchbook.keyword;
+        const maxResults = thunkAPI.getState().searchbook.maxResults;
+        const totalItems = thunkAPI.getState().searchbook.totalItems;
+
+
+        const totalPages = math.ceil(totalItems / maxResults);
+        if(pageNum<=0 || pageNum > totalPages){
+            
+        }
+        const res = await axios.get(
+            //webpage goes here
+        );
+    }
+)
+
 const searchbookReducer = createSlice(
     {
         name:"searchbook",
