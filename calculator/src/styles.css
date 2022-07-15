@@ -1,0 +1,70 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  font-size: 2em;
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.calculator__container {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background: black;
+  padding: 10px;
+}
+
+.display__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: 3rem;
+  padding-bottom: 10px;
+}
+
+.buttons__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.buttons__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.cal__button {
+  font-size: 2.5rem;
+  width: 70px;
+  height: 70px;
+  background-color: #2E3033;
+  border-radius: 35px;
+  border-color: transparent;
+  color: white;
+}
+
+.cal__button:hover {
+  background-color: #7c847b;
+}
+
+.first__row{
+  background-color: #9EA3AD;
+}
+
+.fourth__button {
+  background-color: orange;
+  color: white;
+  text-align: center;
+}
+
+.fourth__button:hover {
+  background-color: #f8de07;
+}
