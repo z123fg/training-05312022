@@ -17,21 +17,27 @@ import "./Searchbox.css";
 
 const Searchbox = () => {
   const keyword = useSelector((state) => state.searchbook.keyword);
+  const isLoading = useSelector((state) => state.searchbook.isLoading);
   const dispatch = useDispatch();
-  const debouncedSearch = useDebounce(() => {
+
+  const debouncedSearch = useDebounce(() => { 
+    
     dispatch(getBooklist());
   }, 1000);
 
   const throttledSubmit = useThrottle(() => {
+    if(isLoading) return 
     dispatch(getBooklist());
-  }, 5000);
+  }, 1000);
+
 
   const handleChange = (e) => {
     //console.log("action",updateKeyword(e.target.value))
     dispatch(updateKeyword(e.target.value));
+    if(isLoading) return 
     debouncedSearch();
   };
-
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     //dispatch(getBookListAndUpdateState());

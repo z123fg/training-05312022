@@ -33,6 +33,10 @@ export const getBooklist = createAsyncThunk(
   }
 );
 
+/* 
+  server side pagination
+*/
+
 export const changePage = createAsyncThunk(
   "searchbook/changePage",
   async (pageNum, thunkAPI) => {

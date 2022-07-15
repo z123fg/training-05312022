@@ -1,16 +1,16 @@
 import "./Header.css";
-
+import { Link } from "react-router-dom";
 const Header = ({ handleChangePage }) => {
-    //home, wishlist
-    return (
-        <header className="header">
-          <div className="banner">
-            <h3>Book Search</h3>
-            
-          </div>
-            <div className="nav__container">
-                <button
-                    href="#"
+  //home, wishlist
+  return (
+    <header className="header">
+      <div className="banner">
+        <h3>Book Search</h3>
+      </div>
+      <div className="nav__container">
+       {/*  <Link to="/home">Home</Link>
+        <Link to="/wishlist">Wishlist</Link> */}
+        <button
                     onClick={(e) => {
                         e.preventDefault();
                         handleChangePage("home");
@@ -19,7 +19,6 @@ const Header = ({ handleChangePage }) => {
                     Home
                 </button>
                 <button
-                    href="#"
                     onClick={(e) => {
                         e.preventDefault();
                         handleChangePage("wishlist");
@@ -27,9 +26,9 @@ const Header = ({ handleChangePage }) => {
                 >
                     Wishlist
                 </button>
-            </div>
-        </header>
-    );
+      </div>
+    </header>
+  );
 };
 
 export default Header;
