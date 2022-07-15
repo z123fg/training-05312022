@@ -8,7 +8,8 @@ import React, { useState, useEffect } from "react";
 
 Array.prototype.peek = function () {
   if (this.length === 0) {
-    throw new Error("out of bounds");
+    //throw new Error("out of bounds");
+    return null;
   }
   return this[this.length - 1];
 };
@@ -68,14 +69,21 @@ function App() {
 
     // valueStack.push(temp);
     setvalueStack(valueStack.push(c));
-    console.log("c ", c, " value stack ", valueStack);
+    console.log(
+      "c ",
+      c,
+      " value stack ",
+      valueStack,
+      "operator ",
+      operatorStack
+    );
   };
 
   const compute = () => {
     //let text = "7+8-11+9/7";
     //let text = "1+2*3-4/2";
-    //let text = "1+4/2+3";
-    let text = "1+2";
+    let text = "1+4/2+3";
+    //let text = "12+4/2";
 
     console.log("text ", text);
     //let text = "1+3+9";
@@ -88,94 +96,67 @@ function App() {
       while (flag === false) {
         if (isNaN(text[j]) && text[j] !== ".") {
           setvalueStack(valueStack.push(temp));
-          //operator.push(text[j]);
+          //operatorStack.push(text[j]);
           // if (
           //   operatorStack.length === 0 ||
           //   getOrder(text[j]) > getOrder(operatorStack.peek())
-          // )
-          if (
-            operatorStack.length === 0 ||
-            getOrder(text[j]) > getOrder(operatorStack.peek())
-          ) {
-            console.log("in the if ");
-            setoperatorStack(operatorStack.push(text[j]));
-          }
+          // ) {
+          //   operatorStack.push(text[j]);
           // } else {
-          //   //console.log("in the else ");
-          //   // console.log(
-          //   //   "getOrder(text[j]) <= getOrder(operatorStack.peek()",
-
-          //   //   getOrder(text[j]) > getOrder(operatorStack.peek()),
-          //   //   " j",
-          //   //   j
-          //   // );
-
           //   while (
           //     operatorStack.length !== 0 &&
           //     getOrder(text[j]) <= getOrder(operatorStack.peek())
           //   ) {
-          //     // var flag_1 = true;
-          //     // while (flag_1 === true)
-          //     console.log("In the while loop!!!!!");
-          //     console.log("operator ", operatorStack, " value ", valueStack);
-          //     var a = operatorStack.peek();
-          //     setoperatorStack(operatorStack.pop());
-          //     processOperator(a);
-
-          //     //flag_1 = false;
+          //     var toProcess = operatorStack.peek();
+          //     operatorStack.pop();
+          //     processOperator(toProcess);
           //   }
-          //   //console.log("after while");
-          //   setoperatorStack(operatorStack.push(text[j]));
+          //   operatorStack.push(text[j]);
           // }
-          console.log(
-            "before loop text[j]",
-            getOrder(text[j]),
-            " peek",
-            getOrder(operatorStack.peek())
-          );
-          if (
-            getOrder(text[j]) <= getOrder(operatorStack.peek()) &&
-            operatorStack.length !== 0
-          ) {
-            console.log("In the while loop!!!!!");
-          }
           i = j;
           flag = true;
+          //operatorStack.push(text[j]);
+
+          if (operatorStack.length === 0 ||) {
+            operatorStack.push(text[j]);
+          } else {
+            console.log("In the else", text[j]);
+          }
         } else {
           temp = temp + text[j];
           j = j + 1;
         }
       }
     }
+    //setoperatorStack(operatorStack.pop());
 
-    console.log(
-      "Before In compute operator ",
-      operatorStack,
-      "stack ",
-      valueStack
-    );
+    // console.log(
+    //   "Before In compute operator ",
+    //   operatorStack,
+    //   "stack ",
+    //   valueStack
+    // );
 
-    while (
-      operatorStack.length !== 0 &&
-      isNaN(operatorStack.peek()) &&
-      valueStack.length !== 1
-    ) {
-      var top = operatorStack.peek();
-      setoperatorStack(operatorStack.pop());
-      console.log("In another while ");
-      processOperator(top);
-    }
+    // while (
+    //   operatorStack.length !== 0 &&
+    //   isNaN(operatorStack.peek()) &&
+    //   valueStack.length !== 1
+    // ) {
+    //   var top = operatorStack.peek();
+    //   setoperatorStack(operatorStack.pop());
+    //   console.log("In another while ");
+    //   processOperator(top);
+    // }
 
-    if (end === false) {
-      let result = valueStack.peek();
-      setvalueStack(valueStack.pop());
-      if (operatorStack.length === 0 && valueStack.length === 0) {
-        console.log("error in length");
-      } else {
-        console.log("The result is ", result);
-      }
-    }
-
+    // if (end === false) {
+    //   let result = valueStack.peek();
+    //   setvalueStack(valueStack.pop());
+    //   if (operatorStack.length === 0 && valueStack.length === 0) {
+    //     console.log("error in length");
+    //   } else {
+    //     console.log("The result is ", result);
+    //   }
+    // }
     console.log("In compute operator ", operatorStack, "stack ", valueStack);
 
     //console.log("In compute trying stack ", stack, "operator ", operator);
