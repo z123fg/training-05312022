@@ -88,3 +88,16 @@ https://www.evernote.com/shard/s706/sh/c0a0a8a3-0016-ae6c-0c7e-c3036d983623/377c
 **solution to practice**
 https://codesandbox.io/s/naughty-frog-qeg574
 
+### 2022/07/14
+
+**materials**
+https://css-tricks.com/debouncing-throttling-explained-examples/
+
+### 2022/07/15
+
+**practice**
+https://www.evernote.com/shard/s706/sh/322b9f26-e761-1ea6-1ced-9d15c1eb4a47/7d612e2fb5f7ec2e8c3e269d2561ecb9
+
+**solution to practice**
+https://codesandbox.io/s/cool-hooks-b7v65j
+
