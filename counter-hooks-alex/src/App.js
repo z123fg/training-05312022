@@ -4,6 +4,7 @@ import CounterBoard from './components/CounterApp2/CounterBoard';
 
 function App() {
   const [ counter, setCounter] = useState(0);
+  const [ testCounter, setTestCounter] = useState(0);
   
   const handleIncrement = () => {
     setCounter(counter+1);
@@ -17,19 +18,21 @@ function App() {
     setTestCounter(testCounter+1);
   }
   return (
-    <TestContext.Provider value = {{testCounter}}>
-    <Provider>
+    
+    <Provider store={store}>
+      <TestContext.Provider value = {{testCounter, handleIncrementTestCounter}}>
     <div className="App"> 
     This is app
       <div className = "button-group">
       this is counter app
-      <CounterBoard counter={counter}/>
-      <ButtonGroup handleDecrement={handleDecrement} handleIncrement={handleIncrement}/>
-      <Child handleClear={handleClear}/>
+      <CounterBoard />
+      <ButtonGroup />
+      <Child />
       </div>
     </div>
-    </Provider>
     </TestContext.Provider>
+    </Provider>
+    
   );
 }
 

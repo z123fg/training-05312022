@@ -1,15 +1,16 @@
 import React from "react";
 import DecrementButton from "./DecrementButton";
 import IncrementButton from "./IncrementButton";
+import "./ButtonGroup"
 
-const ButtonGroup = ({counter} )=> {
+const ButtonGroup = ()=> {
 
     return (
-      <div>
+      <div className="button-group">
         This is a button group
       <div>
-        <DecrementButton handleDecrement={handleDecrement}/>
-        <IncrementButton handleIncrement={handleIncrement}/>
+        <DecrementButton />
+        <IncrementButton />
       </div>
       </div>
     );

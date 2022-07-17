@@ -1,5 +1,6 @@
 import React from "react"
 import './Child.css'
+import { useDispatch } from "react-redux"
 // diffing  algorithm to prevent unnecessary re-rendering
 // class Child extends React.Component{
 //   componentDidUpdate(){
@@ -17,15 +18,19 @@ import './Child.css'
 //   }
 // }
 
-const Child = ({handleClear}) => {
+const Child = () => {
+  const dispatch = useDispatch()
+  const handleClear = () => {
+    dispatch ({type:"COUNTER/PUSHARR",payload:1})
+  }
   return(
-    <div>
+    <div className="child">
       this is a child
       <div>
-    <button onClick={handleClear}>clear</button>
+      <button onClick={handleClear}>clear</button>
     </div>
     </div>
-  )
-}
+  );
+};
 
 export default Child;
