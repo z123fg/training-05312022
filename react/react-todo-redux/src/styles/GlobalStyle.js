@@ -39,34 +39,44 @@ const GlobalStyle = createGlobalStyle`
     display: block;
     position: relative;
     overflow-x: hidden;
+    margin-top: var(--grid-gutter);
   }
 
   h1 {
-    color: var(--clr-secondary-text);
-    font-family: var(--font-primary);
-    font-weight: var(--font-weight-primary);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    font-family: var(--font-secondary);
+    font-weight: var(--font-weight-secondary);
 
     @media (min-width: 40rem) {
+      font-size: 1.3rem;
+      letter-spacing: 2px;
     }
     @media (min-width: 60rem) {
     }
   }
   h2 {
-    color: var(--clr-primary-text);
-    font-family: var(--font-primary);
-    font-weight: var(--font-weight-primary);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    font-family: var(--font-secondary);
+    font-weight: var(--font-weight-secondary);
 
     @media (min-width: 40rem) {
+      font-size: 1.2rem;
+      letter-spacing: 1px;
     }
     @media (min-width: 60rem) {
     }
   }
   h3 {
-    color: var(--clr-secondary-text);
-    font-family: var(--font-primary);
-    font-weight: var(--font-weight-primary);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    font-family: var(--font-secondary);
+    font-weight: var(--font-weight-secondary);
 
     @media (min-width: 40rem) {
+      font-size: 1.15rem;
+      letter-spacing: 1px;
     }
     @media (min-width: 60rem) {
     }
@@ -75,22 +85,18 @@ const GlobalStyle = createGlobalStyle`
   //
 
   span {
-    color: var(--clr-secondary-text);
+    // custom components for sizing
     font-family: var(--font-primary);
     font-weight: var(--font-weight-primary);
-
-    @media (min-width: 40rem) {
-    }
-    @media (min-width: 60rem) {
-    }
   }
 
   p {
-    color: var(--clr-primary-text);
+    font-size: 1rem;
     font-family: var(--font-primary);
     font-weight: var(--font-weight-primary);
 
     @media (min-width: 40rem) {
+      font-size: 1.1rem;
     }
     @media (min-width: 60rem) {
     }
@@ -104,64 +110,74 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     background: transparent;
     
-    color: var(--clr-primary-text);
-    font-family: var(--font-secondary);
-    font-weight: var(--font-weight-secondary);
+    font-size: 1.1rem;
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-primary);
 
     &:hover {
       opacity: 0.8;
+    }
+    @media (min-width: 40rem) {
+      font-size: 1.1rem;
     }
   }
   a {
     // Link Reset
+    font-size: 1rem;
     cursor: pointer;
     text-decoration: none;
 
-    color: var(--clr-primary-text);
-    font-family: var(--font-secondary);
-    font-weight: var(--font-weight-secondary);
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-primary);
 
     &:hover {
       opacity: 0.8;
     }
+    @media (min-width: 40rem) {
+      font-size: 1.1rem;
+    }
   }
+
+  //
+
   input {
     // Input Reset
     border: none;
     background: transparent;
-
-    color: var(--clr-tertiary);
-    font-family: var(--font-secondary);
-    font-weight: var(--font-weight-secondary);
+    
+    font-size: 1rem;
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-primary);
 
     @media (min-width: 40rem) {
+      font-size: 1.1rem;
     }
     @media (min-width: 60rem) {
     } 
   }
-  input[type=checkbox]:checked {
-    border: none;
-    outline: none;
-    accent-color: var(--clr-primary-accent);
-    background: transparent;
-    height: 1.25rem;
-    width: 1.25rem;
-  }
-  input[type=checkbox] {
-    border: none;
-    outline: none;
-    accent-color: var(--clr-primary-accent);
-    background: transparent;
-    height: 1.1rem;
-    width: 1.1rem;
-  }
+
   label {
-    
+    font-size: 1rem;
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-primary);
+    @media (min-width: 40rem) {
+      font-size: 1.1rem;
+    }
+  }
+
+  textarea {
+    font-size: 1rem;
+    font-family: var(--font-secondary);
+    font-weight: var(--font-weight-primary);
+    @media (min-width: 40rem) {
+      font-size: 1.1rem;
+    }
   }
 
   //
 
   svg {
+    // basic sizing for svg
     height: calc(var(--grid-gutter) / 3);
     width: calc(var(--grid-gutter) / 3);
 
@@ -178,10 +194,5 @@ const GlobalStyle = createGlobalStyle`
       width: calc(var(--grid-gutter) / 2);
     }
   }
-
-  /* section backgrounds */
-  /* #dashboardRoute {
-    background-color: var(--clr-primary);
-  } */
 `;
 export default GlobalStyle;

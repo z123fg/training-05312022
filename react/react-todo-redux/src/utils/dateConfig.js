@@ -65,22 +65,3 @@ export const MonthDayLookup = ({ mod }) => {
       return "th";
   }
 };
-
-export const incompleteConfig = {
-  name: "Incomplete",
-  color: "var(--clr-secondary-accent)",
-  border: "solid 2px var(--clr-secondary-accent)",
-  textDecoration: "none",
-};
-export const completeConfig = {
-  name: "Complete",
-  color: "var(--clr-primary-accent)",
-  border: "solid 2px var(--clr-primary-accent)",
-  textDecoration: "line-through",
-};
-export const totalConfig = {
-  name: "Total Tasks",
-  color: "var(--clr-secondary-text)",
-  border: "solid 2px var(--clr-secondary-text)",
-  textDecoration: "none",
-};

@@ -8,6 +8,8 @@ import {
   BsTrash, // Delete Todo
   BsFillPencilFill, // Edit Todo
   BsPlusCircle, // Add Todo
+  BsArrowUpLeftCircle, // back link
+  BsCalendar3, // calendar
 } from "react-icons/bs";
 
 const Icons = ({ name }) => {
@@ -25,11 +27,15 @@ const Icons = ({ name }) => {
     case "Add":
       return <BsPlusCircle />;
     case "Link":
-      return <BsArrowUpRight />
+      return <BsArrowUpRight />;
     case "Completed":
       return <BsCheckCircle />;
     case "Incomplete":
       return <BsCircle />;
+    case "Back":
+      return <BsArrowUpLeftCircle />;
+    case "Calendar":
+      return <BsCalendar3 />;
     default:
       return <BsCheckCircle />;
   }

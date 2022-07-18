@@ -1,20 +1,9 @@
-import React from "react";
 import { useContext } from "react";
 import styled from "styled-components";
-import { GContainer, GMotionRoute } from "../components/AppLayout";
+import { GContainer, GForm, GMotionRoute, GSectionHeader, GTextarea, GTextInput, SubmitButton } from "../components/AppLayout";
+import BreadCrumb from "../components/buttons/BreadCrumb";
 import StateContext from "../context/StateContext";
 import { pageTransitionLeft } from "../utils/motionConfig";
-
-const AddForm = styled.form`
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  background-color: var(--clr-secondary);
-`;
-const Label = styled.label``;
-const TitleInput = styled.input``;
-const DescInput = styled.input``;
-const Submit = styled.button``;
 
 const TodoNew = () => {
   const {
@@ -22,7 +11,7 @@ const TodoNew = () => {
     description,
     onTitleChanged,
     onDescriptionChanged,
-    onAddTodoClicked,
+    handleAddedTodo,
   } = useContext(StateContext);
 
   // console.log(title);
@@ -32,33 +21,38 @@ const TodoNew = () => {
     <GMotionRoute variants={pageTransitionLeft} initial="hidden" animate="show">
       <section id="todoNewRoute">
         <GContainer>
-          <header>
-            <h1>Add a New Todo</h1>
-          </header>
+          <BreadCrumb title="Go Back" /> 
 
-          <AddForm>
-            <Label htmlFor="todoTitle">Todo Title</Label>
-            <TitleInput
+          <GSectionHeader>
+            <h1>Add a New Todo</h1>
+          </GSectionHeader>
+
+          <GForm>
+            <label htmlFor="todoTitle">Title</label>
+            <GTextInput
               type="text"
               id="todoTitle"
               name="todoTitle"
+              placeholder="Type..."
+              required
               value={title}
               onChange={onTitleChanged}
             />
 
-            <Label>Todo Description</Label>
-            <DescInput
+            <label>Description</label>
+            <GTextarea
               type="textarea"
               id="todoDescription"
               name="todoDescription"
+              placeholder="Type..."
               value={description}
               onChange={onDescriptionChanged}
             />
+          </GForm>
 
-            <Submit type="button" onClick={onAddTodoClicked}>
-              Add Todo
-            </Submit>
-          </AddForm>
+          <SubmitButton type="button" onClick={handleAddedTodo}>
+            Add Todo
+          </SubmitButton>
         </GContainer>
       </section>
     </GMotionRoute>

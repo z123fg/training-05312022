@@ -95,7 +95,7 @@ export default class TodoCard extends React.Component {
         />
 
         <EditTodoLink
-          to={`todos/:${todo.id}`}
+          to={`todo/:${todo.id}`}
           style={
             isComplete ? { color: complete.color } : { color: incomplete.color }
           }

@@ -2,7 +2,7 @@ import React from "react";
 import GlobalStyle from "./styles/GlobalStyle";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AppLayout } from "./components";
-import { Dashboard, TodoNew, Todo } from "./routes";
+import { Dashboard, TodoNew, Todo, TodoEdit, NoMatch } from "./routes";
 import { AnimatePresence } from "framer-motion";
 import { StateProvider } from "./context/StateContext";
 
@@ -22,6 +22,9 @@ const App = () => {
                 <Route index element={<TodoNew />} />
                 <Route path=":todoId" element={<Todo />} />
               </Route>
+
+              <Route path="edit/:todoId" element={<TodoEdit />} />
+              <Route path="*" element={<NoMatch />} />
             </Route>
           </Routes>
         </StateProvider>

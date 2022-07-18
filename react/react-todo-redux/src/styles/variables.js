@@ -31,10 +31,13 @@ const variables = css`
     --font-weight-secondary: 700;
     --font-weight-primary: 400;
 
+    --header-height-mobile: 5rem;
+    --header-height-desktop: 5rem;
     --max-layout-width: 80rem;
     --spacing-unit: 0.5rem;
     --grid-gutter: 4rem;
     --card-radius: 1rem;
+    --border: solid 2px;
   }
 `
 export default variables;

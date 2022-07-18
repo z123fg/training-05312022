@@ -1,28 +1,46 @@
 {
   "todos": [
     {
-      "id": 1,
-      "title": "My First Todo",
-      "description": "Here is the description for my first todo.",
-      "completed": false
+      "title": "Add a Todo",
+      "description": "Click the plus icon in the bottom right",
+      "completed": false,
+      "id": 1
     },
     {
-      "title": "Todo 2",
-      "description": "todo 2",
+      "title": "View a Todo",
+      "description": "Click the arrow icon to view a Todo",
       "completed": false,
       "id": 2
     },
     {
-      "title": "Long Todo",
-      "description": "Here is the long todo description. Here is the long todo description. Here is the long todo description. Here is the long todo description. Here is the long todo description. Here is the long todo description.",
-      "completed": false,
+      "title": "Complete a Todo",
+      "description": "Click the status button to the left",
+      "completed": true,
       "id": 3
     },
     {
-      "title": "This Todo is for text overflow. This Todo is for text overflow. This Todo is for text overflow. This Todo is for text overflow. This Todo is for text overflow. This Todo is for text overflow. This Todo is for text overflow.",
-      "description": "This Todo is for text overflow. This Todo is for text overflow. This Todo is for text overflow. This Todo is for text overflow. This Todo is for text overflow. This Todo is for text overflow. This Todo is for text overflow.",
+      "title": "Delete a Todo",
+      "description": "View a Todo and click the Delete button",
       "completed": false,
       "id": 4
+    },
+    {
+      "title": "Edit a Todo",
+      "description": "View a Todo and click the Edit button",
+      "completed": false,
+      "id": 5
+    },
+    {
+      "title": "Filter Todos",
+      "description": "Click the Filter tab at the top of the list",
+      "completed": false,
+      "id": 6
+    },
+    {
+      "title": "Tutorial Complete!",
+      "description": "",
+      "completed": false,
+      "id": 7
     }
   ]
 }

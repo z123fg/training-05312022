@@ -1,7 +1,13 @@
 import React from "react";
-import { GContainer, GMotionRoute } from "../components/AppLayout";
-import TodoList from "../features/todos/TodoList";
+import {
+  GContainer,
+  GMotionRoute,
+  GRouteHeader,
+  GSectionHeader,
+} from "../components/AppLayout";
+import { Clock, CounterBoard, Footer } from "../components";
 import { pageTransitionRight } from "../utils/motionConfig";
+import TodoList from "../features/todos/TodoList";
 
 const Dashboard = () => {
   return (
@@ -12,11 +18,21 @@ const Dashboard = () => {
     >
       <section id="dashboardRoute">
         <GContainer>
-          <header>
-            <h1>Dashboard</h1>
-          </header>
+          <GSectionHeader>
+            <h2>DASHBOARD</h2>
+          </GSectionHeader>
+
+          <Clock />
+
+          <CounterBoard />
+
+          <GSectionHeader>
+            <h2>TODOS</h2>
+          </GSectionHeader>
 
           <TodoList />
+          
+          <Footer />
         </GContainer>
       </section>
     </GMotionRoute>

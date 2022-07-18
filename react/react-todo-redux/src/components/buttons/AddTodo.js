@@ -5,13 +5,21 @@ import Icons from "../assets/Icons"
 const AddTodoLink = styled(Link)`
   display: flex;
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
   border-radius: 5rem;
-  background-color: var(--clr-primary);
+  background-color: var(--clr-secondary);
+
+  right: calc(var(--grid-gutter) / 4);
+  bottom: 2rem;
+  @media (min-width: 40rem) {
+    right: calc(var(--grid-gutter) / 2);
+  }
+  @media (min-width: 60rem) {
+    right: var(--grid-gutter);
+
+  }
 
   svg {
-    fill: var(--clr-primary-accent);
+    fill: var(--clr-tertiary);
     height: 3rem;
     width: 3rem;
   }

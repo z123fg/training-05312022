@@ -5,7 +5,7 @@ import { MonthDayLookup, MonthLookup, WeekdayLookup } from "../utils/appConfig";
 const ClockWrapper = styled.div``;
 
 const ClockDate = styled.h2`
-  color: var(--clr-primary-accent)
+  color: var(--clr-primary-accent);
 `;
 
 export default class Clock extends React.Component {
