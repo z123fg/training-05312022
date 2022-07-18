@@ -8,9 +8,9 @@ const Header = ({ handleChangePage }) => {
         <h3>Book Search</h3>
       </div>
       <div className="nav__container">
-       {/*  <Link to="/home">Home</Link>
-        <Link to="/wishlist">Wishlist</Link> */}
-        <button
+        <Link to="/home">Home</Link>
+        <Link to="/wishlist">Wishlist</Link>
+       {/*  <button
                     onClick={(e) => {
                         e.preventDefault();
                         handleChangePage("home");
@@ -25,7 +25,7 @@ const Header = ({ handleChangePage }) => {
                     }}
                 >
                     Wishlist
-                </button>
+                </button> */}
       </div>
     </header>
   );
