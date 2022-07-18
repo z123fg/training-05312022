@@ -20,7 +20,6 @@ const Wishlist = () => {
   const handleClickPrev = () => {
     const currentPage = Math.floor(startIndex / maxResults) + 1;
     dispatch(changePage(currentPage - 1));
-
   }
 
   const handleClickNext = () => {
