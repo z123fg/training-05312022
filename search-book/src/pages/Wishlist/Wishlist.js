@@ -2,17 +2,19 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Pagination from "../../components/Pagination/Pagination";
 import BookInfo from "../../components/SearchResult/BookInfo/BookInfo";
+import useMyDispatch from "../../redux-demo/useMyDispatch";
+import useMySelector from "../../redux-demo/useMySelector";
 import { changePage, deleteBookFromWishlist, getWishlist } from "../../redux/slices/wishlistSlice";
 import "./Wishlist.css";
 
 const Wishlist = () => {
-  const wishlist = useSelector((state) => state.wishlist.wishlist);
-  const startIndex = useSelector((state) => state.wishlist.startIndex);
-  const maxResults = useSelector((state) => state.wishlist.maxResults);
-  const totalItems = useSelector((state) => state.wishlist.totalItems);
-  const wishlistForCurPage =  useSelector((state) => state.wishlist.wishlistForCurPage);
+  const wishlist = useMySelector((state) => state.wishlist.wishlist);
+  const startIndex = useMySelector((state) => state.wishlist.startIndex);
+  const maxResults = useMySelector((state) => state.wishlist.maxResults);
+  const totalItems = useMySelector((state) => state.wishlist.totalItems);
+  const wishlistForCurPage =  useMySelector((state) => state.wishlist.wishlistForCurPage);
 
-  const dispatch = useDispatch();
+  const dispatch = useMyDispatch();
   useEffect(() => {
     dispatch(getWishlist());
   }, []);

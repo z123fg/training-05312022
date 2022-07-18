@@ -81,7 +81,6 @@ const wishlistSlice = createSlice({
       state.startIndex = 0;
     },
     [getWishlist.rejected]: (state, action) => {
-      console.log("rejected", action.payload);
       alert("get booklist failed!");
     },
     [addBookToWishlist.pending]: (state, action) => {

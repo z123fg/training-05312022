@@ -11,7 +11,6 @@ const useDebounce = (callback, timeout) => {
     timeoutRef.current = setTimeout(() => {
       setIsReady(true);
       callback()
-      console.log("new request!");
     }, timeout);
   };
 

@@ -1,14 +1,16 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import useMyDispatch from "../../redux-demo/useMyDispatch";
+import useMySelector from "../../redux-demo/useMySelector";
 import { addBookToWishlist } from "../../redux/slices/wishlistSlice";
 import BookInfo from "./BookInfo/BookInfo";
 import "./SearchResult.css";
 
 const SearchResult = () => {
-  const searchResult = useSelector((state) => state.searchbook.searchResult);
-  const isLoading = useSelector((state) => state.searchbook.isLoading);
+  const searchResult = useMySelector((state) => state.searchbook.searchResult);
+  const isLoading = useMySelector((state) => state.searchbook.isLoading);
   //console.log("searchResult", searchResult);
-  const dispatch = useDispatch();
+  const dispatch = useMyDispatch();
   
   const handleAddWishlist = (newBook) => {
       dispatch(addBookToWishlist(newBook));
@@ -20,7 +22,7 @@ const SearchResult = () => {
         <ul className="search-result__list">
           {searchResult.map((book) => {
             return (
-              <li onClick={()=>handleAddWishlist(book)}>
+              <li key={book.id} onClick={()=>handleAddWishlist(book)}>
                 <BookInfo key={book.id} bookInfo={book} />
               </li>
             );
