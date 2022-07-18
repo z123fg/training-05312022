@@ -3,6 +3,7 @@
 }
 .search-result__list{
     display: flex;
+    list-style-type:none;
     padding:0;
     flex-direction: column;
     gap:20px;

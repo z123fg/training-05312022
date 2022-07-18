@@ -11,6 +11,7 @@ const BookInfo = ({ bookInfo }) => {
             publisher = "N/A",
         } = {},
     } = bookInfo;
+
     return (
         <div className="book-info__container">
             <div className="thumbnail__container">
