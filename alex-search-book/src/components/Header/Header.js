@@ -1,4 +1,6 @@
 import "./Header.css";
+import { Link } from "react-router-dom";
+import MyLink from "../../router-demo/MyLink";
 
 const Header = ({handleChangePage}) => {
     
@@ -9,7 +11,9 @@ const Header = ({handleChangePage}) => {
                 <h3>Book Search</h3>
             </div>
             <div className="nav__container">
-                <button onClick={(e) => {
+                <MyLink to="/home">Home</MyLink>
+                <MyLink to="/wishlist">Wishlist</MyLink>
+                {/* <button onClick={(e) => {
                     e.preventDefault();
                     handleChangePage("home");
                 }}> Home</button>
@@ -17,7 +21,7 @@ const Header = ({handleChangePage}) => {
                 <button onClick={(e) => {
                     e.preventDefault();
                     handleChangePage("wishlist");
-                }}>Wishlist</button>
+                }}>Wishlist</button> */}
             </div>
         </header>
     );

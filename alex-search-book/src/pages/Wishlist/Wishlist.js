@@ -1,19 +1,21 @@
 import React, { useEffect } from "react"
-import {useSelector} from "react-redux"
-import BookInfo from "../../../../search-book/src/components/SearchResult/BookInfo/BookInfo";
-import { deleteBookFromWishlist } from "../../../../search-book/src/redux/slices/wishlistSlice";
+import Pagination from "../../components/Pagination/Pagination";
+import BookInfo from "../../components/SearchResult/BookInfo/BookInfo";
+import useMyDispatch from "../../redux-demo/useMyDispatch";
+import useMySelector from "../../redux-demo/useMySelector";
+import { changePage, deleteBookFromWishlist, getWishlist } from "../../redux/slices/wishlistSlice";
 import "./Wishlist.css"
 
 
 const Wishlist= () => {
-    const wishlist = useSelector((state) => state.wishlist.wishlist);
-    const startIndex = useSelector((state) => state.wishlist.startIndex);
-    const maxResults = useSelector((state) => state.wishlist.maxResults);
-    const totalItems = useSelector((state) => state.wishlist.totalItems);
-    const wishlistForCurPage = useSelector((state) => state.wishlist.wishlistForCurPage);
+    const wishlist = useMySelector((state) => state.wishlist.wishlist);
+    const startIndex = useMySelector((state) => state.wishlist.startIndex);
+    const maxResults = useMySelector((state) => state.wishlist.maxResults);
+    const totalItems = useMySelector((state) => state.wishlist.totalItems);
+    const wishlistForCurPage =  useMySelector((state) => state.wishlist.wishlistForCurPage);
 
-    const dispatch = useDispatch();
-    useEffect(() =>{
+    const dispatch = useMyDispatch();
+    useEffect(() => {
         dispatch(getWishlist());
     }, []);
 
@@ -46,7 +48,7 @@ const Wishlist= () => {
             isLoading = {true}>
                 {wishlist.length > 0 ? (
                     <ul className = "wishlist__list">
-                        {wishlistForCurPage.map((BookInfo, index) =>(
+                        {wishlistForCurPage.map((bookInfo, index) =>(
                             <li key={bookInfo.id} onClick={() => handleDeleteWishlist(index)}>
                                 <BookInfo bookInfo={bookInfo}/>
                             </li>

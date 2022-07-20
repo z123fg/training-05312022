@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
-import {useSelector} from "react-redux"
+import { useSelector, useDispatch } from "react-redux";
+import { changePage } from "../../redux/slices/searchbookSlice";
+import "./Pagination.css";
 
 //const ITEMS_PER_PAGE = 10;
 const Pagination = ({children, startIndex, items, maxResults, totalItems, isLoading, handleClickNext, handleClickPrev }) => {
@@ -17,7 +19,7 @@ const Pagination = ({children, startIndex, items, maxResults, totalItems, isLoad
     return(
         <div className="pagination__container">
             <div>{children}</div>
-            {item?.length > 0 && (
+            {items?.length > 0 && (
                 <div className="page-button__container">
                     <button disabled={currentPage <= 1} onClick={handleClickPrev}>
                         prev

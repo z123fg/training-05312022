@@ -2,6 +2,8 @@ import React from "react"
 import { useSelector, useDispatch } from "react-redux";
 import useDebounce from "../../hooks/useDebounce";
 import useThrottle from "../../hooks/useThrottle";
+import useMyDispatch from "../../redux-demo/useMyDispatch";
+import useMySelector from "../../redux-demo/useMySelector";
 import {
   getBooklist,
   getBookListAndUpdateState,
@@ -10,7 +12,7 @@ import {
 import "./Searchbox.css"
 
 const Searchbox = () => {
-    const keyword = useSeletor((state)=>state.searchbox.keyword);
+    const keyword = useSelector((state)=>state.searchbox.keyword);
     const isLoading = useSelector((state) => state.searchbox.isLoading);
     const dispatch = useDispatch();
 

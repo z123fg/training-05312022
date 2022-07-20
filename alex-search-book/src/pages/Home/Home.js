@@ -1,27 +1,30 @@
 import React from "react"
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import Pagination from "../../../../search-book/src/components/Pagination/Pagination";
-import Searchbox from "../../components/SearchBox/Searchbox";
-import "./Home.css"
+import Pagination from "../../components/Pagination/Pagination";
+import Searchbox from "../../components/Searchbox/Searchbox";
+import SearchResult from "../../components/SearchResult/SearchResult";
+import { useSelector, useDispatch } from "react-redux";
+import "./Home.css";
+import { changePage } from "../../redux/slices/searchbookSlice";
+import useMySelector from "../../redux-demo/useMySelector";
+import useMyDispatch from "../../redux-demo/useMyDispatch";
 
 const Home = () => {
-    const startIndex = useSelector((state) => state.searchbox.startIndex);
-    const searchResult = useSelector((state) => state.searchbook.searchResult);
-    const  maxResults = useSelector((state) => state.searchbook.maxResults);
-    const totalItems = useSelector((state) => state.searchbook.totalItems);
-    const isLoading = useSelector((state) => state.searchbook.isLoading);
-    const dispatch = useDispatch();
+    const startIndex = useMySelector((state) => state.searchbook.startIndex);
+    const searchResult = useMySelector((state) => state.searchbook.searchResult);
+    const maxResults = useMySelector((state) => state.searchbook.maxResults);
+    const totalItems = useMySelector((state) => state.searchbook.totalItems);
+    const isLoading = useMySelector((state) => state.searchbook.isLoading);
+    const dispatch = useMyDispatch();
 
     const handleClickPrev = () => {
         const currentPage = Math.floor(startIndex / maxResults) +1;
         dispatch(changePage(currentPage - 1));
-    }
+    };
 
     const handleClickNext = () => {
         const currentPage = Math.floor(startIndex / maxResults) + 1;
         dispatch(changePage(currentPage +1));
-    }
+    };
     
     //searchbox, searchResult, pagination
     return (
@@ -38,7 +41,7 @@ const Home = () => {
                 <SearchResult/>
             </Pagination>
         </div>
-    )
-}
+    );
+};
 
 export default Home;

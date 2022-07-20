@@ -1,5 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import useMyDispatch from "../../redux-demo/useMyDispatch";
+import useMySelector from "../../redux-demo/useMySelector";
 import { addBookToWishlist } from "../../redux/slices/wishlistSlice";
 import BookInfo from "./BookInfo/BookInfo";
 import "./SearchResult.css";
