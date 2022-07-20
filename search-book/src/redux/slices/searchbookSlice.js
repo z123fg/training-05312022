@@ -81,7 +81,6 @@ const searchbookSlice = createSlice({
       state.isLoading = false;
     },
     [getBooklist.rejected]: (state, action) => {
-      console.log("rejected");
       state.isLoading = false;
     },
     [changePage.pending]: (state, action) => {

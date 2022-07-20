@@ -5,15 +5,17 @@ import SearchResult from "../../components/SearchResult/SearchResult";
 import { useSelector, useDispatch } from "react-redux";
 import "./Home.css";
 import { changePage } from "../../redux/slices/searchbookSlice";
+import useMySelector from "../../redux-demo/useMySelector";
+import useMyDispatch from "../../redux-demo/useMyDispatch";
 
 const Home = () => {
   //searchbox, searchresult, pagination
-  const startIndex = useSelector((state) => state.searchbook.startIndex);
-  const searchResult = useSelector((state) => state.searchbook.searchResult);
-  const maxResults = useSelector((state) => state.searchbook.maxResults);
-  const totalItems = useSelector((state) => state.searchbook.totalItems);
-  const isLoading = useSelector((state) => state.searchbook.isLoading);
-  const dispatch = useDispatch();
+  const startIndex = useMySelector((state) => state.searchbook.startIndex);
+  const searchResult = useMySelector((state) => state.searchbook.searchResult);
+  const maxResults = useMySelector((state) => state.searchbook.maxResults);
+  const totalItems = useMySelector((state) => state.searchbook.totalItems);
+  const isLoading = useMySelector((state) => state.searchbook.isLoading);
+  const dispatch = useMyDispatch();
   const handleClickPrev = () => {
     const currentPage = Math.floor(startIndex / maxResults) + 1;
     dispatch(changePage(currentPage - 1));
