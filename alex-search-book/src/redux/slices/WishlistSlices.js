@@ -4,20 +4,29 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
     wishlist:[],
+    wishlistForCurPage:[],
     totalItems: 0,
     startIndex: 0,
-    maxResults: 0
+    maxResults: 5
 }
 
-const getWishlist = createAsyncThunk("wishlist/getWishlist", async (_, thunkAPI) =>{
-    const newWishlist = localStorage.getItem("wishlist");
+export const getWishlist = createAsyncThunk(
+    "wishlist/getWishlist", 
+    async () =>{
+    const newWishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+    return newWishlist;
 });
 
 const addBookToWishlist = createAsyncThunk(
     "wishlist/addBookToWishlist",
     async(newBook, thunkAPI) => {
         const prevWishlist = thunkAPI.getState().wishlist.wishlist;
-        const nextWishlist = [newBook, ...prevWishlist];
+        let nextWishlist;
+        if (prevWishlist.some((book) => book.id === newBook.id)){
+            nextWishlist = [...prevWishlist];
+        } else {
+            nextWishlist = [newBook, ...prevWishlist];
+        }
         locatlStoratge.setItem("wishlist",JSON.stringify(nextWishlist))
         return nextWishlist;
     }
@@ -27,7 +36,9 @@ const deleteBookFromWishlist = createAsyncThunk(
     "wishlist/deleteBookFromWishlist",
     async (index, thunkAPI) => {
         const prevWishlist = thunkAPI.getState().wishlist.wishlit;
-        const nextWishlist = prevWishlist.filter((book,index) =>index !== targetIndex)
+        const nextWishlist = prevWishlist.filter(
+            (book, index) => index !== targetIndex
+        );
         localStorage.setItem("wishlist", JSON.stringify(nextWishlist));
         return nextWishlist
     }
@@ -40,8 +51,20 @@ const wishlistSlice = createSlice(
         reducers:{
             changePage:(state,action) => {
                 const targetPage = action.payload;
-                const newStartIndex = 0;
-            }
+                const totalItems = state.totalItems;
+                const maxResults = state.maxResults;
+                const totalPages = Math.ceil(totalItems / maxResults);
+                if(targetPage <= 0 || targetPage > totalPages) {
+                    alert("page number is not valid");
+                    return;
+                }
+                const newStartIndex = (targetPage - 1) * state.maxResults;
+                state.startIndex = newStartIndex;
+                state.wishlistForCurPage = state.wishlist.slice(
+                    newStartIndex,
+                    nweStartIndex + state.maxResults
+                );
+            },
         },
         extraReducers:{
             [getWishlist.pending]:(state,action) =>{
@@ -49,11 +72,13 @@ const wishlistSlice = createSlice(
             },
             [getWishlist.fulfilled]:(state,action) =>{
                 state.wishlist = action.payload;
+                state.wishlistForCurPage = action.payload.slice(0, state.maxResults);
                 state.totalItems = action.payload.length;
                 state.startIndex = 0;
             },
             [getWishlist.rejected]:(state,action) =>{
-                alert("get booklist failed")
+                console.log("rejected", action.payload);
+                alert("get booklist failed");
             },
             [addBookToWishlist.pending]:(state, actoin) => {
 
@@ -75,6 +100,7 @@ const wishlistSlice = createSlice(
 
                 // }
                 state.wishlist = action.payload;
+                state.wishlistForCurPage = action.payload.slice(0, state.maxResults);
                 state.totalItems = action.payload.length;
                 state.storeIndex = 0;
                 
@@ -84,7 +110,9 @@ const wishlistSlice = createSlice(
             },
         },
     }
-)
+);
 
 const wishlistReducer = wishlistSlice.reducer;
 export default wishlistReducer;
+
+export  const {changePage} = wishlistSlice.actions;
