@@ -101,3 +101,25 @@ https://www.evernote.com/shard/s706/sh/322b9f26-e761-1ea6-1ced-9d15c1eb4a47/7d61
 **solution to practice**
 https://codesandbox.io/s/cool-hooks-b7v65j
 
+### 2022/07/19
+
+**materials**
+https://medium.com/geekculture/great-confusion-about-react-memoization-methods-react-memo-usememo-usecallback-a10ebdd3a316#:~:text=The%20useMemo%20is%20used%20to,is%20used%20to%20memoize%20functions
+
+**questions**
+https://www.evernote.com/shard/s706/sh/94059c85-e8bf-efde-07a2-4261f11caba7/92ff61698d73090bd7c73b819b736212
+
+### 2022/07/20
+
+**materials**
+https://drive.google.com/file/d/14Ly9-xPXvlugBHOkwUa4DQiJtj9IoDhM/view?usp=sharing
+
+### 2022/07/21
+
+**materials**
+https://drive.google.com/file/d/15oUObqrgkpciQPnCFEdTtZnKeNGgbDyW/view?usp=sharing
+
+### 2022/07/22
+
+**materials**
+https://docs.google.com/document/d/1LvK1iJ2jkLJg17cU4gyKoW7fI-zlHDWhem244nlIZlo/edit?usp=sharing
