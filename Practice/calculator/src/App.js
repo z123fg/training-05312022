@@ -117,7 +117,7 @@ function App() {
           flag = true;
           //operatorStack.push(text[j]);
 
-          if (operatorStack.length === 0 ||) {
+          if (operatorStack.length === 0) {
             operatorStack.push(text[j]);
           } else {
             console.log("In the else", text[j]);
