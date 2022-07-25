@@ -7,6 +7,10 @@ import Header from "./components/Header/Header";
 import Wishlist from "./pages/Wishlist/Wishlist";
 import Home from "./pages/Home/Home";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import MyProvider from "./redux-demo/MyProvider";
+import MyBrowserRouter from "./router-demo/MyBrowserRouter";
+import MyRoutes from "./router-demo/MyRoutes";
+import MyRoute from "./router-demo/MyRoute";
 /* 
   location:
     host:hostname + port
@@ -38,25 +42,24 @@ function App() {
   const handleChangePage = (page) => {
     setCurPage(page);
   };
-  console.log("BrowserRouter",BrowserRouter)
   return (
     <div>
-      <BrowserRouter>
-        <Provider store={store}>
+      <MyBrowserRouter>
+        <MyProvider store={store}>
           <Header handleChangePage={handleChangePage} />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-          </Routes>
+          <MyRoutes>
+            <MyRoute path="/" element={<Home/>} />
+            <MyRoute path="/home" element={<Home />} />
+            <MyRoute path="/wishlist" element={<Wishlist />} />
+          </MyRoutes>
           {/* {curPage === "home" ? (
           <Home />
         ) : curPage === "wishlist" ? (
           <Wishlist />
         ) : null} */}
-        </Provider>
-      </BrowserRouter>
+        </MyProvider>
+      </MyBrowserRouter>
     </div>
   );
 }
