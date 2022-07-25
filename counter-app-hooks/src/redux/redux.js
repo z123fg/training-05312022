@@ -133,7 +133,7 @@ const myThunk = function (store) {
   };
 };
 
-export const store = createStore(counterReducer, applyMiddleware(myThunk));
+export const store = createStore(counterReducer, applyMiddleware(myThunk));//reducer, enhancer
 
 export const { dispatch, getState, subscribe } = store;
 
