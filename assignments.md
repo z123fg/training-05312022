@@ -123,3 +123,17 @@ https://drive.google.com/file/d/15oUObqrgkpciQPnCFEdTtZnKeNGgbDyW/view?usp=shari
 
 **materials**
 https://docs.google.com/document/d/1LvK1iJ2jkLJg17cU4gyKoW7fI-zlHDWhem244nlIZlo/edit?usp=sharing
+
+### 2022/07/25
+
+**materials**
+https://learntypescript.dev/04/l7-interfaces-v-type-aliases/
+
+**questions**
+https://www.evernote.com/shard/s706/sh/7762cf35-b8f4-9a21-9a9d-e6a90b930c59/6e7817f35ff833d77c6d4a0d55d3bde2
+
+### 2022/07/26
+
+**materials**
+https://dev.to/gedalyakrycer/ohsnap-sass-folder-structure-for-react-483e
+
