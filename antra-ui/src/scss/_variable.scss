@@ -1,3 +1,19 @@
-$primary-color:#3F51B5;
+$primary-color: #3F51B5;;
 $secondary-color:#F50057;
-$default-color:#E0E0E0;
+$default-color:rgba(0, 0, 0, 0.87);
+
+$primary-color-hover: #303F9F;
+$secondary-color-hover:#C51162;
+$default-color-hover:#D5D5D5;
+
+/* 
+$primary-color-hover-light: rgba(63, 81, 181, 0.08);;
+$secondary-color-hover-light:rgba(245, 0, 87, 0.08);;
+$default-color-hover-light:rgba(0, 0, 0, 0.04); */
+
+$disabled-color:rgba(0, 0, 0, 0.12);
+$disabled-font-color: rgba(0, 0, 0, 0.26);
+
+$font-family: "Roboto", sans-serif;
+
+$elevation:0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%)
