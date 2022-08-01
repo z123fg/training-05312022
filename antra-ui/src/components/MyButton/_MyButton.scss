@@ -1,0 +1,193 @@
+@use "../../scss/variable";
+@use "../../scss/mixin";
+
+
+/* 
+  variable
+  mixin
+  nested selector
+  loop
+  if else
+  map
+  list
+  @use
+  @include
+*/
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 4px;
+  position:relative;
+  overflow: hidden;
+}
+
+$color-map: (
+  primary: (
+    default: variable.$primary-color,
+    hover: variable.$primary-color-hover,
+    disabled: rgba(0, 0, 0, 0.12),
+  ),
+  secondary: (
+    default: variable.$secondary-color,
+    hover: variable.$secondary-color-hover,
+    disabled: rgba(0, 0, 0, 0.12),
+  ),
+  default: (
+    default: variable.$default-color,
+    hover: variable.$default-color-hover,
+    disabled: rgba(0, 0, 0, 0.12),
+  ),
+);
+
+@mixin color-variant-class($color, $variant) {
+  .btn-#{$color}-#{$variant} {
+    @if $variant == "contained" {
+      color: white;
+      background-color: map-get(map-get($color-map, $color), "default");
+      border: none;
+      filter: drop-shadow(0px 3px 1px rgba(0, 0, 0, 0.2))
+        drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.14))
+        drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.12));
+    } @else if $variant == "outlined" {
+      background: none;
+      color: map-get(map-get($color-map, $color), "default");
+      border: 1px
+        solid
+        rgba(map-get(map-get($color-map, $color), "default"), 0.23);
+    } @else {
+      border: none;
+      background: none;
+      color: map-get(map-get($color-map, $color), "default");
+    }
+  }
+  .btn-#{$color}-#{$variant}:hover {
+    @if $variant == "contained" {
+      background-color: map-get(map-get($color-map, $color), "hover");
+      filter: none;
+    } @else if $variant == "outlined" {
+      background-color: rgba(
+        map-get(map-get($color-map, $color), "default"),
+        0.08
+      );
+      border: 1px
+        solid
+        rgba(map-get(map-get($color-map, $color), "default"), 0.23);
+    } @else {
+      background-color: rgba(
+        map-get(map-get($color-map, $color), "default"),
+        0.08
+      );
+    }
+  }
+
+  .btn-#{$color}-#{$variant}:disabled {
+    @if $variant == "contained" {
+      background-color: variable.$disabled-color;
+      filter: none;
+      color: variable.$disabled-font-color;
+    } @else if $variant == "outlined" {
+      background: none;
+      color: variable.$disabled-font-color;
+      border: 1px solid variable.$disabled-color;
+    } @else {
+      background: none;
+      color: variable.$disabled-font-color;
+    }
+    pointer-events: none;
+  }
+
+  .btn-ripple-#{$color}-#{$variant}{
+    pointer-events: none;
+    animation: rippleEffect 0.6s linear;
+    border-radius: 50%;
+    @if $variant == "contained" {
+      background-color: white;
+    }@else{
+      background-color: map-get(map-get($color-map, $color), "hover");
+    }
+  }
+}
+
+
+
+$colors: ("primary", "secondary", "default");
+$variants: ("contained", "outlined", "text");
+
+@mixin generate-color-variant-classes {
+  @each $variant in $variants {
+    @each $color in $colors {
+      @include color-variant-class($color, $variant);
+    }
+  }
+}
+
+@include generate-color-variant-classes();
+
+.btn-small {
+  min-width: 97px;
+  height: 30px;
+  span {
+    @include mixin.font-small;
+    pointer-events: none;
+  }
+}
+
+.btn-medium {
+  min-width: 113px;
+  height: 36px;
+  span {
+    @include mixin.font-medium;
+    pointer-events: none;
+  }
+}
+
+/* 
+.btn-medium{
+  min-width: 113px;
+  height: 36px;
+}
+
+.btn-medium span{
+    @include mixin.font-medium;
+    pointer-events: none;
+}
+
+
+*/
+
+.btn-large {
+  min-width: 131px;
+  height: 42px;
+  span {
+    @include mixin.font-large;
+    pointer-events: none;
+  }
+}
+
+.btn span{
+  user-select: none;
+}
+
+
+
+
+@keyframes rippleEffect {
+  0% {
+    width:0px;
+    height:0px;
+    opacity: 0.3;
+  }
+  50%{
+    width:75px;
+    height:75px;
+    opacity: 0.1;
+  }
+  100%{
+    width:150px;
+    height:150px;
+    opacity: 0;
+  }
+}
